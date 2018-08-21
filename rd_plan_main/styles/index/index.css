@@ -45,7 +45,6 @@ a:active,a:hover {
 .left-wrapper {
 	position: fixed;
 	left:0px;
-	/*right: 490px;*/
 	top: 0px;
 	bottom: 0px;
 	z-index: 0px;
@@ -54,17 +53,32 @@ a:active,a:hover {
 	background-color: #F0ECEB;
 	background-image: -webkit-linear-gradient(270deg,#F0ECEB,#fafafa);
 	background-image: linear-gradient(180deg,#F0ECEB,#fafafa);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between
 }
 
+.title {
+	color:#333;
+	font-size: 20px;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	padding-top: 160px;
+}
 
-.logo-background {
-	position: absolute;
-	width: 167px;
-	height: 246px;
-	border-radius: 1px;
-	top: -5px;
-    left: 51px;
-	background-color: #009ee2;
+.mylogin{
+	display:flex;
+	flex-direction: row;
+	/* position:absolute; */
+	/* justify-content:center;
+	align-items: center; */
+	bottom: 0px;
+	width:100%;
+	font-size: 20px;
+	color:#fff;
+	height: 70px;
+	/* background-color: #009ee2d8; */
 }
 
 .right-wrapper {
@@ -97,9 +111,10 @@ a:active,a:hover {
 }
 
 .content-1-img {
-	margin-top: 210px;
-    margin-left: 32%;
-    margin-bottom: 290px;
+	margin-top: 100px;
+    margin-left: 8%;
+	margin-bottom: 150px;
+	
 }
 
 .content-2 {
@@ -215,9 +230,7 @@ a:active,a:hover {
 	.left-wrapper {
 		position: static;
 		width:100%;
-		height:720px;
-		padding-left:56px;
-		padding-right:56px;
+		height:640px;
 	}
 
 	.right-wrapper {
@@ -233,7 +246,6 @@ a:active,a:hover {
 
 @media(max-width:767px){
 	.left-wrapper {
-		padding-left: 65px;
 	}
 
 	.right-wrapper {
@@ -248,7 +260,6 @@ a:active,a:hover {
 @media(max-width:479px){
 	.left-wrapper {
 		height: 560px;
-    	padding: 25px 45px 75px;
 	}
 
 	.right-wrapper {
@@ -271,7 +282,6 @@ a:active,a:hover {
 @media(max-width:390px){
 	.left-wrapper {
 		height: 560px;
-    	padding: 25px 45px 75px;
 	}
 
 	.right-wrapper {
@@ -294,7 +304,6 @@ a:active,a:hover {
 @media(max-width:330px){
 	.left-wrapper {
 		height: 560px;
-    	padding: 25px 45px 75px;
 	}
 
 	.right-wrapper {
@@ -321,19 +330,8 @@ a:active,a:hover {
 @media(max-height:390px){
 	.left-wrapper {
 		height: 560px;
-    	padding: 25px 45px 75px;
 	}
-	.logo-desc-en {
-	    top: 120px;
-	}
-
-	.logo-desc-ch {
-	    top: 150px;
-	}
-
-	.logo-background {
-		height: 186px;
-	}
+	
 	.right-wrapper {
 		
 	}
@@ -347,19 +345,8 @@ a:active,a:hover {
 @media(max-height:302px){
 	.left-wrapper {
 		height: 560px;
-    	padding: 25px 45px 75px;
 	}
-	.logo-desc-en {
-	    top: 100px;
-	}
-
-	.logo-desc-ch {
-	    top: 130px;
-	}
-
-	.logo-background {
-		height: 166px;
-	}
+	
 	.right-wrapper {
 		
 	}
