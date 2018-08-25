@@ -1,7 +1,7 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav in" id="side-menu">
-            <sidebar-search></sidebar-search>
+            <!-- <sidebar-search></sidebar-search> -->
             <li ng-repeat="item in menuList" item="item" ui-sref-active="active" ng-class="{active: collapseVar==$index+1}" ng-init="outerIndex = $index">
                 <a ng-if="item.SPAN_CLASS == ''" ui-sref="dashboard.{{item.A_ID}}" ui-sref-opts="{reload:true}" ng-click="check(outerIndex+1)"><i class="{{item.I_CLASS}}"></i> {{item.NAME}}</a>
                 <a ng-if="item.SPAN_CLASS != ''" href="" ng-click="check(outerIndex+1)"><i class="{{item.I_CLASS}}"></i> {{item.NAME}}<span class="{{item.SPAN_CLASS}}"></span></a>

@@ -30,50 +30,6 @@ angular.module('sbAdminApp').controller('LoginCtrl', ['$rootScope','$scope','Ini
     var url = "";
     var ctrlName = "";
 
-    //公司登录
-    $scope.submit = function (){
-        //输入用户名
-        $scope.name = $("#name").val();
-        //输入密码
-        $scope.pwd = $("#pwd").val();
-        if($scope.name == null || angular.equals("", $scope.name)){
-            $scope.open("用户名不能为空");
-            return;
-        }
-        if ($scope.pwd == null || angular.equals("", $scope.pwd)) {
-            $scope.open("密码不能为空");
-            return;
-        }
-        if($scope.name.length > 66){
-            $scope.open("用户名太长！");
-            return;
-        }
-        if($scope.pwd.length > 18){
-            $scope.open("密码太长！");
-            return;
-        }
-        if($scope.pwd.length < 5){
-            $scope.open("密码太短！");
-            return;
-        }
-        var patrn=/^[A-Za-z0-9]+$/;
-        if (!patrn.exec($scope.pwd)){
-            $scope.open("密码格式错误！");
-            return;
-        }
-        //单位登录
-        Init.iwbhttp('/login/epLogin', {username: $scope.name, pwd: $scope.pwd}, function (data, header, config, status) {
-            if (angular.equals("0", data.resFlag)) {
-                $rootScope.ifLogin = "0";
-                localStorageService.set("indexUrl","dashboard.index");
-                $state.go("dashboard.index");
-            } else {
-                $scope.open(data.msg);
-            }
-        }, function (data, header, config, status) {
-        });
-    }
-
     //管理员登录
     $scope.adminSubmit = function (){
         $scope.adminName = $("#adminName").val();
@@ -124,15 +80,10 @@ angular.module('sbAdminApp').controller('LoginCtrl', ['$rootScope','$scope','Ini
     //单位管理员登录
     $scope.epAdminSubmit = function (){
         //客户端输入统一码，用户名，密码
-        $scope.epCode = $("#epCode").val();
-        $scope.epAdminName = $("#epAdminName").val();
+        $scope.epCode = $("#epId").val();
         $scope.epAdminPwd = $("#epAdminPwd").val();
         if($scope.epCode == null || angular.equals("", $scope.epCode)){
-            $scope.open("统一社会信用代码不能为空");
-            return;
-        }
-        if($scope.epAdminName == null || angular.equals("", $scope.epAdminName)){
-            $scope.open("用户名不能为空");
+            $scope.open("企业编号不能为空");
             return;
         }
         if ($scope.epAdminPwd == null || angular.equals("", $scope.epAdminPwd)) {
@@ -141,10 +92,6 @@ angular.module('sbAdminApp').controller('LoginCtrl', ['$rootScope','$scope','Ini
         }
         if($scope.epCode.length > 30){
             $scope.open("统一社会信用代码太长！");
-            return;
-        }
-        if($scope.epAdminName.length > 66){
-            $scope.open("用户名太长！");
             return;
         }
         if($scope.epAdminPwd.length > 18){

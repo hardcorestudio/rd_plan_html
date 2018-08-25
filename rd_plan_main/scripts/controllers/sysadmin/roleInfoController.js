@@ -59,11 +59,6 @@ angular.module('sbAdminApp').controller('RoleInfoCtrl', ['$scope','Init','Modal'
             $scope.open($scope.content);
             return;
         }
-        var patrn=/^[\u4e00-\u9fa5a-zA-Z]+$/;
-        if (!patrn.exec($("#roleName").val())){
-            $scope.open("角色名称输入不正确，请重新输入");
-            return;
-        }
         if($("#roleName").val().length > 33){
             $scope.content = "角色名称太长";
             $scope.open($scope.content);
