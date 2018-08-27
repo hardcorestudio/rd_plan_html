@@ -401,41 +401,6 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
-        .state('dashboard.unfinishedTaskIndex.approveEpInfoTransition', {
-            url: '/approveEpInfoTransition',
-            controller: 'ApproveEpInfoTransitionCtrl',
-            templateUrl: 'views/dashboard/admin/approveEpInfoTransition.html',
-            params: {
-                "bizId": null,
-                "applyId": null,
-                "btnFlag": null,
-                "oldFrom": null,
-                "from": null
-            },
-            resolve: {
-                loadMyFiles: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'sbAdminApp',
-                        files: [
-                            'scripts/controllers/main.js',
-                            'scripts/directives/timeline/timeline.js',
-                            'scripts/directives/notifications/notifications.js',
-                            'lib/dataTables/dataTables.bootstrap.min.css',
-                            'lib/dataTables/dataTables.bootstrap.min.js',
-                            'lib/dataTables/jquery.dataTables.min.css',
-                            'lib/dataTables/jquery.dataTables.min.js',
-                            
-                            'scripts/directives/dashboard/stats/stats.js',
-                            'styles/mine.css',
-                            'scripts/controllers/admin/approveEpInfoTransitionController.js',
-                            'scripts/controllers/modal/promptModalController.js'
-                        ]
-                    })
-                }
-            }
-        })
-        
-        
         .state('dashboard.unfinishedTaskIndex.epAdminManageUnfinishedTaskForAdmin', {
             url: '/epAdminManageUnfinishedTaskForAdmin',
             controller: 'ApproveEpAdminInfoCtrl',
@@ -470,74 +435,6 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
-        .state('dashboard.unfinishedTaskIndex.epAdminManageUnfinishedTaskForAdminTransition', {
-            url: '/epAdminManageUnfinishedTaskForAdminTransition',
-            controller: 'ApproveEpAdminInfoTranstionCtrl',
-            templateUrl: 'views/dashboard/admin/approveEpAdminInfoTransition.html',
-            params: {
-                "bizId": null,
-                "applyId": null,
-                "btnFlag": null,
-                "from": null,
-                "oldFrom": null
-            },
-            resolve: {
-                loadMyFiles: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'sbAdminApp',
-                        files: [
-                            'scripts/controllers/main.js',
-                            'scripts/directives/timeline/timeline.js',
-                            'scripts/directives/notifications/notifications.js',
-                            'lib/dataTables/dataTables.bootstrap.min.css',
-                            'lib/dataTables/dataTables.bootstrap.min.js',
-                            'lib/dataTables/jquery.dataTables.min.css',
-                            'lib/dataTables/jquery.dataTables.min.js',
-                            
-                            'scripts/directives/dashboard/stats/stats.js',
-                            'styles/mine.css',
-                            'scripts/controllers/modal/promptModalController.js',
-                            'scripts/controllers/admin/approveEpAdminInfoTransitionController.js',
-                            'scripts/controllers/admin/approveDetailModalController.js'
-                        ]
-                    })
-                }
-            }
-        })
-        .state('dashboard.finishedTaskIndex.epAdminManageFinishedTaskForAdminTransition', {
-            url: '/epAdminManageFinishedTaskForAdminTransition',
-            controller: 'ApproveEpAdminInfoTranstionCtrl',
-            templateUrl: 'views/dashboard/admin/approveEpAdminInfoTransition.html',
-            params: {
-                "bizId": null,
-                "applyId": null,
-                "btnFlag": null,
-                "from": null,
-                "oldFrom": null
-            },
-            resolve: {
-                loadMyFiles: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'sbAdminApp',
-                        files: [
-                            'scripts/controllers/main.js',
-                            'scripts/directives/timeline/timeline.js',
-                            'scripts/directives/notifications/notifications.js',
-                            'lib/dataTables/dataTables.bootstrap.min.css',
-                            'lib/dataTables/dataTables.bootstrap.min.js',
-                            'lib/dataTables/jquery.dataTables.min.css',
-                            'lib/dataTables/jquery.dataTables.min.js',
-                            
-                            'scripts/directives/dashboard/stats/stats.js',
-                            'styles/mine.css',
-                            'scripts/controllers/modal/promptModalController.js',
-                            'scripts/controllers/admin/approveEpAdminInfoTransitionController.js',
-                            'scripts/controllers/admin/approveDetailModalController.js'
-                        ]
-                    })
-                }
-            }
-        })
         .state('dashboard.finishedTaskIndex.epAdminManageFinishedTaskForAdmin', {
             url: '/epAdminManageFinishedTaskForAdmin',
             controller: 'ApproveEpAdminInfoCtrl',
@@ -566,6 +463,37 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                             'scripts/controllers/modal/promptModalController.js',
                             'scripts/controllers/admin/approveEpAdminInfoController.js',
                             'scripts/controllers/admin/approveDetailModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.planIndex', {
+            url: '/planIndex',
+            controller: 'PlanIndexCtrl',
+            templateUrl: 'views/dashboard/plan/planIndex.html',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/plan/planIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.planIndex.planMain', {
+            url: '/planMain',
+            controller: 'PlanMainCtrl',
+            templateUrl: 'views/dashboard/plan/planMain.html',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/plan/index.css',
+                            'scripts/controllers/plan/planMainController.js'
                         ]
                     })
                 }
@@ -783,91 +711,6 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                     })
                 }
             }
-        })
-        .state('dashboard.chart', {
-            templateUrl: 'views/chart.html',
-            url: '/chart',
-            controller: 'ChartCtrl',
-            resolve: {
-                loadMyFile: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'chart.js',
-                        files: [
-                            'bower_components/angular-chart.js/dist_bak/angular-chart.min.js',
-                            'bower_components/angular-chart.js/dist_bak/angular-chart.css'
-                        ]
-                    }),
-                        $ocLazyLoad.load({
-                            name: 'sbAdminApp',
-                            files: ['scripts/controllers/chartContoller.js']
-                        })
-                }
-            }
-        })
-        .state('dashboard.table', {
-            templateUrl: 'views/table.html',
-            url: '/table'
-        })
-        .state('dashboard.testTree', {
-            templateUrl: 'views/testTree.html',
-            controller: 'TestTreeCtrl',
-            url: '/testTree',
-            resolve: {
-                loadMyFiles: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'sbAdminApp',
-                        files: [
-                            'scripts/controllers/testTreeController.js'
-                        ]
-                    })
-                }
-            }
-        })
-        .state('dashboard.panels-wells', {
-            templateUrl: 'views/ui-elements/panels-wells.html',
-            url: '/panels-wells',
-            controller: 'TabCtrl',
-            resolve: {
-                loadMyFiles: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'sbAdminApp',
-                        files: [
-                            'scripts/controllers/tabController.js',
-                        ]
-                    })
-                }
-            }
-        })
-        .state('dashboard.buttons', {
-            templateUrl: 'views/ui-elements/buttons.html',
-            url: '/buttons'
-        })
-        .state('dashboard.notifications', {
-            templateUrl: 'views/ui-elements/notifications.html',
-            url: '/notifications',
-            controller: 'NotificationsCtrl',
-            resolve: {
-                loadMyFiles: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'sbAdminApp',
-                        files: [
-                            'scripts/controllers/notificationsController.js',
-                        ]
-                    })
-                }
-            }
-        })
-        .state('dashboard.typography', {
-            templateUrl: 'views/ui-elements/typography.html',
-            url: '/typography'
-        })
-        .state('dashboard.icons', {
-            templateUrl: 'views/ui-elements/icons.html',
-            url: '/icons'
-        })
-        .state('dashboard.grid', {
-            templateUrl: 'views/ui-elements/grid.html',
-            url: '/grid'
         })
         .state('dashboard.batchOperation', {
             url: '/batchOperation',
