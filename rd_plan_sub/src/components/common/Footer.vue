@@ -1,6 +1,6 @@
 <template>
 	<div id='MyFooter'>
-		<div class="footer">copyright by woody</div>
+		<div class="footer">天津市</div>
 	</div>
 </template>
 <style scoped>

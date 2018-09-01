@@ -1,6 +1,6 @@
 <template>
   <div id="AppVue">
-    <my-header></my-header>
+    <!-- <my-header></my-header> -->
     <!-- <my-content></my-content> -->
     <router-view></router-view>
     <my-footer></my-footer>
@@ -9,9 +9,9 @@
 
 <script>
   
-  import Header from './components/common/Header.vue';
+  // import Header from './components/common/Header.vue';
   import Footer from './components/common/Footer.vue';
-  import Content from './components/content/Content.vue'
+  // import Content from './components/content/Content.vue'
   export default {
     name: 'AppVue',
     data () {
@@ -20,9 +20,9 @@
       }
     },
     components:{
-      'my-header':Header,
+      // 'my-header':Header,
       'my-footer':Footer,
-      'my-content':Content,
+      // 'my-content':Content,
     }
   }
 </script>

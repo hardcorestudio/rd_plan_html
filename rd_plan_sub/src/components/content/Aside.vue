@@ -1,79 +1,86 @@
 <template>
 	<div id="MyAside">
-		<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-		  <el-submenu index="1">
-		    <template slot="title" class="ttt">
-		      <i class="el-icon-location"></i>
-		      <span slot="title">导航一</span>
-		    </template>
-		    <el-menu-item-group>
-		      <span slot="title">分组一</span>
-		      <el-menu-item index="1-1" v-on:click="goto('/main/menu1')">选项1</el-menu-item>
-		      <el-menu-item index="1-2" v-on:click="goto('/main/menu2')">选项2</el-menu-item>
-		    </el-menu-item-group>
-		    <el-menu-item-group title="分组2">
-		      <el-menu-item index="1-3">选项3</el-menu-item>
-		    </el-menu-item-group>
-		    <el-submenu index="1-4">
-		      <span slot="title">选项4</span>
-		      <el-menu-item index="1-4-1">选项1</el-menu-item>
-		    </el-submenu>
-		  </el-submenu>
-		  <el-submenu index="2">
-		  	<template slot="title">
-		      <i class="el-icon-menu"></i>
-		      <span slot="title">导航二</span>
-		    </template>
-		    <el-menu-item-group>
-		      <span slot="title">分组一</span>
-		      <el-menu-item index="2-1">选项1</el-menu-item>
-		      <el-menu-item index="2-2">选项2</el-menu-item>
-		    </el-menu-item-group>
-		  </el-submenu>
-		  <el-menu-item index="3" disabled>
-		    <i class="el-icon-document"></i>
-		    <span slot="title">导航三</span>
-		  </el-menu-item>
-		  <el-menu-item index="4">
-		    <i class="el-icon-setting"></i>
-		    <span slot="title">导航四</span>
-		  </el-menu-item>
-		</el-menu>
+		<div class="leftAside_titleBg">
+			<div class="leftAside_title">危险废物管理计划</div>
+			<div class="leftAside_subtitle">{{titleInfo.title}}</div>
+		</div>
+		<div class="leftAside_contentArea">
+			<div class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
+		</div>
+		<div class="leftAside_btnArea">
+			<el-button plain @click="doSubmit">保存</el-button>
+		</div>
 	</div>
 </template>
 <script>
   export default {
+		props: {
+			titleInfo: Object
+		},
     data() {
       return {
-        isCollapse: false
+        // isCollapse: false
       };
-    },
+		},
+		mounted: {
+			
+		},
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      goto(key){
-      	this.$router.push({ path: key})
-      }
+			doSubmit() {
+				this.$emit('doSubmit')
+			}
     }
   }
 </script>
 <style scoped>
 #MyAside{
-	display: -webkit-flex; /* Safari */
-  	display: flex;
+	/* display: -webkit-flex;
+  display: flex; */
 	/*flex:1;*/
 	height: 100%;
 	/*width: 200px;*/
 	/*min-width: 200px;*/
 	/*border-right: 0.5px solid rgba(52, 52, 52,0.5);*/
 	background-color: #fff;
-	width: 200px;
-    min-height: 400px;
-    flex-direction: column;
+	width: 360px;
+	min-height: 400px;
+	/* flex-direction: column; */
+	box-sizing: border-box;
+	padding: 45px 28px;
+}
+.leftAside_bg{
+	width: 100%
+}
+.leftAside_titleBg{
+	border-bottom: 2px solid rgba(67,182,122);
+	float: left;
+	padding-bottom: 26px;
+}
+.leftAside_titleBg .leftAside_title {
+	font-size: 24px;
+}
+.leftAside_titleBg .leftAside_subtitle {
+	font-size: 16px;
+	text-align: right;
+}
+.leftAside_contentArea{
+	width: 100%;
+	padding-top: 42px;
+	float: left;
+}
+.leftAside_contentArea .leftAside_textItem{
+	font-size: 10px;
+	margin-bottom: 5px;
+}
+.leftAside_btnArea{
+	margin-top: 50px;
+	float: left;
+}
+.leftAside_btnArea >button{
+	background: #fff;
+	font-weight: unset;
+	border: 1px solid rgba(67,182,122);
+	color: rgba(67,182,122);
 }
 /*.el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
