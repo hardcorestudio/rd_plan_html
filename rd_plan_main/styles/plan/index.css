@@ -39,14 +39,14 @@
     color:#fff
 }
 
-.func:hover{
+.func:active{
     -moz-box-shadow:2px 3px 6px #33333320; 
     -webkit-box-shadow:2px 3px 6px #33333320; 
     box-shadow:2px 3px 6px #33333320;
     color:rgb(61, 185, 129);
 }
 
-.func_done:hover{
+.func_done:active{
     -moz-box-shadow:2px 3px 6px #33333320; 
     -webkit-box-shadow:2px 3px 6px #33333320; 
     box-shadow:2px 3px 6px #33333320;

@@ -4,6 +4,12 @@ import productionSituation from '../components/content/page/productionSituation.
 import environmentalMonitoring from '../components/content/page/environmentalMonitoring.vue'
 import decrementPlan from '../components/content/page/decrementPlan.vue'
 import lastYearManagePlanRecord from '../components/content/page/lastYearManagePlanRecord.vue'
+import baseInfo from '../components/content/page/baseInfo.vue'
+import transferStuation from '../components/content/page/transferStuation.vue'
+import selfDisposalMeasures from '../components/content/page/selfDisposalMeasures.vue'
+import produceSituation from '../components/content/page/produceSituation.vue'
+import entrustDisposalMeasures from '../components/content/page/entrustDisposalMeasures.vue'
+
 
 
 // import Main from '../components/content/Main.vue';
@@ -33,6 +39,26 @@ const routes = [
 		path: '/lastYearManagePlanRecord',
 		component: lastYearManagePlanRecord,
 	},
+	{
+		path: '/baseInfo',
+		component: baseInfo,
+	},
+	{
+		path: '/transferStuation',
+		component: transferStuation,
+	},
+	{
+		path: '/selfDisposalMeasures',
+		component: selfDisposalMeasures,
+	},
+	{
+		path: '/produceSituation',
+		component: produceSituation,
+	},
+	{
+		path: '/entrustDisposalMeasures',
+		component: entrustDisposalMeasures,
+	}
 	// {
 	// 	path:'/',
 	// 	component:Content,

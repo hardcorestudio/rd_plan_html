@@ -3,6 +3,7 @@
 		<div v-if="titleInfo.title && titleInfo.title !== ''" class="assTitle_titleArea">
 			<div class="assTitleArea_text">{{ titleInfo.title }}</div>
 			<div v-if="titleType === 'reset'" class="assTitleArea_reset" @click="doReset">重置</div>
+			<div v-if="numTitle && numTitle !== ''" class="assTitleArea_num">{{numTitle}}</div>
 		</div>
 		<div v-if="titleType === 'textarea'" class="assTitle_textarea">
 			<div v-if="titleInfo.subTitle && titleInfo.subTitle !== ''" class="assTitleTextarea_title">{{ titleInfo.subTitle }}</div>
@@ -19,7 +20,8 @@
   export default {
 		props: {
 			titleInfo: Object,
-			titleType: String
+			titleType: String,
+			numTitle: String
 		},
     data() {
       return {
@@ -61,6 +63,13 @@
 	margin-left: 10px;
 	width: 50px;
 	text-align: center;
+	color: rgba(67,182,122)
+}
+.assTitleArea_num{
+	height: 100%;
+	float: right;
+	font-size: 14px;
+	padding: 0 5px;
 	color: rgba(67,182,122)
 }
 .assTitle_textarea{

@@ -1,7 +1,7 @@
 <template>
 	<div id="assSwitch">
 		<div class="assSwitch_bg">
-			<div class="assSwitchBg_title">{{ title }}</div>
+			<div v-if="title && title !== ''" class="assSwitchBg_title">{{ title }}</div>
 			<div class="assSwitch_item" v-for="item in switchInfo" :key="item">
 				<el-row class="assSwitchItem_row">
 					<el-col class="assSwitchItem_text" :span="19">{{item.name}}</el-col>

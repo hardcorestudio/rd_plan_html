@@ -3,11 +3,11 @@
 		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="dangerRubbishManagerPlan">
 			<assTitle :titleInfo="title1" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title1fromList" listType="top"></assForm>
+			<assForm :formList="title1fromList"></assForm>
 			<assTitle :titleInfo="title2" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title2fromList" listType="middle"></assForm>
+			<assForm :formList="title2fromList"></assForm>
 			<assTitle :titleInfo="title3" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title3fromList" listType="bottom"></assForm>
+			<assForm :formList="title3fromList"></assForm>
 			<assTitle :titleInfo="title4" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
@@ -46,25 +46,64 @@
 				},
 				title1fromList: [{
 					index: 1,
-					first: "",
-					second: "",
-					third: "",
-					fourth: ""
+					itemList: [{
+						type: "input",
+						text: "",
+						title: "原辅材料名称"
+					},{
+						type: "select",
+						text: "",
+						title: "单位"
+					},{
+						type: "input",
+						text: "",
+						title: "上年度消耗量"
+					},{
+						type: "input",
+						text: "",
+						title: "本年度计划消耗量"
+					}]
 				}],
 				title2fromList: [{
 					index: 1,
-					first: "",
-					second: "",
-					third: "",
-					fourth: ""
+					itemList: [{
+						type: "input",
+						text: "",
+						title: "设备名称"
+					},{
+						type: "unit",
+						text: "台",
+						title: "单位"
+					},{
+						type: "input",
+						text: "",
+						title: "上年度数量"
+					},{
+						type: "input",
+						text: "",
+						title: "本年度数量"
+					}]
 				}],
 				title3fromList: [{
 					index: 1,
-					first: "",
-					second: "",
-					third: "",
-					fourth: ""
-				}]
+					itemList: [{
+						type: "input",
+						text: "",
+						title: "产品名称"
+					},{
+						type: "select",
+						text: "",
+						title: "单位"
+					},{
+						type: "input",
+						text: "",
+						title: "上年度产量"
+					},{
+						type: "input",
+						text: "",
+						title: "本年度计划产量"
+					}]
+				}],
 			}
 		},
 		components:{

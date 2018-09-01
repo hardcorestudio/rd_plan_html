@@ -8,35 +8,35 @@
     <div class="row " ng-model="planMain">
         <div class="col-lg-12">
             <div class="row_func">
-                <div class="func" >
+                <div class="func"  ng-click="jumpSub('baseInfo')">
                     <div>基本信息</div>
                 </div>
-                <div class="func_done">
+                <div class="func_done" ng-click="jumpSub('productionSituation')">
                     <div>产品生产情况</div>
                 </div>
-                <div class="func" >
+                <div class="func" ng-click="jumpSub('produceSituation')">
                     <div>危险废物产生概况</div>
                 </div>
-                <div class="func" >
+                <div class="func" ng-click="jumpSub('decrementPlan')">
                     <div>危险废物减量化计划和措施</div>
                 </div>
             </div>
             <div class="row_func">
-                <div class="func" >
+                <div class="func" ng-click="jumpSub('transferStuation')">
                     <div>危险废物转移情况</div>
                 </div>
-                <div class="func_done">
+                <div class="func_done" ng-click="jumpSub('selfDisposalMeasures')">
                     <div>危险废物自行利用/处置措施</div>
                 </div>
-                <div class="func" >
+                <div class="func" ng-click="jumpSub('entrustDisposalMeasures')">
                     <div>危险废物委托利用/处置措施</div>
                 </div>
-                <div class="func" >
+                <div class="func" ng-click="jumpSub('environmentalMonitoring')">
                     <div>环境监测情况</div>
                 </div>
             </div>
             <div class="row_func">
-                <div class="func" >
+                <div class="func" ng-click="jumpSub('lastYearManagePlanRecord')">
                     <div>上年度管理计划回顾</div>
                 </div>
             </div>
