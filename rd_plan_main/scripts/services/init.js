@@ -77,8 +77,7 @@ angular.module('sbAdminApp').factory('Init', ['$http','$rootScope','localStorage
                 localStorageService.set('WJWT',data.WJWT);
                 userInit(data);
                 //sessionStorage.setItem('IWBSESSION',data.IWBSESSION);
-                //console.log("init11=====>>"+JSON.stringify(data));
-                console.log(data)
+                console.log(data);
                 if(data.IWBSESSION == null || angular.equals("",data.IWBSESSION)){
                     if(!angular.equals("/login/epLogin", url) && !angular.equals("/login/adminLogin", url) && !angular.equals("/login/epAdminLogin", url) && !angular.equals("/login/epRegister", url) && !angular.equals("/login/getCheckCode", url) && !angular.equals("/login/getCheckCodeNum", url)){
                         //console.log("url111=====>"+url);

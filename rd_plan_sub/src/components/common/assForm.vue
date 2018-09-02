@@ -30,8 +30,10 @@
 			</el-row>
 			<el-row class="assFromItem_row">
 				<div class="assFromItem_iconBtnArea">
-					<i v-if="index === formList.length - 1" @click="addSign" class="el-icon-plus"></i>
-					<i v-if="index > 0" @click="reduceSign(item)" class="el-icon-minus"></i>
+					<!-- <i v-if="index === formList.length - 1" @click="addSign" class="el-icon-plus"></i>
+					<i v-if="index > 0" @click="reduceSign(item)" class="el-icon-minus"></i> -->
+					<img v-if="index === formList.length - 1" @click="addSign" src="../../assets/images/plus.png">
+					<img v-if="index > 0" @click="reduceSign(item)" src="../../assets/images/reduce.png">
 				</div>
 			</el-row>
 		</div>

@@ -8,8 +8,8 @@ angular.module('sbAdminApp').factory('CheckBrowser', ['$http','$rootScope','loca
             var explorer = window.navigator.userAgent ;
             var currentUrl = window.location.href;
             var url = "";
-            if(currentUrl.indexOf("/rd_2nd_html")>0){
-                url = currentUrl.split("/rd_2nd_html")[0] + "/rd_2nd_html/index.html";
+            if(currentUrl.indexOf("/rd_plan_main")>0){
+                url = currentUrl.split("/rd_plan_main")[0] + "/rd_plan_main/index.html";
             }
             if(currentUrl.indexOf("#/")>0){
                 url = currentUrl.split("#/")[0] + "/index.html";

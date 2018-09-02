@@ -487,13 +487,38 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
             url: '/planMain',
             controller: 'PlanMainCtrl',
             templateUrl: 'views/dashboard/plan/planMain.html',
+            params: {
+                "tpId": null,
+                "from": null
+            },
             resolve: {
                 loadMyFiles: function ($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'sbAdminApp',
                         files: [
                             'styles/plan/index.css',
+                            'styles/mine.css',
                             'scripts/controllers/plan/planMainController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.planIndex.planList', {
+            url: '/planList',
+            controller: 'PlanListCtrl',
+            templateUrl: 'views/dashboard/plan/planList.html',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/plan/planListController.js'
                         ]
                     })
                 }

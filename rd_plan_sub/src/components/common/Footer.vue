@@ -1,6 +1,6 @@
 <template>
 	<div id='MyFooter'>
-		<div class="footer">天津市</div>
+		<div class="footer">天津市环保局固废管理中心</div>
 	</div>
 </template>
 <style scoped>

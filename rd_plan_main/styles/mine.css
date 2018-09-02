@@ -4,3 +4,29 @@
 .hideth {
     display: none;
 }
+.myHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding-bottom: 9px;
+    margin: 15px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+.myback{
+    margin-left: 16px;
+    color:#4FC08D;
+    font-size: 12px;
+    height:30px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color:#4FC08D;
+    border-style: solid;
+}
+.myback:hover{
+    background-color: #4FC08D;
+    color:#fafafa;
+}

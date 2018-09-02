@@ -112,6 +112,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', ['$rootScope','$scope','Ini
             if (angular.equals("0", data.resFlag)) {
                 $rootScope.ifLogin = "0";
                 localStorageService.set("indexUrl","dashboard.index");
+                localStorageService.set("ROLEID",data.ROLEID);
                 $state.go("dashboard.index");
             } else {
                 $scope.open(data.msg);

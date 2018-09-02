@@ -1,6 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -36,6 +40,10 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
       }
     ]
   },

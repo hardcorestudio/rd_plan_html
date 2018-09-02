@@ -242,6 +242,9 @@
 	/*align-items:center;*/
 	align-content:center;
 }
+#baseInfo >#MyAside{
+	overflow-y: scroll
+}
 #baseInfoArea{
 	flex:1;
 	width: 100%;

@@ -8,7 +8,8 @@
 			<div class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
 		</div>
 		<div class="leftAside_btnArea">
-			<el-button plain @click="doSubmit">保存</el-button>
+			<el-button class="saveBtn" plain @click="doSubmit">保存</el-button>
+			<el-button type="info" plain @click="doClose">关闭</el-button>
 		</div>
 	</div>
 </template>
@@ -28,6 +29,9 @@
     methods: {
 			doSubmit() {
 				this.$emit('doSubmit')
+			},
+			doClose() {
+				window.close();
 			}
     }
   }
@@ -76,7 +80,7 @@
 	margin-top: 50px;
 	float: left;
 }
-.leftAside_btnArea >button{
+.leftAside_btnArea >.saveBtn{
 	background: #fff;
 	font-weight: unset;
 	border: 1px solid rgba(67,182,122);
