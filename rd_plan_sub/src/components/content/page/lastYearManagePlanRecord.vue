@@ -112,6 +112,7 @@ export default {
   justify-content: space-between;
   /*align-items:center;*/
   align-content: center;
+	overflow-y: hidden;
 }
 #lastYearManagePlanRecordContent {
   flex: 1;

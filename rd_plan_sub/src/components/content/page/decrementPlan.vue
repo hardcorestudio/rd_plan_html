@@ -54,6 +54,7 @@
 	justify-content:space-between;
 	/*align-items:center;*/
 	align-content:center;
+	overflow-y: hidden;
 }
 #decrementPlanContent{
 	flex:1;

@@ -79,6 +79,7 @@
 	justify-content:space-between;
 	/*align-items:center;*/
 	align-content:center;
+	overflow-y: hidden;
 }
 #environmentalMonitoringContent{
 	flex:1;
