@@ -1,9 +1,17 @@
 .row_func{
     display:flex;
     flex-direction:row;
-    justify-content: space-between;
-    margin-bottom: 32px;
+    /* justify-content: space-between; */
+    /* margin-bottom: 32px; */
+    flex-wrap:  wrap;
 }
+
+/* .row_func_flexstart {
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    margin-bottom: 32px;
+} */
 
 .func{
     display:flex;
@@ -19,7 +27,9 @@
     -webkit-box-shadow:1px 3px 6px #33333360; 
     box-shadow:1px 3px 6px #33333360;
     background-color: #fafafa;
-    color:#343434
+    color:#343434;
+    margin-right: 38px;
+    margin-top: 16px;
 }
 
 .func_done{
@@ -36,7 +46,9 @@
     -webkit-box-shadow:1px 3px 6px #33333360; 
     box-shadow:1px 3px 6px #33333360;
     background-color: rgb(61, 185, 129);
-    color:#fff
+    color:#fff;
+    margin-right: 38px;
+    margin-top: 16px;
 }
 
 .func:active{

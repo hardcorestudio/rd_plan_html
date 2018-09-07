@@ -18,4 +18,9 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$scope','Init','CheckB
         console.log($stateParams)
         $state.go($stateParams.from);
     }
+    //提交
+    $scope.sub = function (){
+        console.log("提交成功")
+        // $state.go($stateParams.from);
+    }
 }]);
