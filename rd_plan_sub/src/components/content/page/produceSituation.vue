@@ -12,6 +12,7 @@
 	import Aside from '../Aside.vue';
 	import assTitle from '../../common/assTitle.vue'
 	import assForm from '../../common/assForm.vue'
+	import { checkBrowser } from '../../utils/browserCheck.js'
 	export default {
 		name:'produceSituation',
 		data(){
@@ -93,6 +94,16 @@
 				console.log(n);
 				console.log(o);
 			}, 
+		},
+		mounted () {
+			checkBrowser(() => {
+				// this.$message({
+				// 	showClose: true,
+				// 	message: '您当前使用的浏览器不支持本模块功能，建议使用Chrome浏览器',
+				// 	type: 'warning'
+				// });
+				this.$router.push({path: '/pageIncompatible'})
+			})
 		},
 		methods: {
 			doSubmit() {

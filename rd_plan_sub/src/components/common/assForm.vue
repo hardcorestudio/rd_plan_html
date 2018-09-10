@@ -5,30 +5,33 @@
 				<el-col class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'" v-for="fItem in item.itemList" :key="fItem" >
 					<el-row class="assFromItem_itemRow">
 						<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title}}</div>
-						<div v-if="fItem.type === 'input'" class="assFromItem_right">
-							<el-input v-model="fItem.text" placeholder="必填"></el-input>
+						<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
+						<div v-else>
+							<div v-if="fItem.type === 'input'" class="assFromItem_right">
+								<el-input v-model="fItem.text" placeholder="必填"></el-input>
+							</div>
+							<div v-else-if="fItem.type === 'select'" class="assFromItem_right">
+								<el-select placeholder="吨/年">
+									<el-option
+										v-model="fItem.text"
+										v-for="uItem in units"
+										:key="uItem.value"
+										:label="uItem.label"
+										:value="uItem.value">
+									</el-option>
+								</el-select>
+							</div>
+							<div v-else-if="fItem.type === 'inputWithUnit'" class="assFromItem_right">
+								<el-input v-model="fItem.text" placeholder="必填">
+									<template slot="append">{{fItem.unit}}</template>
+								</el-input>
+							</div>
+							<div v-else-if="fItem.type === 'unit'" class="assFromItem_right unitShow">{{fItem.text}}</div>
 						</div>
-						<div v-else-if="fItem.type === 'select'" class="assFromItem_right">
-							<el-select placeholder="吨/年">
-								<el-option
-								  v-model="fItem.text"
-									v-for="uItem in units"
-									:key="uItem.value"
-									:label="uItem.label"
-									:value="uItem.value">
-								</el-option>
-							</el-select>
-						</div>
-						<div v-else-if="fItem.type === 'inputWithUnit'" class="assFromItem_right">
-							<el-input v-model="fItem.text" placeholder="必填">
-								<template slot="append">{{fItem.unit}}</template>
-							</el-input>
-						</div>
-						<div v-else-if="fItem.type === 'unit'" class="assFromItem_right unitShow">{{fItem.text}}</div>
 					</el-row>
 				</el-col>
 			</el-row>
-			<el-row class="assFromItem_row">
+			<el-row v-if="type !== 'label'" class="assFromItem_row">
 				<div class="assFromItem_iconBtnArea">
 					<!-- <i v-if="index === formList.length - 1" @click="addSign" class="el-icon-plus"></i>
 					<i v-if="index > 0" @click="reduceSign(item)" class="el-icon-minus"></i> -->
@@ -43,7 +46,8 @@
   export default {
 		props: {
 			formList: Array,
-			listType: String
+			listType: String,
+			type: String
 		},
     data() {
       return {
@@ -105,6 +109,7 @@
 	/* justify-content: flex-end; */
 	padding-right: 16px;
 	flex-direction: row;
+	align-items: center;
 }
 .assFromItem_col{
 	/* height: 42px; */

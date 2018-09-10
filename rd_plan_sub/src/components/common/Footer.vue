@@ -5,18 +5,18 @@
 </template>
 <style scoped>
 #MyFooter{
-	background-color: #b3c0d1;
+	background-color: rgb(67,182,122);
 	color: #fff;
 	display: -webkit-flex; /* Safari */
-  	display: flex;
-  	position: fixed;
-  	flex:1;
-  	bottom:0;
-  	width: 100%;
-    justify-content:center;
-    align-items: center;
+	display: flex;
+	position: fixed;
+	flex:1;
+	bottom:0;
+	width: 100%;
+	justify-content:center;
+	align-items: center;
 }
 .footer{
-
+	font-size: 15px;
 }
 </style>

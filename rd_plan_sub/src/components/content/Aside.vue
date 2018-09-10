@@ -2,13 +2,13 @@
 	<div id="MyAside">
 		<div class="leftAside_titleBg">
 			<div class="leftAside_title">危险废物管理计划</div>
-			<div class="leftAside_subtitle">{{titleInfo.title}}</div>
+			<div v-if="titleInfo.title" class="leftAside_subtitle">{{titleInfo.title}}</div>
 		</div>
 		<div class="leftAside_contentArea">
-			<div class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
+			<div v-if="titleInfo.textInfoList" class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
 		</div>
 		<div class="leftAside_btnArea">
-			<el-button class="saveBtn" plain @click="doSubmit">保存</el-button>
+			<el-button v-if="titleInfo.title" class="saveBtn" plain @click="doSubmit">保存</el-button>
 			<el-button type="info" plain @click="doClose">关闭</el-button>
 		</div>
 	</div>
@@ -77,6 +77,7 @@
 	margin-bottom: 5px;
 }
 .leftAside_btnArea{
+	width: 100%;
 	margin-top: 50px;
 	float: left;
 }

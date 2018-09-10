@@ -9,6 +9,7 @@ import transferStuation from '../components/content/page/transferStuation.vue'
 import selfDisposalMeasures from '../components/content/page/selfDisposalMeasures.vue'
 import produceSituation from '../components/content/page/produceSituation.vue'
 import entrustDisposalMeasures from '../components/content/page/entrustDisposalMeasures.vue'
+import pageIncompatible from '../components/content/PageIncompatible.vue'
 
 
 
@@ -58,6 +59,10 @@ const routes = [
 	{
 		path: '/entrustDisposalMeasures',
 		component: entrustDisposalMeasures,
+	},
+	{
+		path: '/pageIncompatible',
+		component: pageIncompatible,
 	}
 	// {
 	// 	path:'/',
