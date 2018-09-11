@@ -1,14 +1,14 @@
 <template>
 	<div id='productionSituation'>
-		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
+		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="dangerRubbishManagerPlan">
-			<assTitle :titleInfo="title1" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title1fromList"></assForm>
-			<assTitle :titleInfo="title2" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title2fromList"></assForm>
-			<assTitle :titleInfo="title3" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title3fromList"></assForm>
-			<assTitle :titleInfo="title4" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="resetRawMaterial"></assTitle>
+			<assForm :formList="title1fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" @doReset="resetRawMaterial"></assTitle>
+			<assForm :formList="title2fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title3" titleType="reset" @doReset="resetRawMaterial"></assTitle>
+			<assForm :formList="title3fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -31,6 +31,7 @@
 						"生产工艺说明：文字说明所有危险废物的生产环节。"
 					]
 				},
+				userRole: 'manager',
 				title1: {
 					title: "原辅材料及消耗量",
 				},

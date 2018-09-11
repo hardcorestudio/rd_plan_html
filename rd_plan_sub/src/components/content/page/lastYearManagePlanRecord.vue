@@ -1,15 +1,15 @@
 <template>
 	<div id='lastYearManagePlanRecord'>
-		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
+		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="lastYearManagePlanRecordContent">
-			<assTitle :titleInfo="title1" titleType="textarea"></assTitle>
-			<assTitle :titleInfo="title2" titleType="textarea"></assTitle>
-			<assTitle :titleInfo="title3" titleType="single"></assTitle>
-			<assSwitch title="危险废物经营许可证制度" :switchInfo="switchInfo1"></assSwitch>
-			<assSwitch title="危险废物转移审批制度" :switchInfo="switchInfo2"></assSwitch>
-			<assSwitch title="危险废物识别标志制度" :switchInfo="switchInfo3"></assSwitch>
-			<assSwitch title="危险废物建立台账登记制度" :switchInfo="switchInfo4"></assSwitch>
-			<assSwitch title="建设项目固废污染防治设施环境影响评价及验收制度" :switchInfo="switchInfo5"></assSwitch>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title2" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title3" titleType="single"></assTitle>
+			<assSwitch :userRole="userRole" title="危险废物经营许可证制度" :switchInfo="switchInfo1"></assSwitch>
+			<assSwitch :userRole="userRole" title="危险废物转移审批制度" :switchInfo="switchInfo2"></assSwitch>
+			<assSwitch :userRole="userRole" title="危险废物识别标志制度" :switchInfo="switchInfo3"></assSwitch>
+			<assSwitch :userRole="userRole" title="危险废物建立台账登记制度" :switchInfo="switchInfo4"></assSwitch>
+			<assSwitch :userRole="userRole" title="建设项目固废污染防治设施环境影响评价及验收制度" :switchInfo="switchInfo5"></assSwitch>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -32,6 +32,7 @@ export default {
 					"管理制度执行情况：对是否执行危险废物经营许可证制度、转移审批及联单制度、识别标志标签制度等进行勾选。"
 				]
 			},
+			userRole: 'manager',
 			title1: {
 				title: "检查、监测和公开",
 				subTitle: "上年度各级环保部门检查、环境监测、信息公开情况",

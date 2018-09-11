@@ -1,9 +1,9 @@
 <template>
 	<div id='produceSituation'>
-		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
+		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="produceSituationPlan">
-			<assTitle :titleInfo="title1" titleType="reset" @doReset="doReset" numTitle="计划产生量合计：0   实际产生量合计：0"></assTitle>
-			<assForm :formList="title1fromList"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="doReset" numTitle="计划产生量合计：0   实际产生量合计：0"></assTitle>
+			<assForm :formList="title1fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -30,6 +30,7 @@
 						'来源及产生工序:产生该种废物的部门、车间名称及其相应产生工段、工序名称。'
 					]
 				},
+				userRole: 'manager',
 				title1: {
 					title: " "
 				},

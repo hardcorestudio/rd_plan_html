@@ -1,12 +1,12 @@
 <template>
 	<div id='environmentalMonitoring'>
-		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
+		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="environmentalMonitoringContent">
-			<assTitle :titleInfo="title1" titleType="single"></assTitle>
-			<assTitle :titleInfo="title2" titleType="textarea"></assTitle>
-			<assTitle :titleInfo="title3" titleType="textarea"></assTitle>
-			<assTitle :titleInfo="title4" titleType="textarea"></assTitle>
-			<assTitle :titleInfo="title5" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="single"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title2" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title3" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title5" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -29,6 +29,7 @@
 						"委托检测情况：与有检测资质（通过计量认证）的单位签订的委托监测合同，监测时间，监测项目等。"
 					]
 				},
+				userRole: 'manager',
 				title1: {
 					title: "危险废物利用/处置设施运行过程相关参数的检测",
 				},

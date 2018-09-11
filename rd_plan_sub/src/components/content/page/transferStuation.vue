@@ -1,30 +1,32 @@
 <template>
 	<div id='transferStuation'>
-		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
+		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="transFerStiationArea">
-			<assSwitch title="贮存措施" :switchInfo="switchInfo1"></assSwitch>
-			<assTitle :titleInfo="title1" titleType="reset" @doReset="resetInfo"></assTitle>
-			<assForm :formList="title1fromList"></assForm>
-			<assTitle :titleInfo="title2" titleType="reset" @doReset="resetInfo"></assTitle>
-			<assForm :formList="title2fromList"></assForm>
-			<assTitle :titleInfo="title3" titleType="textarea"></assTitle>
-			<assSwitch title="运输措施" :switchInfo="switchInfo2"></assSwitch>
+			<assSwitch :userRole="userRole" title="贮存措施" :switchInfo="switchInfo1"></assSwitch>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="resetInfo"></assTitle>
+			<assForm :formList="title1fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" @doReset="resetInfo"></assTitle>
+			<assForm :formList="title2fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title3" titleType="textarea"></assTitle>
+			<assSwitch :userRole="userRole" title="运输措施" :switchInfo="switchInfo2"></assSwitch>
 			<el-form ref="form" :model="compInfo" label-width="80px" class="transferStuationFrom">
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="单位名称">
-							<el-input v-model="compInfo.compName" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="compInfo.compName" placeholder="必填"></el-input>
+							<el-row v-else>{{compInfo.compName}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="运输资质">
-							<el-input v-model="compInfo.compVal" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="compInfo.compVal" placeholder="必填"></el-input>
+							<el-row v-else>{{compInfo.compVal}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
-			<assTitle :titleInfo="title4" titleType="textarea"></assTitle>
-			<assTitle :titleInfo="title5" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title5" titleType="hint"></assTitle>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -47,8 +49,9 @@
 						"转移计划：危险废物数量、种类；拟接收危险废物的经营单位的资质和经营范围等。"
 					]
 				},
+				userRole: 'manager',
 				title1: {
-					title: "危险废物贮存设施现况",
+					title: "危险废物贮存设施现状",
 				},
 				title2: {
 					title: "贮存危险废物情况",
@@ -65,9 +68,7 @@
 				},
 				title5: {
 					title: "转移计划",
-					subTitle: "运输过程中采取的污染防治措施（如自行运输危险废物的，还应包括工具种类、载重量、使用年限等）",
-					placeholder: "必填",
-					text: ""
+					subTitle: "请填写危险废物委托利用/处置措施",
 				},
 				title1fromList: [{
 					index: 1,

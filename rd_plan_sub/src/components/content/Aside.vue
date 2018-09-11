@@ -7,8 +7,16 @@
 		<div class="leftAside_contentArea">
 			<div v-if="titleInfo.textInfoList" class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
 		</div>
-		<div class="leftAside_btnArea">
-			<el-button v-if="titleInfo.title" class="saveBtn" plain @click="doSubmit">保存</el-button>
+		<div v-if="userRole === 'manager'" class="leftAside_btnArea">
+			<el-button v-if="titleInfo.title" class="saveBtn" plain @click="doSubmit('save')">保存</el-button>
+			<el-button type="info" plain @click="doClose">关闭</el-button>
+		</div>
+		<div v-else-if="userRole === 'admin'" class="leftAside_btnArea">
+			<el-button v-if="titleInfo.title" class="saveBtn" plain @click="doSubmit('agree')">同意</el-button>
+			<el-button type="info" plain @click="doSubmit('unagree')">不同意</el-button>
+			<el-button type="info" plain @click="doClose">关闭</el-button>
+		</div>
+		<div v-else class="leftAside_btnArea">
 			<el-button type="info" plain @click="doClose">关闭</el-button>
 		</div>
 	</div>
@@ -16,7 +24,8 @@
 <script>
   export default {
 		props: {
-			titleInfo: Object
+			titleInfo: Object,
+			userRole: String
 		},
     data() {
       return {
@@ -27,8 +36,8 @@
 			
 		},
     methods: {
-			doSubmit() {
-				this.$emit('doSubmit')
+			doSubmit(type) {
+				this.$emit('doSubmit',type)
 			},
 			doClose() {
 				window.close();

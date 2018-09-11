@@ -1,66 +1,76 @@
 <template>
 	<div id='selfDisposalMeasures'>
-		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
+		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="selfDisposalMeasuresArea">
 			<el-form ref="form" :model="selfDisposalMeasuresData" label-width="80px">
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="设施名称">
-							<el-input v-model="selfDisposalMeasuresData.equipmentName" placeholder="利用处置方式"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.coequipmentNamempAddr" placeholder="利用处置方式"></el-input>
+							<el-row v-else>{{selfDisposalMeasuresData.equipmentName}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="设施类别">
-							<el-input v-model="selfDisposalMeasuresData.category" placeholder="利用处置方式"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.category" placeholder="利用处置方式"></el-input>
+							<el-row v-else>{{selfDisposalMeasuresData.category}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-form-item label="设施地址">
-					<el-input v-model="selfDisposalMeasuresData.addr" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.addr" placeholder="必填"></el-input>
+					<el-row v-else>{{selfDisposalMeasuresData.addr}}</el-row>
 				</el-form-item>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资">
-							<el-input v-model="selfDisposalMeasuresData.amount" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.amount" placeholder="必填"></el-input>
+							<el-row v-else>{{selfDisposalMeasuresData.amount}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="设计能力">
-							<el-input v-model="selfDisposalMeasuresData.can" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.placeholder" placeholder="必填"></el-input>
+							<el-row v-else>{{selfDisposalMeasuresData.placeholder}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="设计使用年限">
-							<el-input v-model="selfDisposalMeasuresData.years" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.years" placeholder="必填"></el-input>
+							<el-row v-else>{{selfDisposalMeasuresData.years}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="投入运行时间">
-							<el-input v-model="selfDisposalMeasuresData.startDate" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.startDate" placeholder="必填"></el-input>
+							<el-row v-else>{{selfDisposalMeasuresData.startDate}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="运行费用">
-							<el-input v-model="selfDisposalMeasuresData.price" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.price" placeholder="必填"></el-input>
+							<el-row v-else>{{selfDisposalMeasuresData.price}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-form-item label="主要设备及数量">
-					<el-input v-model="selfDisposalMeasuresData.mainEquAndNum" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.mainEquAndNum" placeholder="必填"></el-input>
+					<el-row v-else>{{selfDisposalMeasuresData.mainEquAndNum}}</el-row>
 				</el-form-item>
 				<el-form-item label="危险废物利用处置效果">
-					<el-input v-model="selfDisposalMeasuresData.how" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'manager'" v-model="selfDisposalMeasuresData.how" placeholder="必填"></el-input>
+					<el-row v-else>{{selfDisposalMeasuresData.how}}</el-row>
 				</el-form-item>
 			</el-form>
-			<assSwitch :switchInfo="switchInfo"></assSwitch>
-			<assTitle :titleInfo="title1" titleType="reset" @doReset="doReset" numTitle="本年度计划利用处置量：0   上年度实际利用处置量：0"></assTitle>
-			<assForm :formList="title1fromList"></assForm>
-			<assTitle :titleInfo="textareaInfo1" titleType="textarea"></assTitle>
-			<assTitle :titleInfo="textareaInfo2" titleType="textarea"></assTitle>
+			<assSwitch :userRole="userRole" :switchInfo="switchInfo"></assSwitch>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="doReset" numTitle="本年度计划利用处置量：0   上年度实际利用处置量：0"></assTitle>
+			<assForm :formList="title1fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="textareaInfo1" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="textareaInfo2" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -91,6 +101,7 @@
 						'二次环境污染控制和事故预防措施:包括污染控制措施、事故预防措施、以及设备和制度等方面的内容。'
 					]
 				},
+				userRole: 'manager',
 				switchInfo: [{
 					id: "1",
 					name: "是否定期监测污染物排放情况",

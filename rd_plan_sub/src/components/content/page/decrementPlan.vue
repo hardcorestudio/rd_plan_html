@@ -1,9 +1,9 @@
 <template>
 	<div id='decrementPlan'>
-		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
+		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="decrementPlanContent">
-			<assTitle :titleInfo="title1" titleType="textarea"></assTitle>
-			<assTitle :titleInfo="title2" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title2" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -21,6 +21,7 @@
 					title: "危废减量化计划和措施",
 					textInfoList: []
 				},
+				userRole: 'manager',
 				title1: {
 					title: "减少危险废物危害性的计划",
 					placeholder: "必填",

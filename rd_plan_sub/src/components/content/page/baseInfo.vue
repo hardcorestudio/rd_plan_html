@@ -1,6 +1,6 @@
 <template>
 	<div id='baseInfo'>
-		<my-aside class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
+		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="baseInfoArea">
 			<el-form ref="form" :model="baseInfoData" label-width="80px">
 				<el-form-item label="计划期限">
@@ -10,10 +10,12 @@
 					<el-row>{{baseInfoData.compName}}</el-row>
 				</el-form-item>
 				<el-form-item label="单位注册地址">
-					<el-input v-model="baseInfoData.compAddr" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.compAddr" placeholder="必填"></el-input>
+					<el-row v-else>{{baseInfoData.compAddr}}</el-row>
 				</el-form-item>
 				<el-form-item label="设施厂房地址">
-					<el-input v-model="baseInfoData.factoryAddr" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.factoryAddr" placeholder="必填"></el-input>
+					<el-row v-else>{{baseInfoData.factoryAddr}}</el-row>
 				</el-form-item>
 				<el-row :gutter="20">
 					<el-col :span="12">
@@ -23,7 +25,8 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="邮编">
-							<el-input v-model="baseInfoData.postNo" placeholder="选填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.postNo" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.postNo}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -33,60 +36,70 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资">
-							<el-input v-model="baseInfoData.totalInvestment" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.totalInvestment" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.totalInvestment}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="总产值">
-							<el-input v-model="baseInfoData.totalOutputValue" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.totalOutputValue" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.totalOutputValue}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="占地面积">
-							<el-input v-model="baseInfoData.areaCovered" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.areaCovered" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.areaCovered}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="职工人数">
-							<el-input v-model="baseInfoData.personNum" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.personNum" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.personNum}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="环保部门负责人">
-							<el-input v-model="baseInfoData.chargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.chargeMan" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.chargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="联系人">
-							<el-input v-model="baseInfoData.person" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.person" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.person}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="联系电话">
-							<el-input v-model="baseInfoData.phone" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.phone" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.phone}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="传真电话">
-							<el-input v-model="baseInfoData.tel" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.tel" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.tel}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="电子邮箱">
-							<el-input v-model="baseInfoData.mail" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.mail" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.mail}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="单位网站">
-							<el-input v-model="baseInfoData.webside" placeholder="选填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.webside" placeholder="选填"></el-input>
+							<el-row v-else>{{baseInfoData.webside}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -94,28 +107,31 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="管理部门">
-							<el-input v-model="baseInfoData.department" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.department" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.department}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="部门负责人">
-							<el-input v-model="baseInfoData.departmentChargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.departmentChargeMan" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.departmentChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="废物管理负责人">
-							<el-input v-model="baseInfoData.trashChargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.trashChargeMan" placeholder="必填"></el-input>
+							<el-row v-else>{{baseInfoData.trashChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
-			<assDoubleInput @doReset="doReset" type="input" title="废物污染防治设施" itemTitleLeft="技术负责人" itemTitleRight="文化程度" :formList="managerList"></assDoubleInput>
-			<assDoubleInput type="switch" title="规章制度" :formList="switchList"></assDoubleInput>
-			<assTitle :titleInfo="manageDes" titleType="textarea"></assTitle>
+			<assDoubleInput :userRole="userRole" @doReset="doReset" type="input" title="废物污染防治设施" itemTitleLeft="技术负责人" itemTitleRight="文化程度" :formList="managerList"></assDoubleInput>
+			<assDoubleInput :userRole="userRole" type="switch" title="规章制度" :formList="switchList"></assDoubleInput>
+			<assTitle :userRole="userRole" :titleInfo="manageDes" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -148,6 +164,7 @@
 						"管理组织图：危险废物管理部门及人员构成的组织管理框架图。"
 					]
 				},
+				userRole: 'manager',
 				bigTitle: {
 					title: "管理部门及人员",
 				},
@@ -203,7 +220,7 @@
 				manageDes: {
 					title: "管理组织描述",
 					placeholder: "必填",
-					text: ""
+					text: "12312312"
 				},
 			}
 		},

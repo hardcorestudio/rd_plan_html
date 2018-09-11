@@ -7,6 +7,7 @@
 					<el-col class="assSwitchItem_text" :span="19">{{item.name}}</el-col>
 					<el-col class="assSwitchItem_switchArea" :span="5">
 						<el-switch
+							:disabled="userRole !== 'manager'"
 							style="display: block"
 							v-model="item.value"
 							active-color="#13ce66"
@@ -24,7 +25,8 @@
   export default {
 		props: {
 			switchInfo: Array,
-			title: String
+			title: String,
+			userRole: String
 		},
     data() {
       return {
