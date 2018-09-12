@@ -120,7 +120,16 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
         var row = table.row($(this).parents('tr'));
         var data = row.data();
         var tpId = data.TP_ID;
-        $state.go("dashboard.planIndex.planMain",{"tpId":tpId,"from":"dashboard.planIndex.planList"});
+        var epId = data.EP_ID;
+        var epName = data.EP_NAME;
+        $state.go("dashboard.planIndex.planMain",
+        {
+            "tpId":tpId,
+            "epId":epId,
+            "epName":epName,
+            "btnFlag":true,
+            "from":"dashboard.planIndex.planList"
+        });
     });
 
     //单击某个选项三秒单独选中

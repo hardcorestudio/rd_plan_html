@@ -141,35 +141,26 @@ angular.module('sbAdminApp').controller('FinishedTaskListCtrl', ['$scope','Init'
         var bizId = data.BIZ_ID;
         var applyId = data.AYL_ID;
         var bizIdStart = bizId.substring(0,2);
-        if(angular.equals("EP", bizIdStart)){
+        if(angular.equals("TP", bizIdStart)){
             if(localStorageService.get("userType") == "admin"){
-                $state.go("dashboard.finishedTaskIndex.approveEpInfo",{"bizId":bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }else if(localStorageService.get("userType") == "epCz" || localStorageService.get("userType") == "epCs"){
-                $state.go("dashboard.finishedTaskIndex.submitEpInfoFinished",{"bizId":bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }
-        }else if(angular.equals("TP", bizIdStart)){
-            if(localStorageService.get("userType") == "admin"){
-                $state.go("dashboard.finishedTaskIndex.approveTransferInfo",{"bizId":bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }else if(localStorageService.get("userType") == "epAdminCs"){
-                $state.go("dashboard.finishedTaskIndex.transferInfoForEpAdminFinshed",{"transferId":bizId,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }
-        }else if(angular.equals("PE", bizIdStart)){
-            if(localStorageService.get("userType") == "admin"){
-                $state.go("dashboard.finishedTaskIndex.approveEpModifyInfo",{"bizId":bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }else if(localStorageService.get("userType") == "epCz" || localStorageService.get("userType") == "epCs"){
-                $state.go("dashboard.finishedTaskIndex.epInfoModifyFinishedTask",{"bizId":bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }
-        }else if(angular.equals("PI", bizIdStart)){
-            if(localStorageService.get("userType") == "admin"){
-                $state.go("dashboard.finishedTaskIndex.epAdminManageFinishedTaskForAdmin",{"bizId":bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }else if(localStorageService.get("userType") == "epCz" || localStorageService.get("userType") == "epCs"){
-                $state.go("dashboard.finishedTaskIndex.epAdminManageFinishedTask",{"bizId":bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }
-        }else if(angular.equals("TM", bizIdStart)){
-            if(localStorageService.get("userType") == "admin"){
-                $state.go("dashboard.finishedTaskIndex.approveTransferRunningInfoFinished",{"bizId":bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
-            }else if(localStorageService.get("userType") == "epAdminCs"){
-                $state.go("dashboard.finishedTaskIndex.transferRunningInfoForEpAdminFinished",{"transferId": bizId,"bizId": bizId,"applyId":applyId,"btnFlag":false,"from":"dashboard.finishedTaskIndex.finishedTaskList"});
+                $state.go("dashboard.finishedTaskIndex.planMain",
+                {
+                    "bizId":bizId,
+                    "tpId": bizId,
+                    "applyId":applyId,
+                    "btnFlag":false,
+                    "from":"dashboard.finishedTaskIndex.finishedTaskList"
+                });
+            }else if(localStorageService.get("userType") == "CSEP"){
+                $state.go("dashboard.finishedTaskIndex.planMain",
+                {
+                    "bizId": bizId,
+                    "tpId": bizId,
+                    "btnFlag": true,
+                    "applyId": applyId,
+                    "btnFlag":false,
+                    "from":"dashboard.finishedTaskIndex.finishedTaskList"
+                });
             }
         }
 

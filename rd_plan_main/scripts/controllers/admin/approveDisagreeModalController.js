@@ -38,11 +38,6 @@ angular.module('sbAdminApp').controller('DisagreeModalCtrl', ['$scope','$modalIn
 					applyId:parm.applyId
 				}
 			};
-		}else if(angular.equals("/agreement/reject", parm.httpUrl)){//处置单位驳回医疗废物处置协议
-			par = {
-				AM_ID:parm.AM_ID,
-				REASON:$("#reason").val()
-			};
 		}
 		$("#sureBtn").attr("disabled",true);
 		Init.iwbhttp(parm.httpUrl, par, function (data, header, config, status) {

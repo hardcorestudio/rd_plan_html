@@ -146,86 +146,32 @@ angular.module('sbAdminApp').controller('UnfinishedTaskListCtrl', ['$scope', 'In
         var data = row.data();
         var bizId = data.BIZ_ID;
         var applyId = data.AYL_ID;
+        var epId = data.EP_ID;
+        var epName = data.EP_NAME;
         var bizIdStart = bizId.substring(0, 2);
-        if (angular.equals("EP", bizIdStart)) {
+        if (angular.equals("TP", bizIdStart)) {
             if (localStorageService.get("userType") == "admin") {
-                $state.go("dashboard.unfinishedTaskIndex.approveEpInfo", {
+                $state.go("dashboard.unfinishedTaskIndex.planMain", {
                     "bizId": bizId,
+                    "tpId": bizId,
                     "applyId": applyId,
                     "btnFlag": true,
+                    "epId":epId,
+                    "epName":epName,
                     "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
                 });
-            } else if (localStorageService.get("userType") == "epCz" || localStorageService.get("userType") == "epCs") {
-                $state.go("dashboard.unfinishedTaskIndex.submitEpInfo", {
+            } else if (localStorageService.get("userType") == "CSEP") {
+                $state.go("dashboard.unfinishedTaskIndex.planMain", {
                     "bizId": bizId,
-                    "applyId": applyId,
+                    "tpId": bizId,
                     "btnFlag": true,
+                    "applyId": applyId,
+                    "epId":epId,
+                    "epName":epName,
                     "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
                 });
             }
-        } else if (angular.equals("TP", bizIdStart)) {
-            if (localStorageService.get("userType") == "admin") {
-                $state.go("dashboard.unfinishedTaskIndex.approveTransferInfo", {
-                    "bizId": bizId,
-                    "applyId": applyId,
-                    "btnFlag": true,
-                    "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
-                });
-            } else if (localStorageService.get("userType") == "epAdminCs") {
-                $state.go("dashboard.unfinishedTaskIndex.transferInfoForEpAdmin", {
-                    "transferId": bizId,
-                    "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
-                });
-            }
-        } else if (angular.equals("PE", bizIdStart)) {
-            if (localStorageService.get("userType") == "admin") {
-                $state.go("dashboard.unfinishedTaskIndex.approveEpModifyInfoUnfinished", {
-                    "bizId": bizId,
-                    "applyId": applyId,
-                    "btnFlag": true,
-                    "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
-                });
-            } else if (localStorageService.get("userType") == "epCz" || localStorageService.get("userType") == "epCs") {
-                $state.go("dashboard.unfinishedTaskIndex.epInfoModifyTask", {
-                    "bizId": bizId,
-                    "applyId": applyId,
-                    "btnFlag": true,
-                    "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
-                });
-            }
-        } else if (angular.equals("PI", bizIdStart)) {
-            if (localStorageService.get("userType") == "admin") {
-                $state.go("dashboard.unfinishedTaskIndex.epAdminManageUnfinishedTaskForAdmin", {
-                    "bizId": bizId,
-                    "applyId": applyId,
-                    "btnFlag": true,
-                    "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
-                });
-            } else if (localStorageService.get("userType") == "epCz" || localStorageService.get("userType") == "epCs") {
-                $state.go("dashboard.unfinishedTaskIndex.epAdminManageUnfinishedTask", {
-                    "bizId": bizId,
-                    "applyId": applyId,
-                    "btnFlag": true,
-                    "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
-                });
-            }
-        } else if (angular.equals("TM", bizIdStart)) {
-            if (localStorageService.get("userType") == "admin") {
-                $state.go("dashboard.unfinishedTaskIndex.approveTransferRunningInfo", {
-                    "bizId": bizId,
-                    "applyId": applyId,
-                    "btnFlag": true,
-                    "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
-                });
-            } else if (localStorageService.get("userType") == "epAdminCs") {
-                $state.go("dashboard.unfinishedTaskIndex.transferRunningInfoForEpAdmin", {
-                    "transferId": bizId,
-                    "bizId": bizId,
-                    "applyId": applyId,
-                    "from": "dashboard.unfinishedTaskIndex.unfinishedTaskList"
-                });
-            }
-        }
+        } 
     });
 
     //单击某个选项三秒单独选中

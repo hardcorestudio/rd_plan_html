@@ -6,8 +6,10 @@
             </h1> -->
             <div class="myHeader">
                 <h1>管理计划</h1>
-                <div ng-if="applyBtnFlag == true" class="myaction" ng-click="sub()">确认完成</div>
-                <div ng-if="applyBtnFlag == false" class="myaction_hover" >确认完成</div>
+                <div ng-if="btnFlag == true && applyBtnFlag == true" class="myaction" ng-click="sub()">确认完成</div>
+                <div ng-if="btnFlag == true && taskFlag == true && userType == 'admin' " class="myaction" id="agreeBtn" ng-click="agree()">同意</div>
+                <div ng-if="btnFlag == true && taskFlag == true && userType == 'admin' " class="myaction" id="disagreeBtn" ng-click="disagree()">不同意</div>
+                <div ng-if="applyId && applyId != ''" class="myaction" ng-click="check()">查看审批记录</div>
                 <div class="myback" ng-click="back()">返回</div>
             </div>
         </div>

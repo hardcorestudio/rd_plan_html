@@ -468,6 +468,62 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
+        .state('dashboard.unfinishedTaskIndex.planMain', {
+            url: '/unfinishedPlanMain',
+            controller: 'PlanMainCtrl',
+            templateUrl: 'views/dashboard/plan/planMain.html',
+            params: {
+                "tpId": null,
+                "from": null,
+                "bizId": null,
+                "applyId": null,
+                "btnFlag": null,
+                "epId": null,
+                "epName": null,
+            },
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/plan/index.css',
+                            'scripts/controllers/admin/approveDetailModalController.js',
+                            'scripts/controllers/admin/approveDisagreeModalController.js',
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/plan/planMainController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.finishedTaskIndex.planMain', {
+            url: '/finishedPlanMain',
+            controller: 'PlanMainCtrl',
+            templateUrl: 'views/dashboard/plan/planMain.html',
+            params: {
+                "tpId": null,
+                "from": null,
+                "bizId": null,
+                "applyId": null,
+                "btnFlag": null,
+                "epId": null,
+                "epName": null,
+            },
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/plan/index.css',
+                            'scripts/controllers/admin/approveDetailModalController.js',
+                            'scripts/controllers/admin/approveDisagreeModalController.js',
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/plan/planMainController.js'
+                        ]
+                    })
+                }
+            }
+        })
         .state('dashboard.planIndex', {
             url: '/planIndex',
             controller: 'PlanIndexCtrl',
@@ -489,7 +545,10 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
             templateUrl: 'views/dashboard/plan/planMain.html',
             params: {
                 "tpId": null,
-                "from": null
+                "epId": null,
+                "epName": null,
+                "from": null,
+                "btnFlag":null
             },
             resolve: {
                 loadMyFiles: function ($ocLazyLoad) {
@@ -497,6 +556,7 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                         name: 'sbAdminApp',
                         files: [
                             'styles/plan/index.css',
+                            'scripts/controllers/modal/promptModalController.js',
                             'scripts/controllers/plan/planMainController.js'
                         ]
                     })
