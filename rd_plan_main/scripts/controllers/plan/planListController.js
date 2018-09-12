@@ -32,13 +32,16 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
                 "data": "EP_ID"
             },
             {
+                "data": "TP_ID"
+            },
+            {
                 "data": "EP_NAME"
             },
             {
-                "data": "EPTYPE"
+                "data": "applyYear"
             },
             {
-                "data": "CSEPTYPE"
+                "data": "applyDate"
             },
             {
                 "class": "mytable-borderNone",
@@ -62,6 +65,7 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
             }
             $scope.param.searchContent = CheckParam.checkSql($scope.searchContent);
             Init.iwbhttp('/plan/planList', $scope.param, function(data,header,config,status){
+                console.log(data)
                 var returnData = {};
                 if(data.resFlag == 0){
                     returnData.recordsTotal = data.totalRow;//返回数据全部记录
@@ -115,8 +119,8 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
     $('#epTable tbody').on('click', '#a_check', function () {
         var row = table.row($(this).parents('tr'));
         var data = row.data();
-        var epId = data.EP_ID;
-        $state.go("dashboard.planIndex.planMain",{"tpId":"","from":"dashboard.planIndex.planList"});
+        var tpId = data.TP_ID;
+        $state.go("dashboard.planIndex.planMain",{"tpId":tpId,"from":"dashboard.planIndex.planList"});
     });
 
     //单击某个选项三秒单独选中
@@ -249,7 +253,7 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
         $scope.param.searchContent = $scope.searchContent;
         $scope.param.statusValue = $scope.statusValue;
         $scope.param.sepaValue = $scope.sepaValue;
-        Init.iwbhttp('/admin/queryEpList', $scope.param, function(data,header,config,status){
+        Init.iwbhttp('/plan/planList', $scope.param, function(data,header,config,status){
             if (data.resFlag == 0) {
                 for(var i = 0 ; i < data.epList.length ; i++)
                 {
@@ -258,6 +262,18 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
                 table.draw();
             } else {
                 $scope.open(data.msg);
+            }
+        },function(data,header,config,status){
+        });
+    }
+
+    $scope.applyBtn = function(){
+        $scope.param.epId = localStorageService.get('epId');
+        Init.iwbhttp('/plan/apply', $scope.param, function(data,header,config,status){
+            if(data.resFlag == '0'){
+                $scope.postService()
+            }else{
+                $scope.open(data.resMsg);
             }
         },function(data,header,config,status){
         });

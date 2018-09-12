@@ -28,6 +28,19 @@
     background-color: #4FC08D;
 }
 
+.myaction_hover{
+    margin-left: 16px;
+    color:#fff;
+    font-size: 12px;
+    height:30px;
+    width: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: rgba(79, 192, 141, 0.671);
+}
+
 .myback{
     margin-left: 16px;
     color:#4FC08D;

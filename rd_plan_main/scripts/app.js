@@ -497,7 +497,6 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                         name: 'sbAdminApp',
                         files: [
                             'styles/plan/index.css',
-                            'styles/mine.css',
                             'scripts/controllers/plan/planMainController.js'
                         ]
                     })

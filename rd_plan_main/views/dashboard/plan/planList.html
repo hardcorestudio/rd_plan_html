@@ -1,6 +1,10 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">管理计划列表</h1>
+        <!-- <h1 class="page-header">管理计划列表</h1> -->
+        <div class="myHeader">
+            <h1>管理计划列表</h1>
+            <div class="myaction" ng-click="applyBtn()">申报</div>
+        </div>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -54,9 +58,10 @@
                         <thead>
                         <tr>
                             <th>单位id</th>
+                            <th>编号</th>
                             <th>单位名称</th>
                             <th>申报年份</th>
-                            <th>提交日期</th>
+                            <th>申请日期</th>
                             <th class="mytable-borderNone">状态</th>
                             <th>操作</th>
                         </tr>

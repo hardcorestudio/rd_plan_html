@@ -75,8 +75,6 @@ angular.module('sbAdminApp').controller('UnfinishedTaskListCtrl', ['$scope', 'In
                     "BTOF_ID": localStorageService.get("btofId"),
                     "ROLEID": localStorageService.get("ROLEID")
                 };
-            } else if (localStorageService.get("userType") == "epCz" || localStorageService.get("userType") == "epCs") {
-                $scope.param = {"action": "new", "epId": localStorageService.get("epId")};
             } else {
                 $scope.param = {"action": "new", "epId": localStorageService.get("epId")};
             }

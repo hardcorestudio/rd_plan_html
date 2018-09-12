@@ -18,6 +18,7 @@ angular.module('sbAdminApp').factory('Init', ['$http','$rootScope','localStorage
         localStorageService.set('belongSepa',data.belongSepa);
         localStorageService.set('sepaName',data.sepaName);
         localStorageService.set('status',data.status);
+        localStorageService.set('ROLEID',data.ROLEID);
         if(data.newGuideFlag != undefined && data.newGuideFlag != null){
             localStorageService.set('newGuideFlag',data.newGuideFlag);
         }else{

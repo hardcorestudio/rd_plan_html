@@ -6,6 +6,15 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$scope','Init','CheckB
         $state.go("dashboard.index");
         return;
     }
+    $scope.param = {TP_ID:$stateParams.tpId}
+    $scope.applyBtnFlag = false;
+    Init.iwbhttp('/plan/checkPlan', $scope.param, function(data,header,config,status){
+        if(data.applyListStatus == "" || data.applyListStatus == "00" || data.applyListStatus == "03"){
+            $scope.applyBtnFlag = true;
+        }
+    },function(data,header,config,status){
+    });
+
     $scope.jumpSub = function(pathname){
         Init.iwbhttp('/plan/planMain', {url:pathname}, function(data,header,config,status){
             console.log(data)
@@ -20,7 +29,9 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$scope','Init','CheckB
     }
     //提交
     $scope.sub = function (){
-        console.log("提交成功")
-        // $state.go($stateParams.from);
+        Init.iwbhttp('/plan/apply2q', {url:pathname}, function(data,header,config,status){
+            console.log(data)
+        },function(data,header,config,status){
+        });
     }
 }]);
