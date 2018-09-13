@@ -142,6 +142,7 @@
 	import assForm from '../../common/assForm.vue'
 	import assDoubleInput from '../../common/assDoubleInput.vue'
 	import { checkBrowser } from '../../utils/browserCheck.js'
+	import fetch from '../../utils/fetch.js'
 	export default {
 		name:'baseInfo',
 		data(){
@@ -244,6 +245,13 @@
 				// 	type: 'warning'
 				// });
 				this.$router.push({path: '/pageIncompatible'})
+			})
+			// test woody
+			fetch({
+        url: '',
+        method: 'GET'
+      }).then(res => {
+				console.log(res)
 			})
 		},
 		methods: {
