@@ -3,7 +3,7 @@
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="entrustDisposalMeasuresPlan">
 			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="doReset" numTitle="本年度计划委托利用处置量：0   上年度实际委托利用处置量：0"></assTitle>
-			<assForm :formList="title1fromList" :type="userRole !== 'manager' ? 'label' : ''"></assForm>
+			<assForm :formList="title1fromList" :type="userRole !== 'CSEP' ? 'label' : ''"></assForm>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -29,7 +29,7 @@
 						'危险废物的数量，如为计划期限内新更换的委托利用处置单位，即上一年未委托该单位利用处置废物时，则相应委托利用处置量填写“0”。'
 					]
 				},
-				userRole: 'manager',
+				userRole: 'CSEP',
 				title1: {
 					title: " "
 				},

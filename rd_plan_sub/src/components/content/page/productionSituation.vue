@@ -3,11 +3,11 @@
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="dangerRubbishManagerPlan">
 			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title1fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assForm :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title2fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assForm :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTitle :userRole="userRole" :titleInfo="title3" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title3fromList" :type="userRole === 'manager' ? '' : 'label'"></assForm>
+			<assForm :formList="title3fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
@@ -31,7 +31,7 @@
 						"生产工艺说明：文字说明所有危险废物的生产环节。"
 					]
 				},
-				userRole: 'manager',
+				userRole: 'CSEP',
 				title1: {
 					title: "原辅材料及消耗量",
 				},

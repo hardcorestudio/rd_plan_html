@@ -21,3 +21,28 @@ export function checkBrowser (callMessage) {
     }
   }//isIE end
 }
+// 获取querystring
+export function getQueryString(){
+  var result = window.location.href.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+","g")); 
+  var qsJson = {};
+  if(result == null){
+      return qsJson;
+  }
+  for(var i = 0; i < result.length; i++){
+      var resultStr = result[i].substring(1);
+      var key = subStringByBefore(resultStr);
+      var value = subStringByAfter(resultStr);
+      qsJson[key] = value;
+  }
+  return qsJson;
+}
+function subStringByAfter(str) {
+	var strIndex = str.indexOf("=") + 1;
+	var resultStr = str.substr(strIndex, str.length);
+	return resultStr;
+};
+function subStringByBefore(str) {
+	var strIndex = str.indexOf("=");
+	var resultStr = str.substr(0, strIndex);
+	return resultStr;
+};

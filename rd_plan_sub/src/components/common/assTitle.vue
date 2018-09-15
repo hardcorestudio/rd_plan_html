@@ -2,19 +2,19 @@
 	<div id="assTitle">
 		<div v-if="titleInfo.title && titleInfo.title !== ''" class="assTitle_titleArea">
 			<div class="assTitleArea_text">{{ titleInfo.title }}</div>
-			<div v-if="titleType === 'reset' && userRole === 'manager'" class="assTitleArea_reset" @click="doReset">重置</div>
+			<div v-if="titleType === 'reset' && userRole === 'CSEP'" class="assTitleArea_reset" @click="doReset">重置</div>
 			<div v-if="numTitle && numTitle !== ''" class="assTitleArea_num">{{numTitle}}</div>
 		</div>
 		<div v-if="titleType === 'textarea' || titleType === 'hint'" :class="titleType === 'hint' ? 'colorGreen assTitle_textarea' : 'assTitle_textarea'">
 			<div v-if="titleInfo.subTitle && titleInfo.subTitle !== ''" class="assTitleTextarea_title">{{ titleInfo.subTitle }}</div>
-			<el-input v-if="titleType === 'textarea' && userRole === 'manager'" type="textarea"
-				:class="userRole !== 'manager' ? 'colorBlack': ''"
+			<el-input v-if="titleType === 'textarea' && userRole === 'CSEP'" type="textarea"
+				:class="userRole !== 'CSEP' ? 'colorBlack': ''"
 				:autosize="{ minRows: 4, maxRows: 6}"
 				:placeholder="titleInfo.placeholder"
 				v-model="titleInfo.text" class="assTitleTextarea_input">
 			</el-input>
-			<el-input v-if="titleType === 'textarea' && userRole !== 'manager'" type="textarea"
-				:class="userRole !== 'manager' ? 'colorBlack': ''"
+			<el-input v-if="titleType === 'textarea' && userRole !== 'CSEP'" type="textarea"
+				:class="userRole !== 'CSEP' ? 'colorBlack': ''"
 				:autosize="{ minRows: 4, maxRows: 6}"
 				:placeholder="titleInfo.placeholder"
 				v-model="titleInfo.text" class="assTitleTextarea_input" disabled>

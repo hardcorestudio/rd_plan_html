@@ -21,7 +21,7 @@
 					title: "危废减量化计划和措施",
 					textInfoList: []
 				},
-				userRole: 'manager',
+				userRole: 'CSEP',
 				title1: {
 					title: "减少危险废物危害性的计划",
 					placeholder: "必填",

@@ -32,7 +32,7 @@ export default {
 					"管理制度执行情况：对是否执行危险废物经营许可证制度、转移审批及联单制度、识别标志标签制度等进行勾选。"
 				]
 			},
-			userRole: 'manager',
+			userRole: 'CSEP',
 			title1: {
 				title: "检查、监测和公开",
 				subTitle: "上年度各级环保部门检查、环境监测、信息公开情况",

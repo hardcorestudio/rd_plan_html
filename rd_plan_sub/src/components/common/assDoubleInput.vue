@@ -2,25 +2,25 @@
 	<div id="assDoubleInput">
 		<div class="assDoubleInput_titleArea">
 			<div class="assDoubleInputArea_text">{{ title }}</div>
-			<div v-if="type === 'input' && userRole === 'manager'" class="assDoubleInputArea_reset" @click="doReset">重置</div>
+			<div v-if="type === 'input' && userRole === 'CSEP'" class="assDoubleInputArea_reset" @click="doReset">重置</div>
 		</div>
 		<div v-if="type === 'input'" class="assDoubleInput_textarea" v-for="(item, index) in formList" :key="index">
 			<el-form :model="item">
 				<el-row :gutter="20">
 					<el-col v-if="itemTitleLeft && itemTitleLeft !== ''" :span="11">
 						<el-form-item :label="itemTitleLeft">
-							<el-input v-if="userRole=== 'manager'" v-model="item.text1" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="item.text1" placeholder="必填"></el-input>
 							<el-row v-else>{{item.text1}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col v-if="itemTitleRight && itemTitleRight !== ''" :span="11">
 						<el-form-item :label="itemTitleRight">
-							<el-input v-if="userRole=== 'manager'" v-model="item.text2" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="item.text2" placeholder="必填"></el-input>
 							<el-row v-else>{{item.text2}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="2">
-						<div v-if="userRole === 'manager'" class="assDoubleInputItem_iconBtnArea">
+						<div v-if="userRole === 'CSEP'" class="assDoubleInputItem_iconBtnArea">
 							<i v-if="index === formList.length - 1" @click="addSign" class="el-icon-plus"></i>
 							<i v-if="index > 0" @click="reduceSign(item)" class="el-icon-minus"></i>
 						</div>
@@ -34,7 +34,7 @@
 					<el-col :span="12">
 						<el-form-item :label="item.title1">
 							<el-switch
-								:disabled="userRole !== 'manager'"
+								:disabled="userRole !== 'CSEP'"
 								style="display: block"
 								v-model="item.text1"
 								active-color="#13ce66"
@@ -47,7 +47,7 @@
 					<el-col :span="12">
 						<el-form-item :label="item.title2">
 							<el-switch
-								:disabled="userRole !== 'manager'"
+								:disabled="userRole !== 'CSEP'"
 								style="display: block"
 								v-model="item.text2"
 								active-color="#13ce66"

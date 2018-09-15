@@ -10,11 +10,11 @@
 					<el-row>{{baseInfoData.compName}}</el-row>
 				</el-form-item>
 				<el-form-item label="单位注册地址">
-					<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.compAddr" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.compAddr" placeholder="必填"></el-input>
 					<el-row v-else>{{baseInfoData.compAddr}}</el-row>
 				</el-form-item>
 				<el-form-item label="设施厂房地址">
-					<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.factoryAddr" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.factoryAddr" placeholder="必填"></el-input>
 					<el-row v-else>{{baseInfoData.factoryAddr}}</el-row>
 				</el-form-item>
 				<el-row :gutter="20">
@@ -25,7 +25,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="邮编">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.postNo" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.postNo" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.postNo}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -36,13 +36,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.totalInvestment" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalInvestment" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.totalInvestment}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="总产值">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.totalOutputValue" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalOutputValue" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.totalOutputValue}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -50,13 +50,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="占地面积">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.areaCovered" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.areaCovered" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.areaCovered}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="职工人数">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.personNum" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.personNum" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.personNum}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -64,13 +64,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="环保部门负责人">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.chargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.chargeMan" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.chargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="联系人">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.person" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.person" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.person}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -78,13 +78,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="联系电话">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.phone" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.phone" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.phone}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="传真电话">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.tel" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.tel" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.tel}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -92,13 +92,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="电子邮箱">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.mail" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.mail" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.mail}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="单位网站">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.webside" placeholder="选填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.webside" placeholder="选填"></el-input>
 							<el-row v-else>{{baseInfoData.webside}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -107,7 +107,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="管理部门">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.department" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.department" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.department}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -115,7 +115,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="部门负责人">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.departmentChargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.departmentChargeMan" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.departmentChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -123,7 +123,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="废物管理负责人">
-							<el-input v-if="userRole=== 'manager'" v-model="baseInfoData.trashChargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.trashChargeMan" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.trashChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -137,175 +137,322 @@
 	</div>
 </template>
 <script>
-	import Aside from '../Aside.vue';
-	import assTitle from '../../common/assTitle.vue'
-	import assForm from '../../common/assForm.vue'
-	import assDoubleInput from '../../common/assDoubleInput.vue'
-	import { checkBrowser } from '../../utils/browserCheck.js'
-	import fetch from '../../utils/fetch.js'
-	export default {
-		name:'baseInfo',
-		data(){
-			return {
-				myTitleInfo: {
-					title: "基本信息",
-					textInfoList: [
-						"单位注册地址：法人登记或者工商行政主管部门注册的办公地址；",
-						"生产设施地址：产生危险废物的生产设施所在的地址；",
-						"总产值：计划期限上一年度生产的货物和服务的价值总和；",
-						"行业类别与代码：国民经济行业分类与代码（GB/T4754-2011）",
-						"环保部门负责人：主管环保工作的部门负责人姓名",
-						"联系人：主管环保工作的部门负责危险废物管理的人员姓名；",
-						"电子邮箱：危险废物管理人员的电子邮箱；",
-						"单位网址：本单位用于对外宣传和联系的网页网址",
-						"管理部门：负责危险废物管理的部门名称；",
-						"部门负责人：负责危险废物管理的部门的负责人姓名；",
-						"废物管理负责人：负责危险废物具体管理工作的负责人；",
-						"废物污染防治设施技术负责人及文化程度：负责危险废物贮存、运输、处置等污染防治设施运行管理的负责人姓名，及其文化程度；",
-						"管理组织图：危险废物管理部门及人员构成的组织管理框架图。"
-					]
-				},
-				userRole: 'manager',
-				bigTitle: {
-					title: "管理部门及人员",
-				},
-				baseInfoData: {
-					planDate: "2018年03月-2018年9月",
-					compName: "天津丹阳车圈有限集团",
-					compAddr: "",
-					factoryAddr: "",
-					legalPerson: "woody",
-					postNo: "300333",
-					category: "自行车制造",
-					totalInvestment: "",
-					totalOutputValue: "",
-					areaCovered: "",
-					personNum: "",
-					chargeMan: "",
-					person: "",
-					phone: "",
-					tel: "",
-					mail: "",
-					webside: "",
-					department: "",
-					departmentChargeMan: "",
-					trashChargeMan: ""
-				},
-				managerList: [{
-					index: "0",
-					text1: "",
-					text2: ""
-				}],
-				switchList: [{
-					id1: "1",
-					id2: "2",
-					title1: "管理制度",
-					text1: "",
-					title2: "岗位职位制度",
-					text2: ""
-				},{
-					id1: "1",
-					id2: "2",
-					title1: "安全操作规程",
-					text1: "",
-					title2: "管理台账",
-					text2: ""
-				},{
-					id1: "1",
-					id2: "2",
-					title1: "培训制度",
-					text1: "",
-					title2: "意外事故防范措施和应急预案",
-					text2: ""
-				}],
-				manageDes: {
-					title: "管理组织描述",
-					placeholder: "必填",
-					text: "12312312"
-				},
-			}
-		},
-		components:{
-			'my-aside':Aside,
-			'assTitle':assTitle,
-			'assForm':assForm,
-			'assDoubleInput':assDoubleInput
-		},
-		watch: {
-			title2: function (n, o) {
-				console.log(n);
-				console.log(o);
-			}, 
-		},
-		mounted () {
-			checkBrowser(() => {
-				// this.$message({
-				// 	showClose: true,
-				// 	message: '您当前使用的浏览器不支持本模块功能，建议使用Chrome浏览器',
-				// 	type: 'warning'
-				// });
-				this.$router.push({path: '/pageIncompatible'})
-			})
-			// test woody
-			fetch({
-        url: '',
-        method: 'GET'
-      }).then(res => {
-				console.log(res)
-			})
-		},
-		methods: {
-			doSubmit() {
-				console.log("保存save");
-				console.log(this.title2.text);
+import Aside from '../Aside.vue';
+import assTitle from '../../common/assTitle.vue'
+import assForm from '../../common/assForm.vue'
+import assDoubleInput from '../../common/assDoubleInput.vue'
+import {
+	checkBrowser,
+	getQueryString
+} from '../../utils/browserCheck.js'
+import fetch from '../../utils/fetch.js'
+export default {
+	name: 'baseInfo',
+	data () {
+		return {
+			myTitleInfo: {
+				title: "基本信息",
+				textInfoList: [
+					"单位注册地址：法人登记或者工商行政主管部门注册的办公地址；",
+					"生产设施地址：产生危险废物的生产设施所在的地址；",
+					"总产值：计划期限上一年度生产的货物和服务的价值总和；",
+					"行业类别与代码：国民经济行业分类与代码（GB/T4754-2011）",
+					"环保部门负责人：主管环保工作的部门负责人姓名",
+					"联系人：主管环保工作的部门负责危险废物管理的人员姓名；",
+					"电子邮箱：危险废物管理人员的电子邮箱；",
+					"单位网址：本单位用于对外宣传和联系的网页网址",
+					"管理部门：负责危险废物管理的部门名称；",
+					"部门负责人：负责危险废物管理的部门的负责人姓名；",
+					"废物管理负责人：负责危险废物具体管理工作的负责人；",
+					"废物污染防治设施技术负责人及文化程度：负责危险废物贮存、运输、处置等污染防治设施运行管理的负责人姓名，及其文化程度；",
+					"管理组织图：危险废物管理部门及人员构成的组织管理框架图。"
+				]
 			},
-			resetRawMaterial() {
-				console.log("原辅材料及消耗量");
+			userRole: '',
+			bigTitle: {
+				title: "管理部门及人员",
 			},
-			doReset (){
-
+			baseInfoData: {
+				planDate: "2018年03月-2018年9月",
+				compName: "天津丹阳车圈有限集团",
+				compAddr: "",
+				factoryAddr: "",
+				legalPerson: "woody",
+				postNo: "300333",
+				category: "自行车制造",
+				totalInvestment: "",
+				totalOutputValue: "",
+				areaCovered: "",
+				personNum: "",
+				chargeMan: "",
+				person: "",
+				phone: "",
+				tel: "",
+				mail: "",
+				webside: "",
+				department: "",
+				departmentChargeMan: "",
+				trashChargeMan: ""
+			},
+			managerList: [{
+				index: "0",
+				text1: "",
+				text2: ""
+			}],
+			switchList: [{
+				id1: "1",
+				id2: "2",
+				title1: "管理制度",
+				text1: "",
+				title2: "岗位责任制度",
+				text2: ""
+			}, {
+				id1: "1",
+				id2: "2",
+				title1: "安全操作规程",
+				text1: "",
+				title2: "管理台账",
+				text2: ""
+			}, {
+				id1: "1",
+				id2: "2",
+				title1: "培训制度",
+				text1: "",
+				title2: "意外事故防范措施和应急预案",
+				text2: ""
+			}],
+			manageDes: {
+				title: "管理组织描述",
+				placeholder: "必填",
+				text: "12312312"
+			},
+		}
+	},
+	components: {
+		'my-aside': Aside,
+		'assTitle': assTitle,
+		'assForm': assForm,
+		'assDoubleInput': assDoubleInput
+	},
+	watch: {
+		title2: function (n, o) {
+			console.log(n);
+			console.log(o);
+		},
+	},
+	mounted () {
+		checkBrowser(() => {
+			// this.$message({
+			// 	showClose: true,
+			// 	message: '您当前使用的浏览器不支持本模块功能，建议使用Chrome浏览器',
+			// 	type: 'warning'
+			// });
+			this.$router.push({ path: '/pageIncompatible' })
+		})
+		let paramJson = getQueryString()
+		// fetch({
+		//   url: '',
+		//   method: 'POST',
+		// 	params: paramJson
+		// }).then(res => {
+		// 	console.log(res)
+		// })
+		let res = {
+			"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiV2Z4Z0RySVp5WUw3ZlUyVEZZRGc2Yz0=",
+			"sepaName": "津南区",
+			"operatorId": "",
+			"status": "",
+			"ROLEID": "CSEP",
+			"ifLogin": "0",
+			"initRes": {
+				"ISSUIETIME": null,
+				"ISSUIEVALID": null,
+				"FAX_NUM": "28569822",
+				"epAdress": "天津市津南区双桥河镇东",
+				"sbAdress": "天津市津南区双桥河镇东",
+				"EP_NAME": "天津合佳威立雅环境服务有限公司",
+				"STATUS": "2",
+				"IF_HANDLE": "1",
+				"LATITUDE": "117.35",
+				"IF_PRODUCE": "1",
+				"STEP": "1",
+				"planYear": "2018年",
+				"TEL": "28569833",
+				"OrgId": 3229,
+				"REGISTERCODE": "120000400075101",
+				"R_PERSON": "马宏民",
+				"LINKMAN": "周小华",
+				"EMAIL": "mahongmin1987@126.com",
+				"EP_ADRESS_J": "双桥河镇东",
+				"PROCESSINSTID": 5529,
+				"YSFZDATE": 1403452800000,
+				"epName": "天津合佳威立雅环境服务有限公司",
+				"EP_ADRESS_S": "022",
+				"EP_ADRESS_Q": "JNQ",
+				"EP_ID": "EP201410280910450012",
+				"SB_ADRESS_J": "北闸口镇二八公路69号",
+				"sysdate": 1448208000000,
+				"BELONG_SEPA": "JNQ",
+				"CARD_NUM": 0,
+				"COMMENT": null,
+				"INDUSTRY_CODE": "mid_772",
+				"dictname": "环境治理业",
+				"SB_ADRESS_S": "022",
+				"SB_ADRESS_Q": "JNQ",
+				"POSTAL_CODE": "300350",
+				"LONGITUDE": "38.96",
+				"R_DATE": 1448208000000,
+				"IF_TRANSPORT": "1"
+			},
+			"empId": "",
+			"epName": "天津合佳威立雅环境服务有限公司",
+			"initEpExtend": {
+				"LINK_NUM": "jj",
+				"TOTAL_INVESTMENT": "aa",
+				"SYS_ACCIDENT": 1,
+				"SYS_OPERATION": 0,
+				"TOTAL_OUTPUTVALUE_UNIT": "dd",
+				"STATUS": "00",
+				"TOTAL_OUTPUTVALUE": "cc",
+				"MANAGEMENT_ORG": "rr",
+				"MAIL": "mm",
+				"WEBSITE": "nn",
+				"EMPLOYEES_NUM": 10,
+				"MANAGER": "qq",
+				"SYS_MANAGER": 0,
+				"DEPARTMENT": "oo",
+				"SYS_LEDGER": 1,
+				"FLOOR_AREA": "ee",
+				"FAX_TEL": "ll",
+				"SYS_RESPONSIBILITY": 1,
+				"FLOOR_AREA_UNIT": "ff",
+				"EP_ID": "EP201410280910450012",
+				"PRINCIPAL": "hh",
+				"SYS_TRAINING": 0,
+				"DEPARTMENT_HEAD": "pp",
+				"TOTAL_INVESTMENT_UNIT": "bb",
+				"sons": [{
+					"TECHNICAL_DIRECTER": "111",
+					"EDU_LEVEL": "aaa",
+					"ID": "1",
+					"EP_ID": "EP201410280910450012"
+				}, {
+					"TECHNICAL_DIRECTER": "222",
+					"EDU_LEVEL": "bbb",
+					"ID": "2",
+					"EP_ID": "EP201410280910450012"
+				}],
+				"sysdate": 1536966393780,
+				"LINKMAN": "ii"
+			},
+			"epId": "EP201410280910450012",
+			"userType": "CSEP",
+			"newGuideFlag": "",
+			"belongSepa": "JNQ",
+			"belongQ": "",
+			"userPortrait": "",
+			"belongS": "",
+			"nickName": "天津合佳威立雅环境服务有限公司",
+			"IWBSESSION": "BROWSER-20180915064502",
+			"orgCode": "",
+			"userId": "EP201410280910450012",
+			"userName": "",
+			"realName": "",
+			"contextPath": "",
+			"orgSeq": ""
+		}
+		this.userRole = res.userType
+		this.baseInfoData.planDate = res.initRes.planYear
+		this.baseInfoData.compName = res.initRes.EP_NAME
+		this.baseInfoData.compAddr = res.initRes.epAdress
+		this.baseInfoData.factoryAddr = res.initRes.sbAdress
+		this.baseInfoData.legalPerson = res.initRes.LINKMAN
+		this.baseInfoData.postNo = res.initRes.POSTAL_CODE
+		this.baseInfoData.category = res.initRes.dictname
+		this.baseInfoData.totalInvestment = res.initEpExtend.TOTAL_INVESTMENT
+		this.baseInfoData.totalOutputValue = res.initEpExtend.TOTAL_OUTPUTVALUE
+		this.baseInfoData.areaCovered = res.initEpExtend.FLOOR_AREA
+		this.baseInfoData.personNum = res.initEpExtend.EMPLOYEES_NUM
+		this.baseInfoData.chargeMan = res.initEpExtend.PRINCIPAL
+		this.baseInfoData.person = res.initEpExtend.LINKMAN
+		this.baseInfoData.phone = res.initEpExtend.LINK_NUM
+		this.baseInfoData.tel = res.initEpExtend.FAX_TEL
+		this.baseInfoData.mail = res.initEpExtend.MAIL
+		this.baseInfoData.webside = res.initEpExtend.WEBSITE
+		this.baseInfoData.department = res.initEpExtend.DEPARTMENT
+		this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
+		this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
+		if(res.initEpExtend.sons.length > 0){
+			this.managerList = []
+			for(let i in res.initEpExtend.sons){
+				let item = {}
+				item.index = res.initEpExtend.sons[i].EP_ID
+				item.text1 = res.initEpExtend.sons[i].TECHNICAL_DIRECTER
+				item.text2 = res.initEpExtend.sons[i].EDU_LEVEL
+				this.managerList.push(item)
 			}
 		}
+		this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER
+		this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY
+		this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION
+		this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER
+		this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING
+		this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT
+		this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
+
+	},
+	methods: {
+		doSubmit () {
+			console.log("保存save");
+			console.log(this.title2.text);
+		},
+		resetRawMaterial () {
+			console.log("原辅材料及消耗量");
+		},
+		doReset () {
+
+		}
 	}
+}
 </script>
 <style>
-#baseInfo{
-	display: -webkit-flex; /* Safari */
-	display: flex;
-	flex:1;
-	flex-direction: row;
-	justify-content:space-between;
-	/*align-items:center;*/
-	align-content:center;
-	overflow-y: hidden;
+#baseInfo {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  /*align-items:center;*/
+  align-content: center;
+  overflow-y: hidden;
 }
-#baseInfo >#MyAside{
-	overflow-y: scroll
+#baseInfo > #MyAside {
+  overflow-y: scroll;
 }
-#baseInfoArea{
-	flex:1;
-	width: 100%;
-	padding: 40px 5%;
-	height: 100%;
-	box-sizing: border-box;
-	overflow-y: scroll;
-}	
-#baseInfoArea .el-form-item__label{
-	text-align: left;
-	font-size: 16px;
-	width: 140px!important;
+#baseInfoArea {
+  flex: 1;
+  width: 100%;
+  padding: 40px 5%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
-#baseInfoArea .el-form-item__content{
-	font-size: 16px;
-	color:#666;
-	margin-left: 140px!important;
+#baseInfoArea .el-form-item__label {
+  text-align: left;
+  font-size: 16px;
+  width: 140px !important;
 }
-#baseInfoArea .el-form-item{
-	margin-bottom: 10px;
+#baseInfoArea .el-form-item__content {
+  font-size: 16px;
+  color: #666;
+  margin-left: 140px !important;
 }
-.footerSign{
-	width: 100%;
-	height: 50px;
-	float: left;
+#baseInfoArea .el-form-item {
+  margin-bottom: 10px;
+}
+.footerSign {
+  width: 100%;
+  height: 50px;
+  float: left;
 }
 </style>

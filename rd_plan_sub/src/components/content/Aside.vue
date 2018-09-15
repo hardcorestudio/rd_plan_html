@@ -7,7 +7,7 @@
 		<div class="leftAside_contentArea">
 			<div v-if="titleInfo.textInfoList" class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
 		</div>
-		<div v-if="userRole === 'manager'" class="leftAside_btnArea">
+		<div v-if="userRole === 'CSEP'" class="leftAside_btnArea">
 			<el-button v-if="titleInfo.title" class="saveBtn" plain @click="doSubmit('save')">保存</el-button>
 			<el-button type="info" plain @click="doClose">关闭</el-button>
 		</div>
