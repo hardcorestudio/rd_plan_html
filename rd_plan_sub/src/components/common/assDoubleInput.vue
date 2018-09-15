@@ -21,8 +21,8 @@
 					</el-col>
 					<el-col :span="2">
 						<div v-if="userRole === 'CSEP'" class="assDoubleInputItem_iconBtnArea">
-							<i v-if="index === formList.length - 1" @click="addSign" class="el-icon-plus"></i>
-							<i v-if="index > 0" @click="reduceSign(item)" class="el-icon-minus"></i>
+							<span v-if="index === formList.length - 1" @click="addSign">增加</span>
+							<span v-if="index > 0" @click="reduceSign(item)">减少</span>
 						</div>
 					</el-col>
 				</el-row>		
@@ -82,7 +82,12 @@
 		},
     methods: {
 			doReset() {
-				this.$emit('doReset')
+				this.formList = [];
+				let item = {};
+				item.index = this.formList.length + 1;
+				item.text1 = "";
+				item.text2 = "";
+				this.formList.push(item);
 			},
 			addSign() {
 				let item = {};
@@ -150,6 +155,9 @@
 	box-sizing: border-box;
 	height: 40px;
 	line-height: 40px;
+}
+.assDoubleInputItem_iconBtnArea >span {
+	font-size: 12px;
 }
 .assSwitchItem_switch{
 	height: 40px;
