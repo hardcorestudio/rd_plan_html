@@ -33,22 +33,28 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalInvestment" placeholder="必填"></el-input>
-							<el-row v-else>{{baseInfoData.totalInvestment}}</el-row>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalInvestment" placeholder="必填">
+								<template slot="append">{{baseInfoData.TOTAL_INVESTMENT_UNIT}}</template>
+							</el-input>
+							<el-row v-else>{{baseInfoData.totalInvestment}} {{baseInfoData.TOTAL_INVESTMENT_UNIT}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="总产值">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalOutputValue" placeholder="必填"></el-input>
-							<el-row v-else>{{baseInfoData.totalOutputValue}}</el-row>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalOutputValue" placeholder="必填">
+								<template slot="append">{{baseInfoData.TOTAL_OUTPUTVALUE_UNIT}}</template>
+							</el-input>
+							<el-row v-else>{{baseInfoData.totalOutputValue}} {{baseInfoData.TOTAL_OUTPUTVALUE_UNIT}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="占地面积">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.areaCovered" placeholder="必填"></el-input>
-							<el-row v-else>{{baseInfoData.areaCovered}}</el-row>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.areaCovered" placeholder="必填">
+								<template slot="append">{{baseInfoData.FLOOR_AREA_UNIT}}</template>
+							</el-input>
+							<el-row v-else>{{baseInfoData.areaCovered}} {{baseInfoData.FLOOR_AREA_UNIT}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
@@ -191,7 +197,10 @@ export default {
 				webside: "",
 				department: "",
 				departmentChargeMan: "",
-				trashChargeMan: ""
+				trashChargeMan: "",
+				TOTAL_INVESTMENT_UNIT: "",
+				TOTAL_OUTPUTVALUE_UNIT: "",
+				FLOOR_AREA_UNIT: ""
 			},
 			managerList: [{
 				index: "0",
@@ -382,6 +391,11 @@ export default {
 			this.baseInfoData.department = res.initEpExtend.DEPARTMENT
 			this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
 			this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
+
+			this.baseInfoData.TOTAL_INVESTMENT_UNIT = res.initEpExtend.TOTAL_INVESTMENT_UNIT
+			this.baseInfoData.TOTAL_OUTPUTVALUE_UNIT = res.initEpExtend.TOTAL_OUTPUTVALUE_UNIT
+			this.baseInfoData.FLOOR_AREA_UNIT = res.initEpExtend.FLOOR_AREA_UNIT
+
 			if(res.initEpExtend.sons.length > 0){
 				this.managerList = []
 				for(let i in res.initEpExtend.sons){
@@ -422,6 +436,11 @@ export default {
 			submitData.DEPARTMENT_HEAD = this.baseInfoData.departmentChargeMan
 			submitData.MANAGER = this.baseInfoData.trashChargeMan
 			submitData.MANAGEMENT_ORG = this.manageDes.text
+
+			submitData.TOTAL_INVESTMENT_UNIT = this.baseInfoData.TOTAL_INVESTMENT_UNIT
+			submitData.TOTAL_OUTPUTVALUE_UNIT = this.baseInfoData.TOTAL_OUTPUTVALUE_UNIT
+			submitData.FLOOR_AREA_UNIT = this.baseInfoData.FLOOR_AREA_UNIT
+
 			submitData.sons = []
 			for(let i in this.managerList){
 				let item = {}

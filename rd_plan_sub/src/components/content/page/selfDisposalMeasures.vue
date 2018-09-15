@@ -187,9 +187,6 @@
 				console.log("保存save");
 				console.log(this.title2.text);
 			},
-			resetRawMaterial() {
-				console.log("原辅材料及消耗量");
-			},
 			doReset (){
 
 			}
