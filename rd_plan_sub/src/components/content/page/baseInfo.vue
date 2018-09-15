@@ -250,155 +250,157 @@ export default {
 			this.$router.push({ path: '/pageIncompatible' })
 		})
 		let paramJson = getQueryString()
-		// fetch({
-		//   url: '',
-		//   method: 'POST',
-		// 	params: paramJson
-		// }).then(res => {
-		// 	console.log(res)
-		// })
-		let res = {
-			"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiV2Z4Z0RySVp5WUw3ZlUyVEZZRGc2Yz0=",
-			"sepaName": "津南区",
-			"operatorId": "",
-			"status": "",
-			"ROLEID": "CSEP",
-			"ifLogin": "0",
-			"initRes": {
-				"ISSUIETIME": null,
-				"ISSUIEVALID": null,
-				"FAX_NUM": "28569822",
-				"epAdress": "天津市津南区双桥河镇东",
-				"sbAdress": "天津市津南区双桥河镇东",
-				"EP_NAME": "天津合佳威立雅环境服务有限公司",
-				"STATUS": "2",
-				"IF_HANDLE": "1",
-				"LATITUDE": "117.35",
-				"IF_PRODUCE": "1",
-				"STEP": "1",
-				"planYear": "2018年",
-				"TEL": "28569833",
-				"OrgId": 3229,
-				"REGISTERCODE": "120000400075101",
-				"R_PERSON": "马宏民",
-				"LINKMAN": "周小华",
-				"EMAIL": "mahongmin1987@126.com",
-				"EP_ADRESS_J": "双桥河镇东",
-				"PROCESSINSTID": 5529,
-				"YSFZDATE": 1403452800000,
-				"epName": "天津合佳威立雅环境服务有限公司",
-				"EP_ADRESS_S": "022",
-				"EP_ADRESS_Q": "JNQ",
-				"EP_ID": "EP201410280910450012",
-				"SB_ADRESS_J": "北闸口镇二八公路69号",
-				"sysdate": 1448208000000,
-				"BELONG_SEPA": "JNQ",
-				"CARD_NUM": 0,
-				"COMMENT": null,
-				"INDUSTRY_CODE": "mid_772",
-				"dictname": "环境治理业",
-				"SB_ADRESS_S": "022",
-				"SB_ADRESS_Q": "JNQ",
-				"POSTAL_CODE": "300350",
-				"LONGITUDE": "38.96",
-				"R_DATE": 1448208000000,
-				"IF_TRANSPORT": "1"
-			},
-			"empId": "",
-			"epName": "天津合佳威立雅环境服务有限公司",
-			"initEpExtend": {
-				"LINK_NUM": "jj",
-				"TOTAL_INVESTMENT": "aa",
-				"SYS_ACCIDENT": 1,
-				"SYS_OPERATION": 0,
-				"TOTAL_OUTPUTVALUE_UNIT": "dd",
-				"STATUS": "00",
-				"TOTAL_OUTPUTVALUE": "cc",
-				"MANAGEMENT_ORG": "rr",
-				"MAIL": "mm",
-				"WEBSITE": "nn",
-				"EMPLOYEES_NUM": 10,
-				"MANAGER": "qq",
-				"SYS_MANAGER": 0,
-				"DEPARTMENT": "oo",
-				"SYS_LEDGER": 1,
-				"FLOOR_AREA": "ee",
-				"FAX_TEL": "ll",
-				"SYS_RESPONSIBILITY": 1,
-				"FLOOR_AREA_UNIT": "ff",
-				"EP_ID": "EP201410280910450012",
-				"PRINCIPAL": "hh",
-				"SYS_TRAINING": 0,
-				"DEPARTMENT_HEAD": "pp",
-				"TOTAL_INVESTMENT_UNIT": "bb",
-				"sons": [{
-					"TECHNICAL_DIRECTER": "111",
-					"EDU_LEVEL": "aaa",
-					"ID": "1",
-					"EP_ID": "EP201410280910450012"
-				}, {
-					"TECHNICAL_DIRECTER": "222",
-					"EDU_LEVEL": "bbb",
-					"ID": "2",
-					"EP_ID": "EP201410280910450012"
-				}],
-				"sysdate": 1536966393780,
-				"LINKMAN": "ii"
-			},
-			"epId": "EP201410280910450012",
-			"userType": "CSEP",
-			"newGuideFlag": "",
-			"belongSepa": "JNQ",
-			"belongQ": "",
-			"userPortrait": "",
-			"belongS": "",
-			"nickName": "天津合佳威立雅环境服务有限公司",
-			"IWBSESSION": "BROWSER-20180915064502",
-			"orgCode": "",
-			"userId": "EP201410280910450012",
-			"userName": "",
-			"realName": "",
-			"contextPath": "",
-			"orgSeq": ""
-		}
-		this.userRole = res.userType
-		this.baseInfoData.planDate = res.initRes.planYear
-		this.baseInfoData.compName = res.initRes.EP_NAME
-		this.baseInfoData.compAddr = res.initRes.epAdress
-		this.baseInfoData.factoryAddr = res.initRes.sbAdress
-		this.baseInfoData.legalPerson = res.initRes.LINKMAN
-		this.baseInfoData.postNo = res.initRes.POSTAL_CODE
-		this.baseInfoData.category = res.initRes.dictname
-		this.baseInfoData.totalInvestment = res.initEpExtend.TOTAL_INVESTMENT
-		this.baseInfoData.totalOutputValue = res.initEpExtend.TOTAL_OUTPUTVALUE
-		this.baseInfoData.areaCovered = res.initEpExtend.FLOOR_AREA
-		this.baseInfoData.personNum = res.initEpExtend.EMPLOYEES_NUM
-		this.baseInfoData.chargeMan = res.initEpExtend.PRINCIPAL
-		this.baseInfoData.person = res.initEpExtend.LINKMAN
-		this.baseInfoData.phone = res.initEpExtend.LINK_NUM
-		this.baseInfoData.tel = res.initEpExtend.FAX_TEL
-		this.baseInfoData.mail = res.initEpExtend.MAIL
-		this.baseInfoData.webside = res.initEpExtend.WEBSITE
-		this.baseInfoData.department = res.initEpExtend.DEPARTMENT
-		this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
-		this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
-		if(res.initEpExtend.sons.length > 0){
-			this.managerList = []
-			for(let i in res.initEpExtend.sons){
-				let item = {}
-				item.index = res.initEpExtend.sons[i].EP_ID
-				item.text1 = res.initEpExtend.sons[i].TECHNICAL_DIRECTER
-				item.text2 = res.initEpExtend.sons[i].EDU_LEVEL
-				this.managerList.push(item)
+		console.log("======================")
+		console.log(paramJson)
+		fetch({
+		  url: '/plan/initBaseInfo',
+		  method: 'POST',
+		  data: 'params='+JSON.stringify(paramJson)
+		}).then(res => {
+			console.log(res)
+			this.userRole = res.userType
+			this.baseInfoData.planDate = res.initRes.planYear
+			this.baseInfoData.compName = res.initRes.EP_NAME
+			this.baseInfoData.compAddr = res.initRes.epAdress
+			this.baseInfoData.factoryAddr = res.initRes.sbAdress
+			this.baseInfoData.legalPerson = res.initRes.LINKMAN
+			this.baseInfoData.postNo = res.initRes.POSTAL_CODE
+			this.baseInfoData.category = res.initRes.dictname
+			this.baseInfoData.totalInvestment = res.initEpExtend.TOTAL_INVESTMENT
+			this.baseInfoData.totalOutputValue = res.initEpExtend.TOTAL_OUTPUTVALUE
+			this.baseInfoData.areaCovered = res.initEpExtend.FLOOR_AREA
+			this.baseInfoData.personNum = res.initEpExtend.EMPLOYEES_NUM
+			this.baseInfoData.chargeMan = res.initEpExtend.PRINCIPAL
+			this.baseInfoData.person = res.initEpExtend.LINKMAN
+			this.baseInfoData.phone = res.initEpExtend.LINK_NUM
+			this.baseInfoData.tel = res.initEpExtend.FAX_TEL
+			this.baseInfoData.mail = res.initEpExtend.MAIL
+			this.baseInfoData.webside = res.initEpExtend.WEBSITE
+			this.baseInfoData.department = res.initEpExtend.DEPARTMENT
+			this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
+			this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
+			if(res.initEpExtend.sons.length > 0){
+				this.managerList = []
+				for(let i in res.initEpExtend.sons){
+					let item = {}
+					item.index = res.initEpExtend.sons[i].EP_ID
+					item.text1 = res.initEpExtend.sons[i].TECHNICAL_DIRECTER
+					item.text2 = res.initEpExtend.sons[i].EDU_LEVEL
+					this.managerList.push(item)
+				}
 			}
-		}
-		this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER
-		this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY
-		this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION
-		this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER
-		this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING
-		this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT
-		this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
+			this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER
+			this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY
+			this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION
+			this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER
+			this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING
+			this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT
+			this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
+		})
+		// let res = {
+		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiV2Z4Z0RySVp5WUw3ZlUyVEZZRGc2Yz0=",
+		// 	"sepaName": "津南区",
+		// 	"operatorId": "",
+		// 	"status": "",
+		// 	"ROLEID": "CSEP",
+		// 	"ifLogin": "0",
+		// 	"initRes": {
+		// 		"ISSUIETIME": null,
+		// 		"ISSUIEVALID": null,
+		// 		"FAX_NUM": "28569822",
+		// 		"epAdress": "天津市津南区双桥河镇东",
+		// 		"sbAdress": "天津市津南区双桥河镇东",
+		// 		"EP_NAME": "天津合佳威立雅环境服务有限公司",
+		// 		"STATUS": "2",
+		// 		"IF_HANDLE": "1",
+		// 		"LATITUDE": "117.35",
+		// 		"IF_PRODUCE": "1",
+		// 		"STEP": "1",
+		// 		"planYear": "2018年",
+		// 		"TEL": "28569833",
+		// 		"OrgId": 3229,
+		// 		"REGISTERCODE": "120000400075101",
+		// 		"R_PERSON": "马宏民",
+		// 		"LINKMAN": "周小华",
+		// 		"EMAIL": "mahongmin1987@126.com",
+		// 		"EP_ADRESS_J": "双桥河镇东",
+		// 		"PROCESSINSTID": 5529,
+		// 		"YSFZDATE": 1403452800000,
+		// 		"epName": "天津合佳威立雅环境服务有限公司",
+		// 		"EP_ADRESS_S": "022",
+		// 		"EP_ADRESS_Q": "JNQ",
+		// 		"EP_ID": "EP201410280910450012",
+		// 		"SB_ADRESS_J": "北闸口镇二八公路69号",
+		// 		"sysdate": 1448208000000,
+		// 		"BELONG_SEPA": "JNQ",
+		// 		"CARD_NUM": 0,
+		// 		"COMMENT": null,
+		// 		"INDUSTRY_CODE": "mid_772",
+		// 		"dictname": "环境治理业",
+		// 		"SB_ADRESS_S": "022",
+		// 		"SB_ADRESS_Q": "JNQ",
+		// 		"POSTAL_CODE": "300350",
+		// 		"LONGITUDE": "38.96",
+		// 		"R_DATE": 1448208000000,
+		// 		"IF_TRANSPORT": "1"
+		// 	},
+		// 	"empId": "",
+		// 	"epName": "天津合佳威立雅环境服务有限公司",
+		// 	"initEpExtend": {
+		// 		"LINK_NUM": "jj",
+		// 		"TOTAL_INVESTMENT": "aa",
+		// 		"SYS_ACCIDENT": 1,
+		// 		"SYS_OPERATION": 0,
+		// 		"TOTAL_OUTPUTVALUE_UNIT": "dd",
+		// 		"STATUS": "00",
+		// 		"TOTAL_OUTPUTVALUE": "cc",
+		// 		"MANAGEMENT_ORG": "rr",
+		// 		"MAIL": "mm",
+		// 		"WEBSITE": "nn",
+		// 		"EMPLOYEES_NUM": 10,
+		// 		"MANAGER": "qq",
+		// 		"SYS_MANAGER": 0,
+		// 		"DEPARTMENT": "oo",
+		// 		"SYS_LEDGER": 1,
+		// 		"FLOOR_AREA": "ee",
+		// 		"FAX_TEL": "ll",
+		// 		"SYS_RESPONSIBILITY": 1,
+		// 		"FLOOR_AREA_UNIT": "ff",
+		// 		"EP_ID": "EP201410280910450012",
+		// 		"PRINCIPAL": "hh",
+		// 		"SYS_TRAINING": 0,
+		// 		"DEPARTMENT_HEAD": "pp",
+		// 		"TOTAL_INVESTMENT_UNIT": "bb",
+		// 		"sons": [{
+		// 			"TECHNICAL_DIRECTER": "111",
+		// 			"EDU_LEVEL": "aaa",
+		// 			"ID": "1",
+		// 			"EP_ID": "EP201410280910450012"
+		// 		}, {
+		// 			"TECHNICAL_DIRECTER": "222",
+		// 			"EDU_LEVEL": "bbb",
+		// 			"ID": "2",
+		// 			"EP_ID": "EP201410280910450012"
+		// 		}],
+		// 		"sysdate": 1536966393780,
+		// 		"LINKMAN": "ii"
+		// 	},
+		// 	"epId": "EP201410280910450012",
+		// 	"userType": "CSEP",
+		// 	"newGuideFlag": "",
+		// 	"belongSepa": "JNQ",
+		// 	"belongQ": "",
+		// 	"userPortrait": "",
+		// 	"belongS": "",
+		// 	"nickName": "天津合佳威立雅环境服务有限公司",
+		// 	"IWBSESSION": "BROWSER-20180915064502",
+		// 	"orgCode": "",
+		// 	"userId": "EP201410280910450012",
+		// 	"userName": "",
+		// 	"realName": "",
+		// 	"contextPath": "",
+		// 	"orgSeq": ""
+		// }
 
 	},
 	methods: {

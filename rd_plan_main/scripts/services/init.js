@@ -60,13 +60,13 @@ angular.module('sbAdminApp').factory('Init', ['$http','$rootScope','localStorage
     };
     var initRes = {
         iwbhttp : function(url,data,success,error){
-            //console.log("init=====>>"+JSON.stringify($state.current));
             data['IWBSESSION'] = localStorageService.get('IWBSESSION');
             data['WJWT'] = localStorageService.get('WJWT');
             //data['IWBSESSION'] = sessionStorage.getItem('IWBSESSION');
             data['DEVICE_UUID'] = $rootScope.uuid;
             data['CURRENT_URL'] =  $location.url();
             data['USER_ID'] = localStorageService.get('userId');
+            console.log("params="+JSON.stringify(data));
             $http({
                 url:$rootScope.baseUrl+$rootScope.baseUrlPath+url,
                 data: "params="+JSON.stringify(data),  // pass in data as strings

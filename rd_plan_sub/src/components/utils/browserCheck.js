@@ -38,11 +38,12 @@ export function getQueryString(){
 }
 function subStringByAfter(str) {
 	var strIndex = str.indexOf("=") + 1;
-	var resultStr = str.substr(strIndex, str.length);
+  var resultStr = str.substr(strIndex, str.length);
+  resultStr = resultStr.replace(/%2F/g,'/')
 	return resultStr;
 };
 function subStringByBefore(str) {
 	var strIndex = str.indexOf("=");
-	var resultStr = str.substr(0, strIndex);
+  var resultStr = str.substr(0, strIndex);
 	return resultStr;
 };

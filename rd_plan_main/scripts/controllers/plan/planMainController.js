@@ -1,5 +1,5 @@
 'use strict';
-angular.module('sbAdminApp').controller('PlanMainCtrl', ['$scope','Init','CheckBrowser','$state','$stateParams','localStorageService','Modal', function ($scope,Init,CheckBrowser,$state,$stateParams,localStorageService,Modal) {
+angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','Init','CheckBrowser','$state','$stateParams','localStorageService','Modal','$location', function ($rootScope,$scope,Init,CheckBrowser,$state,$stateParams,localStorageService,Modal,$location) {
     CheckBrowser.check();
     //弹框参数
     var resolve = {};
@@ -10,6 +10,17 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$scope','Init','CheckB
         $state.go("dashboard.index");
         return;
     }
+
+    $scope.baseInfoClass = false;
+    $scope.productionSituationClass = false;
+    $scope.produceSituationClass = false;
+    $scope.decrementPlanClass = false;
+    $scope.transferStuationClass = false;
+    $scope.selfDisposalMeasuresClass = false;
+    $scope.entrustDisposalMeasuresClass = false;
+    $scope.envClass = false;
+    $scope.lastClass = false;
+    
     $scope.param = {TP_ID:$stateParams.tpId}
     $scope.taskFlag = $stateParams.from.indexOf('Task') > -1 ? true : false;
     $scope.btnFlag = $stateParams.btnFlag;
@@ -22,13 +33,133 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$scope','Init','CheckB
         if(data.applyListStatus == "" || data.applyListStatus == "00" || data.applyListStatus == "03"){
             $scope.applyBtnFlag = true;
         }
+        if(data.baseInfoFlag == '1'){
+            $scope.baseInfoClass = true
+        }
+        if(data.productionSituationFlag == '1'){
+            $scope.productionSituationClass = true
+        }
     },function(data,header,config,status){
     });
 
     $scope.jumpSub = function(pathname){
         Init.iwbhttp('/plan/planMain', {url:pathname}, function(data,header,config,status){
             console.log(data)
-            window.open(data.sub_url, '_blank')
+            var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId  ;
+            window.open(sub_url, '_blank')
+        },function(data,header,config,status){
+        });
+    }
+
+    $scope.test1 = function(pathname){
+        // var p = {};
+        // p.EP_ID = $stateParams.epId;
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initBaseInfo', p, function(data,header,config,status){
+        //     console.log(JSON.stringify(data))
+           
+        // },function(data,header,config,status){
+        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initProductInfo', p, function(data,header,config,status){
+            console.log(data)
+           
+        },function(data,header,config,status){
+        });
+    }
+    $scope.test = function(pathname){
+        // var p = {};
+        // p.EP_ID = $stateParams.epId;
+        // p.TOTAL_INVESTMENT = 'aa';
+        // p.TOTAL_INVESTMENT_UNIT = 'bb';
+        // p.TOTAL_OUTPUTVALUE = 'cc';
+        // p.TOTAL_OUTPUTVALUE_UNIT = 'dd';
+        // p.FLOOR_AREA = 'ee';
+        // p.FLOOR_AREA_UNIT = 'ff';
+        // p.EMPLOYEES_NUM = '10';
+        // p.PRINCIPAL = 'hh';
+        // p.LINKMAN = 'ii';
+        // p.LINK_NUM = 'jj';
+        // p.FAX_TEL = 'll';
+        // p.MAIL = 'mm';
+        // p.WEBSITE = 'nn';
+        // p.DEPARTMENT = 'oo';
+        // p.DEPARTMENT_HEAD = 'pp';
+        // p.MANAGER = 'qq';
+        // p.SYS_MANAGER = '0';
+        // p.SYS_RESPONSIBILITY = '1';
+        // p.SYS_OPERATION = '0';
+        // p.SYS_LEDGER = '1';
+        // p.SYS_TRAINING = '0';
+        // p.SYS_ACCIDENT = '1';
+        // p.MANAGEMENT_ORG = 'rr';
+        // p.sons = [
+        //     {
+        //         "TECHNICAL_DIRECTER": "111", 
+        //         "EDU_LEVEL": "aaa"
+        //     },
+        //     {
+        //         "TECHNICAL_DIRECTER": "222", 
+        //         "EDU_LEVEL": "bbb"
+        //     }
+        // ]
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveBaseInfo', p, function(data,header,config,status){
+        //     console.log(data)
+           
+        // },function(data,header,config,status){
+        // });
+        var p = {};
+        p.EP_ID = $stateParams.epId;
+        p.TP_ID = $stateParams.tpId;
+        p.PRODUCT_DESC = 'aaa'
+        p.PRODUCT_ORI = [
+            {
+                "NAME": "111", 
+                "UNIT": "aaa",
+                "LAST_NUM": "100.00",
+                "YEAR_NUM": "1000.00",
+            },
+            {
+                "NAME": "222", 
+                "UNIT": "bbb",
+                "LAST_NUM": "100.00",
+                "YEAR_NUM": "1000.00",
+            }
+        ]
+        p.PRODUCT_EQU = [
+            {
+                "NAME": "111", 
+                "UNIT": "aaa",
+                "LAST_NUM": "100.00",
+                "YEAR_NUM": "1000.00",
+            },
+            {
+                "NAME": "222", 
+                "UNIT": "bbb",
+                "LAST_NUM": "100.00",
+                "YEAR_NUM": "1000.00",
+            }
+        ]
+        p.PRODUCT_OUTPUT = [
+            {
+                "NAME": "111", 
+                "UNIT": "aaa",
+                "LAST_NUM": "100.00",
+                "YEAR_NUM": "1000.00",
+            },
+            {
+                "NAME": "222", 
+                "UNIT": "bbb",
+                "LAST_NUM": "100.00",
+                "YEAR_NUM": "1000.00",
+            }
+        ]
+        console.log(JSON.stringify(p));
+        Init.iwbhttp('/plan/saveProductInfo', p, function(data,header,config,status){
+            console.log(data)
+           
         },function(data,header,config,status){
         });
     }
