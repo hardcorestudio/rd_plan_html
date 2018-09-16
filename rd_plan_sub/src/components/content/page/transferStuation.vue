@@ -177,10 +177,6 @@
 			'assSwitch':assSwitch
 		},
 		watch: {
-			title2: function (n, o) {
-				console.log(n);
-				console.log(o);
-			}, 
 		},
 		mounted () {
 			checkBrowser(() => {
@@ -195,7 +191,6 @@
 		methods: {
 			doSubmit() {
 				console.log("保存save");
-				console.log(this.title2.text);
 			},
 			resetInfo() {
 				console.log("重置");

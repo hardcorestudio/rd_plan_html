@@ -12,7 +12,7 @@
 	import Aside from '../Aside.vue';
 	import assTitle from '../../common/assTitle.vue'
 	import assForm from '../../common/assForm.vue'
-	import { checkBrowser } from '../../utils/browserCheck.js'
+	import { checkBrowser, getQueryString } from '../../utils/browserCheck.js'
 	export default {
 		name:'produceSituation',
 		data(){
@@ -30,6 +30,7 @@
 						'来源及产生工序:产生该种废物的部门、车间名称及其相应产生工段、工序名称。'
 					]
 				},
+				queryJson: {},
 				userRole: 'CSEP',
 				title1: {
 					title: " "
@@ -91,10 +92,7 @@
 			'assForm':assForm
 		},
 		watch: {
-			title2: function (n, o) {
-				console.log(n);
-				console.log(o);
-			}, 
+			 
 		},
 		mounted () {
 			checkBrowser(() => {
@@ -105,11 +103,11 @@
 				// });
 				this.$router.push({path: '/pageIncompatible'})
 			})
+			
 		},
 		methods: {
 			doSubmit() {
 				console.log("保存save");
-				console.log(this.title2.text);
 			},
 			doReset() {
 				console.log("原辅材料及消耗量");

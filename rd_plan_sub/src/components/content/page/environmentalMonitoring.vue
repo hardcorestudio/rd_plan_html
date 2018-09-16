@@ -77,7 +77,6 @@
 		methods: {
 			doSubmit() {
 				console.log("保存save");
-				console.log(this.title2.text);
 			}
 		}
 	}

@@ -21,8 +21,8 @@
 					</el-col>
 					<el-col :span="2">
 						<div v-if="userRole === 'CSEP'" class="assDoubleInputItem_iconBtnArea">
-							<span v-if="index === formList.length - 1" @click="addSign">增加</span>
-							<span v-if="index > 0" @click="reduceSign(item)">减少</span>
+							<div v-if="index === formList.length - 1" @click="addSign">增加</div>
+							<div v-if="index > 0" @click="reduceSign(item)">减少</div>
 						</div>
 					</el-col>
 				</el-row>		
@@ -160,9 +160,12 @@
 	height: 40px;
 	line-height: 40px;
 }
-.assDoubleInputItem_iconBtnArea >span {
+.assDoubleInputItem_iconBtnArea >div {
 	font-size: 12px;
 	color: #13ce66;
+	float: right;
+	width: 26px;
+	padding: 0 2px;
 }
 .assSwitchItem_switch{
 	height: 40px;

@@ -11,9 +11,8 @@
 								<el-input v-model="fItem.text" placeholder="必填"></el-input>
 							</div>
 							<div v-else-if="fItem.type === 'select'" class="assFromItem_right">
-								<el-select placeholder="吨/年">
+								<el-select placeholder="吨/年" v-model="fItem.text">
 									<el-option
-										v-model="fItem.text"
 										v-for="uItem in units"
 										:key="uItem.value"
 										:label="uItem.label"
@@ -53,10 +52,10 @@
       return {
         units:[{
 					label: "吨",
-					value: "10"
+					value: "吨"
 				},{
 					label: "年",
-					value: "20"
+					value: "年"
 				}],
       };
 		},
@@ -66,12 +65,16 @@
 			addSign() {
 				let item = {};
 				item.index = this.formList.length + 1;
-				item.itemList = this.formList[0].itemList;
-				for(let i in item.itemList){
-					item.itemList[i].text = "";
+				item.itemList = [];
+				let arr = this.formList[0].itemList
+				for(let i in arr){
+					let arrItem = {}
+					arrItem.type = arr[i].type
+					arrItem.text = ""
+					arrItem.title = arr[i].title
+					item.itemList.push(arrItem)
 				}
 				this.formList.push(item);
-				console.log(this.formList)
 			},
 			reduceSign(item) {
 				let myFormList = [];
