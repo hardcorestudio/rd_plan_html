@@ -162,6 +162,7 @@
 }
 .assDoubleInputItem_iconBtnArea >span {
 	font-size: 12px;
+	color: #13ce66;
 }
 .assSwitchItem_switch{
 	height: 40px;

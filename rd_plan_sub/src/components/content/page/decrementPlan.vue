@@ -22,6 +22,9 @@
 					textInfoList: []
 				},
 				userRole: 'CSEP',
+				queryJson: {},
+				EP_ID: "",
+				decrementInfo: {},
 				title1: {
 					title: "减少危险废物危害性的计划",
 					placeholder: "必填",
@@ -48,11 +51,74 @@
 				// });
 				this.$router.push({path: '/pageIncompatible'})
 			})
+			this.queryJson = getQueryString()
+
+			// fetch({
+			// 	url: '',
+			// 	method: 'POST',
+			// 	data: 'params='+JSON.stringify(this.queryJson)
+			// }).then(res => {
+				let res = {
+					"sepaName":"津南区",
+					"WJWT":"czlEcjhPMjRXelI5LzQrVE5JS1hiV2dWUlExSHIvanVGWUdybTh0N0ZFOD0=",
+					"operatorId":"",
+					"status":"",
+					"ROLEID":"CSEP",
+					"empId":"",
+					"ifLogin":"0",
+					"epName":"天津合佳威立雅环境服务有限公司",
+					"epId":"EP201410280910450012",
+					"userType":"CSEP",
+					"newGuideFlag":"",
+					"belongQ":"",
+					"belongSepa":"JNQ",
+					"userPortrait":"",
+					"belongS":"",
+					"nickName":"天津合佳威立雅环境服务有限公司",
+					"orgCode":"",
+					"IWBSESSION":"BROWSER-20180915141153",
+					"userId":"EP201410280910450012",
+					"userName":"",
+					"initReduction":{
+							"MEASURES_REDUCTION":"aaadfsafdasfafda1111111",
+							"PLAN_REDUCTION":"fdasfdasfdas",
+							"sysdate":1537036831470,
+							"TP_ID":"TP201809120707190010",
+							"STATUS":"00"
+					},
+					"contextPath":"",
+					"realName":"",
+					"orgSeq":""
+				}	
+				this.decrementInfo = res.initReduction
+				this.title2.text = this.decrementInfo.MEASURES_REDUCTION
+				this.title1.text = this.decrementInfo.PLAN_REDUCTION
+				this.EP_ID = res.epId
+			// })
+			
+
 		},
 		methods: {
 			doSubmit() {
-				console.log("保存save");
-				console.log(this.title2.text);
+				let submitData = {}
+				submitData.EP_ID = this.EP_ID
+				submitData.TP_ID = this.decrementInfo.TP_ID
+				submitData.MEASURES_REDUCTION = this.title2.text
+				submitData.PLAN_REDUCTION = this.title1.text
+				for (let key in this.queryJson) {
+					submitData[key] = this.queryJson[key]
+				}
+				// fetch({
+				// 	url: '',
+				// 	method: 'POST',
+				// 	data: 'params='+JSON.stringify(submitData)
+				// }).then(res => {
+				// 	this.$notify({
+				// 		title: '成功',
+				// 		message: '保存成功',
+				// 		type: 'success'
+				// 	});
+				// })
 			}
 		}
 	}

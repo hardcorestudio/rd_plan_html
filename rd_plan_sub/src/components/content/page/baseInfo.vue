@@ -198,9 +198,9 @@ export default {
 				department: "",
 				departmentChargeMan: "",
 				trashChargeMan: "",
-				TOTAL_INVESTMENT_UNIT: "",
-				TOTAL_OUTPUTVALUE_UNIT: "",
-				FLOOR_AREA_UNIT: ""
+				TOTAL_INVESTMENT_UNIT: "万元",
+				TOTAL_OUTPUTVALUE_UNIT: "万元",
+				FLOOR_AREA_UNIT: "平方米"
 			},
 			managerList: [{
 				index: "0",
@@ -392,10 +392,6 @@ export default {
 			this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
 			this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
 
-			this.baseInfoData.TOTAL_INVESTMENT_UNIT = res.initEpExtend.TOTAL_INVESTMENT_UNIT
-			this.baseInfoData.TOTAL_OUTPUTVALUE_UNIT = res.initEpExtend.TOTAL_OUTPUTVALUE_UNIT
-			this.baseInfoData.FLOOR_AREA_UNIT = res.initEpExtend.FLOOR_AREA_UNIT
-
 			if(res.initEpExtend.sons.length > 0){
 				this.managerList = []
 				for(let i in res.initEpExtend.sons){
@@ -406,12 +402,12 @@ export default {
 					this.managerList.push(item)
 				}
 			}
-			this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER
-			this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY
-			this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION
-			this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER
-			this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING
-			this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT
+			this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER + ""
+			this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY + ""
+			this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION + ""
+			this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER + ""
+			this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING + ""
+			this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT + ""
 			this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
 		})
 		
@@ -419,7 +415,6 @@ export default {
 	},
 	methods: {
 		doSubmit () {
-			console.log("保存save");
 			let submitData = {}
 			submitData.EP_ID = this.EP_ID
 			submitData.TOTAL_INVESTMENT = this.baseInfoData.totalInvestment
