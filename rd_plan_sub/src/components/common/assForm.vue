@@ -126,6 +126,7 @@
 .assFromItem_titleSingle{
 	line-height: 42px;
 	padding: 0 15px;
+	box-sizing: border-box;
 	min-width: 130px;
 }
 .unitShow{

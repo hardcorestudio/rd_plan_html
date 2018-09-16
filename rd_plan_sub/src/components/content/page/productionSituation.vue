@@ -74,18 +74,17 @@
 					itemList: [{
 						type: "input",
 						text: "",
-						title: "设备名称"
+						title: "设备名称",
+						isSingle: "1"
 					},{
-						type: "unit",
-						text: "台",
-						title: "单位"
-					},{
-						type: "input",
+						type: "inputWithUnit",
 						text: "",
+						unit: "台",
 						title: "上年度数量"
 					},{
-						type: "input",
+						type: "inputWithUnit",
 						text: "",
+						unit: "台",
 						title: "本年度数量"
 					}]
 				}],
@@ -279,18 +278,17 @@
 							index: i + 1,
 							itemList: [{
 								type: "input",
+								isSingle: "1",
 								text: res.initProductEqu[i].NAME,
 								title: "设备名称"
 							},{
-								type: "unit",
-								text: "台",
-								title: "单位"
-							},{
-								type: "input",
+								type: "inputWithUnit",
+								unit: "台",
 								text: res.initProductEqu[i].LAST_NUM,
 								title: "上年度数量"
 							},{
-								type: "input",
+								type: "inputWithUnit",
+								unit: "台",
 								text: res.initProductEqu[i].YEAR_NUM,
 								title: "本年度数量"
 							}]
@@ -303,17 +301,16 @@
 						itemList: [{
 							type: "input",
 							text: "",
+							isSingle: "1",
 							title: "设备名称"
 						},{
-							type: "unit",
-							text: "台",
-							title: "单位"
-						},{
-							type: "input",
+							type: "inputWithUnit",
+							unit: "台",
 							text: "",
 							title: "上年度数量"
 						},{
-							type: "input",
+							type: "inputWithUnit",
+							unit: "台",
 							text: "",
 							title: "本年度数量"
 						}]
@@ -393,8 +390,8 @@
 					let item = {}
 					item.NAME = this.title2fromList[i].itemList[0].text
 					item.UNIT = "台"
-					item.LAST_NUM = this.title2fromList[i].itemList[2].text
-					item.YEAR_NUM = this.title2fromList[i].itemList[3].text
+					item.LAST_NUM = this.title2fromList[i].itemList[1].text
+					item.YEAR_NUM = this.title2fromList[i].itemList[2].text
 
 					submitData.PRODUCT_EQU.push(item)
 				}
