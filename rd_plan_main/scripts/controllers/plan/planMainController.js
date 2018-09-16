@@ -39,6 +39,21 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         if(data.productionSituationFlag == '1'){
             $scope.productionSituationClass = true
         }
+        if(data.produceSituationFlag == '1'){
+            $scope.produceSituationClass = true
+        }
+        if(data.decrementPlanFlag == '1'){
+            $scope.decrementPlanClass = true
+        }
+        if(data.transferStuationFlag == '1'){
+            $scope.transferStuationClass = true
+        }
+        if(data.selfDisposalMeasuresFlag == '1'){
+            $scope.selfDisposalMeasuresClass = true
+        }
+        if(data.entrustDisposalMeasuresFlag == '1'){
+            $scope.entrustDisposalMeasuresClass = true
+        }
     },function(data,header,config,status){
     });
 
@@ -60,13 +75,13 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
            
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initProductInfo', p, function(data,header,config,status){
-            console.log(data)
-            console.log(JSON.stringify(data))
-        },function(data,header,config,status){
-        });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initProductInfo', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
@@ -83,6 +98,30 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initTransfer', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initHandleSelf', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
+            console.log(data)
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
     }
     $scope.test = function(pathname){
         // var p = {};
@@ -126,58 +165,58 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
            
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.EP_ID = $stateParams.epId;
-        p.TP_ID = $stateParams.tpId;
-        p.PRODUCT_DESC = 'aaa'
-        p.PRODUCT_ORI = [
-            {
-                "NAME": "111", 
-                "UNIT": "aaa",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            },
-            {
-                "NAME": "222", 
-                "UNIT": "bbb",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            }
-        ]
-        p.PRODUCT_EQU = [
-            {
-                "NAME": "111", 
-                "UNIT": "aaa",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            },
-            {
-                "NAME": "222", 
-                "UNIT": "bbb",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            }
-        ]
-        p.PRODUCT_OUTPUT = [
-            {
-                "NAME": "111", 
-                "UNIT": "aaa",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            },
-            {
-                "NAME": "222", 
-                "UNIT": "bbb",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            }
-        ]
-        console.log(JSON.stringify(p));
-        Init.iwbhttp('/plan/saveProductInfo', p, function(data,header,config,status){
-            console.log(data)
+        // var p = {};
+        // p.EP_ID = $stateParams.epId;
+        // p.TP_ID = $stateParams.tpId;
+        // p.PRODUCT_DESC = 'aaa'
+        // p.PRODUCT_ORI = [
+        //     {
+        //         "NAME": "111", 
+        //         "UNIT": "aaa",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     },
+        //     {
+        //         "NAME": "222", 
+        //         "UNIT": "bbb",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     }
+        // ]
+        // p.PRODUCT_EQU = [
+        //     {
+        //         "NAME": "111", 
+        //         "UNIT": "aaa",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     },
+        //     {
+        //         "NAME": "222", 
+        //         "UNIT": "bbb",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     }
+        // ]
+        // p.PRODUCT_OUTPUT = [
+        //     {
+        //         "NAME": "111", 
+        //         "UNIT": "aaa",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     },
+        //     {
+        //         "NAME": "222", 
+        //         "UNIT": "bbb",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     }
+        // ]
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveProductInfo', p, function(data,header,config,status){
+        //     console.log(data)
           
-        },function(data,header,config,status){
-        });
+        // },function(data,header,config,status){
+        // });
         // var p = {};
         // p.EP_ID = $stateParams.epId;
         // p.TP_ID = $stateParams.tpId;
@@ -223,6 +262,221 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
           
         // },function(data,header,config,status){
         // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId;
+        // p.CC_1 = '0'
+        // p.CC_2 = '1'
+        // p.CC_3 = '0'
+        // p.CC_4 = '1'
+        // p.CC_5 = '0'
+        // p.CC_PROCESS = 'aaa'
+        // p.TRANSFER_FACILITY = [
+        //     {
+        //         "NAME": "111", 
+        //         "STORE":"111111",
+        //         "UNIT": "吨",
+        //         "NUM": "100.00",
+        //         "NUM_UNIT": "个",
+        //         "AREA": "100",
+        //         "AREA_UNIT": "平方米",
+        //         "TYPE": "bbb",
+        //     },
+        //     {
+        //         "NAME": "111", 
+        //         "STORE":"111111",
+        //         "UNIT": "吨",
+        //         "NUM": "100.00",
+        //         "NUM_UNIT": "个",
+        //         "AREA": "100",
+        //         "AREA_UNIT": "平方米",
+        //         "TYPE": "bbb",
+        //     }
+        // ]
+        // p.TRANSFER_CC = [
+        //     {
+        //         "D_NAME": "111", 
+        //         "BIG_CATEGORY_ID": "HW01",
+        //         "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+        //         "STORE_REASON": "啊啊啊",
+        //         "STORE_PLAN": "1000.00",
+        //         "STORE_PLAN_UNIT": "吨",
+        //         "STORE_LAST": "1000.00",
+        //         "STORE_LAST_UNIT": "个",
+        //         "STORE_LASTSUM": "100.00",
+        //         "STORE_LASTSUM": "吨",
+        //     },
+        //     {
+        //         "D_NAME": "111", 
+        //         "BIG_CATEGORY_ID": "HW01",
+        //         "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+        //         "STORE_REASON": "啊啊啊",
+        //         "STORE_PLAN": "1000.00",
+        //         "STORE_PLAN_UNIT": "吨",
+        //         "STORE_LAST": "1000.00",
+        //         "STORE_LAST_UNIT": "个",
+        //         "STORE_LASTSUM": "100.00",
+        //         "STORE_LASTSUM": "吨",
+        //     },
+        //     {
+        //         "D_NAME": "111", 
+        //         "BIG_CATEGORY_ID": "HW01",
+        //         "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+        //         "STORE_REASON": "啊啊啊",
+        //         "STORE_PLAN": "1000.00",
+        //         "STORE_PLAN_UNIT": "吨",
+        //         "STORE_LAST": "1000.00",
+        //         "STORE_LAST_UNIT": "个",
+        //         "STORE_LASTSUM": "100.00",
+        //         "STORE_LASTSUM": "吨",
+        //     }
+        // ]
+        // p.TRANSFER_YS = [
+        //     {
+        //         "EN_ID_YS": "111", 
+        //         "EN_NAME_YS": "aaa",
+        //         "YS_ZZ": "bbb",
+        //         "YS_1": "1",
+        //         "YS_2": "0",
+        //         "YS_3": "1",
+        //         "YS_PROCESS": "aaaaaaaaa",
+        //     },
+        //     {
+        //         "EN_ID_YS": "222", 
+        //         "EN_NAME_YS": "bbb",
+        //         "YS_ZZ": "bbb",
+        //         "YS_1": "1",
+        //         "YS_2": "0",
+        //         "YS_3": "1",
+        //         "YS_PROCESS": "bbbbbbbbbbb",
+        //     },
+        //     {
+        //         "EN_ID_YS": "111", 
+        //         "EN_NAME_YS": "aaa",
+        //         "YS_ZZ": "bbb",
+        //         "YS_1": "1",
+        //         "YS_2": "0",
+        //         "YS_3": "1",
+        //         "YS_PROCESS": "aaaaaaaaa",
+        //     },
+        //     {
+        //         "EN_ID_YS": "222", 
+        //         "EN_NAME_YS": "bbb",
+        //         "YS_ZZ": "bbb",
+        //         "YS_1": "1",
+        //         "YS_2": "0",
+        //         "YS_3": "1",
+        //         "YS_PROCESS": "bbbbbbbbbbb",
+        //     },
+        //     {
+        //         "EN_ID_YS": "111", 
+        //         "EN_NAME_YS": "aaa",
+        //         "YS_ZZ": "bbb",
+        //         "YS_1": "1",
+        //         "YS_2": "0",
+        //         "YS_3": "1",
+        //         "YS_PROCESS": "aaaaaaaaa",
+        //     },
+        //     {
+        //         "EN_ID_YS": "222", 
+        //         "EN_NAME_YS": "bbb",
+        //         "YS_ZZ": "bbb",
+        //         "YS_1": "1",
+        //         "YS_2": "0",
+        //         "YS_3": "1",
+        //         "YS_PROCESS": "bbbbbbbbbbb",
+        //     }
+        // ]
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveTransfer', p, function(data,header,config,status){
+        //     console.log(data)
+          
+        // },function(data,header,config,status){
+        // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId;
+        // p.FACILITY_NAME = '放大'
+        // p.FACILITY_TYPE = '范德萨发'
+        // p.FACILITY_ADDRESS = '放大书法大赛嘎的说法'
+        // p.INVEST_SUM = '1'
+        // p.INVEST_SUM_UNIT = '吨'
+        // p.DESIGN = '放大书法'
+        // p.DESIGN_TIME = '十年'
+        // p.RUN_TIME = '二年'
+        // p.RUN_MONEY = '10'
+        // p.RUN_MONEY_UNIT = '万元'
+        // p.FACILITY_SUM = '放大书法大赛'
+        // p.HANDLE_EFFECT = '范德萨发大水'
+        // p.DB_1 = '1'
+        // p.DB_2 = '0'
+        // p.DESC_CONTENT = '范德萨范德萨发大水萨法'
+        // p.MEASURE = '啊啊啊啊啊啊啊啊啊啊啊啊啊啊'
+        // p.HANDLE_LIST = [
+        //     {
+        //         "D_NAME": "", 
+        //     "STORE_YEAR": "100", 
+        //     "STORE_PLAN_UNIT": "吨", 
+        //     "STORE_LAST": "1000", 
+        //     "STORE_LAST_UNIT": "个"
+        //     },
+        //     {
+        //         "D_NAME": "", 
+        //     "STORE_YEAR": "200", 
+        //     "STORE_PLAN_UNIT": "吨", 
+        //     "STORE_LAST": "2000", 
+        //     "STORE_LAST_UNIT": "个"
+        //     }
+        // ]
+       
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveHandleSelf', p, function(data,header,config,status){
+        //     console.log(data)
+          
+        // },function(data,header,config,status){
+        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId;
+        p.LIST = [
+            {
+                "EN_ID_CZ": "EP00000000001", 
+            "EN_NAME_CZ": "范德萨发生发撒附近开了；阿", 
+            "LINCENSE_NO": "1234567", 
+            "D_NAME": "范德萨", 
+            "BIG_CATEGORY_ID": "HW01", 
+            "HANDLE_TYPE": "范德萨", 
+            "YEAR_NUM": "100", 
+            "LAST_NUM": "100", 
+            "UNIT": "吨"
+            },
+            {
+                "EN_ID_CZ": "EP00000000002", 
+            "EN_NAME_CZ": "范德萨发生发撒附近开了；阿", 
+            "LINCENSE_NO": "1234567", 
+            "D_NAME": "范德萨", 
+            "BIG_CATEGORY_ID": "HW01", 
+            "HANDLE_TYPE": "范德萨", 
+            "YEAR_NUM": "100", 
+            "LAST_NUM": "100", 
+            "UNIT": "吨"
+            },
+            {
+                "EN_ID_CZ": "EP00000000003", 
+            "EN_NAME_CZ": "aaaaaaaaaaaa", 
+            "LINCENSE_NO": "1234567", 
+            "D_NAME": "范德萨", 
+            "BIG_CATEGORY_ID": "HW01", 
+            "HANDLE_TYPE": "范德萨", 
+            "YEAR_NUM": "100", 
+            "LAST_NUM": "100", 
+            "UNIT": "吨"
+            }
+        ]
+       
+        console.log(JSON.stringify(p));
+        Init.iwbhttp('/plan/saveHandle', p, function(data,header,config,status){
+            console.log(data)
+          
+        },function(data,header,config,status){
+        });
     }
     //返回上一页
     $scope.back = function (){
