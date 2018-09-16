@@ -13,6 +13,8 @@
 							active-color="#13ce66"
 							:active-text="item.type && item.type === 'reach' ? '达标' : '是'"
 							:inactive-text="item.type && item.type === 'reach' ? '不达标' : '否'"
+							active-value="1"
+							inactive-value="0"
 							class="assSwitchItem_switch">
 						</el-switch>
 					</el-col>

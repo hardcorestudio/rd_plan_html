@@ -449,12 +449,13 @@ export default {
 				submitData.sons.push(item)
 			}
 
-			submitData.SYS_MANAGER = this.switchList[0].text1
-			submitData.SYS_RESPONSIBILITY = this.switchList[0].text2
-			submitData.SYS_OPERATION = this.switchList[1].text1
-			submitData.SYS_LEDGER = this.switchList[1].text2
-			submitData.SYS_TRAINING = this.switchList[2].text1
-			submitData.SYS_ACCIDENT = this.switchList[2].text2
+			submitData.SYS_MANAGER = this.switchList[0].text1 + ""
+			submitData.SYS_RESPONSIBILITY = this.switchList[0].text2 + ""
+			submitData.SYS_OPERATION = this.switchList[1].text1 + ""
+			submitData.SYS_LEDGER = this.switchList[1].text2 + ""
+			submitData.SYS_TRAINING = this.switchList[2].text1 + ""
+			submitData.SYS_ACCIDENT = this.switchList[2].text2 + ""
+
 
 			for (let key in this.queryJson) {
 				submitData[key] = this.queryJson[key]
@@ -464,7 +465,11 @@ export default {
 			// 	method: 'POST',
 			// 	data: 'params='+JSON.stringify(submitData)
 			// }).then(res => {
-			// 	window.close();
+			// 	this.$notify({
+      //     title: '成功',
+      //     message: '保存成功',
+      //     type: 'success'
+      //   });
 			// })
 		},
 	}

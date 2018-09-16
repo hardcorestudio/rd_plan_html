@@ -40,6 +40,8 @@
 								active-color="#13ce66"
 								active-text="有"
 								inactive-text="无"
+								active-value="1"
+								inactive-value="0"
 								class="assSwitchItem_switch">
 							</el-switch>
 						</el-form-item>
@@ -53,6 +55,8 @@
 								active-color="#13ce66"
 								active-text="有"
 								inactive-text="无"
+								active-value="1"
+								inactive-value="0"
 								class="assSwitchItem_switch">
 							</el-switch>
 						</el-form-item>
