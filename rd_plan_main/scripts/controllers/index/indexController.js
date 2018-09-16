@@ -26,6 +26,8 @@ angular.module('sbAdminApp').controller('IndexCtrl', ['$scope','Init','Modal','l
         par = {"action":"new", "epId":localStorageService.get("epId")};
     }else if(localStorageService.get("userType") == "epAdminCz"){
         par = {"epId":localStorageService.get("epId")};
+    }else if(localStorageService.get("userType") == "CSEP"){
+        par = {"action":"new","epId":localStorageService.get("epId")};
     }
     //获取待办业务数量、协议数量、忘记密码数量、未提交转移计划数量
     Init.iwbhttp('/admin/adminTaskNum', par, function (data, header, config, status) {
@@ -49,97 +51,32 @@ angular.module('sbAdminApp').controller('IndexCtrl', ['$scope','Init','Modal','l
     }, function (data, header, config, status) {
     });
 
-    //医疗机构流程    hospitalBusiness
-    $scope.hospitalBusiness = [
+    //产生单位流程
+    $scope.csBusiness = [
         {
             li_class : '',
             div_class : '',
             step : '第一步',
-            tital : '单位注册',
-            content : '在系统登录页面选择单位登录后，点击【注册】按钮，跳转至单位注册页面，选择单位类型，填写单位名称、统一社会代码，及登录密码等信息。'
+            tital : '每年申报管理计划',
+            content : '每年年初，需要申报危险废物管理计划。'
         },
         {
             li_class : 'timeline-inverted',
             div_class : ' warning',
             step : '第二步',
-            tital : '单位信息完善',
-            content : '单位注册成功之后，会跳转至系统首页，或者使用单位名称和密码在单位登录页面进行登录，选择“单位信息维护”菜单，会跳转至单位信息修改页面，填写完单位信息和单位人员信息后单击【保存】按钮。'
+            tital : '完成管理计划内容',
+            content : '管理计划功能中有多个申报表，需要一一填写申报。'
         },
         {
             li_class : '',
             div_class : ' danger',
             step : '第三步',
             tital : '提交审核',
-            content : '单位信息保存之后，可以在待办任务页，或者单位信息维护页面，点击【提交】按钮，该申请就会提交至所属区级，进行审批流程。'
-        },
-        {
-            li_class : 'timeline-inverted',
-            div_class : ' info',
-            step : '第四步',
-            tital : '管理员登录',
-            content : '当单位信息市级审核通过后，可以用统一社会信息用码和设置的管理员、密码，在单位管理员登录标签卡进行登录。'
-        },
-        {
-            li_class : '',
-            div_class : ' success',
-            step : '第五步',
-            tital : '操作业务',
-            content : '制作医疗危废处置协议(需处置机构同意)，制作医疗废物转移计划(需区市管理部门审批)'
-        },
-        {
-            li_class : 'timeline-inverted',
-            div_class : ' primary',
-            step : '第六步',
-            tital : '转移',
-            content : '管理员或交接员在医废转移app中，进行交接流程'
+            content : '保存之后，可以在待办任务页，点击【提交】按钮，该申请就会提交至所属区级，进行审批流程。'
         }
     ];
 
-    //处置机构流程    handleBusiness
-    $scope.handleBusiness = [
-        {
-            li_class : '',
-            div_class : '',
-            step : '第一步',
-            title : '单位注册',
-            content : '在系统登录页面选择单位登录后，点击【注册】按钮，跳转至单位注册页面，选择单位类型，填写单位名称、统一社会代码，及登录密码等信息。'
-        },
-        {
-            li_class : 'timeline-inverted',
-            div_class : ' warning',
-            step : '第二步',
-            title : '单位信息完善',
-            content : '单位注册成功之后，会跳转至系统首页，或者使用单位名称和密码在单位登录页面进行登录，选择“单位信息维护”菜单，会跳转至单位信息修改页面，填写完单位信息和单位人员信息后单击【保存】按钮。'
-        },
-        {
-            li_class : '',
-            div_class : ' danger',
-            step : '第三步',
-            title : '提交审核',
-            content : '单位信息保存之后，可以在待办任务页，或者单位信息维护页面，点击【提交】按钮，该申请就会提交至所属区级，进行审批流程。'
-        },
-        {
-            li_class : 'timeline-inverted',
-            div_class : ' info',
-            step : '第四步',
-            title : '管理员登录',
-            content : '当单位信息市级审核通过后，可以用统一社会信息用码和设置的管理员、密码，在单位管理员登录标签卡进行登录。'
-        },
-        {
-            li_class : '',
-            div_class : ' success',
-            step : '第五步',
-            title : '操作业务',
-            content : '审批医疗危废处置协议'
-        },
-        {
-            li_class : 'timeline-inverted',
-            div_class : ' primary',
-            step : '第六步',
-            title : '转移',
-            content : '司机和管理员、交接员在医废转移app中，开启转移流程'
-        }
-    ];
+    
 
     //管理部门流程    manageBusiness
     $scope.manageBusiness = [
@@ -193,13 +130,9 @@ angular.module('sbAdminApp').controller('IndexCtrl', ['$scope','Init','Modal','l
 
     //业务流程指南
     $scope.business = new Array();
-    //医疗机构流程
-    if(localStorageService.get("userType") == "epCs" || localStorageService.get("userType") == "epAdminCs"){
-        $scope.business = $scope.hospitalBusiness;
-    }
-    //处置机构流程
-    if(localStorageService.get("userType") == "epCz" || localStorageService.get("userType") == "epAdminCz"){
-        $scope.business = $scope.handleBusiness;
+    //产生单位
+    if(localStorageService.get("userType") == "CSEP" ){
+        $scope.business = $scope.csBusiness;
     }
     //管理部门流程
     if(localStorageService.get("userType") == "admin" || localStorageService.get("userType") == "admin"){
