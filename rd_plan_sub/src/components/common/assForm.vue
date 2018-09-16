@@ -2,33 +2,65 @@
 	<div id="assForm">
 		<div class="assForm_bg" v-for="(item, index) in formList" :key="index">
 			<el-row class="assFromItem_row">
-				<el-col class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'" v-for="fItem in item.itemList" :key="fItem" >
-					<el-row class="assFromItem_itemRow">
-						<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title}}</div>
-						<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
-						<div v-else>
-							<div v-if="fItem.type === 'input'" class="assFromItem_right">
-								<el-input v-model="fItem.text" placeholder="必填"></el-input>
+				<div v-for="fItem in item.itemList" :key="fItem" >
+					<el-col v-if="fItem.type!=='selectLevel'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
+						<el-row class="assFromItem_itemRow">
+							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title}}</div>
+							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
+							<div v-else>
+								<div v-if="fItem.type === 'input'" class="assFromItem_right">
+									<el-input v-model="fItem.text" placeholder="必填"></el-input>
+								</div>
+								<div v-else-if="fItem.type === 'select'" class="assFromItem_right">
+									<el-select placeholder="吨/个" v-model="fItem.text">
+										<el-option
+											v-for="uItem in units"
+											:key="uItem.value"
+											:label="uItem.label"
+											:value="uItem.value">
+										</el-option>
+									</el-select>
+								</div>
+								<div v-else-if="fItem.type === 'inputWithUnit'" class="assFromItem_right">
+									<el-input v-model="fItem.text" placeholder="必填">
+										<template slot="append">{{fItem.unit}}</template>
+									</el-input>
+								</div>
+								<div v-else-if="fItem.type === 'unit'" class="assFromItem_right unitShow">{{fItem.text}}</div>
 							</div>
-							<div v-else-if="fItem.type === 'select'" class="assFromItem_right">
-								<el-select placeholder="吨/年" v-model="fItem.text">
+						</el-row>
+					</el-col>
+					<el-col v-if="fItem.type==='selectLevel'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
+						<el-row class="assFromItem_itemRow">
+							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
+							<div class="assFromItem_right">
+								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelOneChange(fItem)">
 									<el-option
-										v-for="uItem in units"
+										v-for="uItem in levelOneData"
 										:key="uItem.value"
 										:label="uItem.label"
 										:value="uItem.value">
 									</el-option>
 								</el-select>
 							</div>
-							<div v-else-if="fItem.type === 'inputWithUnit'" class="assFromItem_right">
-								<el-input v-model="fItem.text" placeholder="必填">
-									<template slot="append">{{fItem.unit}}</template>
-								</el-input>
+						</el-row>
+					</el-col>
+					<el-col v-if="fItem.type==='selectLevel'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
+						<el-row	v-if="fItem.type==='selectLevel'" class="assFromItem_itemRow">
+							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title2}}</div>
+							<div class="assFromItem_right">
+								<el-select placeholder="请选择" v-model="fItem.text2">
+									<el-option
+										v-for="uItem in levelTwoData[fItem.text1]"
+										:key="uItem.value"
+										:label="uItem.label"
+										:value="uItem.value">
+									</el-option>
+								</el-select>
 							</div>
-							<div v-else-if="fItem.type === 'unit'" class="assFromItem_right unitShow">{{fItem.text}}</div>
-						</div>
-					</el-row>
-				</el-col>
+						</el-row>
+					</el-col>
+				</div>
 			</el-row>
 			<el-row v-if="type !== 'label'" class="assFromItem_row">
 				<div class="assFromItem_iconBtnArea">
@@ -46,7 +78,9 @@
 		props: {
 			formList: Array,
 			listType: String,
-			type: String
+			type: String,
+			levelOneData: Array,
+			levelTwoData: Object,
 		},
     data() {
       return {
@@ -54,8 +88,8 @@
 					label: "吨",
 					value: "吨"
 				},{
-					label: "年",
-					value: "年"
+					label: "个",
+					value: "个"
 				}],
       };
 		},
@@ -70,8 +104,17 @@
 				for(let i in arr){
 					let arrItem = {}
 					arrItem.type = arr[i].type
-					arrItem.text = ""
-					arrItem.title = arr[i].title
+					if(arr[i].type === "selectLevel"){
+						arrItem.text1 = ""
+						arrItem.title1 = arr[i].title1
+						arrItem.text2 = ""
+						arrItem.title2 = arr[i].title2
+					}else{
+						arrItem.text = ""
+						arrItem.title = arr[i].title
+					}
+					
+					
 					item.itemList.push(arrItem)
 				}
 				this.formList.push(item);
@@ -84,6 +127,9 @@
 					}
 				}
 				this.formList = myFormList;
+			},
+			levelOneChange(item){
+				item.text2 = ""
 			}
     }
   }
@@ -122,6 +168,8 @@
 	line-height: 42px;
 	padding: 0 15px;
 	width: 130px;
+	min-width: 130px;
+	box-sizing: border-box;
 }
 .assFromItem_titleSingle{
 	line-height: 42px;
