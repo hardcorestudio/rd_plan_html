@@ -82,14 +82,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //     console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        // var p = {};
-        // p.TP_ID = $stateParams.tpId
-        // Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
-        //     console.log(data)
-        //     console.log("sssssssssssss")
-        // //    console.log(JSON.stringify(data))
-        // },function(data,header,config,status){
-        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
+            console.log(data)
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initReduction', p, function(data,header,config,status){
@@ -114,14 +114,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
-            console.log(data)
-            console.log("sssssssssssss")
-           console.log(JSON.stringify(data))
-        },function(data,header,config,status){
-        });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
     }
     $scope.test = function(pathname){
         // var p = {};
@@ -433,46 +433,99 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
           
         // },function(data,header,config,status){
         // });
-        var p = {};
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId;
+        // p.LIST = [
+        //     {
+        //         "EN_ID_CZ": "EP00000000001", 
+        //     "EN_NAME_CZ": "范德萨发生发撒附近开了；阿", 
+        //     "LINCENSE_NO": "1234567", 
+        //     "D_NAME": "范德萨", 
+        //     "BIG_CATEGORY_ID": "HW01", 
+        //     "HANDLE_TYPE": "范德萨", 
+        //     "YEAR_NUM": "100", 
+        //     "LAST_NUM": "100", 
+        //     "UNIT": "吨"
+        //     },
+        //     {
+        //         "EN_ID_CZ": "EP00000000002", 
+        //     "EN_NAME_CZ": "范德萨发生发撒附近开了；阿", 
+        //     "LINCENSE_NO": "1234567", 
+        //     "D_NAME": "范德萨", 
+        //     "BIG_CATEGORY_ID": "HW01", 
+        //     "HANDLE_TYPE": "范德萨", 
+        //     "YEAR_NUM": "100", 
+        //     "LAST_NUM": "100", 
+        //     "UNIT": "吨"
+        //     },
+        //     {
+        //         "EN_ID_CZ": "EP00000000003", 
+        //     "EN_NAME_CZ": "aaaaaaaaaaaa", 
+        //     "LINCENSE_NO": "1234567", 
+        //     "D_NAME": "范德萨", 
+        //     "BIG_CATEGORY_ID": "HW01", 
+        //     "HANDLE_TYPE": "范德萨", 
+        //     "YEAR_NUM": "100", 
+        //     "LAST_NUM": "100", 
+        //     "UNIT": "吨"
+        //     }
+        // ]
+       
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveHandle', p, function(data,header,config,status){
+        //     console.log(data)
+          
+        // },function(data,header,config,status){
+        // });
+         var p = {};
         p.TP_ID = $stateParams.tpId;
         p.LIST = [
             {
-                "EN_ID_CZ": "EP00000000001", 
-            "EN_NAME_CZ": "范德萨发生发撒附近开了；阿", 
-            "LINCENSE_NO": "1234567", 
-            "D_NAME": "范德萨", 
-            "BIG_CATEGORY_ID": "HW01", 
-            "HANDLE_TYPE": "范德萨", 
-            "YEAR_NUM": "100", 
-            "LAST_NUM": "100", 
-            "UNIT": "吨"
+                "D_NAME": "aa", 
+                "UNIT": "吨", 
+                "LAST_NUM": "100", 
+                "YEAR_NUM": "1000", 
+                "BIG_CATEGORY_ID": "HW01", 
+                "BIG_CATEGORY_NAME": "范德萨", 
+                "SAMLL_CATEGORY_ID": "1124325432", 
+                "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
+                "W_SHAPE": "范德萨", 
+                "W_NAME": "范德萨", 
+                "CHARACTER": "啊啊啊", 
+                "SOURCE_PROCESS": "afd"
             },
             {
-                "EN_ID_CZ": "EP00000000002", 
-            "EN_NAME_CZ": "范德萨发生发撒附近开了；阿", 
-            "LINCENSE_NO": "1234567", 
-            "D_NAME": "范德萨", 
-            "BIG_CATEGORY_ID": "HW01", 
-            "HANDLE_TYPE": "范德萨", 
-            "YEAR_NUM": "100", 
-            "LAST_NUM": "100", 
-            "UNIT": "吨"
+                "D_NAME": "aa", 
+                "UNIT": "吨", 
+                "LAST_NUM": "100", 
+                "YEAR_NUM": "1000", 
+                "BIG_CATEGORY_ID": "HW01", 
+                "BIG_CATEGORY_NAME": "范德萨", 
+                "SAMLL_CATEGORY_ID": "1124325432", 
+                "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
+                "W_SHAPE": "范德萨", 
+                "W_NAME": "范德萨", 
+                "CHARACTER": "啊啊啊", 
+                "SOURCE_PROCESS": "afd"
             },
             {
-                "EN_ID_CZ": "EP00000000003", 
-            "EN_NAME_CZ": "aaaaaaaaaaaa", 
-            "LINCENSE_NO": "1234567", 
-            "D_NAME": "范德萨", 
-            "BIG_CATEGORY_ID": "HW01", 
-            "HANDLE_TYPE": "范德萨", 
-            "YEAR_NUM": "100", 
-            "LAST_NUM": "100", 
-            "UNIT": "吨"
+                "D_NAME": "aa", 
+                "UNIT": "吨", 
+                "LAST_NUM": "100", 
+                "YEAR_NUM": "1000", 
+                "BIG_CATEGORY_ID": "HW01", 
+                "BIG_CATEGORY_NAME": "范德萨", 
+                "SAMLL_CATEGORY_ID": "1124325432", 
+                "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
+                "W_SHAPE": "范德萨", 
+                "W_NAME": "范德萨", 
+                "CHARACTER": "啊啊啊", 
+                "SOURCE_PROCESS": "afd"
             }
         ]
        
         console.log(JSON.stringify(p));
-        Init.iwbhttp('/plan/saveHandle', p, function(data,header,config,status){
+        Init.iwbhttp('/plan/saveOverview', p, function(data,header,config,status){
             console.log(data)
           
         },function(data,header,config,status){

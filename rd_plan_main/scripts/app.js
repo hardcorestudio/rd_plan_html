@@ -835,6 +835,7 @@ iwoboApp.run(['$state', '$rootScope', 'localStorageService', '$modal', '$log', '
     console.log("===========iwobo app running====================================");
     // $rootScope.baseUrl = 'http://lovewobo.com';
     $rootScope.baseUrl = 'http://localhost:9002/api';
+    // $rootScope.baseUrl = 'http://192.168.2.139:9002/api';
     //$rootScope.baseUrl = 'http://60.30.64.249:7080/rd_2nd';
     $rootScope.baseUrlPath = '';
     $rootScope.uuid = '';

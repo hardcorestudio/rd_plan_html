@@ -18,6 +18,7 @@
 	import assTitle from '../../common/assTitle.vue'
 	import assForm from '../../common/assForm.vue'
 	import { checkBrowser,getQueryString } from '../../utils/browserCheck.js'
+	import fetch from '../../utils/fetch.js'
 	export default {
 		name:'productionSituation',
 		data(){
@@ -128,100 +129,100 @@
 			})
 			this.queryJson = getQueryString()
 			
-			// fetch({
-			// 	url: '',
-			// 	method: 'POST',
-			// 	data: 'params='+JSON.stringify(this.queryJson)
-			// }).then(res => {
-				let res = {
-					"initProductOutput":[
-							{
-									"UNIT":"aaa",
-									"NAME":"111",
-									"LAST_NUM":"100.00",
-									"ID":"1",
-									"TP_ID":"TP201809120707190010",
-									"YEAR_NUM":"1000.00"
-							},
-							{
-									"UNIT":"aaa",
-									"NAME":"111",
-									"LAST_NUM":"100.00",
-									"ID":"2",
-									"TP_ID":"TP201809120707190010",
-									"YEAR_NUM":"1000.00"
-							}
-					],
-					"WJWT":"czlEcjhPMjRXelI5LzQrVE5JS1hiY0phWnd2KzhIdkFaa0JCSFNUWk1xQT0=",
-					"operatorId":"",
-					"empId":"",
-					"userType":"CSEP",
-					"initProductOri":[
-							{
-									"UNIT":"吨",
-									"NAME":"111",
-									"LAST_NUM":"100.00",
-									"Id":"1",
-									"TP_ID":"TP201809120707190010",
-									"YEAR_NUM":"1000.00"
-							},
-							{
-									"UNIT":"年",
-									"NAME":"111",
-									"LAST_NUM":"100.00",
-									"Id":"2",
-									"TP_ID":"TP201809120707190010",
-									"YEAR_NUM":"1000.00"
-							}
-					],
-					"newGuideFlag":"",
-					"initProductEqu":[
-							{
-									"UNIT":"aaa",
-									"NAME":"111",
-									"LAST_NUM":"100.00",
-									"Id":"1",
-									"TP_ID":"TP201809120707190010",
-									"YEAR_NUM":"1000.00"
-							},
-							{
-									"UNIT":"aaa",
-									"NAME":"111",
-									"LAST_NUM":"100.00",
-									"Id":"2",
-									"TP_ID":"TP201809120707190010",
-									"YEAR_NUM":"1000.00"
-							}
-					],
-					"belongQ":"",
-					"belongS":"",
-					"nickName":"天津合佳威立雅环境服务有限公司",
-					"orgCode":"",
-					"userId":"EP201410280910450012",
-					"userName":"",
-					"sepaName":"津南区",
-					"status":"",
-					"ifLogin":"0",
-					"ROLEID":"CSEP",
-					"epName":"天津合佳威立雅环境服务有限公司",
-					"epId":"EP201410280910450012",
-					"belongSepa":"JNQ",
-					"userPortrait":"",
-					"IWBSESSION":"BROWSER-20180916033650",
-					"realName":"",
-					"contextPath":"",
-					"initProductInfo":{
-							"PRODUCT_DESC":"aaa",
-							"sysdate":1536974048557,
-							"TP_ID":"TP201809120707190010",
-							"STATUS":"00",
-							"EP_ID":"EP201410280910450012"
-					},
-					"orgSeq":""
-				}
+			fetch({
+				url: '/plan/initProductInfo',
+				method: 'POST',
+				data: 'params='+JSON.stringify(this.queryJson)
+			}).then(res => {
+				// let res = {
+				// 	"initProductOutput":[
+				// 			{
+				// 					"UNIT":"aaa",
+				// 					"NAME":"111",
+				// 					"LAST_NUM":"100.00",
+				// 					"ID":"1",
+				// 					"TP_ID":"TP201809120707190010",
+				// 					"YEAR_NUM":"1000.00"
+				// 			},
+				// 			{
+				// 					"UNIT":"aaa",
+				// 					"NAME":"111",
+				// 					"LAST_NUM":"100.00",
+				// 					"ID":"2",
+				// 					"TP_ID":"TP201809120707190010",
+				// 					"YEAR_NUM":"1000.00"
+				// 			}
+				// 	],
+				// 	"WJWT":"czlEcjhPMjRXelI5LzQrVE5JS1hiY0phWnd2KzhIdkFaa0JCSFNUWk1xQT0=",
+				// 	"operatorId":"",
+				// 	"empId":"",
+				// 	"userType":"CSEP",
+				// 	"initProductOri":[
+				// 			{
+				// 					"UNIT":"吨",
+				// 					"NAME":"111",
+				// 					"LAST_NUM":"100.00",
+				// 					"Id":"1",
+				// 					"TP_ID":"TP201809120707190010",
+				// 					"YEAR_NUM":"1000.00"
+				// 			},
+				// 			{
+				// 					"UNIT":"年",
+				// 					"NAME":"111",
+				// 					"LAST_NUM":"100.00",
+				// 					"Id":"2",
+				// 					"TP_ID":"TP201809120707190010",
+				// 					"YEAR_NUM":"1000.00"
+				// 			}
+				// 	],
+				// 	"newGuideFlag":"",
+				// 	"initProductEqu":[
+				// 			{
+				// 					"UNIT":"aaa",
+				// 					"NAME":"111",
+				// 					"LAST_NUM":"100.00",
+				// 					"Id":"1",
+				// 					"TP_ID":"TP201809120707190010",
+				// 					"YEAR_NUM":"1000.00"
+				// 			},
+				// 			{
+				// 					"UNIT":"aaa",
+				// 					"NAME":"111",
+				// 					"LAST_NUM":"100.00",
+				// 					"Id":"2",
+				// 					"TP_ID":"TP201809120707190010",
+				// 					"YEAR_NUM":"1000.00"
+				// 			}
+				// 	],
+				// 	"belongQ":"",
+				// 	"belongS":"",
+				// 	"nickName":"天津合佳威立雅环境服务有限公司",
+				// 	"orgCode":"",
+				// 	"userId":"EP201410280910450012",
+				// 	"userName":"",
+				// 	"sepaName":"津南区",
+				// 	"status":"",
+				// 	"ifLogin":"0",
+				// 	"ROLEID":"CSEP",
+				// 	"epName":"天津合佳威立雅环境服务有限公司",
+				// 	"epId":"EP201410280910450012",
+				// 	"belongSepa":"JNQ",
+				// 	"userPortrait":"",
+				// 	"IWBSESSION":"BROWSER-20180916033650",
+				// 	"realName":"",
+				// 	"contextPath":"",
+				// 	"initProductInfo":{
+				// 			"PRODUCT_DESC":"aaa",
+				// 			"sysdate":1536974048557,
+				// 			"TP_ID":"TP201809120707190010",
+				// 			"STATUS":"00",
+				// 			"EP_ID":"EP201410280910450012"
+				// 	},
+				// 	"orgSeq":""
+				// }
 				this.userRole = res.userType
-				this.EP_ID = res.initProductInfo.EP_ID
-				this.TP_ID = res.initProductInfo.TP_ID
+				this.EP_ID = this.queryJson.EP_ID
+				this.TP_ID = this.queryJson.TP_ID
 				
 				if(res.initProductOri.length > 0){
 					this.title1fromList = []
@@ -365,7 +366,7 @@
 					}]
 				}
 				this.title4.text = res.initProductInfo.PRODUCT_DESC
-			// })
+			})
 		},
 		methods: {
 			doSubmit() {
@@ -408,24 +409,24 @@
 				for (let key in this.queryJson) {
 					submitData[key] = this.queryJson[key]
 				}
-				// fetch({
-				// 	url: '',
-				// 	method: 'POST',
-				// 	data: 'params='+JSON.stringify(submitData)
-				// }).then(res => {
-				// 	if(res.resFlag == '0'){
-				// 		this.$notify({
-				// 			title: '成功',
-				// 			message: '保存成功',
-				// 			type: 'success'
-				// 		});
-				// 	}else{
-				// 		this.$notify.error({
-				// 			title: '失败',
-				// 			message: res.resMsg
-				// 		});
-				// 	}
-				// })
+				fetch({
+					url: '/plan/saveProductInfo',
+					method: 'POST',
+					data: 'params='+JSON.stringify(submitData)
+				}).then(res => {
+					if(res.resFlag == '0'){
+						this.$notify({
+							title: '成功',
+							message: '保存成功',
+							type: 'success'
+						});
+					}else{
+						this.$notify.error({
+							title: '失败',
+							message: res.resMsg
+						});
+					}
+				})
 			},
 			resetRawMaterial() {
 				console.log("原辅材料及消耗量");
