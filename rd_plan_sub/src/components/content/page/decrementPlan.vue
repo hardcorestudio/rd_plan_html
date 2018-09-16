@@ -12,7 +12,8 @@
 	import Aside from '../Aside.vue';
 	import assTitle from '../../common/assTitle.vue'
 	import assForm from '../../common/assForm.vue'
-	import { checkBrowser } from '../../utils/browserCheck.js'
+	import { checkBrowser,getQueryString } from '../../utils/browserCheck.js'
+	import fetch from '../../utils/fetch.js'
 	export default {
 		name:'decrementPlan',
 		data(){
@@ -53,48 +54,49 @@
 			})
 			this.queryJson = getQueryString()
 
-			// fetch({
-			// 	url: '',
-			// 	method: 'POST',
-			// 	data: 'params='+JSON.stringify(this.queryJson)
-			// }).then(res => {
-				let res = {
-					"sepaName":"津南区",
-					"WJWT":"czlEcjhPMjRXelI5LzQrVE5JS1hiV2dWUlExSHIvanVGWUdybTh0N0ZFOD0=",
-					"operatorId":"",
-					"status":"",
-					"ROLEID":"CSEP",
-					"empId":"",
-					"ifLogin":"0",
-					"epName":"天津合佳威立雅环境服务有限公司",
-					"epId":"EP201410280910450012",
-					"userType":"CSEP",
-					"newGuideFlag":"",
-					"belongQ":"",
-					"belongSepa":"JNQ",
-					"userPortrait":"",
-					"belongS":"",
-					"nickName":"天津合佳威立雅环境服务有限公司",
-					"orgCode":"",
-					"IWBSESSION":"BROWSER-20180915141153",
-					"userId":"EP201410280910450012",
-					"userName":"",
-					"initReduction":{
-							"MEASURES_REDUCTION":"aaadfsafdasfafda1111111",
-							"PLAN_REDUCTION":"fdasfdasfdas",
-							"sysdate":1537036831470,
-							"TP_ID":"TP201809120707190010",
-							"STATUS":"00"
-					},
-					"contextPath":"",
-					"realName":"",
-					"orgSeq":""
-				}	
+			fetch({
+				url: '/plan/initReduction',
+				method: 'POST',
+				data: 'params='+JSON.stringify(this.queryJson)
+			}).then(res => {
+				// let res = {
+				// 	"sepaName":"津南区",
+				// 	"WJWT":"czlEcjhPMjRXelI5LzQrVE5JS1hiV2dWUlExSHIvanVGWUdybTh0N0ZFOD0=",
+				// 	"operatorId":"",
+				// 	"status":"",
+				// 	"ROLEID":"CSEP",
+				// 	"empId":"",
+				// 	"ifLogin":"0",
+				// 	"epName":"天津合佳威立雅环境服务有限公司",
+				// 	"epId":"EP201410280910450012",
+				// 	"userType":"CSEP",
+				// 	"newGuideFlag":"",
+				// 	"belongQ":"",
+				// 	"belongSepa":"JNQ",
+				// 	"userPortrait":"",
+				// 	"belongS":"",
+				// 	"nickName":"天津合佳威立雅环境服务有限公司",
+				// 	"orgCode":"",
+				// 	"IWBSESSION":"BROWSER-20180915141153",
+				// 	"userId":"EP201410280910450012",
+				// 	"userName":"",
+				// 	"initReduction":{
+				// 			"MEASURES_REDUCTION":"aaadfsafdasfafda1111111",
+				// 			"PLAN_REDUCTION":"fdasfdasfdas",
+				// 			"sysdate":1537036831470,
+				// 			"TP_ID":"TP201809120707190010",
+				// 			"STATUS":"00"
+				// 	},
+				// 	"contextPath":"",
+				// 	"realName":"",
+				// 	"orgSeq":""
+				// }	
+				console.log(res);
 				this.decrementInfo = res.initReduction
 				this.title2.text = this.decrementInfo.MEASURES_REDUCTION
 				this.title1.text = this.decrementInfo.PLAN_REDUCTION
 				this.EP_ID = res.epId
-			// })
+			})
 			
 
 		},
@@ -108,24 +110,24 @@
 				for (let key in this.queryJson) {
 					submitData[key] = this.queryJson[key]
 				}
-				// fetch({
-				// 	url: '',
-				// 	method: 'POST',
-				// 	data: 'params='+JSON.stringify(submitData)
-				// }).then(res => {
-				// 	if(res.resFlag == '0'){
-				// 		this.$notify({
-				// 			title: '成功',
-				// 			message: '保存成功',
-				// 			type: 'success'
-				// 		});
-				// 	}else{
-				// 		this.$notify.error({
-				// 			title: '失败',
-				// 			message: res.resMsg
-				// 		});
-				// 	}
-				// })
+				fetch({
+					url: '/plan/saveReduction',
+					method: 'POST',
+					data: 'params='+JSON.stringify(submitData)
+				}).then(res => {
+					if(res.resFlag == '0'){
+						this.$notify({
+							title: '成功',
+							message: '保存成功',
+							type: 'success'
+						});
+					}else{
+						this.$notify.error({
+							title: '失败',
+							message: res.resMsg
+						});
+					}
+				})
 			}
 		}
 	}
