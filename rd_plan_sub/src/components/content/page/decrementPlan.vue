@@ -93,8 +93,8 @@
 				// }	
 				console.log(res);
 				this.decrementInfo = res.initReduction
-				this.title2.text = this.decrementInfo.MEASURES_REDUCTION
-				this.title1.text = this.decrementInfo.PLAN_REDUCTION
+				this.title2.text = this.decrementInfo && this.decrementInfo != null ? this.decrementInfo.MEASURES_REDUCTION : ''
+				this.title1.text = this.decrementInfo && this.decrementInfo != null ? this.decrementInfo.PLAN_REDUCTION : ''
 				this.EP_ID = res.epId
 			})
 			
@@ -104,7 +104,7 @@
 			doSubmit() {
 				let submitData = {}
 				submitData.EP_ID = this.EP_ID
-				submitData.TP_ID = this.decrementInfo.TP_ID
+				submitData.TP_ID = this.queryJson.TP_ID
 				submitData.MEASURES_REDUCTION = this.title2.text
 				submitData.PLAN_REDUCTION = this.title1.text
 				for (let key in this.queryJson) {
