@@ -113,11 +113,18 @@
 				// 	method: 'POST',
 				// 	data: 'params='+JSON.stringify(submitData)
 				// }).then(res => {
-				// 	this.$notify({
-				// 		title: '成功',
-				// 		message: '保存成功',
-				// 		type: 'success'
-				// 	});
+				// 	if(res.resFlag == '0'){
+				// 		this.$notify({
+				// 			title: '成功',
+				// 			message: '保存成功',
+				// 			type: 'success'
+				// 		});
+				// 	}else{
+				// 		this.$notify.error({
+				// 			title: '失败',
+				// 			message: res.resMsg
+				// 		});
+				// 	}
 				// })
 			}
 		}

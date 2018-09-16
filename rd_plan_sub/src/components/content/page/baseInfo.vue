@@ -467,10 +467,9 @@ export default {
 						type: 'success'
 					});
 				}else{
-					this.$notify({
+					this.$notify.error({
 						title: '失败',
-						message: res.resMsg,
-						type: 'success'
+						message: res.resMsg
 					});
 				}
 			})
