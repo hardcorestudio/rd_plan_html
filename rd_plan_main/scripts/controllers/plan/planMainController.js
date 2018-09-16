@@ -60,11 +60,27 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
            
         // },function(data,header,config,status){
         // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initProductInfo', p, function(data,header,config,status){
+        //     console.log(data)
+           
+        // },function(data,header,config,status){
+        // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        // //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
         var p = {};
         p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initProductInfo', p, function(data,header,config,status){
+        Init.iwbhttp('/plan/initReduction', p, function(data,header,config,status){
             console.log(data)
-           
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
         },function(data,header,config,status){
         });
     }
@@ -110,56 +126,101 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
            
         // },function(data,header,config,status){
         // });
+        // var p = {};
+        // p.EP_ID = $stateParams.epId;
+        // p.TP_ID = $stateParams.tpId;
+        // p.PRODUCT_DESC = 'aaa'
+        // p.PRODUCT_ORI = [
+        //     {
+        //         "NAME": "111", 
+        //         "UNIT": "aaa",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     },
+        //     {
+        //         "NAME": "222", 
+        //         "UNIT": "bbb",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     }
+        // ]
+        // p.PRODUCT_EQU = [
+        //     {
+        //         "NAME": "111", 
+        //         "UNIT": "aaa",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     },
+        //     {
+        //         "NAME": "222", 
+        //         "UNIT": "bbb",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     }
+        // ]
+        // p.PRODUCT_OUTPUT = [
+        //     {
+        //         "NAME": "111", 
+        //         "UNIT": "aaa",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     },
+        //     {
+        //         "NAME": "222", 
+        //         "UNIT": "bbb",
+        //         "LAST_NUM": "100.00",
+        //         "YEAR_NUM": "1000.00",
+        //     }
+        // ]
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveProductInfo', p, function(data,header,config,status){
+        //     console.log(data)
+          
+        // },function(data,header,config,status){
+        // });
+        // var p = {};
+        // p.EP_ID = $stateParams.epId;
+        // p.TP_ID = $stateParams.tpId;
+        // p.LIST = [
+        //     {
+        //         "D_NAME": "aa", 
+        //         "UNIT": "bb", 
+        //         "LAST_NUM": "11", 
+        //         "YEAR_NUM": "22", 
+        //         "BIG_CATEGORY_ID": "cc", 
+        //         "BIG_CATEGORY_NAME": "dd", 
+        //         "SAMLL_CATEGORY_ID": "ee", 
+        //         "SAMLL_CATEGORY_NAME": "ff", 
+        //         "W_SHAPE": "gg", 
+        //         "W_NAME": "hh", 
+        //         "CHARACTER": "ii", 
+        //         "SOURCE_PROCESS": "gg"
+        //     },
+        //     {
+        //         "D_NAME": "aa11", 
+        //         "UNIT": "bb11", 
+        //         "LAST_NUM": "1100", 
+        //         "YEAR_NUM": "2200", 
+        //         "BIG_CATEGORY_ID": "cc11", 
+        //         "BIG_CATEGORY_NAME": "dd11", 
+        //         "SAMLL_CATEGORY_ID": "ee11", 
+        //         "SAMLL_CATEGORY_NAME": "ff11", 
+        //         "W_SHAPE": "gg11", 
+        //         "W_NAME": "hh11", 
+        //         "CHARACTER": "ii11", 
+        //         "SOURCE_PROCESS": "gg11"
+        //     }
+        // ]
         var p = {};
         p.EP_ID = $stateParams.epId;
         p.TP_ID = $stateParams.tpId;
-        p.PRODUCT_DESC = 'aaa'
-        p.PRODUCT_ORI = [
-            {
-                "NAME": "111", 
-                "UNIT": "aaa",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            },
-            {
-                "NAME": "222", 
-                "UNIT": "bbb",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            }
-        ]
-        p.PRODUCT_EQU = [
-            {
-                "NAME": "111", 
-                "UNIT": "aaa",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            },
-            {
-                "NAME": "222", 
-                "UNIT": "bbb",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            }
-        ]
-        p.PRODUCT_OUTPUT = [
-            {
-                "NAME": "111", 
-                "UNIT": "aaa",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            },
-            {
-                "NAME": "222", 
-                "UNIT": "bbb",
-                "LAST_NUM": "100.00",
-                "YEAR_NUM": "1000.00",
-            }
-        ]
+        p.PLAN_REDUCTION = 'fdasfdasfdas'
+        p.MEASURES_REDUCTION = 'aaadfsafdasfafda1111111'
+       
         console.log(JSON.stringify(p));
-        Init.iwbhttp('/plan/saveProductInfo', p, function(data,header,config,status){
+        Init.iwbhttp('/plan/saveReduction', p, function(data,header,config,status){
             console.log(data)
-           
+          
         },function(data,header,config,status){
         });
     }
