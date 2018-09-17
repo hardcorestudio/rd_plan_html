@@ -157,7 +157,7 @@
 							arrItem.unit = arr[i].unit
 						}
 						if(arr[i].num){
-							arritem.num = arr[i].num
+							arrItem.num = arr[i].num
 						}
 					}
 					if(arr[i].isSingle){
