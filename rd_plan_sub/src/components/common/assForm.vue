@@ -11,6 +11,16 @@
 								<div v-if="fItem.type === 'input'" class="assFromItem_right">
 									<el-input v-model="fItem.text" placeholder="必填"></el-input>
 								</div>
+								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_right">
+									<el-select placeholder="请选择" v-model="fItem.text">
+										<el-option
+											v-for="uItem in cateList"
+											:key="uItem.value"
+											:label="uItem.label"
+											:value="uItem.value">
+										</el-option>
+									</el-select>
+								</div>
 								<div v-else-if="fItem.type === 'select'" class="assFromItem_right">
 									<el-select placeholder="吨/个" v-model="fItem.text">
 										<el-option
@@ -102,6 +112,7 @@
 			type: String,
 			levelOneData: Array,
 			levelTwoData: Object,
+			cateList: Array
 		},
     data() {
       return {

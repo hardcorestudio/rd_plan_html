@@ -94,7 +94,7 @@ export default {
 					type: "inputWithUnit",
 					text: "",
 					title: "面积",
-					unit: "M"
+					unit: "平方米"
 				}, {
 					type: "input",
 					text: "",
@@ -109,21 +109,22 @@ export default {
 					title1: "名称",
 					text2: "",
 					title2: "类别"
-				},{
-					type: "inputWithUnit",
+				}, {
+					type: "select",
+					text: "",
+					title: "单位",
+				}, {
+					type: "input",
 					text: "",
 					title: "拟贮存量",
-					unit: "吨"
 				}, {
-					type: "inputWithUnit",
+					type: "input",
 					text: "",
 					title: "上年度贮存量",
-					unit: "吨"
 				}, {
-					type: "inputWithUnit",
+					type: "input",
 					text: "",
 					title: "截止上年度年底累计贮存量",
-					unit: "吨"
 				}, {
 					type: "input",
 					text: "",
@@ -195,11 +196,11 @@ export default {
 			method: 'POST',
 			data: 'params=' + JSON.stringify(this.queryJson)
 		}).then(res => {
-			this.switchInfo1[0].value = res.initTransfer.CC_1 + ""
-			this.switchInfo1[1].value = res.initTransfer.CC_2 + ""
-			this.switchInfo1[2].value = res.initTransfer.CC_3 + ""
-			this.switchInfo1[3].value = res.initTransfer.CC_4 + ""
-			this.switchInfo1[4].value = res.initTransfer.CC_5 + ""
+			this.switchInfo1[0].value = res.initTransfer.CC_1 ? res.initTransfer.CC_1 + "" : '0'
+			this.switchInfo1[1].value = res.initTransfer.CC_2 ? res.initTransfer.CC_2 + "" : '0'
+			this.switchInfo1[2].value = res.initTransfer.CC_3 ? res.initTransfer.CC_3 + "" : '0'
+			this.switchInfo1[3].value = res.initTransfer.CC_4 ? res.initTransfer.CC_4 + "" : '0'
+			this.switchInfo1[4].value = res.initTransfer.CC_5 ? res.initTransfer.CC_5 + "" : '0'
 
 			if (res.initProductFacility.length > 0) {
 				this.title1fromList = []
@@ -226,7 +227,7 @@ export default {
 							type: "inputWithUnit",
 							text: res.initProductFacility[i].AREA,
 							title: "面积",
-							unit: res.initProductFacility[i].AREA_UNIT
+							unit: "平方米"
 						}, {
 							type: "input",
 							text: res.initProductFacility[i].STORE,
@@ -258,7 +259,7 @@ export default {
 						type: "inputWithUnit",
 						text: "",
 						title: "面积",
-						unit: "M"
+						unit: "平方米"
 					}, {
 						type: "input",
 						text: "",
@@ -285,21 +286,22 @@ export default {
 							title1: "名称",
 							text2: res.initProductCc[i].BIG_CATEGORY_ID,
 							title2: "类别"
-						},{
-							type: "inputWithUnit",
+						}, {
+							type: "select",
+							text: res.initProductCc[i].STORE_PLAN_UNIT,
+							title: "单位",
+						}, {
+							type: "input",
 							text: res.initProductCc[i].STORE_PLAN,
 							title: "拟贮存量",
-							unit: res.initProductCc[i].STORE_PLAN_UNIT
 						}, {
-							type: "inputWithUnit",
+							type: "input",
 							text: res.initProductCc[i].STORE_LAST,
 							title: "上年度贮存量",
-							unit: res.initProductCc[i].STORE_LAST_UNIT
 						}, {
-							type: "inputWithUnit",
+							type: "input",
 							text: res.initProductCc[i].STORE_LASTSUM,
 							title: "截止上年度年底累计贮存量",
-							unit: res.initProductCc[i].STORE_LASTSUM_UNIT,
 						}, {
 							type: "input",
 							text: res.initProductCc[i].STORE_REASON,
@@ -318,20 +320,21 @@ export default {
 						text2: "",
 						title2: "类别"
 					}, {
-						type: "inputWithUnit",
+						type: "select",
+						text: "",
+						title: "单位",
+					}, {
+						type: "input",
 						text: "",
 						title: "拟贮存量",
-						unit: "吨"
 					}, {
-						type: "inputWithUnit",
+						type: "input",
 						text: "",
 						title: "上年度贮存量",
-						unit: "吨"
 					}, {
-						type: "inputWithUnit",
+						type: "input",
 						text: "",
 						title: "截止上年度年底累计贮存量",
-						unit: "吨"
 					}, {
 						type: "input",
 						text: "",
@@ -385,7 +388,7 @@ export default {
 				item.NUM = this.title1fromList[i].itemList[2].text
 				item.TYPE = this.title1fromList[i].itemList[3].text
 				item.AREA = this.title1fromList[i].itemList[4].text
-				item.AREA_UNIT = this.title1fromList[i].itemList[4].unit
+				item.AREA_UNIT = "平方米"
 				item.STORE = this.title1fromList[i].itemList[5].text
 
 				submitData.TRANSFER_FACILITY.push(item)
@@ -396,14 +399,14 @@ export default {
 				let item = {}
 				item.D_NAME = this.title2fromList[i].itemList[0].text1
 				item.BIG_CATEGORY_ID = this.title2fromList[i].itemList[0].text2
-				item.STORE_PLAN = this.title2fromList[i].itemList[1].text
-				item.STORE_PLAN_UNIT = this.title2fromList[i].itemList[1].unit
-				item.STORE_LAST = this.title2fromList[i].itemList[2].text
-				item.STORE_LAST_UNIT = this.title2fromList[i].itemList[2].unit
-				item.STORE_LASTSUM = this.title2fromList[i].itemList[3].text
-				item.STORE_LASTSUM_UNIT = this.title2fromList[i].itemList[3].unit
-				item.STORE_REASON = this.title2fromList[i].itemList[4].text
+				item.STORE_PLAN_UNIT = this.title2fromList[i].itemList[1].text
+				item.STORE_LAST_UNIT = this.title2fromList[i].itemList[1].text
+				item.STORE_LASTSUM_UNIT = this.title2fromList[i].itemList[1].text
 
+				item.STORE_PLAN = this.title2fromList[i].itemList[2].text
+				item.STORE_LAST = this.title2fromList[i].itemList[3].text
+				item.STORE_LASTSUM = this.title2fromList[i].itemList[4].text
+				item.STORE_REASON = this.title2fromList[i].itemList[5].text
 				submitData.TRANSFER_FACILITY.push(item)
 			}
 
@@ -449,7 +452,7 @@ export default {
 					type: "inputWithUnit",
 					text: "",
 					title: "面积",
-					unit: "M"
+					unit: "平方米"
 				}, {
 					type: "input",
 					text: "",
@@ -467,20 +470,21 @@ export default {
 					text2: "",
 					title2: "类别"
 				}, {
-					type: "inputWithUnit",
+					type: "select",
+					text: "",
+					title: "单位",
+				}, {
+					type: "input",
 					text: "",
 					title: "拟贮存量",
-					unit: "吨"
 				}, {
-					type: "inputWithUnit",
+					type: "input",
 					text: "",
 					title: "上年度贮存量",
-					unit: "吨"
 				}, {
-					type: "inputWithUnit",
+					type: "input",
 					text: "",
 					title: "截止上年度年底累计贮存量",
-					unit: "吨"
 				}, {
 					type: "input",
 					text: "",
