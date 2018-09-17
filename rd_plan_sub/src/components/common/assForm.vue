@@ -12,7 +12,15 @@
 									<el-input v-model="fItem.text" placeholder="必填"></el-input>
 								</div>
 								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_right">
-									<el-select placeholder="请选择" v-model="fItem.text">
+									<el-select v-if="fItem.num && fItem.num === '1'" placeholder="请选择" v-model="fItem.text">
+										<el-option
+											v-for="uItem in cateList2"
+											:key="uItem.value"
+											:label="uItem.label"
+											:value="uItem.value">
+										</el-option>
+									</el-select>
+									<el-select v-else placeholder="请选择" v-model="fItem.text">
 										<el-option
 											v-for="uItem in cateList"
 											:key="uItem.value"
@@ -112,7 +120,8 @@
 			type: String,
 			levelOneData: Array,
 			levelTwoData: Object,
-			cateList: Array
+			cateList: Array,
+			cateList2: Array
 		},
     data() {
       return {
@@ -147,8 +156,13 @@
 						if(arr[i].unit){
 							arrItem.unit = arr[i].unit
 						}
+						if(arr[i].num){
+							arritem.num = arr[i].num
+						}
 					}
-					
+					if(arr[i].isSingle){
+						arrItem.isSingle = arr[i].isSingle
+					}
 					
 					item.itemList.push(arrItem)
 				}
