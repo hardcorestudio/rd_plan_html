@@ -24,8 +24,10 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.amount" placeholder="必填"></el-input>
-							<el-row v-else>{{selfDisposalMeasuresData.amount}}</el-row>
+							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.amount" placeholder="必填">
+								<template slot="append">{{selfDisposalMeasuresData.amountUnit}}</template>
+							</el-input>
+							<el-row v-else>{{selfDisposalMeasuresData.amount}} {{selfDisposalMeasuresData.amountUnit}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">

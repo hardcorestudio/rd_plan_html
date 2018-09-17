@@ -351,7 +351,7 @@ export default {
 					index: i + 1,
 					itemList: [{
 						type: "selectDIY",
-						text: res.initHandleList[i].EN_NAME_CZ,
+						text: res.initHandleList[i].EN_ID_CZ,
 						title: "委托利用处置单位名称",
 						isSingle: true
 					},{
@@ -424,7 +424,44 @@ export default {
 	},
 	methods: {
 		doSubmit () {
-			console.log("保存save");
+			let submitData = {}
+			submitData.TP_ID = this.queryJson.TP_ID
+
+			submitData.LIST = []
+
+			for (let i in this.title1fromList) {
+				let item = {}
+				item.EN_ID_CZ = this.title1fromList[i].itemList[0].text
+				item.D_NAME = this.title1fromList[i].itemList[1].text
+				item.UNIT = this.title1fromList[i].itemList[2].text
+				item.HANDLE_TYPE = this.title1fromList[i].itemList[3].text
+				item.YEAR_NUM = this.title1fromList[i].itemList[4].text
+				item.LAST_NUM = this.title1fromList[i].itemList[5].text
+
+				submitData.LIST.push(item)
+			}
+
+			for (let key in this.queryJson) {
+				submitData[key] = this.queryJson[key]
+			}
+			fetch({
+				url: '',
+				method: 'POST',
+				data: 'params=' + JSON.stringify(submitData)
+			}).then(res => {
+				if (res.resFlag == '0') {
+					this.$notify({
+						title: '成功',
+						message: '保存成功',
+						type: 'success'
+					});
+				} else {
+					this.$notify.error({
+						title: '失败',
+						message: res.resMsg
+					});
+				}
+			})
 		},
 		doReset () {
 			console.log("原辅材料及消耗量");
