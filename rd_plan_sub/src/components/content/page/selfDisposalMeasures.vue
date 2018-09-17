@@ -412,7 +412,7 @@ export default {
 				item.STORE_PLAN_UNIT = this.title1fromList[i].itemList[1].text
 				item.STORE_LAST_UNIT = this.title1fromList[i].itemList[1].text
 				item.STORE_YEAR = this.title1fromList[i].itemList[2].text
-				item.YEARSTORE_LAST_NUM = this.title1fromList[i].itemList[3].text
+				item.STORE_LAST = this.title1fromList[i].itemList[3].text
 
 				submitData.HANDLE_LIST.push(item)
 			}
