@@ -185,127 +185,127 @@ export default {
 		})
 		this.queryJson = getQueryString()
 
-		// fetch({
-		// 	url: '/plan/initTransfer',
-		// 	method: 'POST',
-		// 	data: 'params=' + JSON.stringify(this.queryJson)
-		// }).then(res => {
-		let res = {
-			"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiVGxudHdidmxmclhIenN5WSsrYU9TOD0=",
-			"operatorId": "",
-			"empId": "",
-			"userType": "CSEP",
-			"newGuideFlag": "",
-			"belongQ": "",
-			"belongS": "",
-			"nickName": "天津合佳威立雅环境服务有限公司",
-			"orgCode": "",
-			"initHandleSelf": {
-				"DB_2": 0,
-				"DESIGN": "放大书法",
-				"DB_1": 1,
-				"RUN_MONEY": "10",
-				"TP_ID": "TP201809120707190010",
-				"STATUS": "00",
-				"FACILITY_TYPE": "范德萨发",
-				"FACILITY_ADDRESS": "放大书法大赛嘎的说法",
-				"DESIGN_TIME": "十年",
-				"RUN_TIME": "二年",
-				"FACILITY_NAME": "放大",
-				"RUN_MONEY_UNIT": "万元",
-				"DESC_CONTENT": "范德萨范德萨发大水萨法",
-				"INVEST_SUM": "1",
-				"FACILITY_SUM": "放大书法大赛",
-				"sysdate": 1537053927987,
-				"MEASURE": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
-				"HANDLE_EFFECT": "范德萨发大水",
-				"INVEST_SUM_UNIT": "吨"
-			},
-			"userId": "EP201410280910450012",
-			"userName": "",
-			"sepaName": "津南区",
-			"status": "",
-			"ifLogin": "0",
-			"ROLEID": "CSEP",
-			"epName": "天津合佳威立雅环境服务有限公司",
-			"epId": "EP201410280910450012",
-			"belongSepa": "JNQ",
-			"userPortrait": "",
-			"IWBSESSION": "BROWSER-20180917123504",
-			"initOverviewList": [
-				{
-					"BIG_CATEGORY_NAME": null,
-					"UNIT": "吨",
-					"W_NAME": "发大水",
-					"SOURCE_PROCESS": "adfdsa",
-					"SAMLL_CATEGORY_ID": "271-005-02",
-					"TP_ID": "TP201809120707190010",
-					"YEAR_NUM": "11",
-					"BIG_CATEGORY_ID": "HW02",
-					"W_SHAPE": "发大水",
-					"LAST_NUM": "1100",
-					"SAMLL_CATEGORY_NAME": null,
-					"ID": "1",
-					"D_NAME": "发达",
-					"CHARACTER": "aaa"
-				},
-				{
-					"BIG_CATEGORY_NAME": null,
-					"UNIT": "个",
-					"W_NAME": "111",
-					"SOURCE_PROCESS": "嗷嗷",
-					"SAMLL_CATEGORY_ID": "900-402-06",
-					"TP_ID": "TP201809120707190010",
-					"YEAR_NUM": "22",
-					"BIG_CATEGORY_ID": "HW06",
-					"W_SHAPE": "发大水",
-					"LAST_NUM": "2200",
-					"SAMLL_CATEGORY_NAME": null,
-					"ID": "2",
-					"D_NAME": "vvv",
-					"CHARACTER": "范德萨"
-				},
-				{
-					"BIG_CATEGORY_NAME": null,
-					"UNIT": "吨",
-					"W_NAME": "发大水",
-					"SOURCE_PROCESS": "发大水",
-					"SAMLL_CATEGORY_ID": "831-002-01",
-					"TP_ID": "TP201809120707190010",
-					"YEAR_NUM": "发大水",
-					"BIG_CATEGORY_ID": "HW01",
-					"W_SHAPE": "22",
-					"LAST_NUM": "22",
-					"SAMLL_CATEGORY_NAME": null,
-					"ID": "3",
-					"D_NAME": "发大水",
-					"CHARACTER": "范德萨"
-				}
-			],
-			"initHandleSelfList": [
-				{
-					"STORE_LAST_UNIT": "个",
-					"STORE_LAST": "1000",
-					"ID": "1",
-					"D_NAME": "",
-					"TP_ID": "TP201809120707190010",
-					"STORE_PLAN_UNIT": "吨",
-					"STORE_YEAR": "100"
-				},
-				{
-					"STORE_LAST_UNIT": "个",
-					"STORE_LAST": "2000",
-					"ID": "2",
-					"D_NAME": "",
-					"TP_ID": "TP201809120707190010",
-					"STORE_PLAN_UNIT": "吨",
-					"STORE_YEAR": "200"
-				}
-			],
-			"contextPath": "",
-			"realName": "",
-			"orgSeq": ""
-		}
+		fetch({
+			url: '/plan/initHandleSelf',
+			method: 'POST',
+			data: 'params=' + JSON.stringify(this.queryJson)
+		}).then(res => {
+		// let res = {
+		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiVGxudHdidmxmclhIenN5WSsrYU9TOD0=",
+		// 	"operatorId": "",
+		// 	"empId": "",
+		// 	"userType": "CSEP",
+		// 	"newGuideFlag": "",
+		// 	"belongQ": "",
+		// 	"belongS": "",
+		// 	"nickName": "天津合佳威立雅环境服务有限公司",
+		// 	"orgCode": "",
+		// 	"initHandleSelf": {
+		// 		"DB_2": 0,
+		// 		"DESIGN": "放大书法",
+		// 		"DB_1": 1,
+		// 		"RUN_MONEY": "10",
+		// 		"TP_ID": "TP201809120707190010",
+		// 		"STATUS": "00",
+		// 		"FACILITY_TYPE": "范德萨发",
+		// 		"FACILITY_ADDRESS": "放大书法大赛嘎的说法",
+		// 		"DESIGN_TIME": "十年",
+		// 		"RUN_TIME": "二年",
+		// 		"FACILITY_NAME": "放大",
+		// 		"RUN_MONEY_UNIT": "万元",
+		// 		"DESC_CONTENT": "范德萨范德萨发大水萨法",
+		// 		"INVEST_SUM": "1",
+		// 		"FACILITY_SUM": "放大书法大赛",
+		// 		"sysdate": 1537053927987,
+		// 		"MEASURE": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+		// 		"HANDLE_EFFECT": "范德萨发大水",
+		// 		"INVEST_SUM_UNIT": "吨"
+		// 	},
+		// 	"userId": "EP201410280910450012",
+		// 	"userName": "",
+		// 	"sepaName": "津南区",
+		// 	"status": "",
+		// 	"ifLogin": "0",
+		// 	"ROLEID": "CSEP",
+		// 	"epName": "天津合佳威立雅环境服务有限公司",
+		// 	"epId": "EP201410280910450012",
+		// 	"belongSepa": "JNQ",
+		// 	"userPortrait": "",
+		// 	"IWBSESSION": "BROWSER-20180917123504",
+		// 	"initOverviewList": [
+		// 		{
+		// 			"BIG_CATEGORY_NAME": null,
+		// 			"UNIT": "吨",
+		// 			"W_NAME": "发大水",
+		// 			"SOURCE_PROCESS": "adfdsa",
+		// 			"SAMLL_CATEGORY_ID": "271-005-02",
+		// 			"TP_ID": "TP201809120707190010",
+		// 			"YEAR_NUM": "11",
+		// 			"BIG_CATEGORY_ID": "HW02",
+		// 			"W_SHAPE": "发大水",
+		// 			"LAST_NUM": "1100",
+		// 			"SAMLL_CATEGORY_NAME": null,
+		// 			"ID": "1",
+		// 			"D_NAME": "发达",
+		// 			"CHARACTER": "aaa"
+		// 		},
+		// 		{
+		// 			"BIG_CATEGORY_NAME": null,
+		// 			"UNIT": "个",
+		// 			"W_NAME": "111",
+		// 			"SOURCE_PROCESS": "嗷嗷",
+		// 			"SAMLL_CATEGORY_ID": "900-402-06",
+		// 			"TP_ID": "TP201809120707190010",
+		// 			"YEAR_NUM": "22",
+		// 			"BIG_CATEGORY_ID": "HW06",
+		// 			"W_SHAPE": "发大水",
+		// 			"LAST_NUM": "2200",
+		// 			"SAMLL_CATEGORY_NAME": null,
+		// 			"ID": "2",
+		// 			"D_NAME": "vvv",
+		// 			"CHARACTER": "范德萨"
+		// 		},
+		// 		{
+		// 			"BIG_CATEGORY_NAME": null,
+		// 			"UNIT": "吨",
+		// 			"W_NAME": "发大水",
+		// 			"SOURCE_PROCESS": "发大水",
+		// 			"SAMLL_CATEGORY_ID": "831-002-01",
+		// 			"TP_ID": "TP201809120707190010",
+		// 			"YEAR_NUM": "发大水",
+		// 			"BIG_CATEGORY_ID": "HW01",
+		// 			"W_SHAPE": "22",
+		// 			"LAST_NUM": "22",
+		// 			"SAMLL_CATEGORY_NAME": null,
+		// 			"ID": "3",
+		// 			"D_NAME": "发大水",
+		// 			"CHARACTER": "范德萨"
+		// 		}
+		// 	],
+		// 	"initHandleSelfList": [
+		// 		{
+		// 			"STORE_LAST_UNIT": "个",
+		// 			"STORE_LAST": "1000",
+		// 			"ID": "1",
+		// 			"D_NAME": "",
+		// 			"TP_ID": "TP201809120707190010",
+		// 			"STORE_PLAN_UNIT": "吨",
+		// 			"STORE_YEAR": "100"
+		// 		},
+		// 		{
+		// 			"STORE_LAST_UNIT": "个",
+		// 			"STORE_LAST": "2000",
+		// 			"ID": "2",
+		// 			"D_NAME": "",
+		// 			"TP_ID": "TP201809120707190010",
+		// 			"STORE_PLAN_UNIT": "吨",
+		// 			"STORE_YEAR": "200"
+		// 		}
+		// 	],
+		// 	"contextPath": "",
+		// 	"realName": "",
+		// 	"orgSeq": ""
+		// }
 
 		this.selfDisposalMeasuresData.equipmentName = res.initHandleSelf.FACILITY_NAME
 		this.selfDisposalMeasuresData.category = res.initHandleSelf.FACILITY_TYPE
@@ -386,7 +386,7 @@ export default {
 			}]
 		}
 
-		// })
+		})
 	},
 	methods: {
 		doSubmit () {
@@ -425,7 +425,7 @@ export default {
 				submitData[key] = this.queryJson[key]
 			}
 			fetch({
-				url: '',
+				url: '/plan/saveHandleSelf',
 				method: 'POST',
 				data: 'params=' + JSON.stringify(submitData)
 			}).then(res => {
