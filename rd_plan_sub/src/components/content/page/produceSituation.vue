@@ -44,13 +44,15 @@ export default {
 				itemList: [{
 					type: "input",
 					text: "",
-					title: "废物名称"
+					title: "废物名称",
+					isSingle: "1"
 				}, {
 					type: "selectLevel",
 					text1: "",
 					title1: "类别选择",
 					text2: "",
-					title2: "废物代码"
+					title2: "废物代码",
+					isSingle: "1"
 				}, {
 					type: "input",
 					text: "",
@@ -8616,13 +8618,15 @@ export default {
 					itemList: [{
 						type: "input",
 						text: res.initOverviewList[i].D_NAME,
-						title: "废物名称"
+						title: "废物名称",
+						isSingle: "1"
 					}, {
 						type: "selectLevel",
 						text1: res.initOverviewList[i].BIG_CATEGORY_ID,
 						title1: "类别选择",
 						text2: res.initOverviewList[i].SAMLL_CATEGORY_ID,
-						title2: "废物代码"
+						title2: "废物代码",
+						isSingle: "1"
 					}, {
 						type: "input",
 						text: res.initOverviewList[i].W_NAME,
@@ -8661,13 +8665,15 @@ export default {
 				itemList: [{
 					type: "input",
 					text: "",
-					title: "废物名称"
+					title: "废物名称",
+					isSingle: "1"
 				}, {
 					type: "selectLevel",
 					text1: "",
 					title1: "类别选择",
 					text2: "",
-					title2: "废物代码"
+					title2: "废物代码",
+					isSingle: "1"
 				}, {
 					type: "input",
 					text: "",
@@ -8798,13 +8804,15 @@ export default {
 				itemList: [{
 					type: "input",
 					text: "",
-					title: "废物名称"
+					title: "废物名称",
+					isSingle: "1"
 				}, {
 					type: "selectLevel",
 					text1: "",
 					title1: "类别选择",
 					text2: "",
-					title2: "废物代码"
+					title2: "废物代码",
+					isSingle: "1"
 				}, {
 					type: "input",
 					text: "",
