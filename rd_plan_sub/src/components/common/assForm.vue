@@ -64,10 +64,10 @@
 			</el-row>
 			<el-row v-if="type !== 'label'" class="assFromItem_row">
 				<div class="assFromItem_iconBtnArea">
-					<!-- <i v-if="index === formList.length - 1" @click="addSign" class="el-icon-plus"></i>
-					<i v-if="index > 0" @click="reduceSign(item)" class="el-icon-minus"></i> -->
-					<img v-if="index === formList.length - 1" @click="addSign" src="../../assets/images/plus.png">
-					<img v-if="index > 0" @click="reduceSign(item)" src="../../assets/images/reduce.png">
+					<!-- <img v-if="index === formList.length - 1" @click="addSign" src="../../assets/images/plus.png">
+					<img v-if="index > 0" @click="reduceSign(item)" src="../../assets/images/reduce.png"> -->
+					<div v-if="index === formList.length - 1" @click="addSign">增加</div>
+					<div v-if="index > 0" @click="reduceSign(item)">减少</div>
 				</div>
 			</el-row>
 		</div>
@@ -188,6 +188,13 @@
 	height: 40px;
 	line-height: 40px;
 	margin-top: 24px;
+}
+.assFromItem_iconBtnArea >div{
+	font-size: 14px;
+	color: #13ce66;
+	float: right;
+	width: 30px;
+	padding: 0 4px;
 }
 
 </style>

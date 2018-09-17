@@ -48,9 +48,9 @@ export default {
 				}, {
 					type: "selectLevel",
 					text1: "",
-					title1: "废物代码",
+					title1: "类别选择",
 					text2: "",
-					title2: "类别选择"
+					title2: "废物代码"
 				}, {
 					type: "input",
 					text: "",
@@ -75,11 +75,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "实际生产量"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
+				},{
 					type: "input",
 					text: "",
 					title: "来源及产生工序",
@@ -8624,9 +8620,9 @@ export default {
 					}, {
 						type: "selectLevel",
 						text1: res.initOverviewList[i].BIG_CATEGORY_ID,
-						title1: "废物代码",
+						title1: "类别选择",
 						text2: res.initOverviewList[i].SAMLL_CATEGORY_ID,
-						title2: "类别选择"
+						title2: "废物代码"
 					}, {
 						type: "input",
 						text: res.initOverviewList[i].W_NAME,
@@ -8669,9 +8665,9 @@ export default {
 				}, {
 					type: "selectLevel",
 					text1: "",
-					title1: "废物代码",
+					title1: "类别选择",
 					text2: "",
-					title2: "类别选择"
+					title2: "废物代码"
 				}, {
 					type: "input",
 					text: "",
@@ -8696,10 +8692,6 @@ export default {
 					type: "input",
 					text: "",
 					title: "实际生产量"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
 				}, {
 					type: "input",
 					text: "",
@@ -8810,9 +8802,9 @@ export default {
 				}, {
 					type: "selectLevel",
 					text1: "",
-					title1: "废物代码",
+					title1: "类别选择",
 					text2: "",
-					title2: "类别选择"
+					title2: "废物代码"
 				}, {
 					type: "input",
 					text: "",
@@ -8837,10 +8829,6 @@ export default {
 					type: "input",
 					text: "",
 					title: "实际生产量"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
 				}, {
 					type: "input",
 					text: "",
