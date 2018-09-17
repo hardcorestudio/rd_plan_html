@@ -13,6 +13,7 @@ import Aside from '../Aside.vue';
 import assTitle from '../../common/assTitle.vue'
 import assForm from '../../common/assForm.vue'
 import { checkBrowser,getQueryString } from '../../utils/browserCheck.js'
+import fetch from '../../utils/fetch.js'
 export default {
 	name: 'entrustDisposalMeasures',
 	data () {
