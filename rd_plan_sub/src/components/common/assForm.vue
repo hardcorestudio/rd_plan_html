@@ -38,7 +38,7 @@
 									<el-option
 										v-for="uItem in levelOneData"
 										:key="uItem.value"
-										:label="uItem.label"
+										:label="uItem.value + ' ' + uItem.label"
 										:value="uItem.value">
 									</el-option>
 								</el-select>
@@ -53,7 +53,7 @@
 									<el-option
 										v-for="uItem in levelTwoData[fItem.text1]"
 										:key="uItem.value"
-										:label="uItem.label"
+										:label="uItem.value + ' ' + uItem.label"
 										:value="uItem.value">
 									</el-option>
 								</el-select>

@@ -8749,6 +8749,54 @@ export default {
 	methods: {
 		doSubmit () {
 			console.log("保存save");
+			let submitData = {}
+			submitData.TP_ID = this.queryJson.TP_ID
+			for (let key in this.queryJson) {
+				submitData[key] = this.queryJson[key]
+			}
+			submitData.LIST = []
+			
+			for(let i in this.title1fromList) {
+				let item = {}
+				item.D_NAME = this.title1fromList[i].itemList[0].text
+				item.BIG_CATEGORY_ID = this.title1fromList[i].itemList[1].text1
+				item.SAMLL_CATEGORY_ID = this.title1fromList[i].itemList[1].text2
+				item.W_NAME = this.title1fromList[i].itemList[2].text
+				item.W_SHAPE = this.title1fromList[i].itemList[3].text
+				item.CHARACTER = this.title1fromList[i].itemList[4].text
+				item.YEAR_NUM = this.title1fromList[i].itemList[5].text
+				item.UNIT = this.title1fromList[i].itemList[6].text
+				item.LAST_NUM = this.title1fromList[i].itemList[7].text
+				item.SOURCE_PROCESS = this.title1fromList[i].itemList[8].text
+				// item.BIG_CATEGORY_NAME
+				// item.SAMLL_CATEGORY_NAME
+				submitData.LIST.push(item)
+			}
+			if(this.nameRepeatCheck(submitData.LIST,'D_NAME')){
+				this.$notify.error({
+					title: '错误',
+					message: "废物名称不能重复，请修改后重新提交"
+				});
+				return;
+			}
+			// fetch({
+			// 	url: '',
+			// 	method: 'POST',
+			// 	data: 'params='+JSON.stringify(submitData)
+			// }).then(res => {
+			// 	if(res.resFlag == '0'){
+			// 		this.$notify({
+			// 			title: '成功',
+			// 			message: '保存成功',
+			// 			type: 'success'
+			// 		});
+			// 	}else{
+			// 		this.$notify.error({
+			// 			title: '失败',
+			// 			message: res.resMsg
+			// 		});
+			// 	}
+			// })
 		},
 		doReset () {
 			this.numTitle = "计划产生量合计：0 实际产生量合计：0"
@@ -8798,6 +8846,18 @@ export default {
 					title: "来源及产生工序",
 				}]
 			}]
+		},
+		nameRepeatCheck(arr,key) {
+			for(let i = 0; i < arr.length; i++){
+				let name1 = arr[i][key]
+				for(let j = i + 1; j < arr.length; j++){
+					let name2 = arr[j][key]
+					if(name1 === name2){
+						return true;
+					}
+				}
+			}
+			return false
 		}
 	}
 }
