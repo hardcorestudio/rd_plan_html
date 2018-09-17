@@ -50,7 +50,7 @@ export default {
 					"转移计划：危险废物数量、种类；拟接收危险废物的经营单位的资质和经营范围等。"
 				]
 			},
-			userRole: 'CSEP',
+			userRole: '',
 			queryJson: {},
 			title1: {
 				title: "危险废物贮存设施现状",
@@ -196,6 +196,7 @@ export default {
 			method: 'POST',
 			data: 'params=' + JSON.stringify(this.queryJson)
 		}).then(res => {
+			this.userRole = res.userType
 			this.switchInfo1[0].value = res.initTransfer.CC_1 ? res.initTransfer.CC_1 + "" : '0'
 			this.switchInfo1[1].value = res.initTransfer.CC_2 ? res.initTransfer.CC_2 + "" : '0'
 			this.switchInfo1[2].value = res.initTransfer.CC_3 ? res.initTransfer.CC_3 + "" : '0'

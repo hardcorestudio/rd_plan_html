@@ -32,7 +32,7 @@ export default {
 				]
 			},
 			queryJson: {},
-			userRole: 'CSEP',
+			userRole: '',
 			title1: {
 				title: " "
 			},
@@ -8609,7 +8609,7 @@ export default {
 		// 	"contextPath": "",
 		// 	"orgSeq": ""
 		// }
-
+		this.userRole = res.userType
 		if (res.initOverviewList.length > 0) {
 			this.title1fromList = []
 			for (let i in res.initOverviewList) {

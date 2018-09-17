@@ -104,7 +104,7 @@ export default {
 					'二次环境污染控制和事故预防措施:包括污染控制措施、事故预防措施、以及设备和制度等方面的内容。'
 				]
 			},
-			userRole: 'CSEP',
+			userRole: '',
 			queryJson: {},
 			switchInfo: [{
 				id: "1",
@@ -306,7 +306,7 @@ export default {
 		// 	"realName": "",
 		// 	"orgSeq": ""
 		// }
-
+		this.userRole = res.userType
 		this.selfDisposalMeasuresData.equipmentName = res.initHandleSelf.FACILITY_NAME
 		this.selfDisposalMeasuresData.category = res.initHandleSelf.FACILITY_TYPE
 		this.selfDisposalMeasuresData.addr = res.initHandleSelf.FACILITY_ADDRESS

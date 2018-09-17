@@ -32,7 +32,7 @@
 						"生产工艺说明：文字说明所有危险废物的生产环节。"
 					]
 				},
-				userRole: 'CSEP',
+				userRole: '',
 				EP_ID: "",
 				TP_ID: "",
 				queryJson: {},

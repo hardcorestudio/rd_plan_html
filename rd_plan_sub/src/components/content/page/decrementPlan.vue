@@ -22,7 +22,7 @@
 					title: "危废减量化计划和措施",
 					textInfoList: []
 				},
-				userRole: 'CSEP',
+				userRole: '',
 				queryJson: {},
 				EP_ID: "",
 				decrementInfo: {},
@@ -92,6 +92,7 @@
 				// 	"orgSeq":""
 				// }	
 				console.log(res);
+				this.userRole = res.userType
 				this.decrementInfo = res.initReduction
 				this.title2.text = this.decrementInfo && this.decrementInfo != null ? this.decrementInfo.MEASURES_REDUCTION : ''
 				this.title1.text = this.decrementInfo && this.decrementInfo != null ? this.decrementInfo.PLAN_REDUCTION : ''

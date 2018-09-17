@@ -30,7 +30,7 @@ export default {
 					'危险废物的数量，如为计划期限内新更换的委托利用处置单位，即上一年未委托该单位利用处置废物时，则相应委托利用处置量填写“0”。'
 				]
 			},
-			userRole: 'CSEP',
+			userRole: '',
 			title1: {
 				title: " "
 			},
@@ -317,6 +317,7 @@ export default {
 			// 	"contextPath": "",
 			// 	"orgSeq": ""
 			// }
+			this.userRole = res.userType
 			let lastNum = ""
 			let yearNum = ""
 			for (let i in res.sumHandleList) {
