@@ -136,7 +136,7 @@
 				for(let i in arr){
 					let arrItem = {}
 					arrItem.type = arr[i].type
-					if(arr[i].type === "selectLevel"){
+					if(arr[i].type === "selectLevel" || arr[i].type === "selectLevelText"){
 						arrItem.text1 = ""
 						arrItem.title1 = arr[i].title1
 						arrItem.text2 = ""
@@ -144,6 +144,9 @@
 					}else{
 						arrItem.text = ""
 						arrItem.title = arr[i].title
+						if(arr[i].unit){
+							arrItem.unit = arr[i].unit
+						}
 					}
 					
 					

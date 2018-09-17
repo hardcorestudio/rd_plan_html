@@ -402,12 +402,12 @@ export default {
 				item.STORE_PLAN_UNIT = this.title2fromList[i].itemList[1].text
 				item.STORE_LAST_UNIT = this.title2fromList[i].itemList[1].text
 				item.STORE_LASTSUM_UNIT = this.title2fromList[i].itemList[1].text
-
 				item.STORE_PLAN = this.title2fromList[i].itemList[2].text
 				item.STORE_LAST = this.title2fromList[i].itemList[3].text
 				item.STORE_LASTSUM = this.title2fromList[i].itemList[4].text
 				item.STORE_REASON = this.title2fromList[i].itemList[5].text
-				submitData.TRANSFER_FACILITY.push(item)
+
+				submitData.TRANSFER_CC.push(item)
 			}
 
 			fetch({
