@@ -82,14 +82,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //     console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
-            console.log(data)
-            console.log("sssssssssssss")
-           console.log(JSON.stringify(data))
-        },function(data,header,config,status){
-        });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initReduction', p, function(data,header,config,status){
@@ -98,14 +98,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        // var p = {};
-        // p.TP_ID = $stateParams.tpId
-        // Init.iwbhttp('/plan/initTransfer', p, function(data,header,config,status){
-        //     console.log(data)
-        //     console.log("sssssssssssss")
-        //    console.log(JSON.stringify(data))
-        // },function(data,header,config,status){
-        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initTransfer', p, function(data,header,config,status){
+            console.log(data)
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initHandleSelf', p, function(data,header,config,status){
@@ -262,136 +262,136 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
           
         // },function(data,header,config,status){
         // });
-        // var p = {};
-        // p.TP_ID = $stateParams.tpId;
-        // p.CC_1 = '0'
-        // p.CC_2 = '1'
-        // p.CC_3 = '0'
-        // p.CC_4 = '1'
-        // p.CC_5 = '0'
-        // p.CC_PROCESS = 'aaa'
-        // p.TRANSFER_FACILITY = [
-        //     {
-        //         "NAME": "111", 
-        //         "STORE":"111111",
-        //         "UNIT": "吨",
-        //         "NUM": "100.00",
-        //         "NUM_UNIT": "个",
-        //         "AREA": "100",
-        //         "AREA_UNIT": "平方米",
-        //         "TYPE": "bbb",
-        //     },
-        //     {
-        //         "NAME": "111", 
-        //         "STORE":"111111",
-        //         "UNIT": "吨",
-        //         "NUM": "100.00",
-        //         "NUM_UNIT": "个",
-        //         "AREA": "100",
-        //         "AREA_UNIT": "平方米",
-        //         "TYPE": "bbb",
-        //     }
-        // ]
-        // p.TRANSFER_CC = [
-        //     {
-        //         "D_NAME": "111", 
-        //         "BIG_CATEGORY_ID": "HW01",
-        //         "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-        //         "STORE_REASON": "啊啊啊",
-        //         "STORE_PLAN": "1000.00",
-        //         "STORE_PLAN_UNIT": "吨",
-        //         "STORE_LAST": "1000.00",
-        //         "STORE_LAST_UNIT": "个",
-        //         "STORE_LASTSUM": "100.00",
-        //         "STORE_LASTSUM": "吨",
-        //     },
-        //     {
-        //         "D_NAME": "111", 
-        //         "BIG_CATEGORY_ID": "HW01",
-        //         "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-        //         "STORE_REASON": "啊啊啊",
-        //         "STORE_PLAN": "1000.00",
-        //         "STORE_PLAN_UNIT": "吨",
-        //         "STORE_LAST": "1000.00",
-        //         "STORE_LAST_UNIT": "个",
-        //         "STORE_LASTSUM": "100.00",
-        //         "STORE_LASTSUM": "吨",
-        //     },
-        //     {
-        //         "D_NAME": "111", 
-        //         "BIG_CATEGORY_ID": "HW01",
-        //         "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-        //         "STORE_REASON": "啊啊啊",
-        //         "STORE_PLAN": "1000.00",
-        //         "STORE_PLAN_UNIT": "吨",
-        //         "STORE_LAST": "1000.00",
-        //         "STORE_LAST_UNIT": "个",
-        //         "STORE_LASTSUM": "100.00",
-        //         "STORE_LASTSUM": "吨",
-        //     }
-        // ]
-        // p.TRANSFER_YS = [
-        //     {
-        //         "EN_ID_YS": "111", 
-        //         "EN_NAME_YS": "aaa",
-        //         "YS_ZZ": "bbb",
-        //         "YS_1": "1",
-        //         "YS_2": "0",
-        //         "YS_3": "1",
-        //         "YS_PROCESS": "aaaaaaaaa",
-        //     },
-        //     {
-        //         "EN_ID_YS": "222", 
-        //         "EN_NAME_YS": "bbb",
-        //         "YS_ZZ": "bbb",
-        //         "YS_1": "1",
-        //         "YS_2": "0",
-        //         "YS_3": "1",
-        //         "YS_PROCESS": "bbbbbbbbbbb",
-        //     },
-        //     {
-        //         "EN_ID_YS": "111", 
-        //         "EN_NAME_YS": "aaa",
-        //         "YS_ZZ": "bbb",
-        //         "YS_1": "1",
-        //         "YS_2": "0",
-        //         "YS_3": "1",
-        //         "YS_PROCESS": "aaaaaaaaa",
-        //     },
-        //     {
-        //         "EN_ID_YS": "222", 
-        //         "EN_NAME_YS": "bbb",
-        //         "YS_ZZ": "bbb",
-        //         "YS_1": "1",
-        //         "YS_2": "0",
-        //         "YS_3": "1",
-        //         "YS_PROCESS": "bbbbbbbbbbb",
-        //     },
-        //     {
-        //         "EN_ID_YS": "111", 
-        //         "EN_NAME_YS": "aaa",
-        //         "YS_ZZ": "bbb",
-        //         "YS_1": "1",
-        //         "YS_2": "0",
-        //         "YS_3": "1",
-        //         "YS_PROCESS": "aaaaaaaaa",
-        //     },
-        //     {
-        //         "EN_ID_YS": "222", 
-        //         "EN_NAME_YS": "bbb",
-        //         "YS_ZZ": "bbb",
-        //         "YS_1": "1",
-        //         "YS_2": "0",
-        //         "YS_3": "1",
-        //         "YS_PROCESS": "bbbbbbbbbbb",
-        //     }
-        // ]
-        // console.log(JSON.stringify(p));
-        // Init.iwbhttp('/plan/saveTransfer', p, function(data,header,config,status){
-        //     console.log(data)
+        var p = {};
+        p.TP_ID = $stateParams.tpId;
+        p.CC_1 = '0'
+        p.CC_2 = '1'
+        p.CC_3 = '0'
+        p.CC_4 = '1'
+        p.CC_5 = '0'
+        p.CC_PROCESS = 'aaa'
+        p.TRANSFER_FACILITY = [
+            {
+                "NAME": "111", 
+                "STORE":"111111",
+                "UNIT": "吨",
+                "NUM": "100.00",
+                "NUM_UNIT": "个",
+                "AREA": "100",
+                "AREA_UNIT": "平方米",
+                "TYPE": "bbb",
+            },
+            {
+                "NAME": "111", 
+                "STORE":"111111",
+                "UNIT": "吨",
+                "NUM": "100.00",
+                "NUM_UNIT": "个",
+                "AREA": "100",
+                "AREA_UNIT": "平方米",
+                "TYPE": "bbb",
+            }
+        ]
+        p.TRANSFER_CC = [
+            {
+                "D_NAME": "111", 
+                "BIG_CATEGORY_ID": "HW01",
+                "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+                "STORE_REASON": "啊啊啊",
+                "STORE_PLAN": "1000.00",
+                "STORE_PLAN_UNIT": "吨",
+                "STORE_LAST": "1000.00",
+                "STORE_LAST_UNIT": "个",
+                "STORE_LASTSUM": "100.00",
+                "STORE_LASTSUM": "吨",
+            },
+            {
+                "D_NAME": "111", 
+                "BIG_CATEGORY_ID": "HW01",
+                "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+                "STORE_REASON": "啊啊啊",
+                "STORE_PLAN": "1000.00",
+                "STORE_PLAN_UNIT": "吨",
+                "STORE_LAST": "1000.00",
+                "STORE_LAST_UNIT": "个",
+                "STORE_LASTSUM": "100.00",
+                "STORE_LASTSUM": "吨",
+            },
+            {
+                "D_NAME": "111", 
+                "BIG_CATEGORY_ID": "HW01",
+                "BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+                "STORE_REASON": "啊啊啊",
+                "STORE_PLAN": "1000.00",
+                "STORE_PLAN_UNIT": "吨",
+                "STORE_LAST": "1000.00",
+                "STORE_LAST_UNIT": "个",
+                "STORE_LASTSUM": "100.00",
+                "STORE_LASTSUM": "吨",
+            }
+        ]
+        p.TRANSFER_YS = [
+            {
+                "EN_ID_YS": "111", 
+                "EN_NAME_YS": "aaa",
+                "YS_ZZ": "bbb",
+                "YS_1": "1",
+                "YS_2": "0",
+                "YS_3": "1",
+                "YS_PROCESS": "aaaaaaaaa",
+            },
+            {
+                "EN_ID_YS": "222", 
+                "EN_NAME_YS": "bbb",
+                "YS_ZZ": "bbb",
+                "YS_1": "1",
+                "YS_2": "0",
+                "YS_3": "1",
+                "YS_PROCESS": "bbbbbbbbbbb",
+            },
+            {
+                "EN_ID_YS": "111", 
+                "EN_NAME_YS": "aaa",
+                "YS_ZZ": "bbb",
+                "YS_1": "1",
+                "YS_2": "0",
+                "YS_3": "1",
+                "YS_PROCESS": "aaaaaaaaa",
+            },
+            {
+                "EN_ID_YS": "222", 
+                "EN_NAME_YS": "bbb",
+                "YS_ZZ": "bbb",
+                "YS_1": "1",
+                "YS_2": "0",
+                "YS_3": "1",
+                "YS_PROCESS": "bbbbbbbbbbb",
+            },
+            {
+                "EN_ID_YS": "111", 
+                "EN_NAME_YS": "aaa",
+                "YS_ZZ": "bbb",
+                "YS_1": "1",
+                "YS_2": "0",
+                "YS_3": "1",
+                "YS_PROCESS": "aaaaaaaaa",
+            },
+            {
+                "EN_ID_YS": "222", 
+                "EN_NAME_YS": "bbb",
+                "YS_ZZ": "bbb",
+                "YS_1": "1",
+                "YS_2": "0",
+                "YS_3": "1",
+                "YS_PROCESS": "bbbbbbbbbbb",
+            }
+        ]
+        console.log(JSON.stringify(p));
+        Init.iwbhttp('/plan/saveTransfer', p, function(data,header,config,status){
+            console.log(data)
           
-        // },function(data,header,config,status){
-        // });
+        },function(data,header,config,status){
+        });
         // var p = {};
         // p.TP_ID = $stateParams.tpId;
         // p.FACILITY_NAME = '放大'
@@ -477,59 +477,59 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
           
         // },function(data,header,config,status){
         // });
-         var p = {};
-        p.TP_ID = $stateParams.tpId;
-        p.LIST = [
-            {
-                "D_NAME": "aa", 
-                "UNIT": "吨", 
-                "LAST_NUM": "100", 
-                "YEAR_NUM": "1000", 
-                "BIG_CATEGORY_ID": "HW01", 
-                "BIG_CATEGORY_NAME": "范德萨", 
-                "SAMLL_CATEGORY_ID": "1124325432", 
-                "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
-                "W_SHAPE": "范德萨", 
-                "W_NAME": "范德萨", 
-                "CHARACTER": "啊啊啊", 
-                "SOURCE_PROCESS": "afd"
-            },
-            {
-                "D_NAME": "aa", 
-                "UNIT": "吨", 
-                "LAST_NUM": "100", 
-                "YEAR_NUM": "1000", 
-                "BIG_CATEGORY_ID": "HW01", 
-                "BIG_CATEGORY_NAME": "范德萨", 
-                "SAMLL_CATEGORY_ID": "1124325432", 
-                "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
-                "W_SHAPE": "范德萨", 
-                "W_NAME": "范德萨", 
-                "CHARACTER": "啊啊啊", 
-                "SOURCE_PROCESS": "afd"
-            },
-            {
-                "D_NAME": "aa", 
-                "UNIT": "吨", 
-                "LAST_NUM": "100", 
-                "YEAR_NUM": "1000", 
-                "BIG_CATEGORY_ID": "HW01", 
-                "BIG_CATEGORY_NAME": "范德萨", 
-                "SAMLL_CATEGORY_ID": "1124325432", 
-                "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
-                "W_SHAPE": "范德萨", 
-                "W_NAME": "范德萨", 
-                "CHARACTER": "啊啊啊", 
-                "SOURCE_PROCESS": "afd"
-            }
-        ]
+        //  var p = {};
+        // p.TP_ID = $stateParams.tpId;
+        // p.LIST = [
+        //     {
+        //         "D_NAME": "aa", 
+        //         "UNIT": "吨", 
+        //         "LAST_NUM": "100", 
+        //         "YEAR_NUM": "1000", 
+        //         "BIG_CATEGORY_ID": "HW01", 
+        //         "BIG_CATEGORY_NAME": "范德萨", 
+        //         "SAMLL_CATEGORY_ID": "1124325432", 
+        //         "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
+        //         "W_SHAPE": "范德萨", 
+        //         "W_NAME": "范德萨", 
+        //         "CHARACTER": "啊啊啊", 
+        //         "SOURCE_PROCESS": "afd"
+        //     },
+        //     {
+        //         "D_NAME": "aa", 
+        //         "UNIT": "吨", 
+        //         "LAST_NUM": "100", 
+        //         "YEAR_NUM": "1000", 
+        //         "BIG_CATEGORY_ID": "HW01", 
+        //         "BIG_CATEGORY_NAME": "范德萨", 
+        //         "SAMLL_CATEGORY_ID": "1124325432", 
+        //         "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
+        //         "W_SHAPE": "范德萨", 
+        //         "W_NAME": "范德萨", 
+        //         "CHARACTER": "啊啊啊", 
+        //         "SOURCE_PROCESS": "afd"
+        //     },
+        //     {
+        //         "D_NAME": "aa", 
+        //         "UNIT": "吨", 
+        //         "LAST_NUM": "100", 
+        //         "YEAR_NUM": "1000", 
+        //         "BIG_CATEGORY_ID": "HW01", 
+        //         "BIG_CATEGORY_NAME": "范德萨", 
+        //         "SAMLL_CATEGORY_ID": "1124325432", 
+        //         "SAMLL_CATEGORY_NAME": "范德萨发撒发撒的", 
+        //         "W_SHAPE": "范德萨", 
+        //         "W_NAME": "范德萨", 
+        //         "CHARACTER": "啊啊啊", 
+        //         "SOURCE_PROCESS": "afd"
+        //     }
+        // ]
        
-        console.log(JSON.stringify(p));
-        Init.iwbhttp('/plan/saveOverview', p, function(data,header,config,status){
-            console.log(data)
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveOverview', p, function(data,header,config,status){
+        //     console.log(data)
           
-        },function(data,header,config,status){
-        });
+        // },function(data,header,config,status){
+        // });
     }
     //返回上一页
     $scope.back = function (){
