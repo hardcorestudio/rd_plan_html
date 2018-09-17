@@ -397,6 +397,7 @@ export default {
 			submitData.FACILITY_ADDRESS = this.selfDisposalMeasuresData.addr
 			submitData.INVEST_SUM = this.selfDisposalMeasuresData.amount
 			submitData.INVEST_SUM_UNIT = this.selfDisposalMeasuresData.amountUnit
+			submitData.RUN_MONEY_UNIT = this.selfDisposalMeasuresData.amountUnit
 			submitData.DESIGN = this.selfDisposalMeasuresData.can
 			submitData.DESIGN_TIME = this.selfDisposalMeasuresData.years
 			submitData.RUN_TIME = this.selfDisposalMeasuresData.startDate
