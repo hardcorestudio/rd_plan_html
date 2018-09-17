@@ -6,7 +6,7 @@
 			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="resetInfo1"></assTitle>
 			<assForm :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" @doReset="resetInfo2"></assTitle>
-			<assForm :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assForm :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData"></assForm>
 			<assTitle :userRole="userRole" :titleInfo="title3" titleType="textarea"></assTitle>
 			<assSwitch :userRole="userRole" title="运输措施" :switchInfo="switchInfo2"></assSwitch>
 			<el-form ref="form" :model="compInfo" label-width="80px" class="transferStuationFrom">
@@ -104,14 +104,12 @@ export default {
 			title2fromList: [{
 				index: 1,
 				itemList: [{
-					type: "input",
-					text: "",
-					title: "名称"
-				}, {
-					type: "input",
-					text: "",
-					title: "类别"
-				}, {
+					type: "selectLevelText",
+					text1: "",
+					title1: "名称",
+					text2: "",
+					title2: "类别"
+				},{
 					type: "inputWithUnit",
 					text: "",
 					title: "拟贮存量",
@@ -169,7 +167,8 @@ export default {
 			compInfo: {
 				compName: "",
 				compVal: ""
-			}
+			},
+			levelOneData: []
 		}
 	},
 	components: {
@@ -191,369 +190,167 @@ export default {
 		})
 		this.queryJson = getQueryString()
 
-		// fetch({
-		// 	url: '',
-		// 	method: 'POST',
-		// 	data: 'params='+JSON.stringify(this.queryJson)
-		// }).then(res => {
-		let res = {
-			"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY25iUjlwN2tRVmdZb2xRRVl6WEl2QT0=",
-			"initProductFacility": [{
-				"UNIT": "吨",
-				"NAME": "111",
-				"AREA_UNIT": "平方米",
-				"AREA": "100",
-				"ID": "1",
-				"NUM_UNIT": "个",
-				"TP_ID": "TP201809120707190010",
-				"NUM": "100.00",
-				"STORE": "111111",
-				"TYPE": "bbb"
-			}, {
-				"UNIT": "吨",
-				"NAME": "111",
-				"AREA_UNIT": "平方米",
-				"AREA": "100",
-				"ID": "2",
-				"NUM_UNIT": "个",
-				"TP_ID": "TP201809120707190010",
-				"NUM": "100.00",
-				"STORE": "111111",
-				"TYPE": "bbb"
-			}],
-			"operatorId": "",
-			"initProductYs": [{
-				"EN_NAME_YS": "aaa",
-				"EN_ID_YS": "111",
-				"YS_PROCESS": "aaaaaaaaa",
-				"ID": "1",
-				"TP_ID": "TP201809120707190010",
-				"YS_2": 0,
-				"YS_ZZ": "bbb",
-				"YS_1": 1,
-				"YS_3": 1
-			}, {
-				"EN_NAME_YS": "bbb",
-				"EN_ID_YS": "222",
-				"YS_PROCESS": "bbbbbbbbbbb",
-				"ID": "2",
-				"TP_ID": "TP201809120707190010",
-				"YS_2": 0,
-				"YS_ZZ": "bbb",
-				"YS_1": 1,
-				"YS_3": 1
-			}, {
-				"EN_NAME_YS": "aaa",
-				"EN_ID_YS": "111",
-				"YS_PROCESS": "aaaaaaaaa",
-				"ID": "3",
-				"TP_ID": "TP201809120707190010",
-				"YS_2": 0,
-				"YS_ZZ": "bbb",
-				"YS_1": 1,
-				"YS_3": 1
-			}, {
-				"EN_NAME_YS": "bbb",
-				"EN_ID_YS": "222",
-				"YS_PROCESS": "bbbbbbbbbbb",
-				"ID": "4",
-				"TP_ID": "TP201809120707190010",
-				"YS_2": 0,
-				"YS_ZZ": "bbb",
-				"YS_1": 1,
-				"YS_3": 1
-			}, {
-				"EN_NAME_YS": "aaa",
-				"EN_ID_YS": "111",
-				"YS_PROCESS": "aaaaaaaaa",
-				"ID": "5",
-				"TP_ID": "TP201809120707190010",
-				"YS_2": 0,
-				"YS_ZZ": "bbb",
-				"YS_1": 1,
-				"YS_3": 1
-			}, {
-				"EN_NAME_YS": "bbb",
-				"EN_ID_YS": "222",
-				"YS_PROCESS": "bbbbbbbbbbb",
-				"ID": "6",
-				"TP_ID": "TP201809120707190010",
-				"YS_2": 0,
-				"YS_ZZ": "bbb",
-				"YS_1": 1,
-				"YS_3": 1
-			}],
-			"empId": "",
-			"userType": "CSEP",
-			"newGuideFlag": "",
-			"belongQ": "",
-			"belongS": "",
-			"nickName": "天津合佳威立雅环境服务有限公司",
-			"orgCode": "",
-			"userId": "EP201410280910450012",
-			"userName": "",
-			"sepaName": "津南区",
-			"status": "",
-			"ifLogin": "0",
-			"ROLEID": "CSEP",
-			"initTransfer": {
-				"CC_2": 1,
-				"CC_1": 0,
-				"CC_5": 0,
-				"sysdate": 1537051428310,
-				"CC_4": 1,
-				"CC_3": 0,
-				"TP_ID": "TP201809120707190010",
-				"STATUS": "00",
-				"CC_PROCESS": "aaa"
-			},
-			"epName": "天津合佳威立雅环境服务有限公司",
-			"epId": "EP201410280910450012",
-			"belongSepa": "JNQ",
-			"userPortrait": "",
-			"IWBSESSION": "BROWSER-20180917065100",
-			"initOverviewList": [{
-				"BIG_CATEGORY_NAME": "范德萨",
-				"UNIT": "吨",
-				"W_NAME": "范德萨",
-				"SOURCE_PROCESS": "afd",
-				"SAMLL_CATEGORY_ID": "1124325432",
-				"TP_ID": "TP201809120707190010",
-				"YEAR_NUM": "1000",
-				"BIG_CATEGORY_ID": "HW01",
-				"W_SHAPE": "范德萨",
-				"LAST_NUM": "100",
-				"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
-				"ID": "1",
-				"D_NAME": "aa",
-				"CHARACTER": "啊啊啊"
-			}, {
-				"BIG_CATEGORY_NAME": "范德萨",
-				"UNIT": "吨",
-				"W_NAME": "范德萨",
-				"SOURCE_PROCESS": "afd",
-				"SAMLL_CATEGORY_ID": "1124325432",
-				"TP_ID": "TP201809120707190010",
-				"YEAR_NUM": "1000",
-				"BIG_CATEGORY_ID": "HW01",
-				"W_SHAPE": "范德萨",
-				"LAST_NUM": "100",
-				"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
-				"ID": "2",
-				"D_NAME": "aa",
-				"CHARACTER": "啊啊啊"
-			}, {
-				"BIG_CATEGORY_NAME": "范德萨",
-				"UNIT": "吨",
-				"W_NAME": "范德萨",
-				"SOURCE_PROCESS": "afd",
-				"SAMLL_CATEGORY_ID": "1124325432",
-				"TP_ID": "TP201809120707190010",
-				"YEAR_NUM": "1000",
-				"BIG_CATEGORY_ID": "HW01",
-				"W_SHAPE": "范德萨",
-				"LAST_NUM": "100",
-				"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
-				"ID": "3",
-				"D_NAME": "aa",
-				"CHARACTER": "啊啊啊"
-			}],
-			"realName": "",
-			"contextPath": "",
-			"initProductCc": [{
-				"STORE_LAST_UNIT": "个",
-				"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-				"STORE_REASON": "啊啊啊",
-				"STORE_LAST": "1000.00",
-				"ID": "1",
-				"D_NAME": "111",
-				"STORE_LASTSUM": "吨",
-				"TP_ID": "TP201809120707190010",
-				"STORE_LASTSUM_UNIT": null,
-				"STORE_PLAN_UNIT": "吨",
-				"STORE_PLAN": "1000.00",
-				"BIG_CATEGORY_ID": "HW01"
-			}, {
-				"STORE_LAST_UNIT": "个",
-				"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-				"STORE_REASON": "啊啊啊",
-				"STORE_LAST": "1000.00",
-				"ID": "2",
-				"D_NAME": "111",
-				"STORE_LASTSUM": "吨",
-				"TP_ID": "TP201809120707190010",
-				"STORE_LASTSUM_UNIT": null,
-				"STORE_PLAN_UNIT": "吨",
-				"STORE_PLAN": "1000.00",
-				"BIG_CATEGORY_ID": "HW01"
-			}, {
-				"STORE_LAST_UNIT": "个",
-				"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-				"STORE_REASON": "啊啊啊",
-				"STORE_LAST": "1000.00",
-				"ID": "3",
-				"D_NAME": "111",
-				"STORE_LASTSUM": "吨",
-				"TP_ID": "TP201809120707190010",
-				"STORE_LASTSUM_UNIT": null,
-				"STORE_PLAN_UNIT": "吨",
-				"STORE_PLAN": "1000.00",
-				"BIG_CATEGORY_ID": "HW01"
-			}],
-			"orgSeq": ""
-		}
-		this.switchInfo1[0].value = res.initTransfer.CC_1 + ""
-		this.switchInfo1[1].value = res.initTransfer.CC_2 + ""
-		this.switchInfo1[2].value = res.initTransfer.CC_3 + ""
-		this.switchInfo1[3].value = res.initTransfer.CC_4 + ""
-		this.switchInfo1[4].value = res.initTransfer.CC_5 + ""
-		
-		if (res.initProductFacility.length > 0) {
-			this.title1fromList = []
-			for (let i in res.initProductFacility) {
-				let item = {
-					index: i + 1,
+		fetch({
+			url: '/plan/initTransfer',
+			method: 'POST',
+			data: 'params=' + JSON.stringify(this.queryJson)
+		}).then(res => {
+			this.switchInfo1[0].value = res.initTransfer.CC_1 + ""
+			this.switchInfo1[1].value = res.initTransfer.CC_2 + ""
+			this.switchInfo1[2].value = res.initTransfer.CC_3 + ""
+			this.switchInfo1[3].value = res.initTransfer.CC_4 + ""
+			this.switchInfo1[4].value = res.initTransfer.CC_5 + ""
+
+			if (res.initProductFacility.length > 0) {
+				this.title1fromList = []
+				for (let i in res.initProductFacility) {
+					let item = {
+						index: i + 1,
+						itemList: [{
+							type: "input",
+							text: res.initProductFacility[i].NAME,
+							title: "设施名称"
+						}, {
+							type: "select",
+							text: res.initProductFacility[i].UNIT,
+							title: "单位"
+						}, {
+							type: "input",
+							text: res.initProductFacility[i].NUM,
+							title: "数量"
+						}, {
+							type: "input",
+							text: res.initProductFacility[i].TYPE,
+							title: "类型"
+						}, {
+							type: "inputWithUnit",
+							text: res.initProductFacility[i].AREA,
+							title: "面积",
+							unit: res.initProductFacility[i].AREA_UNIT
+						}, {
+							type: "input",
+							text: res.initProductFacility[i].STORE,
+							title: "贮存能力"
+						}]
+					}
+					this.title1fromList.push(item)
+				}
+			} else {
+				this.title1fromList = [{
+					index: 1,
 					itemList: [{
 						type: "input",
-						text: res.initProductFacility[i].NAME,
+						text: "",
 						title: "设施名称"
 					}, {
 						type: "select",
-						text: res.initProductFacility[i].UNIT,
+						text: "",
 						title: "单位"
 					}, {
 						type: "input",
-						text: res.initProductFacility[i].NUM,
+						text: "",
 						title: "数量"
 					}, {
 						type: "input",
-						text: res.initProductFacility[i].TYPE,
+						text: "",
 						title: "类型"
 					}, {
 						type: "inputWithUnit",
-						text: res.initProductFacility[i].AREA,
+						text: "",
 						title: "面积",
-						unit: res.initProductFacility[i].AREA_UNIT
+						unit: "M"
 					}, {
 						type: "input",
-						text: res.initProductFacility[i].STORE,
+						text: "",
 						title: "贮存能力"
 					}]
-				}
-				this.title1fromList.push(item)
-			}
-		} else {
-			this.title1fromList = [{
-				index: 1,
-				itemList: [{
-					type: "input",
-					text: "",
-					title: "设施名称"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
-					type: "input",
-					text: "",
-					title: "数量"
-				}, {
-					type: "input",
-					text: "",
-					title: "类型"
-				}, {
-					type: "inputWithUnit",
-					text: "",
-					title: "面积",
-					unit: "M"
-				}, {
-					type: "input",
-					text: "",
-					title: "贮存能力"
 				}]
-			}]
-		}
-		if (res.initProductCc.length > 0) {
-			this.title2fromList = []
-			for (let i in res.initProductCc) {
-				let item = {
-					index: i + 1,
+			}
+			this.levelOneData = []
+			for (let i in res.initOverviewList) {
+				let item = {}
+				item.value = res.initOverviewList[i].D_NAME
+				item.label = res.initOverviewList[i].D_NAME
+				item.category = res.initOverviewList[i].BIG_CATEGORY_ID
+				this.levelOneData.push(item)
+			}
+			if (res.initProductCc.length > 0) {
+				this.title2fromList = []
+				for (let i in res.initProductCc) {
+					let item = {
+						index: i + 1,
+						itemList: [{
+							type: "selectLevelText",
+							text1: res.initProductCc[i].D_NAME,
+							title1: "名称",
+							text2: res.initProductCc[i].BIG_CATEGORY_ID,
+							title2: "类别"
+						},{
+							type: "inputWithUnit",
+							text: res.initProductCc[i].STORE_PLAN,
+							title: "拟贮存量",
+							unit: res.initProductCc[i].STORE_PLAN_UNIT
+						}, {
+							type: "inputWithUnit",
+							text: res.initProductCc[i].STORE_LAST,
+							title: "上年度贮存量",
+							unit: res.initProductCc[i].STORE_LAST_UNIT
+						}, {
+							type: "inputWithUnit",
+							text: res.initProductCc[i].STORE_LASTSUM,
+							title: "截止上年度年底累计贮存量",
+							unit: res.initProductCc[i].STORE_LASTSUM_UNIT,
+						}, {
+							type: "input",
+							text: res.initProductCc[i].STORE_REASON,
+							title: "贮存原因"
+						}]
+					}
+					this.title2fromList.push(item)
+				}
+			} else {
+				this.title2fromList = [{
+					index: 1,
 					itemList: [{
-						type: "input",
-						text: res.initProductCc[i].D_NAME,
-						title: "名称"
-					}, {
-						type: "input",
-						text: res.initProductCc[i].BIG_CATEGORY_ID,
-						title: "类别"
+						type: "selectLevelText",
+						text1: "",
+						title1: "名称",
+						text2: "",
+						title2: "类别"
 					}, {
 						type: "inputWithUnit",
-						text: res.initProductCc[i].STORE_PLAN,
+						text: "",
 						title: "拟贮存量",
-						unit: res.initProductCc[i].STORE_PLAN_UNIT
+						unit: "吨"
 					}, {
 						type: "inputWithUnit",
-						text: res.initProductCc[i].STORE_LAST,
+						text: "",
 						title: "上年度贮存量",
-						unit: res.initProductCc[i].STORE_LAST_UNIT
+						unit: "吨"
 					}, {
 						type: "inputWithUnit",
-						text: res.initProductCc[i].STORE_LASTSUM,
+						text: "",
 						title: "截止上年度年底累计贮存量",
-						unit: res.initProductCc[i].STORE_LASTSUM_UNIT,
+						unit: "吨"
 					}, {
 						type: "input",
-						text: res.initProductCc[i].STORE_REASON,
+						text: "",
 						title: "贮存原因"
 					}]
-				}
-				this.title2fromList.push(item)
-			}
-		} else {
-			this.title2fromList = [{
-				index: 1,
-				itemList: [{
-					type: "input",
-					text: "",
-					title: "名称"
-				}, {
-					type: "input",
-					text: "",
-					title: "类别"
-				}, {
-					type: "inputWithUnit",
-					text: "",
-					title: "拟贮存量",
-					unit: "吨"
-				}, {
-					type: "inputWithUnit",
-					text: "",
-					title: "上年度贮存量",
-					unit: "吨"
-				}, {
-					type: "inputWithUnit",
-					text: "",
-					title: "截止上年度年底累计贮存量",
-					unit: "吨"
-				}, {
-					type: "input",
-					text: "",
-					title: "贮存原因"
 				}]
-			}]
-		}
-		this.title3.text = res.initTransfer.CC_PROCESS
+			}
+			this.title3.text = res.initTransfer.CC_PROCESS
 
-		if(res.initProductYs.length > 0){
-			this.switchInfo2[0].value = res.initProductYs[0].YS_1 + ""
-			this.switchInfo2[1].value = res.initProductYs[0].YS_2 + ""
-			this.switchInfo2[2].value = res.initProductYs[0].YS_3 + ""
-			this.compInfo.compName = res.initProductYs[0].EN_NAME_YS
-			this.compInfo.compVal = res.initProductYs[0].YS_ZZ
-			this.title4.text = res.initProductYs[0].YS_PROCESS
-		}
+			if (res.initProductYs.length > 0) {
+				this.switchInfo2[0].value = res.initProductYs[0].YS_1 + ""
+				this.switchInfo2[1].value = res.initProductYs[0].YS_2 + ""
+				this.switchInfo2[2].value = res.initProductYs[0].YS_3 + ""
+				this.compInfo.compName = res.initProductYs[0].EN_NAME_YS
+				this.compInfo.compVal = res.initProductYs[0].YS_ZZ
+				this.title4.text = res.initProductYs[0].YS_PROCESS
+			}
 
-		// })
+		})
 
 	},
 	methods: {
@@ -563,11 +360,11 @@ export default {
 			for (let key in this.queryJson) {
 				submitData[key] = this.queryJson[key]
 			}
-			submitData.CC_1 = this.switchInfo1[0].value + "" 
-			submitData.CC_2 = this.switchInfo1[1].value + "" 
-			submitData.CC_3 = this.switchInfo1[2].value + "" 
-			submitData.CC_4 = this.switchInfo1[3].value + "" 
-			submitData.CC_5 = this.switchInfo1[4].value + "" 
+			submitData.CC_1 = this.switchInfo1[0].value + ""
+			submitData.CC_2 = this.switchInfo1[1].value + ""
+			submitData.CC_3 = this.switchInfo1[2].value + ""
+			submitData.CC_4 = this.switchInfo1[3].value + ""
+			submitData.CC_5 = this.switchInfo1[4].value + ""
 			submitData.CC_PROCESS = this.title3.text
 
 			submitData.TRANSFER_YS = []
@@ -581,7 +378,7 @@ export default {
 			submitData.TRANSFER_YS.push(transItem)
 
 			submitData.TRANSFER_FACILITY = []
-			for(let i in this.title1fromList) {
+			for (let i in this.title1fromList) {
 				let item = {}
 				item.NAME = this.title1fromList[i].itemList[0].text
 				item.UNIT = this.title1fromList[i].itemList[1].text
@@ -590,39 +387,38 @@ export default {
 				item.AREA = this.title1fromList[i].itemList[4].text
 				item.AREA_UNIT = this.title1fromList[i].itemList[4].unit
 				item.STORE = this.title1fromList[i].itemList[5].text
-				
+
 				submitData.TRANSFER_FACILITY.push(item)
 			}
 
 			submitData.TRANSFER_CC = []
-			for(let i in this.title1fromList) {
+			for (let i in this.title1fromList) {
 				let item = {}
-				item.D_NAME = this.title2fromList[i].itemList[0].text
-				item.BIG_CATEGORY_ID = this.title2fromList[i].itemList[1].text
-				item.STORE_PLAN = this.title2fromList[i].itemList[2].text
-				item.STORE_PLAN_UNIT = this.title2fromList[i].itemList[2].unit
+				item.D_NAME = this.title2fromList[i].itemList[0].text1
+				item.BIG_CATEGORY_ID = this.title2fromList[i].itemList[0].text2
+				item.STORE_PLAN = this.title2fromList[i].itemList[1].text
+				item.STORE_PLAN_UNIT = this.title2fromList[i].itemList[1].unit
+				item.STORE_LAST = this.title2fromList[i].itemList[2].text
+				item.STORE_LAST_UNIT = this.title2fromList[i].itemList[2].unit
+				item.STORE_LASTSUM = this.title2fromList[i].itemList[3].text
+				item.STORE_LASTSUM_UNIT = this.title2fromList[i].itemList[3].unit
+				item.STORE_REASON = this.title2fromList[i].itemList[4].text
 
-				item.STORE_LAST = this.title2fromList[i].itemList[3].text
-				item.STORE_LAST_UNIT = this.title2fromList[i].itemList[3].unit
-				item.STORE_LASTSUM = this.title2fromList[i].itemList[4].text
-				item.STORE_LASTSUM_UNIT = this.title2fromList[i].itemList[4].unit
-				item.STORE_REASON = this.title2fromList[i].itemList[5].text
-				
 				submitData.TRANSFER_FACILITY.push(item)
 			}
-				
+
 			fetch({
 				url: '/plan/saveTransfer',
 				method: 'POST',
-				data: 'params='+JSON.stringify(submitData)
+				data: 'params=' + JSON.stringify(submitData)
 			}).then(res => {
-				if(res.resFlag == '0'){
+				if (res.resFlag == '0') {
 					this.$notify({
 						title: '成功',
 						message: '保存成功',
 						type: 'success'
 					});
-				}else{
+				} else {
 					this.$notify.error({
 						title: '失败',
 						message: res.resMsg
@@ -665,13 +461,11 @@ export default {
 			this.title2fromList = [{
 				index: 1,
 				itemList: [{
-					type: "input",
-					text: "",
-					title: "名称"
-				}, {
-					type: "input",
-					text: "",
-					title: "类别"
+					type: "selectLevelText",
+					text1: "",
+					title1: "名称",
+					text2: "",
+					title2: "类别"
 				}, {
 					type: "inputWithUnit",
 					text: "",

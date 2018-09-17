@@ -3,7 +3,7 @@
 		<div class="assForm_bg" v-for="(item, index) in formList" :key="index">
 			<el-row class="assFromItem_row">
 				<div v-for="fItem in item.itemList" :key="fItem" >
-					<el-col v-if="fItem.type!=='selectLevel'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
+					<el-col v-if="fItem.type!=='selectLevel' && fItem.type!=='selectLevelText'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title}}</div>
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
@@ -58,6 +58,27 @@
 									</el-option>
 								</el-select>
 							</div>
+						</el-row>
+					</el-col>
+					<el-col v-if="fItem.type==='selectLevelText'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
+						<el-row class="assFromItem_itemRow">
+							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
+							<div class="assFromItem_right">
+								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelChange(fItem)">
+									<el-option
+										v-for="uItem in levelOneData"
+										:key="uItem.value"
+										:label="uItem.label"
+										:value="uItem.value">
+									</el-option>
+								</el-select>
+							</div>
+						</el-row>
+					</el-col>
+					<el-col v-if="fItem.type==='selectLevelText'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
+						<el-row	v-if="fItem.type==='selectLevelText'" class="assFromItem_itemRow">
+							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title2}}</div>
+							<div class="assFromItem_right unitShow">{{fItem.text2}}</div>
 						</el-row>
 					</el-col>
 				</div>
@@ -130,6 +151,14 @@
 			},
 			levelOneChange(item){
 				item.text2 = ""
+			},
+			levelChange(item){
+				for(let i in this.levelOneData){
+					if(this.levelOneData[i].value === item.text1){
+						item.text2 = this.levelOneData[i].category
+						break
+					}
+				}
 			}
     }
   }
