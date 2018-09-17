@@ -392,7 +392,7 @@ export default {
 			this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
 			this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
 
-			if(res.initEpExtend.sons.length > 0){
+			if(res.initEpExtend.sons && res.initEpExtend.sons.length > 0){
 				this.managerList = []
 				for(let i in res.initEpExtend.sons){
 					let item = {}
