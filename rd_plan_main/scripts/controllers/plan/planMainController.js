@@ -60,7 +60,15 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
     $scope.jumpSub = function(pathname){
         Init.iwbhttp('/plan/planMain', {url:pathname}, function(data,header,config,status){
             console.log(data)
-            var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId  ;
+            var showflag = false;
+            if($scope.userType == 'admin'){
+                showflag = $stateParams.btnFlag 
+            }else{
+                if($scope.applyBtnFlag && stateParams.btnFlag ){
+                    showflag = true
+                }
+            }
+            var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId+"&showflag="+showflag ;
             window.open(sub_url, '_blank')
         },function(data,header,config,status){
         });

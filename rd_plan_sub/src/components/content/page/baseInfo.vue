@@ -369,7 +369,7 @@ export default {
 		  method: 'POST',
 		  data: 'params='+JSON.stringify(this.queryJson)
 		}).then(res => {
-			this.EP_ID = res.initRes.EP_ID
+			this.EP_ID = this.queryJson.EP_ID
 			this.userRole = res.userType
 			this.baseInfoData.planDate = res.initRes.planYear
 			this.baseInfoData.compName = res.initRes.EP_NAME

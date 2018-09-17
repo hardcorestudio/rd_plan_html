@@ -140,6 +140,7 @@ angular.module('sbAdminApp').controller('FinishedTaskListCtrl', ['$scope','Init'
         var data = row.data();
         var bizId = data.BIZ_ID;
         var applyId = data.AYL_ID;
+        var epId = data.EP_ID;
         var bizIdStart = bizId.substring(0,2);
         if(angular.equals("TP", bizIdStart)){
             if(localStorageService.get("userType") == "admin"){
@@ -148,6 +149,7 @@ angular.module('sbAdminApp').controller('FinishedTaskListCtrl', ['$scope','Init'
                     "bizId":bizId,
                     "tpId": bizId,
                     "applyId":applyId,
+                    "epId":epId,
                     "btnFlag":false,
                     "from":"dashboard.finishedTaskIndex.finishedTaskList"
                 });
@@ -156,8 +158,8 @@ angular.module('sbAdminApp').controller('FinishedTaskListCtrl', ['$scope','Init'
                 {
                     "bizId": bizId,
                     "tpId": bizId,
-                    "btnFlag": true,
                     "applyId": applyId,
+                    "epId":epId,
                     "btnFlag":false,
                     "from":"dashboard.finishedTaskIndex.finishedTaskList"
                 });
