@@ -402,12 +402,12 @@ export default {
 					this.managerList.push(item)
 				}
 			}
-			this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER + ""
-			this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY + ""
-			this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION + ""
-			this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER + ""
-			this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING + ""
-			this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT + ""
+			this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER ? res.initEpExtend.SYS_MANAGER + "" : "0"
+			this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY ? res.initEpExtend.SYS_RESPONSIBILITY + "" : "0"
+			this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION ? res.initEpExtend.SYS_OPERATION + "" : "0"
+			this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER ? res.initEpExtend.SYS_LEDGER + "" : "0"
+			this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING ? res.initEpExtend.SYS_TRAINING + "" : "0"
+			this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT ? res.initEpExtend.SYS_ACCIDENT + "" : "0"
 			this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
 		})
 		

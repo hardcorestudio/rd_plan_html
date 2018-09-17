@@ -345,9 +345,9 @@ export default {
 			this.title3.text = res.initTransfer.CC_PROCESS
 
 			if (res.initProductYs.length > 0) {
-				this.switchInfo2[0].value = res.initProductYs[0].YS_1 + ""
-				this.switchInfo2[1].value = res.initProductYs[0].YS_2 + ""
-				this.switchInfo2[2].value = res.initProductYs[0].YS_3 + ""
+				this.switchInfo2[0].value = res.initProductYs[0].YS_1 ? res.initProductYs[0].YS_1 + "" : "0"
+				this.switchInfo2[1].value = res.initProductYs[0].YS_2 ? res.initProductYs[0].YS_2 + "" : "0"
+				this.switchInfo2[2].value = res.initProductYs[0].YS_3 ? res.initProductYs[0].YS_3 + "" : "0"
 				this.compInfo.compName = res.initProductYs[0].EN_NAME_YS
 				this.compInfo.compVal = res.initProductYs[0].YS_ZZ
 				this.title4.text = res.initProductYs[0].YS_PROCESS
