@@ -64,7 +64,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
             if($scope.userType == 'admin'){
                 showflag = $stateParams.btnFlag 
             }else{
-                if($scope.applyBtnFlag && stateParams.btnFlag ){
+                if($scope.applyBtnFlag && $scope.btnFlag ){
                     showflag = true
                 }
             }
