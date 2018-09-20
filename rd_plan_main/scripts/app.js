@@ -834,8 +834,8 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
 iwoboApp.run(['$state', '$rootScope', 'localStorageService', '$modal', '$log', 'Init', function ($state, $rootScope, localStorageService, $modal, $log, Init) {
     console.log("===========iwobo app running====================================");
     // $rootScope.baseUrl = 'http://lovewobo.com';
-    // $rootScope.baseUrl = 'http://localhost:9002/api';
-    $rootScope.baseUrl = 'http://192.168.1.101:9002/api';
+    $rootScope.baseUrl = 'http://localhost:9002/api';
+    // $rootScope.baseUrl = 'http://192.168.1.101:9002/api';
     //$rootScope.baseUrl = 'http://60.30.64.249:7080/rd_2nd';
     $rootScope.baseUrlPath = '';
     $rootScope.uuid = '';
