@@ -150,8 +150,11 @@ angular.module('sbAdminApp').controller('LoginCtrl', ['$rootScope','$scope','Ini
         var currentUrl = window.location.href;
         var url = "";
         if(currentUrl.indexOf("/main.html")>0){
-            url = currentUrl.split("/main.html")[0] + "/index.html";
-        }else{
+            // url = currentUrl.split("/main.html")[0] + "/index.html";
+            // url = currentUrl.split("/rd_plan_main/main.html")[0];
+            url = currentUrl.split("/rd_plan_main/main.html")[0] + "/index.html";
+        }
+        else{
             url = "/index.html";
         }
         window.location.href = url;

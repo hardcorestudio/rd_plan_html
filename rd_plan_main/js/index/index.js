@@ -42,9 +42,16 @@
 function gologin(){
     var currentUrl = window.location.href;
     var url = "";
-    if(currentUrl.indexOf("/index.html")>0){
+    if(currentUrl.indexOf("/index.html")>0 && currentUrl.indexOf("/rdplan/index.html")<0){
         url = currentUrl.split("/index.html")[0] + "/main.html#/login";
-    }else{
+    }
+    else if(currentUrl.substr(currentUrl.length-8) == '/rdplan/'){
+        url = currentUrl + "rd_plan_main/main.html#/login";
+    }
+    else if(currentUrl.indexOf("/rdplan/index.html") > 0){
+        url = currentUrl.split("/index.html")[0] + "/rd_plan_main/main.html#/login";
+    }
+    else{
         url = currentUrl + "main.html#/login";
     }
     window.location.href = url;
