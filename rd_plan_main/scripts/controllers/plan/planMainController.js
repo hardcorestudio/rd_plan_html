@@ -58,6 +58,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
     });
 
     $scope.jumpSub = function(pathname){
+        var newWin = window.open('about:blank');//过渡页面的url
         Init.iwbhttp('/plan/planMain', {url:pathname}, function(data,header,config,status){
             console.log(data)
             var showflag = false;
@@ -69,7 +70,8 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                 }
             }
             var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId+"&showflag="+showflag ;
-            window.open(sub_url, '_blank')
+            // window.open(sub_url, '_blank')
+            newWin.location.href = sub_url;
         },function(data,header,config,status){
         });
     }
