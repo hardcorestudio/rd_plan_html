@@ -13,13 +13,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="单位名称">
-							<el-input v-if="userRole=== 'CSEP'" v-model="compInfo.compName" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="compInfo.compName" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{compInfo.compName}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="运输资质">
-							<el-input v-if="userRole=== 'CSEP'" v-model="compInfo.compVal" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="compInfo.compVal" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{compInfo.compVal}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -359,6 +359,13 @@ export default {
 	},
 	methods: {
 		doSubmit () {
+			const loading = this.$loading({
+				lock: true,
+				text: 'Loading',
+				spinner: 'el-icon-loading',
+				background: 'rgba(0, 0, 0, 0.3)'
+			});
+
 			let submitData = {}
 			submitData.TP_ID = this.queryJson.TP_ID
 			for (let key in this.queryJson) {
@@ -428,6 +435,7 @@ export default {
 						message: res.resMsg
 					});
 				}
+				loading.close();
 			})
 		},
 		resetInfo1 () {

@@ -10,14 +10,14 @@
 			<el-input v-if="titleType === 'textarea' && userRole === 'CSEP'" type="textarea"
 				:class="userRole !== 'CSEP' ? 'colorBlack': ''"
 				:autosize="{ minRows: 4, maxRows: 6}"
-				:placeholder="titleInfo.placeholder"
-				v-model="titleInfo.text" class="assTitleTextarea_input">
+				:placeholder="titleInfo.placeholder + '(限500字)'"
+				v-model="titleInfo.text" class="assTitleTextarea_input" maxlength="500">
 			</el-input>
 			<el-input v-if="titleType === 'textarea' && userRole !== 'CSEP'" type="textarea"
 				:class="userRole !== 'CSEP' ? 'colorBlack': ''"
 				:autosize="{ minRows: 4, maxRows: 6}"
-				:placeholder="titleInfo.placeholder"
-				v-model="titleInfo.text" class="assTitleTextarea_input" disabled>
+				:placeholder="titleInfo.placeholder + '(限500字)'"
+				v-model="titleInfo.text" class="assTitleTextarea_input" disabled maxlength="500">
 			</el-input>
 		</div>
 	</div>

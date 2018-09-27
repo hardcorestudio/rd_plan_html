@@ -33,7 +33,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalInvestment" placeholder="必填">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalInvestment" placeholder="必填(限9位)" type="number" maxlength="9">
 								<template slot="append">{{baseInfoData.TOTAL_INVESTMENT_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.totalInvestment}} {{baseInfoData.TOTAL_INVESTMENT_UNIT}}</el-row>
@@ -41,7 +41,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="总产值">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalOutputValue" placeholder="必填">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalOutputValue" placeholder="必填(限9位)" type="number" maxlength="9">
 								<template slot="append">{{baseInfoData.TOTAL_OUTPUTVALUE_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.totalOutputValue}} {{baseInfoData.TOTAL_OUTPUTVALUE_UNIT}}</el-row>
@@ -51,7 +51,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="占地面积">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.areaCovered" placeholder="必填">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.areaCovered" placeholder="必填(限9位)" type="number" maxlength="9">
 								<template slot="append">{{baseInfoData.FLOOR_AREA_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.areaCovered}} {{baseInfoData.FLOOR_AREA_UNIT}}</el-row>
@@ -59,7 +59,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="职工人数">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.personNum" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.personNum" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.personNum}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -67,13 +67,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="环保部门负责人">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.chargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.chargeMan" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.chargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="联系人">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.person" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.person" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.person}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -81,13 +81,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="联系电话">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.phone" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.phone" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.phone}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="传真电话">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.tel" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.tel" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.tel}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -95,13 +95,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="电子邮箱">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.mail" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.mail" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.mail}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="单位网站">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.webside" placeholder="选填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.webside" placeholder="选填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.webside}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -110,7 +110,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="管理部门">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.department" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.department" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.department}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -118,7 +118,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="部门负责人">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.departmentChargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.departmentChargeMan" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.departmentChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -126,7 +126,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="废物管理负责人">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.trashChargeMan" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.trashChargeMan" placeholder="必填(限500字)" maxlength="500"></el-input>
 							<el-row v-else>{{baseInfoData.trashChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -415,6 +415,14 @@ export default {
 	},
 	methods: {
 		doSubmit () {
+			const loading = this.$loading({
+				lock: true,
+				text: 'Loading',
+				spinner: 'el-icon-loading',
+				background: 'rgba(0, 0, 0, 0.3)'
+			});
+			
+				
 			let submitData = {}
 			submitData.EP_ID = this.EP_ID
 			submitData.TOTAL_INVESTMENT = this.baseInfoData.totalInvestment
@@ -472,6 +480,7 @@ export default {
 						message: res.resMsg
 					});
 				}
+				loading.close();
 			})
 		},
 	}

@@ -437,6 +437,12 @@ export default {
 	},
 	methods: {
 		doSubmit () {
+			const loading = this.$loading({
+				lock: true,
+				text: 'Loading',
+				spinner: 'el-icon-loading',
+				background: 'rgba(0, 0, 0, 0.3)'
+			});
 			let submitData = {}
 			submitData.TP_ID = this.queryJson.TP_ID
 
@@ -475,6 +481,7 @@ export default {
 						message: res.resMsg
 					});
 				}
+				loading.close();
 			})
 		},
 		doReset () {

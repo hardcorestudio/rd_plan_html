@@ -6,7 +6,6 @@
     <my-footer></my-footer>
   </div>
 </template>
-
 <script>
   
   // import Header from './components/common/Header.vue';
@@ -27,7 +26,10 @@
   }
 </script>
 
-<style scoped>
+<style>
+.el-loading-parent--relative{
+  position: static!important;
+}
 #AppVue{
   background-color: #f5f7f9;
   display: flex;
