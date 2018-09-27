@@ -1,13 +1,14 @@
 /**
  * Created by woody on 2015/12/12.
  */
-angular.module('app').factory('WebSocket', ['$websocket', '$rootScope','$cordovaLocalNotification', function($websocket, $rootScope,$cordovaLocalNotification) {
-//  var ws = $websocket('ws://localhost:9001/wobowebsocket');
-  var wsurl = $rootScope.websocketUrlController+'?userId='+$rootScope.userId;
+angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','localStorageService', function($websocket, $rootScope,localStorageService) {
+//  var ws = $websocket('ws://localhost:9001/mywebsocket');
+  var wsurl = $rootScope.websocketUrlController+'?userId='+localStorageService.get('userId');;
+  console.log(wsurl)
   var ws = $websocket(wsurl);
   var collection = [];
   ws.onMessage(function(event) {
-    //console.log('message: ', event);
+    console.log('message: ', event);
     var res;
     try {
       res = (new Function("return " + event.data))();
@@ -17,33 +18,16 @@ angular.module('app').factory('WebSocket', ['$websocket', '$rootScope','$cordova
           'message': event.data
       };
     }
-    $cordovaLocalNotification.schedule([
-      {
-          id: res.id,
-          title: res.title,
-          text: res.text
-      }
-    ]).then(function (result) {
-      //to do
-    });
-//    collection.push({
-//      userId: res.userId,
-//      content: res.message,
-//      timeStamp: event.timeStamp
-//    });
-  });
-  $rootScope.$on('$cordovaLocalNotification:click',function (event, notification, state) {
-    //to do
   });
   ws.onError(function(event) {
-    //console.log('connection Error', event);
+    console.log('connection Error', event);
   });
   ws.onClose(function(event) {
-    //console.log('connection closed', event);
+    console.log('connection closed', event);
   });
   ws.onOpen(function() {
-    //console.log('connection open');
-//    ws.send('Hello woody');
+    console.log('connection open');
+   ws.send('{"key":"hello","val":"woody"}');
   });
   return {
     collection: collection,

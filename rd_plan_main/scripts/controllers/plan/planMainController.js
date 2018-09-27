@@ -1,5 +1,6 @@
 'use strict';
-angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','Init','CheckBrowser','$state','$stateParams','localStorageService','Modal','$location', function ($rootScope,$scope,Init,CheckBrowser,$state,$stateParams,localStorageService,Modal,$location) {
+angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','Init','CheckBrowser','$state','$stateParams','localStorageService','Modal','$location','WebSocket', function ($rootScope,$scope,Init,CheckBrowser,$state,$stateParams,localStorageService,Modal,$location,WebSocket) {
+    $scope.WebSocket = WebSocket;
     CheckBrowser.check();
     //弹框参数
     var resolve = {};

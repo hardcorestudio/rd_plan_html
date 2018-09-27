@@ -14,7 +14,8 @@ var iwoboApp = angular.module('sbAdminApp', [
     'ui.bootstrap',
     'angular-loading-bar',
     'duScroll',
-    'treeControl'
+    'treeControl',
+    'ngWebSocket'
 ]);
 iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($httpProvider, $stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -469,6 +470,7 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
             }
         })
         .state('dashboard.unfinishedTaskIndex.planMain', {
+            // cache:'false', 
             url: '/unfinishedPlanMain',
             controller: 'PlanMainCtrl',
             templateUrl: 'views/dashboard/plan/planMain.html',
@@ -837,6 +839,7 @@ iwoboApp.run(['$state', '$rootScope', 'localStorageService', '$modal', '$log', '
     $rootScope.baseUrl = 'http://localhost:9002/api';
     // $rootScope.baseUrl = 'http://192.168.1.120:9002/api';
     //$rootScope.baseUrl = 'http://60.30.64.249:7080/rd_2nd';
+    $rootScope.websocketUrlController = 'ws://localhost:9002/mywebsocket';
     $rootScope.baseUrlPath = '';
     $rootScope.uuid = '';
     $rootScope.platform = "";
