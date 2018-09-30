@@ -17,30 +17,29 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <div class="row " ng-model="planMain">
+    <div class="row " ng-model="planMain" style="padding-bottom: 60px">
         <div class="col-lg-12">
             <h3>基本信息</h3>
             <div class="row_func">
                 <div ng-class="{true:'func_done',false:'func'}[baseInfoClass]"  ng-click="jumpSub('baseInfo')">
                     <div>基本信息</div>
                 </div>
+                <div ng-class="{true:'func_done',false:'func'}[productionSituationClass]" ng-click="jumpSub('productionSituation')">
+                    <div>产品生产情况</div>
+                </div>
                 <div ng-class="{true:'func_done',false:'func'}[decrementPlanClass]" ng-click="jumpSub('decrementPlan')">
                     <div>危险废物减量化计划和措施</div>
                 </div>
-                
-                <!-- <div ng-class="{true:'func_done',false:'func'}[envClass]" ng-click="jumpSub('environmentalMonitoring')">
+                <div ng-class="{true:'func_done',false:'func'}[envClass]" ng-click="jumpSub('environmentalMonitoring')">
                     <div>环境监测情况</div>
                 </div>
                 <div ng-class="{true:'func_done',false:'func'}[lastClass]" ng-click="jumpSub('lastYearManagePlanRecord')">
                     <div>上年度管理计划回顾</div>
-                </div> -->
+                </div>
             </div>
             <div style="display:flex;margin-top:36px;border-bottom: 1px solid #eee;"></div>
             <h3>危险废物信息</h3>
             <div class="row_func">
-                <div ng-class="{true:'func_done',false:'func'}[productionSituationClass]" ng-click="jumpSub('productionSituation')">
-                    <div>产品生产情况</div>
-                </div>
                 <div ng-class="{true:'func_done',false:'func'}[produceSituationClass]" ng-click="jumpSub('produceSituation')">
                     <div>危险废物产生概况</div>
                 </div>
