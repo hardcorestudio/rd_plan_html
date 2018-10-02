@@ -1,5 +1,5 @@
 'use strict';
-angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','Init','CheckBrowser','$state','$stateParams','localStorageService','Modal','$location','WebSocket', function ($rootScope,$scope,Init,CheckBrowser,$state,$stateParams,localStorageService,Modal,$location,WebSocket) {
+angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','Init','CheckBrowser','$state','$stateParams','localStorageService','Modal','$location','WebSocket','$timeout','$interval', function ($rootScope,$scope,Init,CheckBrowser,$state,$stateParams,localStorageService,Modal,$location,WebSocket,$timeout,$interval) {
     $scope.WebSocket = WebSocket;
     CheckBrowser.check();
     //弹框参数
@@ -549,15 +549,33 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
     }
     //提交
     $scope.sub = function (){
-        Init.iwbhttp('/plan/apply2q', $scope.param, function(data,header,config,status){
-            if(data.resFlag == '0'){
-                $scope.applyBtnFlag = false;
-                $scope.open('提交成功');
-            }else{
-                $scope.open('提交失败');
-            }
-        },function(data,header,config,status){
-        });
+        $timeout(function () {
+            var msg = "确定提交管理计划？";
+            var parm = $scope.param;
+            url = 'views/modal/confirmModal.html';
+            ctrlName = 'ConfirmModalCtrl';
+            resolve = {
+                content: function () {
+                    return msg;
+                },
+                data: function () {
+                    return parm;
+                }
+            };
+            var modalInstance = Modal.modal(url, ctrlName, resolve, function (returnData) {
+                Init.iwbhttp('/plan/apply2q', returnData, function(data,header,config,status){
+                    if(data.resFlag == '0'){
+                        $scope.applyBtnFlag = false;
+                        $scope.open('提交成功');
+                    }else{
+                        $scope.open('提交失败');
+                    }
+                },function(data,header,config,status){
+                });
+            }, function () {
+
+            });
+        }, 500);
     }
 
     //同意

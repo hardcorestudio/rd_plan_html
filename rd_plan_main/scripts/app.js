@@ -492,6 +492,7 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                             'scripts/controllers/admin/approveDetailModalController.js',
                             'scripts/controllers/admin/approveDisagreeModalController.js',
                             'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/modal/confirmModalController.js',
                             'scripts/controllers/plan/planMainController.js'
                         ]
                     })
@@ -520,6 +521,7 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                             'scripts/controllers/admin/approveDetailModalController.js',
                             'scripts/controllers/admin/approveDisagreeModalController.js',
                             'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/modal/confirmModalController.js',
                             'scripts/controllers/plan/planMainController.js'
                         ]
                     })
@@ -559,6 +561,7 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                         files: [
                             'styles/plan/index.css',
                             'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/modal/confirmModalController.js',
                             'scripts/controllers/plan/planMainController.js'
                         ]
                     })
