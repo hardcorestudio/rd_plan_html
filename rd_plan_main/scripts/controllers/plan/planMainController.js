@@ -31,7 +31,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
     $scope.applyBtnFlag = false;
     $scope.applyId = $stateParams.applyId;
     Init.iwbhttp('/plan/checkPlan', $scope.param, function(data,header,config,status){
-        if(data.applyListStatus == "" || data.applyListStatus == "00" || data.applyListStatus == "03"){
+        if(data.applyListStatus == "" || data.applyListStatus == "00" || data.applyListStatus == "03" || data.applyListStatus == "04"){
             $scope.applyBtnFlag = true;
         }
         if(data.baseInfoFlag == '1'){
@@ -125,9 +125,25 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initEnv', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
         var p = {};
         p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
+        Init.iwbhttp('/plan/initLastInfo', p, function(data,header,config,status){
             console.log(data)
             console.log("sssssssssssss")
            console.log(JSON.stringify(data))
@@ -541,6 +557,37 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
           
         // },function(data,header,config,status){
         // });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId;
+        // p.ENV1 = '测试1'
+        // p.ENV2 = '测试2'
+        // p.ENV3 = '测试3'
+        // p.ENV4 = '测试4'
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveEnv', p, function(data,header,config,status){
+        //     console.log(data)
+           
+        // },function(data,header,config,status){
+        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId;
+        p.LI_1 = '测试1'
+        p.LI_2 = '测试2'
+        p.C_1 = 1
+        p.C_2 = 0
+        p.C_3 = 1
+        p.C_4 = 0
+        p.C_5 = 1
+        p.C_6 = 0
+        p.C_7 = 1
+        p.C_8 = 0
+        p.C_9 = 0
+        console.log(JSON.stringify(p));
+        Init.iwbhttp('/plan/saveLastInfo', p, function(data,header,config,status){
+            console.log(data)
+           
+        },function(data,header,config,status){
+        });
     }
     //返回上一页
     $scope.back = function (){
