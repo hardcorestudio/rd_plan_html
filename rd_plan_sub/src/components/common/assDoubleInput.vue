@@ -9,13 +9,13 @@
 				<el-row :gutter="20">
 					<el-col v-if="itemTitleLeft && itemTitleLeft !== ''" :span="11">
 						<el-form-item :label="itemTitleLeft">
-							<el-input v-if="userRole=== 'CSEP'" v-model="item.text1" placeholder="必填(限500字)" maxlength="500"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="item.text1" placeholder="必填"></el-input>
 							<el-row v-else>{{item.text1}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col v-if="itemTitleRight && itemTitleRight !== ''" :span="11">
 						<el-form-item :label="itemTitleRight">
-							<el-input v-if="userRole=== 'CSEP'" v-model="item.text2" placeholder="必填(限500字)" maxlength="500"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="item.text2" placeholder="必填"></el-input>
 							<el-row v-else>{{item.text2}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -101,13 +101,16 @@
 				this.formList.push(item);
 			},
 			reduceSign(item) {
-				let myFormList = [];
+				let myIndex = ""
 				for(let i in this.formList) {
-					if(this.formList[i].index !== item.index){
-						myFormList.push(this.formList[i]);
+					if(this.formList[i].index === item.index){
+						myIndex = i
 					}
 				}
-				this.formList = myFormList;
+				if(myIndex !== ""){
+					this.formList.splice(myIndex, 1)
+				}
+				
 			}
     }
   }

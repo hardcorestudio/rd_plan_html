@@ -3,7 +3,9 @@
 		<div v-if="titleInfo.title && titleInfo.title !== ''" class="assTitle_titleArea">
 			<div class="assTitleArea_text">{{ titleInfo.title }}</div>
 			<div v-if="titleType === 'reset' && userRole === 'CSEP'" class="assTitleArea_reset" @click="doReset">重置</div>
-			<div v-if="numTitle && numTitle !== ''" class="assTitleArea_num">{{numTitle}}</div>
+			<div v-if="numTitle && numTitle.length > 0" class="assTitleArea_num">
+				<div :class="numTitle.length == '1' ? 'assTitleArea_numItem' : ''" v-for="numItem in numTitle" :key="numItem">计划产生量合计：{{numItem.year_num_sum}} 实际产生量合计：{{numItem.last_num_sum}}</div>
+			</div>
 		</div>
 		<div v-if="titleType === 'textarea' || titleType === 'hint'" :class="titleType === 'hint' ? 'colorGreen assTitle_textarea' : 'assTitle_textarea'">
 			<div v-if="titleInfo.subTitle && titleInfo.subTitle !== ''" class="assTitleTextarea_title">{{ titleInfo.subTitle }}</div>
@@ -27,7 +29,7 @@
 		props: {
 			titleInfo: Object,
 			titleType: String,
-			numTitle: String,
+			numTitle: Array,
 			userRole: String
 		},
     data() {
@@ -52,8 +54,8 @@
 }
 .assTitle_titleArea{
 	width: 100%;
-	height: 44px;
-	line-height: 44px;
+	/* height: 44px;
+	line-height: 44px; */
 	float: left;
 }
 .assTitleArea_text{
@@ -62,6 +64,7 @@
 	font-size: 20px;
 	color: black;
 	font-weight: bold;
+	line-height: 44px;
 }
 .assTitleArea_reset{
 	height: 100%;
@@ -70,7 +73,11 @@
 	margin-left: 10px;
 	width: 50px;
 	text-align: center;
-	color: rgba(67,182,122)
+	color: rgba(67,182,122);
+	line-height:44px;
+}
+.assTitleArea_numItem{
+	line-height: 44px;
 }
 .assTitleArea_num{
 	height: 100%;

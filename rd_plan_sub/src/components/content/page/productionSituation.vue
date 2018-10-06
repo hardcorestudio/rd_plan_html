@@ -57,7 +57,7 @@ export default {
 					text: "",
 					title: "原辅材料名称"
 				}, {
-					type: "select",
+					type: "selectThree",
 					text: "",
 					title: "单位"
 				}, {
@@ -132,250 +132,244 @@ export default {
 		fetch({
 			url: '/plan/initProductInfo',
 			method: 'POST',
-			data: 'params='+JSON.stringify(this.queryJson)
+			data: 'params=' + JSON.stringify(this.queryJson)
 		}).then(res => {
-		// let res = {
-		// 	"initProductOutput": [
-		// 		{
-		// 			"UNIT": "aaa",
-		// 			"NAME": "111",
-		// 			"LAST_NUM": "100.00",
-		// 			"ID": "1",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "1000.00"
-		// 		},
-		// 		{
-		// 			"UNIT": "aaa",
-		// 			"NAME": "111",
-		// 			"LAST_NUM": "100.00",
-		// 			"ID": "2",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "1000.00"
-		// 		}
-		// 	],
-		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY0phWnd2KzhIdkFaa0JCSFNUWk1xQT0=",
-		// 	"operatorId": "",
-		// 	"empId": "",
-		// 	"userType": "CSEP",
-		// 	"initProductOri": [
-		// 		{
-		// 			"UNIT": "吨",
-		// 			"NAME": "111",
-		// 			"LAST_NUM": "100.00",
-		// 			"Id": "1",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "1000.00"
-		// 		},
-		// 		{
-		// 			"UNIT": "年",
-		// 			"NAME": "111",
-		// 			"LAST_NUM": "100.00",
-		// 			"Id": "2",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "1000.00"
-		// 		}
-		// 	],
-		// 	"newGuideFlag": "",
-		// 	"initProductEqu": [
-		// 		{
-		// 			"UNIT": "aaa",
-		// 			"NAME": "111",
-		// 			"LAST_NUM": "100.00",
-		// 			"Id": "1",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "1000.00"
-		// 		},
-		// 		{
-		// 			"UNIT": "aaa",
-		// 			"NAME": "111",
-		// 			"LAST_NUM": "100.00",
-		// 			"Id": "2",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "1000.00"
-		// 		}
-		// 	],
-		// 	"belongQ": "",
-		// 	"belongS": "",
-		// 	"nickName": "天津合佳威立雅环境服务有限公司",
-		// 	"orgCode": "",
-		// 	"userId": "EP201410280910450012",
-		// 	"userName": "",
-		// 	"sepaName": "津南区",
-		// 	"status": "",
-		// 	"ifLogin": "0",
-		// 	"ROLEID": "CSEP",
-		// 	"epName": "天津合佳威立雅环境服务有限公司",
-		// 	"epId": "EP201410280910450012",
-		// 	"belongSepa": "JNQ",
-		// 	"userPortrait": "",
-		// 	"IWBSESSION": "BROWSER-20180916033650",
-		// 	"realName": "",
-		// 	"contextPath": "",
-		// 	"initProductInfo": {
-		// 		"PRODUCT_DESC": "aaa",
-		// 		"sysdate": 1536974048557,
-		// 		"TP_ID": "TP201809120707190010",
-		// 		"STATUS": "00",
-		// 		"EP_ID": "EP201410280910450012"
-		// 	},
-		// 	"orgSeq": ""
-		// }
-		this.userRole = res.userType
-		this.EP_ID = this.queryJson.EP_ID
-		this.TP_ID = this.queryJson.TP_ID
+			// let res = {
+			// 	"initProductOutput": [
+			// 		{
+			// 			"UNIT": "aaa",
+			// 			"NAME": "111",
+			// 			"LAST_NUM": "100.00",
+			// 			"ID": "1",
+			// 			"TP_ID": "TP201809120707190010",
+			// 			"YEAR_NUM": "1000.00"
+			// 		},
+			// 		{
+			// 			"UNIT": "aaa",
+			// 			"NAME": "111",
+			// 			"LAST_NUM": "100.00",
+			// 			"ID": "2",
+			// 			"TP_ID": "TP201809120707190010",
+			// 			"YEAR_NUM": "1000.00"
+			// 		}
+			// 	],
+			// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY0phWnd2KzhIdkFaa0JCSFNUWk1xQT0=",
+			// 	"operatorId": "",
+			// 	"empId": "",
+			// 	"userType": "CSEP",
+			// 	"initProductOri": [
+			// 		{
+			// 			"UNIT": "吨",
+			// 			"NAME": "111",
+			// 			"LAST_NUM": "100.00",
+			// 			"Id": "1",
+			// 			"TP_ID": "TP201809120707190010",
+			// 			"YEAR_NUM": "1000.00"
+			// 		},
+			// 		{
+			// 			"UNIT": "年",
+			// 			"NAME": "111",
+			// 			"LAST_NUM": "100.00",
+			// 			"Id": "2",
+			// 			"TP_ID": "TP201809120707190010",
+			// 			"YEAR_NUM": "1000.00"
+			// 		}
+			// 	],
+			// 	"newGuideFlag": "",
+			// 	"initProductEqu": [
+			// 		{
+			// 			"UNIT": "aaa",
+			// 			"NAME": "111",
+			// 			"LAST_NUM": "100.00",
+			// 			"Id": "1",
+			// 			"TP_ID": "TP201809120707190010",
+			// 			"YEAR_NUM": "1000.00"
+			// 		},
+			// 		{
+			// 			"UNIT": "aaa",
+			// 			"NAME": "111",
+			// 			"LAST_NUM": "100.00",
+			// 			"Id": "2",
+			// 			"TP_ID": "TP201809120707190010",
+			// 			"YEAR_NUM": "1000.00"
+			// 		}
+			// 	],
+			// 	"belongQ": "",
+			// 	"belongS": "",
+			// 	"nickName": "天津合佳威立雅环境服务有限公司",
+			// 	"orgCode": "",
+			// 	"userId": "EP201410280910450012",
+			// 	"userName": "",
+			// 	"sepaName": "津南区",
+			// 	"status": "",
+			// 	"ifLogin": "0",
+			// 	"ROLEID": "CSEP",
+			// 	"epName": "天津合佳威立雅环境服务有限公司",
+			// 	"epId": "EP201410280910450012",
+			// 	"belongSepa": "JNQ",
+			// 	"userPortrait": "",
+			// 	"IWBSESSION": "BROWSER-20180916033650",
+			// 	"realName": "",
+			// 	"contextPath": "",
+			// 	"initProductInfo": {
+			// 		"PRODUCT_DESC": "aaa",
+			// 		"sysdate": 1536974048557,
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"STATUS": "00",
+			// 		"EP_ID": "EP201410280910450012"
+			// 	},
+			// 	"orgSeq": ""
+			// }
+			this.userRole = res.userType
+			this.EP_ID = this.queryJson.EP_ID
+			this.TP_ID = this.queryJson.TP_ID
 
-		if (res.initProductOri.length > 0) {
-			this.title1fromList = []
-			for (let i in res.initProductOri) {
-				let item = {
-					index: i + 1,
+			if (res.initProductOri.length > 0) {
+				this.title1fromList = []
+				for (let i in res.initProductOri) {
+					let item = {
+						index: i + 1,
+						itemList: [{
+							type: "input",
+							text: res.initProductOri[i].NAME,
+							title: "原辅材料名称"
+						}, {
+							type: "selectThree",
+							text: res.initProductOri[i].UNIT,
+							title: "单位"
+						}, {
+							type: "input",
+							text: res.initProductOri[i].LAST_NUM,
+							title: "上年度消耗量"
+						}, {
+							type: "input",
+							text: res.initProductOri[i].YEAR_NUM,
+							title: "本年度计划消耗量"
+						}]
+					}
+					this.title1fromList.push(item)
+				}
+			} else {
+				this.title1fromList = [{
+					index: 1,
 					itemList: [{
 						type: "input",
-						text: res.initProductOri[i].NAME,
+						text: "",
 						title: "原辅材料名称"
 					}, {
-						type: "select",
-						text: res.initProductOri[i].UNIT,
+						type: "selectThree",
+						text: "",
 						title: "单位"
 					}, {
 						type: "input",
-						text: res.initProductOri[i].LAST_NUM,
+						text: "",
 						title: "上年度消耗量"
 					}, {
 						type: "input",
-						text: res.initProductOri[i].YEAR_NUM,
+						text: "",
 						title: "本年度计划消耗量"
 					}]
-				}
-				this.title1fromList.push(item)
-			}
-		} else {
-			this.title1fromList = [{
-				index: 1,
-				itemList: [{
-					type: "input",
-					text: "",
-					title: "原辅材料名称"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
-					type: "input",
-					text: "",
-					title: "上年度消耗量"
-				}, {
-					type: "input",
-					text: "",
-					title: "本年度计划消耗量"
 				}]
-			}]
-		}
+			}
 
-		if (res.initProductEqu.length > 0) {
-			this.title2fromList = []
-			for (let i in res.initProductEqu) {
-				let item = {
-					index: i + 1,
+			if (res.initProductEqu.length > 0) {
+				this.title2fromList = []
+				for (let i in res.initProductEqu) {
+					let item = {
+						index: i + 1,
+						itemList: [{
+							type: "input",
+							isSingle: "1",
+							text: res.initProductEqu[i].NAME,
+							title: "设备名称"
+						}, {
+							type: "inputWithUnit",
+							unit: "台",
+							text: res.initProductEqu[i].LAST_NUM,
+							title: "上年度数量"
+						}, {
+							type: "inputWithUnit",
+							unit: "台",
+							text: res.initProductEqu[i].YEAR_NUM,
+							title: "本年度数量"
+						}]
+					}
+					this.title2fromList.push(item)
+				}
+			} else {
+				this.title2fromList = [{
+					index: 1,
 					itemList: [{
 						type: "input",
+						text: "",
 						isSingle: "1",
-						text: res.initProductEqu[i].NAME,
 						title: "设备名称"
 					}, {
 						type: "inputWithUnit",
 						unit: "台",
-						text: res.initProductEqu[i].LAST_NUM,
+						text: "",
 						title: "上年度数量"
 					}, {
 						type: "inputWithUnit",
 						unit: "台",
-						text: res.initProductEqu[i].YEAR_NUM,
+						text: "",
 						title: "本年度数量"
 					}]
-				}
-				this.title2fromList.push(item)
-			}
-		} else {
-			this.title2fromList = [{
-				index: 1,
-				itemList: [{
-					type: "input",
-					text: "",
-					isSingle: "1",
-					title: "设备名称"
-				}, {
-					type: "inputWithUnit",
-					unit: "台",
-					text: "",
-					title: "上年度数量"
-				}, {
-					type: "inputWithUnit",
-					unit: "台",
-					text: "",
-					title: "本年度数量"
 				}]
-			}]
-		}
+			}
 
-		if (res.initProductOutput.length > 0) {
-			this.title3fromList = []
-			for (let i in res.initProductOutput) {
-				let item = {
-					index: i + 1,
+			if (res.initProductOutput.length > 0) {
+				this.title3fromList = []
+				for (let i in res.initProductOutput) {
+					let item = {
+						index: i + 1,
+						itemList: [{
+							type: "input",
+							text: res.initProductOutput[i].NAME,
+							title: "产品名称"
+						}, {
+							type: "select",
+							text: res.initProductOutput[i].UNIT,
+							title: "单位"
+						}, {
+							type: "input",
+							text: res.initProductOutput[i].LAST_NUM,
+							title: "上年度产量"
+						}, {
+							type: "input",
+							text: res.initProductOutput[i].YEAR_NUM,
+							title: "本年度计划产量"
+						}]
+					}
+					this.title3fromList.push(item)
+				}
+			} else {
+				this.title3fromList = [{
+					index: 1,
 					itemList: [{
 						type: "input",
-						text: res.initProductOutput[i].NAME,
+						text: "",
 						title: "产品名称"
 					}, {
 						type: "select",
-						text: res.initProductOutput[i].UNIT,
+						text: "",
 						title: "单位"
 					}, {
 						type: "input",
-						text: res.initProductOutput[i].LAST_NUM,
+						text: "",
 						title: "上年度产量"
 					}, {
 						type: "input",
-						text: res.initProductOutput[i].YEAR_NUM,
+						text: "",
 						title: "本年度计划产量"
 					}]
-				}
-				this.title3fromList.push(item)
-			}
-		} else {
-			this.title3fromList = [{
-				index: 1,
-				itemList: [{
-					type: "input",
-					text: "",
-					title: "产品名称"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
-					type: "input",
-					text: "",
-					title: "上年度产量"
-				}, {
-					type: "input",
-					text: "",
-					title: "本年度计划产量"
 				}]
-			}]
-		}
-		this.title4.text = res.initProductInfo.PRODUCT_DESC
+			}
+			this.title4.text = res.initProductInfo.PRODUCT_DESC
 		})
 	},
 	methods: {
 		doSubmit () {
-			const loading = this.$loading({
-				lock: true,
-				text: 'Loading',
-				spinner: 'el-icon-loading',
-				background: 'rgba(0, 0, 0, 0.3)'
-			});
 
 			let submitData = {}
 			submitData.EP_ID = this.EP_ID
@@ -412,10 +406,56 @@ export default {
 
 				submitData.PRODUCT_OUTPUT.push(item)
 			}
+			for (let i in submitData.PRODUCT_ORI) {
+				for (let key in submitData.PRODUCT_ORI[i]) {
+					if (submitData.PRODUCT_ORI[i][key] === "") {
+						this.$notify.error({
+							title: '警告',
+							message: "请填全[原辅材料及消耗量]所有内容"
+						});
+						return
+					}
+				}
+			}
+			for (let i in submitData.PRODUCT_EQU) {
+				for (let key in submitData.PRODUCT_EQU[i]) {
+					if (submitData.PRODUCT_EQU[i][key] === "") {
+						this.$notify.error({
+							title: '警告',
+							message: "请填全[生产设备及数量]所有内容"
+						});
+						return
+					}
+				}
+			}
+			for (let i in submitData.PRODUCT_OUTPUT) {
+				for (let key in submitData.PRODUCT_OUTPUT[i]) {
+					if (submitData.PRODUCT_OUTPUT[i][key] === "") {
+						this.$notify.error({
+							title: '警告',
+							message: "请填全[产品及产量]所有内容"
+						});
+						return
+					}
+				}
+			}
+			if (submitData.PRODUCT_DESC === "") {
+				this.$notify.error({
+					title: '警告',
+					message: "请填写生产工艺说明"
+				});
+				return
+			}
 
 			for (let key in this.queryJson) {
 				submitData[key] = this.queryJson[key]
 			}
+			const loading = this.$loading({
+				lock: true,
+				text: 'Loading',
+				spinner: 'el-icon-loading',
+				background: 'rgba(0, 0, 0, 0.3)'
+			});
 			fetch({
 				url: '/plan/saveProductInfo',
 				method: 'POST',

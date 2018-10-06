@@ -91,7 +91,6 @@ export default {
 			// 	"realName":"",
 			// 	"orgSeq":""
 			// }	
-			console.log(res);
 			this.userRole = res.userType
 			this.decrementInfo = res.initReduction
 			this.title2.text = this.decrementInfo && this.decrementInfo != null ? this.decrementInfo.MEASURES_REDUCTION : ''
@@ -103,6 +102,20 @@ export default {
 	},
 	methods: {
 		doSubmit () {
+			if(this.title1.text === ""){
+				this.$notify.error({
+					title: '警告',
+					message: "请填写减少危险废物危害性的计划"
+				});
+				return
+			}
+			if(this.title2.text === ""){
+				this.$notify.error({
+					title: '警告',
+					message: "请填写减少危险废物生产量和危害性的措施"
+				});
+				return
+			}
 			const loading = this.$loading({
 				lock: true,
 				text: 'Loading',

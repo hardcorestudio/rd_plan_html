@@ -2,7 +2,7 @@
 	<div id='baseInfo'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="baseInfoArea">
-			<el-form ref="form" :model="baseInfoData" label-width="80px">
+			<el-form ref="form" :rules="rules" :model="baseInfoData" label-width="80px">
 				<el-form-item label="计划期限">
 					<el-row>{{baseInfoData.planDate}}</el-row>
 				</el-form-item>
@@ -32,16 +32,16 @@
 				</el-form-item>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="总投资">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalInvestment" placeholder="必填(限9位)" type="number" maxlength="9">
+						<el-form-item label="总投资" prop="totalInvestment">
+							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.totalInvestment" placeholder="必填" maxlength="9">
 								<template slot="append">{{baseInfoData.TOTAL_INVESTMENT_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.totalInvestment}} {{baseInfoData.TOTAL_INVESTMENT_UNIT}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
-						<el-form-item label="总产值">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.totalOutputValue" placeholder="必填(限9位)" type="number" maxlength="9">
+						<el-form-item label="总产值" prop="totalOutputValue">
+							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.totalOutputValue" placeholder="必填" maxlength="9">
 								<template slot="append">{{baseInfoData.TOTAL_OUTPUTVALUE_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.totalOutputValue}} {{baseInfoData.TOTAL_OUTPUTVALUE_UNIT}}</el-row>
@@ -50,58 +50,58 @@
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="占地面积">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.areaCovered" placeholder="必填(限9位)" type="number" maxlength="9">
+						<el-form-item label="占地面积" prop="areaCovered">
+							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.areaCovered" placeholder="必填" maxlength="9">
 								<template slot="append">{{baseInfoData.FLOOR_AREA_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.areaCovered}} {{baseInfoData.FLOOR_AREA_UNIT}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
-						<el-form-item label="职工人数">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.personNum" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="职工人数" prop="personNum">
+							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.personNum" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.personNum}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="环保部门负责人">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.chargeMan" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="环保部门负责人" prop="chargeMan">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.chargeMan" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.chargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
-						<el-form-item label="联系人">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.person" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="联系人" prop="person">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.person" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.person}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="联系电话">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.phone" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="联系电话" prop="phone">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.phone" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.phone}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
-						<el-form-item label="传真电话">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.tel" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="传真电话" prop="tel">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.tel" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.tel}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="电子邮箱">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.mail" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="电子邮箱" prop="mail">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.mail" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.mail}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="单位网站">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.webside" placeholder="选填(限500字)" maxlength="500"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.webside" placeholder="选填"></el-input>
 							<el-row v-else>{{baseInfoData.webside}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -109,24 +109,24 @@
 				<assTitle :titleInfo="bigTitle" titleType="single"></assTitle>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="管理部门">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.department" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="管理部门" prop="department">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.department" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.department}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="部门负责人">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.departmentChargeMan" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="部门负责人" prop="departmentChargeMan">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.departmentChargeMan" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.departmentChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="废物管理负责人">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.trashChargeMan" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="废物管理负责人" prop="trashChargeMan">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.trashChargeMan" placeholder="必填"></el-input>
 							<el-row v-else>{{baseInfoData.trashChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -185,25 +185,67 @@ export default {
 				legalPerson: "",
 				postNo: "",
 				category: "",
-				totalInvestment: "",
-				totalOutputValue: "",
-				areaCovered: "",
-				personNum: "",
-				chargeMan: "",
-				person: "",
-				phone: "",
-				tel: "",
-				mail: "",
-				webside: "",
-				department: "",
-				departmentChargeMan: "",
-				trashChargeMan: "",
+				totalInvestment: "", // input
+				totalOutputValue: "", // input
+				areaCovered: "", // input
+				personNum: "", // input
+				chargeMan: "", // input
+				person: "", // input
+				phone: "", // input
+				tel: "", // input
+				mail: "", // input
+				webside: "", // input
+				department: "", // input
+				departmentChargeMan: "", // input
+				trashChargeMan: "", // input
 				TOTAL_INVESTMENT_UNIT: "万元",
 				TOTAL_OUTPUTVALUE_UNIT: "万元",
 				FLOOR_AREA_UNIT: "平方米"
 			},
+			rules: {
+				totalInvestment: [
+					{ required: true, message: '请输入总投资', trigger: 'blur' },
+					{ type: 'number', message: '请输入数字' }
+				],
+				totalOutputValue: [
+					{ required: true, message: '请输入总产值', trigger: 'blur' },
+					{ type: 'number', message: '请输入数字' }
+				],
+				areaCovered: [
+					{ required: true, message: '请输入占地面积', trigger: 'blur' },
+					{ type: 'number', message: '请输入数字' }
+				],
+				personNum: [
+					{ required: true, message: '请输入职工人数', trigger: 'blur' },
+					{ type: 'number', message: '请输入数字' }
+				],
+				chargeMan: [
+					{ required: true, message: '请输入负责人', trigger: 'blur' }
+				],
+				person: [
+					{ required: true, message: '请输入联系人', trigger: 'blur' }
+				],
+				phone: [
+					{ required: true, message: '请输入联系电话', trigger: 'blur' }
+				],
+				tel: [
+					{ required: true, message: '请输入传真电话', trigger: 'blur' }
+				],
+				mail: [
+					{ required: true, message: '请输入电子邮箱', trigger: 'blur' }
+				],
+				department: [
+					{ required: true, message: '请输入管理部门', trigger: 'blur' }
+				],
+				departmentChargeMan: [
+					{ required: true, message: '请输入部门负责人', trigger: 'blur' }
+				],
+				trashChargeMan: [
+					{ required: true, message: '请输入废物管理负责人', trigger: 'blur' }
+				]
+			},
 			managerList: [{
-				index: "0",
+				index: 1,
 				text1: "",
 				text2: ""
 			}],
@@ -310,12 +352,12 @@ export default {
 		// 	"epName": "天津合佳威立雅环境服务有限公司",
 		// 	"initEpExtend": {
 		// 		"LINK_NUM": "jj",
-		// 		"TOTAL_INVESTMENT": "aa",
+		// 		"TOTAL_INVESTMENT": "11",
 		// 		"SYS_ACCIDENT": 1,
 		// 		"SYS_OPERATION": 0,
 		// 		"TOTAL_OUTPUTVALUE_UNIT": "dd",
 		// 		"STATUS": "00",
-		// 		"TOTAL_OUTPUTVALUE": "cc",
+		// 		"TOTAL_OUTPUTVALUE": "12",
 		// 		"MANAGEMENT_ORG": "rr",
 		// 		"MAIL": "mm",
 		// 		"WEBSITE": "nn",
@@ -324,7 +366,7 @@ export default {
 		// 		"SYS_MANAGER": 0,
 		// 		"DEPARTMENT": "oo",
 		// 		"SYS_LEDGER": 1,
-		// 		"FLOOR_AREA": "ee",
+		// 		"FLOOR_AREA": "13",
 		// 		"FAX_TEL": "ll",
 		// 		"SYS_RESPONSIBILITY": 1,
 		// 		"FLOOR_AREA_UNIT": "ff",
@@ -363,11 +405,11 @@ export default {
 		// 	"contextPath": "",
 		// 	"orgSeq": ""
 		// }
-		
+
 		fetch({
-		  url: '/plan/initBaseInfo',
-		  method: 'POST',
-		  data: 'params='+JSON.stringify(this.queryJson)
+			url: '/plan/initBaseInfo',
+			method: 'POST',
+			data: 'params=' + JSON.stringify(this.queryJson)
 		}).then(res => {
 			this.EP_ID = this.queryJson.EP_ID
 			this.userRole = res.userType
@@ -378,10 +420,10 @@ export default {
 			this.baseInfoData.legalPerson = res.initRes.LINKMAN
 			this.baseInfoData.postNo = res.initRes.POSTAL_CODE
 			this.baseInfoData.category = res.initRes.dictname
-			this.baseInfoData.totalInvestment = res.initEpExtend.TOTAL_INVESTMENT
-			this.baseInfoData.totalOutputValue = res.initEpExtend.TOTAL_OUTPUTVALUE
-			this.baseInfoData.areaCovered = res.initEpExtend.FLOOR_AREA
-			this.baseInfoData.personNum = res.initEpExtend.EMPLOYEES_NUM
+			this.baseInfoData.totalInvestment = parseInt(res.initEpExtend.TOTAL_INVESTMENT)
+			this.baseInfoData.totalOutputValue = parseInt(res.initEpExtend.TOTAL_OUTPUTVALUE)
+			this.baseInfoData.areaCovered = parseInt(res.initEpExtend.FLOOR_AREA)
+			this.baseInfoData.personNum = parseInt(res.initEpExtend.EMPLOYEES_NUM)
 			this.baseInfoData.chargeMan = res.initEpExtend.PRINCIPAL
 			this.baseInfoData.person = res.initEpExtend.LINKMAN
 			this.baseInfoData.phone = res.initEpExtend.LINK_NUM
@@ -392,11 +434,11 @@ export default {
 			this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
 			this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
 
-			if(res.initEpExtend.sons && res.initEpExtend.sons.length > 0){
+			if (res.initEpExtend.sons && res.initEpExtend.sons.length > 0) {
 				this.managerList = []
-				for(let i in res.initEpExtend.sons){
+				for (let i in res.initEpExtend.sons) {
 					let item = {}
-					item.index = i + 1
+					item.index = parseInt(i) + 1
 					item.text1 = res.initEpExtend.sons[i].TECHNICAL_DIRECTER
 					item.text2 = res.initEpExtend.sons[i].EDU_LEVEL
 					this.managerList.push(item)
@@ -410,72 +452,105 @@ export default {
 			this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT ? res.initEpExtend.SYS_ACCIDENT + "" : "0"
 			this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
 		})
-		
+
 
 	},
 	methods: {
 		doSubmit () {
-			const loading = this.$loading({
+			let _this = this
+			let checkFlag = false
+			_this.$refs['form'].validate((valid) => {
+				if (valid) {
+					checkFlag = true
+				} else {
+					checkFlag = false
+				}
+			});
+			if (!checkFlag) {
+				return
+			}
+			let checkMethodFlag = true
+			let checkMessagge = ''
+			for (let i in _this.managerList) {
+				if (_this.managerList[i].text1 === '' || _this.managerList[i].text2 === '') {
+					checkMethodFlag = false
+					break
+				}
+			}
+			if (!checkMethodFlag) {
+				_this.$notify.error({
+					title: '警告',
+					message: "请填全[废物污染防治设施]所有内容"
+				});
+				return
+			}
+			if (this.manageDes.text === "") {
+				_this.$notify.error({
+					title: '警告',
+					message: "请填写管理组织描述"
+				});
+				return
+			}
+			const loading = _this.$loading({
 				lock: true,
 				text: 'Loading',
 				spinner: 'el-icon-loading',
 				background: 'rgba(0, 0, 0, 0.3)'
 			});
-			
-				
-			let submitData = {}
-			submitData.EP_ID = this.EP_ID
-			submitData.TOTAL_INVESTMENT = this.baseInfoData.totalInvestment
-			submitData.TOTAL_OUTPUTVALUE = this.baseInfoData.totalOutputValue
-			submitData.FLOOR_AREA = this.baseInfoData.areaCovered
-			submitData.EMPLOYEES_NUM = this.baseInfoData.personNum
-			submitData.PRINCIPAL = this.baseInfoData.chargeMan
-			submitData.LINKMAN = this.baseInfoData.person
-			submitData.LINK_NUM = this.baseInfoData.phone
-			submitData.FAX_TEL = this.baseInfoData.tel
-			submitData.MAIL = this.baseInfoData.mail
-			submitData.WEBSITE = this.baseInfoData.webside
-			submitData.DEPARTMENT = this.baseInfoData.department
-			submitData.DEPARTMENT_HEAD = this.baseInfoData.departmentChargeMan
-			submitData.MANAGER = this.baseInfoData.trashChargeMan
-			submitData.MANAGEMENT_ORG = this.manageDes.text
 
-			submitData.TOTAL_INVESTMENT_UNIT = this.baseInfoData.TOTAL_INVESTMENT_UNIT
-			submitData.TOTAL_OUTPUTVALUE_UNIT = this.baseInfoData.TOTAL_OUTPUTVALUE_UNIT
-			submitData.FLOOR_AREA_UNIT = this.baseInfoData.FLOOR_AREA_UNIT
+			let submitData = {}
+			submitData.EP_ID = _this.EP_ID
+			submitData.TOTAL_INVESTMENT = _this.baseInfoData.totalInvestment
+			submitData.TOTAL_OUTPUTVALUE = _this.baseInfoData.totalOutputValue
+			submitData.FLOOR_AREA = _this.baseInfoData.areaCovered
+			submitData.EMPLOYEES_NUM = _this.baseInfoData.personNum
+			submitData.PRINCIPAL = _this.baseInfoData.chargeMan
+			submitData.LINKMAN = _this.baseInfoData.person
+			submitData.LINK_NUM = _this.baseInfoData.phone
+			submitData.FAX_TEL = _this.baseInfoData.tel
+			submitData.MAIL = _this.baseInfoData.mail
+			submitData.WEBSITE = _this.baseInfoData.webside
+			submitData.DEPARTMENT = _this.baseInfoData.department
+			submitData.DEPARTMENT_HEAD = _this.baseInfoData.departmentChargeMan
+			submitData.MANAGER = _this.baseInfoData.trashChargeMan
+			submitData.MANAGEMENT_ORG = _this.manageDes.text
+
+			submitData.TOTAL_INVESTMENT_UNIT = _this.baseInfoData.TOTAL_INVESTMENT_UNIT
+			submitData.TOTAL_OUTPUTVALUE_UNIT = _this.baseInfoData.TOTAL_OUTPUTVALUE_UNIT
+			submitData.FLOOR_AREA_UNIT = _this.baseInfoData.FLOOR_AREA_UNIT
 
 			submitData.sons = []
-			for(let i in this.managerList){
+			for (let i in _this.managerList) {
 				let item = {}
-				item.TECHNICAL_DIRECTER = this.managerList[i].text1
-				item.EDU_LEVEL = this.managerList[i].text2
+				item.TECHNICAL_DIRECTER = _this.managerList[i].text1
+				item.EDU_LEVEL = _this.managerList[i].text2
 				submitData.sons.push(item)
 			}
 
-			submitData.SYS_MANAGER = this.switchList[0].text1 + ""
-			submitData.SYS_RESPONSIBILITY = this.switchList[0].text2 + ""
-			submitData.SYS_OPERATION = this.switchList[1].text1 + ""
-			submitData.SYS_LEDGER = this.switchList[1].text2 + ""
-			submitData.SYS_TRAINING = this.switchList[2].text1 + ""
-			submitData.SYS_ACCIDENT = this.switchList[2].text2 + ""
+			submitData.SYS_MANAGER = _this.switchList[0].text1 + ""
+			submitData.SYS_RESPONSIBILITY = _this.switchList[0].text2 + ""
+			submitData.SYS_OPERATION = _this.switchList[1].text1 + ""
+			submitData.SYS_LEDGER = _this.switchList[1].text2 + ""
+			submitData.SYS_TRAINING = _this.switchList[2].text1 + ""
+			submitData.SYS_ACCIDENT = _this.switchList[2].text2 + ""
 
 
-			for (let key in this.queryJson) {
-				submitData[key] = this.queryJson[key]
+			for (let key in _this.queryJson) {
+				submitData[key] = _this.queryJson[key]
 			}
 			fetch({
 				url: '/plan/saveBaseInfo',
 				method: 'POST',
-				data: 'params='+JSON.stringify(submitData)
+				data: 'params=' + JSON.stringify(submitData)
 			}).then(res => {
-				if(res.resFlag == '0'){
-					this.$notify({
+				if (res.resFlag == '0') {
+					_this.$notify({
 						title: '成功',
 						message: '保存成功',
 						type: 'success'
 					});
-				}else{
-					this.$notify.error({
+				} else {
+					_this.$notify.error({
 						title: '失败',
 						message: res.resMsg
 					});
@@ -518,9 +593,9 @@ export default {
   color: #666;
   margin-left: 140px !important;
 }
-#baseInfoArea .el-form-item {
+/* #baseInfoArea .el-form-item {
   margin-bottom: 10px;
-}
+} */
 .footerSign {
   width: 100%;
   height: 50px;

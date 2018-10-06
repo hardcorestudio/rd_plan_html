@@ -36,7 +36,7 @@ export default {
 			title1: {
 				title: " "
 			},
-			numTitle: "",
+			numTitle: [],
 			levelOneData: [],
 			levelTwoData: {},
 			title1fromList: [{
@@ -8706,22 +8706,23 @@ export default {
 			}]
 		}
 
-		let lastNum = ""
-		let yearNum = ""
-		for (let i in res.sumOverviewList) {
-			if (i === 0) {
-				lastNum = res.sumOverviewList[i].last_num_sum
-				yearNum = res.sumOverviewList[i].year_num_sum
-			} else {
-				lastNum += ' ' + res.sumOverviewList[i].last_num_sum
-				yearNum += ' ' + res.sumOverviewList[i].year_num_sum
-			}
-		}
-		if (res.sumOverviewList.length === 0) {
-			lastNum = "0"
-			yearNum = "0"
-		}
-		this.numTitle = "计划产生量合计：" + yearNum + "   实际产生量合计：" + lastNum
+		// let lastNum = ""
+		// let yearNum = ""
+		// for (let i in res.sumOverviewList) {
+		// 	if (i === 0) {
+		// 		lastNum = res.sumOverviewList[i].last_num_sum
+		// 		yearNum = res.sumOverviewList[i].year_num_sum
+		// 	} else {
+		// 		lastNum += ' ' + res.sumOverviewList[i].last_num_sum
+		// 		yearNum += ' ' + res.sumOverviewList[i].year_num_sum
+		// 	}
+		// }
+		// if (res.sumOverviewList.length === 0) {
+		// 	lastNum = "0"
+		// 	yearNum = "0"
+		// }
+		// this.numTitle = "计划产生量合计：" + yearNum + "   实际产生量合计：" + lastNum
+		this.numTitle = res.sumOverviewList
 
 		this.levelOneData = []
 		this.levelTwoData = {}
@@ -8747,13 +8748,6 @@ export default {
 	},
 	methods: {
 		doSubmit () {
-			const loading = this.$loading({
-				lock: true,
-				text: 'Loading',
-				spinner: 'el-icon-loading',
-				background: 'rgba(0, 0, 0, 0.3)'
-			});
-
 			let submitData = {}
 			submitData.TP_ID = this.queryJson.TP_ID
 			for (let key in this.queryJson) {
@@ -8784,6 +8778,24 @@ export default {
 				});
 				return;
 			}
+
+			for(let i in submitData.LIST) {
+				for(let key in submitData.LIST[i]){
+					if(submitData.LIST[i][key] === ""){
+						this.$notify.error({
+							title: '警告',
+							message: "请填全所有卡片内容"
+						});
+						return
+					}
+				}
+			}
+			const loading = this.$loading({
+				lock: true,
+				text: 'Loading',
+				spinner: 'el-icon-loading',
+				background: 'rgba(0, 0, 0, 0.3)'
+			});
 			fetch({
 				url: '/plan/saveOverview',
 				method: 'POST',
@@ -8805,7 +8817,8 @@ export default {
 			})
 		},
 		doReset () {
-			this.numTitle = "计划产生量合计：0 实际产生量合计：0"
+			// this.numTitle = "计划产生量合计：0 实际产生量合计：0"
+			this.numTitle = []
 			this.title1fromList = [{
 				index: 1,
 				itemList: [{

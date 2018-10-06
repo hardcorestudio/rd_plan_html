@@ -9,17 +9,17 @@
 			<assForm :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData"></assForm>
 			<assTitle :userRole="userRole" :titleInfo="title3" titleType="textarea"></assTitle>
 			<assSwitch :userRole="userRole" title="运输措施" :switchInfo="switchInfo2"></assSwitch>
-			<el-form ref="form" :model="compInfo" label-width="80px" class="transferStuationFrom">
+			<el-form ref="form" :model="compInfo" :rules="rules" label-width="80px" class="transferStuationFrom">
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="单位名称">
-							<el-input v-if="userRole=== 'CSEP'" v-model="compInfo.compName" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="单位名称" prop="compName">
+							<el-input v-if="userRole=== 'CSEP'" v-model="compInfo.compName" placeholder="必填"></el-input>
 							<el-row v-else>{{compInfo.compName}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
-						<el-form-item label="运输资质">
-							<el-input v-if="userRole=== 'CSEP'" v-model="compInfo.compVal" placeholder="必填(限500字)" maxlength="500"></el-input>
+						<el-form-item label="运输资质" prop="compVal">
+							<el-input v-if="userRole=== 'CSEP'" v-model="compInfo.compVal" placeholder="必填"></el-input>
 							<el-row v-else>{{compInfo.compVal}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -47,7 +47,10 @@ export default {
 				textInfoList: [
 					"贮存措施：废物收集、贮存相关环保制度的执行情概况，根据实际情况勾选，同时填写废物的贮存设施现状及贮存情况，贮存方面的相关要求，如数量。面积以及采取的污染防治措施；",
 					"运输措施：废物运输过程中相关环保制度的执行情况，根据实际情概况勾选，同时填写废物运输过程中采取的污染防治措施；",
-					"转移计划：危险废物数量、种类；拟接收危险废物的经营单位的资质和经营范围等。"
+					"转移计划：危险废物数量、种类；拟接收危险废物的经营单位的资质和经营范围等。",
+					"拟贮存量: 待定",
+					"上年度贮存量: 待定",
+					"截止上年度年底累计贮存量: 待定"
 				]
 			},
 			userRole: '',
@@ -169,7 +172,15 @@ export default {
 				compName: "",
 				compVal: ""
 			},
-			levelOneData: []
+			levelOneData: [],
+			rules: {
+				compName: [
+					{ required: true, message: '请输入单位名称', trigger: 'blur' }
+				],
+				compVal: [
+					{ required: true, message: '请输入运输资质', trigger: 'blur' }
+				]
+			}
 		}
 	},
 	components: {
@@ -196,6 +207,214 @@ export default {
 			method: 'POST',
 			data: 'params=' + JSON.stringify(this.queryJson)
 		}).then(res => {
+
+			// let res = {
+			// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY25iUjlwN2tRVmdZb2xRRVl6WEl2QT0=",
+			// 	"initProductFacility": [{
+			// 		"UNIT": "吨",
+			// 		"NAME": "111",
+			// 		"AREA_UNIT": "平方米",
+			// 		"AREA": "100",
+			// 		"ID": "1",
+			// 		"NUM_UNIT": "个",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"NUM": "100.00",
+			// 		"STORE": "111111",
+			// 		"TYPE": "bbb"
+			// 	}, {
+			// 		"UNIT": "吨",
+			// 		"NAME": "111",
+			// 		"AREA_UNIT": "平方米",
+			// 		"AREA": "100",
+			// 		"ID": "2",
+			// 		"NUM_UNIT": "个",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"NUM": "100.00",
+			// 		"STORE": "111111",
+			// 		"TYPE": "bbb"
+			// 	}],
+			// 	"operatorId": "",
+			// 	"initProductYs": [{
+			// 		"EN_NAME_YS": "aaa",
+			// 		"EN_ID_YS": "111",
+			// 		"YS_PROCESS": "aaaaaaaaa",
+			// 		"ID": "1",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YS_2": 0,
+			// 		"YS_ZZ": "bbb",
+			// 		"YS_1": 1,
+			// 		"YS_3": 1
+			// 	}, {
+			// 		"EN_NAME_YS": "bbb",
+			// 		"EN_ID_YS": "222",
+			// 		"YS_PROCESS": "bbbbbbbbbbb",
+			// 		"ID": "2",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YS_2": 0,
+			// 		"YS_ZZ": "bbb",
+			// 		"YS_1": 1,
+			// 		"YS_3": 1
+			// 	}, {
+			// 		"EN_NAME_YS": "aaa",
+			// 		"EN_ID_YS": "111",
+			// 		"YS_PROCESS": "aaaaaaaaa",
+			// 		"ID": "3",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YS_2": 0,
+			// 		"YS_ZZ": "bbb",
+			// 		"YS_1": 1,
+			// 		"YS_3": 1
+			// 	}, {
+			// 		"EN_NAME_YS": "bbb",
+			// 		"EN_ID_YS": "222",
+			// 		"YS_PROCESS": "bbbbbbbbbbb",
+			// 		"ID": "4",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YS_2": 0,
+			// 		"YS_ZZ": "bbb",
+			// 		"YS_1": 1,
+			// 		"YS_3": 1
+			// 	}, {
+			// 		"EN_NAME_YS": "aaa",
+			// 		"EN_ID_YS": "111",
+			// 		"YS_PROCESS": "aaaaaaaaa",
+			// 		"ID": "5",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YS_2": 0,
+			// 		"YS_ZZ": "bbb",
+			// 		"YS_1": 1,
+			// 		"YS_3": 1
+			// 	}, {
+			// 		"EN_NAME_YS": "bbb",
+			// 		"EN_ID_YS": "222",
+			// 		"YS_PROCESS": "bbbbbbbbbbb",
+			// 		"ID": "6",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YS_2": 0,
+			// 		"YS_ZZ": "bbb",
+			// 		"YS_1": 1,
+			// 		"YS_3": 1
+			// 	}],
+			// 	"empId": "",
+			// 	"userType": "CSEP",
+			// 	"newGuideFlag": "",
+			// 	"belongQ": "",
+			// 	"belongS": "",
+			// 	"nickName": "天津合佳威立雅环境服务有限公司",
+			// 	"orgCode": "",
+			// 	"userId": "EP201410280910450012",
+			// 	"userName": "",
+			// 	"sepaName": "津南区",
+			// 	"status": "",
+			// 	"ifLogin": "0",
+			// 	"ROLEID": "CSEP",
+			// 	"initTransfer": {
+			// 		"CC_2": 1,
+			// 		"CC_1": 0,
+			// 		"CC_5": 0,
+			// 		"sysdate": 1537051428310,
+			// 		"CC_4": 1,
+			// 		"CC_3": 0,
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"STATUS": "00",
+			// 		"CC_PROCESS": "aaa"
+			// 	},
+			// 	"epName": "天津合佳威立雅环境服务有限公司",
+			// 	"epId": "EP201410280910450012",
+			// 	"belongSepa": "JNQ",
+			// 	"userPortrait": "",
+			// 	"IWBSESSION": "BROWSER-20180917065100",
+			// 	"initOverviewList": [{
+			// 		"BIG_CATEGORY_NAME": "范德萨",
+			// 		"UNIT": "吨",
+			// 		"W_NAME": "范德萨",
+			// 		"SOURCE_PROCESS": "afd",
+			// 		"SAMLL_CATEGORY_ID": "1124325432",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YEAR_NUM": "1000",
+			// 		"BIG_CATEGORY_ID": "HW01",
+			// 		"W_SHAPE": "范德萨",
+			// 		"LAST_NUM": "100",
+			// 		"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
+			// 		"ID": "1",
+			// 		"D_NAME": "aa",
+			// 		"CHARACTER": "啊啊啊"
+			// 	}, {
+			// 		"BIG_CATEGORY_NAME": "范德萨",
+			// 		"UNIT": "吨",
+			// 		"W_NAME": "范德萨",
+			// 		"SOURCE_PROCESS": "afd",
+			// 		"SAMLL_CATEGORY_ID": "1124325432",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YEAR_NUM": "1000",
+			// 		"BIG_CATEGORY_ID": "HW01",
+			// 		"W_SHAPE": "范德萨",
+			// 		"LAST_NUM": "100",
+			// 		"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
+			// 		"ID": "2",
+			// 		"D_NAME": "aa",
+			// 		"CHARACTER": "啊啊啊"
+			// 	}, {
+			// 		"BIG_CATEGORY_NAME": "范德萨",
+			// 		"UNIT": "吨",
+			// 		"W_NAME": "范德萨",
+			// 		"SOURCE_PROCESS": "afd",
+			// 		"SAMLL_CATEGORY_ID": "1124325432",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"YEAR_NUM": "1000",
+			// 		"BIG_CATEGORY_ID": "HW01",
+			// 		"W_SHAPE": "范德萨",
+			// 		"LAST_NUM": "100",
+			// 		"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
+			// 		"ID": "3",
+			// 		"D_NAME": "aa",
+			// 		"CHARACTER": "啊啊啊"
+			// 	}],
+			// 	"realName": "",
+			// 	"contextPath": "",
+			// 	"initProductCc": [{
+			// 		"STORE_LAST_UNIT": "个",
+			// 		"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+			// 		"STORE_REASON": "啊啊啊",
+			// 		"STORE_LAST": "1000.00",
+			// 		"ID": "1",
+			// 		"D_NAME": "111",
+			// 		"STORE_LASTSUM": "吨",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"STORE_LASTSUM_UNIT": null,
+			// 		"STORE_PLAN_UNIT": "吨",
+			// 		"STORE_PLAN": "1000.00",
+			// 		"BIG_CATEGORY_ID": "HW01"
+			// 	}, {
+			// 		"STORE_LAST_UNIT": "个",
+			// 		"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+			// 		"STORE_REASON": "啊啊啊",
+			// 		"STORE_LAST": "1000.00",
+			// 		"ID": "2",
+			// 		"D_NAME": "111",
+			// 		"STORE_LASTSUM": "吨",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"STORE_LASTSUM_UNIT": null,
+			// 		"STORE_PLAN_UNIT": "吨",
+			// 		"STORE_PLAN": "1000.00",
+			// 		"BIG_CATEGORY_ID": "HW01"
+			// 	}, {
+			// 		"STORE_LAST_UNIT": "个",
+			// 		"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
+			// 		"STORE_REASON": "啊啊啊",
+			// 		"STORE_LAST": "1000.00",
+			// 		"ID": "3",
+			// 		"D_NAME": "111",
+			// 		"STORE_LASTSUM": "吨",
+			// 		"TP_ID": "TP201809120707190010",
+			// 		"STORE_LASTSUM_UNIT": null,
+			// 		"STORE_PLAN_UNIT": "吨",
+			// 		"STORE_PLAN": "1000.00",
+			// 		"BIG_CATEGORY_ID": "HW01"
+			// 	}],
+			// 	"orgSeq": ""
+			// }
+
 			this.userRole = res.userType
 			this.switchInfo1[0].value = res.initTransfer.CC_1 ? res.initTransfer.CC_1 + "" : '0'
 			this.switchInfo1[1].value = res.initTransfer.CC_2 ? res.initTransfer.CC_2 + "" : '0'
@@ -213,13 +432,18 @@ export default {
 							text: res.initProductFacility[i].NAME,
 							title: "设施名称"
 						}, {
+							type: "inputWithUnit",
+							text: res.initProductFacility[i].NUM,
+							title: "数量",
+							unit: "个"
+						}, {
+							type: "input",
+							text: res.initProductFacility[i].STORE,
+							title: "贮存能力"
+						}, {
 							type: "select",
 							text: res.initProductFacility[i].UNIT,
 							title: "单位"
-						}, {
-							type: "input",
-							text: res.initProductFacility[i].NUM,
-							title: "数量"
 						}, {
 							type: "input",
 							text: res.initProductFacility[i].TYPE,
@@ -229,10 +453,6 @@ export default {
 							text: res.initProductFacility[i].AREA,
 							title: "面积",
 							unit: "平方米"
-						}, {
-							type: "input",
-							text: res.initProductFacility[i].STORE,
-							title: "贮存能力"
 						}]
 					}
 					this.title1fromList.push(item)
@@ -245,13 +465,18 @@ export default {
 						text: "",
 						title: "设施名称"
 					}, {
-						type: "select",
+						type: "inputWithUnit",
 						text: "",
-						title: "单位"
+						title: "数量",
+						unit: "个"
 					}, {
 						type: "input",
 						text: "",
-						title: "数量"
+						title: "贮存能力"
+					}, {
+						type: "select",
+						text: "",
+						title: "单位"
 					}, {
 						type: "input",
 						text: "",
@@ -261,10 +486,6 @@ export default {
 						text: "",
 						title: "面积",
 						unit: "平方米"
-					}, {
-						type: "input",
-						text: "",
-						title: "贮存能力"
 					}]
 				}]
 			}
@@ -359,13 +580,6 @@ export default {
 	},
 	methods: {
 		doSubmit () {
-			const loading = this.$loading({
-				lock: true,
-				text: 'Loading',
-				spinner: 'el-icon-loading',
-				background: 'rgba(0, 0, 0, 0.3)'
-			});
-
 			let submitData = {}
 			submitData.TP_ID = this.queryJson.TP_ID
 			for (let key in this.queryJson) {
@@ -392,18 +606,20 @@ export default {
 			for (let i in this.title1fromList) {
 				let item = {}
 				item.NAME = this.title1fromList[i].itemList[0].text
-				item.UNIT = this.title1fromList[i].itemList[1].text
-				item.NUM = this.title1fromList[i].itemList[2].text
-				item.TYPE = this.title1fromList[i].itemList[3].text
-				item.AREA = this.title1fromList[i].itemList[4].text
+				item.NUM = this.title1fromList[i].itemList[1].text
+				item.NUM_UNIT = "个"
+				item.STORE = this.title1fromList[i].itemList[2].text
+				item.UNIT = this.title1fromList[i].itemList[3].text
+				item.TYPE = this.title1fromList[i].itemList[4].text
+				item.AREA = this.title1fromList[i].itemList[5].text
 				item.AREA_UNIT = "平方米"
-				item.STORE = this.title1fromList[i].itemList[5].text
+
 
 				submitData.TRANSFER_FACILITY.push(item)
 			}
 
 			submitData.TRANSFER_CC = []
-			for (let i in this.title1fromList) {
+			for (let i in this.title2fromList) {
 				let item = {}
 				item.D_NAME = this.title2fromList[i].itemList[0].text1
 				item.BIG_CATEGORY_ID = this.title2fromList[i].itemList[0].text2
@@ -418,6 +634,60 @@ export default {
 				submitData.TRANSFER_CC.push(item)
 			}
 
+			for (let i in submitData.TRANSFER_FACILITY) {
+				for (let key in submitData.TRANSFER_FACILITY[i]) {
+					if (submitData.TRANSFER_FACILITY[i][key] === "") {
+						this.$notify.error({
+							title: '警告',
+							message: "请填全[危险废物贮存设施现状]所有内容"
+						});
+						return
+					}
+				}
+			}
+			for (let i in submitData.TRANSFER_CC) {
+				for (let key in submitData.TRANSFER_CC[i]) {
+					if (submitData.TRANSFER_CC[i][key] === "") {
+						this.$notify.error({
+							title: '警告',
+							message: "请填全[贮存危险废物情况]所有内容"
+						});
+						return
+					}
+				}
+			}
+			let checkFlag = false
+			this.$refs['form'].validate((valid) => {
+				if (valid) {
+					checkFlag = true
+				} else {
+					checkFlag = false
+				}
+			});
+			if (!checkFlag) {
+				return
+			}
+			if (submitData.CC_PROCESS === '') {
+				this.$notify.error({
+					title: '警告',
+					message: "请填写贮存过程中采取的污染防治和事故预防措施"
+				});
+				return
+			}
+			if (this.title4.text === '') {
+				this.$notify.error({
+					title: '警告',
+					message: "请填写运输过程中采取的污染防治措施"
+				});
+				return
+			}
+
+			const loading = this.$loading({
+				lock: true,
+				text: 'Loading',
+				spinner: 'el-icon-loading',
+				background: 'rgba(0, 0, 0, 0.3)'
+			});
 			fetch({
 				url: '/plan/saveTransfer',
 				method: 'POST',
@@ -446,13 +716,18 @@ export default {
 					text: "",
 					title: "设施名称"
 				}, {
-					type: "select",
+					type: "inputWithUnit",
 					text: "",
-					title: "单位"
+					title: "数量",
+					unit: "个"
 				}, {
 					type: "input",
 					text: "",
-					title: "数量"
+					title: "贮存能力"
+				}, {
+					type: "select",
+					text: "",
+					title: "单位"
 				}, {
 					type: "input",
 					text: "",
@@ -462,10 +737,6 @@ export default {
 					text: "",
 					title: "面积",
 					unit: "平方米"
-				}, {
-					type: "input",
-					text: "",
-					title: "贮存能力"
 				}]
 			}]
 		},

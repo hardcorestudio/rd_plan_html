@@ -9,7 +9,7 @@
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
 							<div v-else>
 								<div v-if="fItem.type === 'input'" class="assFromItem_right">
-									<el-input v-model="fItem.text" placeholder="必填(限500字)" maxlength="500"></el-input>
+									<el-input v-model="fItem.text" placeholder="必填"></el-input>
 								</div>
 								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_right">
 									<el-select v-if="fItem.num && fItem.num === '1'" placeholder="请选择" v-model="fItem.text">
@@ -39,6 +39,16 @@
 										</el-option>
 									</el-select>
 								</div>
+								<div v-else-if="fItem.type === 'selectThree'" class="assFromItem_right">
+									<el-select placeholder="吨/个/公升" v-model="fItem.text">
+										<el-option
+											v-for="uItem in unitsThree"
+											:key="uItem.value"
+											:label="uItem.label"
+											:value="uItem.value">
+										</el-option>
+									</el-select>
+								</div>
 								<div v-else-if="fItem.type === 'inputWithUnit'" class="assFromItem_right">
 									<el-input v-model="fItem.text" placeholder="必填(限9位)" type="number" maxlength="9">
 										<template slot="append">{{fItem.unit}}</template>
@@ -51,7 +61,8 @@
 					<el-col v-if="fItem.type==='selectLevel'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
-							<div class="assFromItem_right">
+							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
+							<div v-else class="assFromItem_right">
 								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelOneChange(fItem)">
 									<el-option
 										v-for="uItem in levelOneData"
@@ -66,7 +77,8 @@
 					<el-col v-if="fItem.type==='selectLevel'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row	v-if="fItem.type==='selectLevel'" class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title2}}</div>
-							<div class="assFromItem_right">
+							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text2}}</div>
+							<div v-else class="assFromItem_right">
 								<el-select placeholder="请选择" v-model="fItem.text2">
 									<el-option
 										v-for="uItem in levelTwoData[fItem.text1]"
@@ -81,7 +93,8 @@
 					<el-col v-if="fItem.type==='selectLevelText'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
-							<div class="assFromItem_right">
+							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
+							<div v-else class="assFromItem_right">
 								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelChange(fItem)">
 									<el-option
 										v-for="uItem in levelOneData"
@@ -131,9 +144,16 @@
 				},{
 					label: "个",
 					value: "个"
+				}],
+				unitsThree:[{
+					label: "吨",
+					value: "吨"
 				},{
-					label: "公斤",
-					value: "公斤"
+					label: "个",
+					value: "个"
+				},{
+					label: "公升",
+					value: "公升"
 				}],
       };
 		},
@@ -172,13 +192,23 @@
 				this.formList.push(item);
 			},
 			reduceSign(item) {
-				let myFormList = [];
+				// let myFormList = [];
+				// for(let i in this.formList) {
+				// 	if(this.formList[i].index !== item.index){
+				// 		myFormList.push(this.formList[i]);
+				// 	}
+				// }
+				// this.formList = myFormList;
+
+				let myIndex = ""
 				for(let i in this.formList) {
-					if(this.formList[i].index !== item.index){
-						myFormList.push(this.formList[i]);
+					if(this.formList[i].index === item.index){
+						myIndex = i
 					}
 				}
-				this.formList = myFormList;
+				if(myIndex !== ""){
+					this.formList.splice(myIndex, 1)
+				}
 			},
 			levelOneChange(item){
 				item.text2 = ""
