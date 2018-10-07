@@ -55,6 +55,12 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         if(data.entrustDisposalMeasuresFlag == '1'){
             $scope.entrustDisposalMeasuresClass = true
         }
+        if(data.envFlag == '1'){
+            $scope.envClass = true
+        }
+        if(data.lastInfoFlag == '1'){
+            $scope.lastClass = true
+        }
     },function(data,header,config,status){
     });
 
