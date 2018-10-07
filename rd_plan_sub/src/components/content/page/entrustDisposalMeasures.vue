@@ -3,7 +3,7 @@
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="entrustDisposalMeasuresPlan">
 			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="doReset" :numTitle="numTitle"></assTitle>
-			<assForm :formList="title1fromList" :type="userRole !== 'CSEP' ? 'label' : ''" :cateList="cateList" :cateList2="cateList2"></assForm>
+			<assFormCascade :formList="title1fromList" :type="userRole !== 'CSEP' ? 'label' : ''" :levelOneData="cateList" :levelTwoData="cateList2" :cateList="cateList3"></assFormCascade>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -11,7 +11,7 @@
 <script>
 import Aside from '../Aside.vue';
 import assTitle from '../../common/assTitle.vue'
-import assForm from '../../common/assForm.vue'
+import assFormCascade from '../../common/assFormCascade.vue'
 import { checkBrowser, getQueryString } from '../../utils/browserCheck.js'
 import fetch from '../../utils/fetch.js'
 export default {
@@ -38,47 +38,52 @@ export default {
 			title1fromList: [{
 				index: 1,
 				itemList: [{
-					type: "selectDIY",
-					text: "",
-					title: "委托利用处置单位名称",
+					type: "selectLevelText",
+					text1: "",
+					title1: "委托利用处置单位名称",
+					text2: "",
+					title2: "许可证编号",
 					isSingle: true
 				}, {
-					type: "input",
-					text: "",
-					title: "许可证编号",
+					type: "selectLevelTwoText",
+					title1: "废物名称",
+					text1: "",
+					title2: "废物类别",
+					text2: "",
+					title3: "废物代码",
+					text3: "",
+					isSingle: true
 				}, {
 					type: "selectDIY",
 					text: "",
-					title: "废物名称",
-					num: "1"
+					title: "利用处置方式"
 				}, {
 					type: "select",
 					text: "",
 					title: "单位"
 				}, {
-					type: "input",
-					text: "",
-					title: "利用处置方式"
-				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划委托利用处置量",
-					isSingle: true
+					isSingle: true,
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年度实际委托利用处置量",
-					isSingle: true
+					isSingle: true,
+					unit: ""
 				}]
 			}],
 			cateList: [],
-			cateList2: []
+			cateList2: [],
+			cateList3: []
 		}
 	},
 	components: {
 		'my-aside': Aside,
 		'assTitle': assTitle,
-		'assForm': assForm
+		'assFormCascade': assFormCascade
 	},
 	watch: {
 	},
@@ -93,233 +98,183 @@ export default {
 		})
 		this.queryJson = getQueryString()
 
-		fetch({
-			url: '/plan/initHandle',
-			method: 'POST',
-			data: 'params=' + JSON.stringify(this.queryJson)
-		}).then(res => {
-		// let res = {
-		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiZkxoR29rSFkwQVFNOUczbXMxNlBJdz0=",
-		// 	"operatorId": "",
-		// 	"sumHandleList": [
-		// 		{
-		// 			"last_num_sum": "300.00吨",
-		// 			"year_num_sum": "300.00吨"
-		// 		}, {
-		// 			"last_num_sum": "300.00吨",
-		// 			"year_num_sum": "300.00吨"
-		// 		}
-		// 	],
-		// 	"empId": "",
-		// 	"initEpCzList": [
-		// 		{
-		// 			"EN_NAME_CZ": "天津壹鸣环境工程有限公司",
-		// 			"EN_ID_CZ": "EP201410280833480008"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "中海油能源发展股份有限公司安全环保分公司（碧海环保）",
-		// 			"EN_ID_CZ": "EP201410280908450011"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津合佳威立雅环境服务有限公司",
-		// 			"EN_ID_CZ": "EP201410280910450012"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津市海澜危废品综合利用处理有限公司",
-		// 			"EN_ID_CZ": "EP201410280929450017"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津市昱隆泰再生资源环保处理有限公司",
-		// 			"EN_ID_CZ": "EP201410280946090018"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津东邦铅资源再生有限公司",
-		// 			"EN_ID_CZ": "EP201410281131110030"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津市海丰化工有限公司",
-		// 			"EN_ID_CZ": "EP201410281233290032"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津江源环保科技有限公司",
-		// 			"EN_ID_CZ": "EP201410281429170043"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津环通金属制品有限公司",
-		// 			"EN_ID_CZ": "EP201410281648190057"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "利弗斯（天津）工业废物处理有限公司",
-		// 			"EN_ID_CZ": "EP201410291259060069"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "泰鼎（天津）环保科技有限公司",
-		// 			"EN_ID_CZ": "EP201410291352330074"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津仁新玻璃材料有限公司",
-		// 			"EN_ID_CZ": "EP201410291732000084"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津滨海合佳威立雅环境服务有限公司",
-		// 			"EN_ID_CZ": "EP201411031103580169"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津友信材料科技有限公司",
-		// 			"EN_ID_CZ": "EP201501071338330387"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津壹鸣环境科技股份有限公司",
-		// 			"EN_ID_CZ": "EP201505151246570569"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津市雅环再生资源回收利用有限公司",
-		// 			"EN_ID_CZ": "EP201508141009471304"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津市祥源盛自行车配件有限公司",
-		// 			"EN_ID_CZ": "EP201510101504241835"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "中能（天津）环保再生资源利用有限公司",
-		// 			"EN_ID_CZ": "EP201512021411072294"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津华庆百胜能源有限公司",
-		// 			"EN_ID_CZ": "EP201602251339212631"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津市腾源环保科技有限公司",
-		// 			"EN_ID_CZ": "EP201606031641393014"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "天津壹鸣环境污染治理有限公司",
-		// 			"EN_ID_CZ": "EP201607110955513122"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "德鸿泰（天津）环保科技有限公司",
-		// 			"EN_ID_CZ": "EP201611221430103497"
-		// 		},
-		// 		{
-		// 			"EN_NAME_CZ": "生产记录簿测试户",
-		// 			"EN_ID_CZ": "EP201707191015183982"
-		// 		}
-		// 	],
-		// 	"userType": "CSEP",
-		// 	"newGuideFlag": "",
-		// 	"belongQ": "",
-		// 	"belongS": "",
-		// 	"nickName": "天津合佳威立雅环境服务有限公司",
-		// 	"orgCode": "",
-		// 	"userId": "EP201410280910450012",
-		// 	"userName": "",
-		// 	"sepaName": "津南区",
-		// 	"status": "",
-		// 	"ifLogin": "0",
-		// 	"ROLEID": "CSEP",
-		// 	"epName": "天津合佳威立雅环境服务有限公司",
-		// 	"epId": "EP201410280910450012",
-		// 	"belongSepa": "JNQ",
-		// 	"userPortrait": "",
-		// 	"initHandleList": [
-		// 		{
-		// 			"UNIT": "吨",
-		// 			"EN_NAME_CZ": "范德萨发生发撒附近开了；阿",
-		// 			"LAST_NUM": "100",
-		// 			"HANDLE_TYPE": "范德萨",
-		// 			"LINCENSE_NO": "1234567",
-		// 			"SAMLL_CATEGORY_ID": null,
-		// 			"ID": "1",
-		// 			"D_NAME": "范德萨",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"EN_ID_CZ": "EP00000000001",
-		// 			"YEAR_NUM": "100",
-		// 			"BIG_CATEGORY_ID": "HW01"
-		// 		},
-		// 		{
-		// 			"UNIT": "吨",
-		// 			"EN_NAME_CZ": "范德萨发生发撒附近开了；阿",
-		// 			"LAST_NUM": "100",
-		// 			"HANDLE_TYPE": "范德萨",
-		// 			"LINCENSE_NO": "1234567",
-		// 			"SAMLL_CATEGORY_ID": null,
-		// 			"ID": "2",
-		// 			"D_NAME": "范德萨",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"EN_ID_CZ": "EP00000000002",
-		// 			"YEAR_NUM": "100",
-		// 			"BIG_CATEGORY_ID": "HW01"
-		// 		},
-		// 		{
-		// 			"UNIT": "吨",
-		// 			"EN_NAME_CZ": "aaaaaaaaaaaa",
-		// 			"LAST_NUM": "100",
-		// 			"HANDLE_TYPE": "范德萨",
-		// 			"LINCENSE_NO": "1234567",
-		// 			"SAMLL_CATEGORY_ID": null,
-		// 			"ID": "3",
-		// 			"D_NAME": "范德萨",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"EN_ID_CZ": "EP00000000003",
-		// 			"YEAR_NUM": "100",
-		// 			"BIG_CATEGORY_ID": "HW01"
-		// 		}
-		// 	],
-		// 	"IWBSESSION": "BROWSER-20180917145842",
-		// 	"initOverviewList": [
-		// 		{
-		// 			"BIG_CATEGORY_NAME": null,
-		// 			"UNIT": "吨",
-		// 			"W_NAME": "发大水",
-		// 			"SOURCE_PROCESS": "adfdsa",
-		// 			"SAMLL_CATEGORY_ID": "271-005-02",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "11",
-		// 			"BIG_CATEGORY_ID": "HW02",
-		// 			"W_SHAPE": "发大水",
-		// 			"LAST_NUM": "1100",
-		// 			"SAMLL_CATEGORY_NAME": null,
-		// 			"ID": "1",
-		// 			"D_NAME": "发达",
-		// 			"CHARACTER": "aaa"
-		// 		},
-		// 		{
-		// 			"BIG_CATEGORY_NAME": null,
-		// 			"UNIT": "个",
-		// 			"W_NAME": "111",
-		// 			"SOURCE_PROCESS": "嗷嗷",
-		// 			"SAMLL_CATEGORY_ID": "900-402-06",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "22",
-		// 			"BIG_CATEGORY_ID": "HW06",
-		// 			"W_SHAPE": "发大水",
-		// 			"LAST_NUM": "2200",
-		// 			"SAMLL_CATEGORY_NAME": null,
-		// 			"ID": "2",
-		// 			"D_NAME": "vvv",
-		// 			"CHARACTER": "范德萨"
-		// 		},
-		// 		{
-		// 			"BIG_CATEGORY_NAME": null,
-		// 			"UNIT": "吨",
-		// 			"W_NAME": "发大水",
-		// 			"SOURCE_PROCESS": "发大水",
-		// 			"SAMLL_CATEGORY_ID": "831-002-01",
-		// 			"TP_ID": "TP201809120707190010",
-		// 			"YEAR_NUM": "发大水",
-		// 			"BIG_CATEGORY_ID": "HW01",
-		// 			"W_SHAPE": "22",
-		// 			"LAST_NUM": "22",
-		// 			"SAMLL_CATEGORY_NAME": null,
-		// 			"ID": "3",
-		// 			"D_NAME": "发大水",
-		// 			"CHARACTER": "范德萨"
-		// 		}
-		// 	],
-		// 	"realName": "",
-		// 	"contextPath": "",
-		// 	"orgSeq": ""
-		// }
+		// fetch({
+		// 	url: '/plan/initHandle',
+		// 	method: 'POST',
+		// 	data: 'params=' + JSON.stringify(this.queryJson)
+		// }).then(res => {
+		let res = {
+			"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY0lYVit5TXR5YnVlT1VSdytZeEN3WT0=",
+			"sumHandleList": [{
+				"last_num_sum": "33.00吨",
+				"year_num_sum": "22.00吨"
+			}, {
+				"last_num_sum": "22.00个",
+				"year_num_sum": "11.00个"
+			}],
+			"operatorId": "",
+			"empId": "",
+			"initEpCzList": [{
+				"EN_NAME_CZ": "中海油能源发展股份有限公司安全环保分公司碧海环保服务公司",
+				"LICENSE_NO": "TJHW011",
+				"EN_ID_CZ": "EP201410280908450011"
+			}, {
+				"EN_NAME_CZ": "天津合佳威立雅环境服务有限公司",
+				"LICENSE_NO": "TJHW004",
+				"EN_ID_CZ": "EP201410280910450012"
+			}, {
+				"EN_NAME_CZ": "天津昱隆泰再生资源环保处理有限公司",
+				"LICENSE_NO": "TJHW003",
+				"EN_ID_CZ": "EP201410280946090018"
+			}, {
+				"EN_NAME_CZ": "天津东邦铅资源再生有限公司",
+				"LICENSE_NO": "TJHW017",
+				"EN_ID_CZ": "EP201410281131110030"
+			}, {
+				"EN_NAME_CZ": "天津市海丰化工有限公司",
+				"LICENSE_NO": "TJHW014",
+				"EN_ID_CZ": "EP201410281233290032"
+			}, {
+				"EN_NAME_CZ": "天津江源环保科技有限公司",
+				"LICENSE_NO": "TJHW006",
+				"EN_ID_CZ": "EP201410281429170043"
+			}, {
+				"EN_NAME_CZ": "天津市环通金属制品有限公司",
+				"LICENSE_NO": "TJHW002",
+				"EN_ID_CZ": "EP201410281648190057"
+			}, {
+				"EN_NAME_CZ": "泰鼎(天津）环保科技有限公司",
+				"LICENSE_NO": "TJHW021",
+				"EN_ID_CZ": "EP201410291352330074"
+			}, {
+				"EN_NAME_CZ": "天津仁新玻璃材料有限公司",
+				"LICENSE_NO": "TJHW020",
+				"EN_ID_CZ": "EP201410291732000084"
+			}, {
+				"EN_NAME_CZ": "天津滨海合佳威立雅环境服务有限公司",
+				"LICENSE_NO": "TJHW010",
+				"EN_ID_CZ": "EP201411031103580169"
+			}, {
+				"EN_NAME_CZ": "天津友信材料科技有限公司",
+				"LICENSE_NO": "TJHW012",
+				"EN_ID_CZ": "EP201501071338330387"
+			}, {
+				"EN_NAME_CZ": "天津市益康环保服务公司",
+				"LICENSE_NO": "TJHW009",
+				"EN_ID_CZ": "EP201504091955520499"
+			}, {
+				"EN_NAME_CZ": "天津瀚洋汇和环保科技有限公司",
+				"LICENSE_NO": "TJHW005",
+				"EN_ID_CZ": "EP201505291554270613"
+			}, {
+				"EN_NAME_CZ": "天津市雅环再生资源回收利用有限公司",
+				"LICENSE_NO": "TJHW013",
+				"EN_ID_CZ": "EP201508141009471304"
+			}, {
+				"EN_NAME_CZ": "中能（天津）环保再生资源利用有限公司",
+				"LICENSE_NO": "TJHW015",
+				"EN_ID_CZ": "EP201512021411072294"
+			}, {
+				"EN_NAME_CZ": "天津华庆百胜能源有限公司（试点）",
+				"LICENSE_NO": "TJHW016",
+				"EN_ID_CZ": "EP201602251339212631"
+			}, {
+				"EN_NAME_CZ": "天津市腾源环保科技有限公司",
+				"LICENSE_NO": "TJHW018",
+				"EN_ID_CZ": "EP201606031641393014"
+			}, {
+				"EN_NAME_CZ": "天津壹鸣环境污染治理有限公司",
+				"LICENSE_NO": "TJHW008",
+				"EN_ID_CZ": "EP201607110955513122"
+			}, {
+				"EN_NAME_CZ": "德鸿泰（天津）环保科技有限公司",
+				"LICENSE_NO": "TJHW019",
+				"EN_ID_CZ": "EP201611221430103497"
+			}, {
+				"EN_NAME_CZ": "天津莱奥西斯环保科技有限公司",
+				"LICENSE_NO": "TJHW001",
+				"EN_ID_CZ": "EP201707251144524521"
+			}],
+			"userType": "CSEP",
+			"newGuideFlag": "",
+			"belongQ": "",
+			"belongS": "",
+			"nickName": "天津合佳威立雅环境服务有限公司",
+			"orgCode": "",
+			"userId": "EP201410280910450012",
+			"userName": "",
+			"sepaName": "津南区",
+			"status": "",
+			"ifLogin": "0",
+			"ROLEID": "CSEP",
+			"epName": "天津合佳威立雅环境服务有限公司",
+			"epId": "EP201410280910450012",
+			"belongSepa": "JNQ",
+			"userPortrait": "",
+			"initOverviewList": [{
+				"BIG_CATEGORY_NAME": "123",
+				"UNIT": "吨",
+				"W_NAME": "11",
+				"SOURCE_PROCESS": "11",
+				"SAMLL_CATEGORY_ID": "831-003-01",
+				"TP_ID": "TP201810020531260014",
+				"YEAR_NUM": "22",
+				"BIG_CATEGORY_ID": "HW01",
+				"W_SHAPE": "11",
+				"LAST_NUM": "11",
+				"SAMLL_CATEGORY_NAME": null,
+				"ID": "1",
+				"D_NAME": "11",
+				"CHARACTER": "11"
+			}, {
+				"BIG_CATEGORY_NAME": null,
+				"UNIT": "个",
+				"W_NAME": "11",
+				"SOURCE_PROCESS": "22",
+				"SAMLL_CATEGORY_ID": "266-003-05",
+				"TP_ID": "TP201810020531260014",
+				"YEAR_NUM": "22",
+				"BIG_CATEGORY_ID": "HW05",
+				"W_SHAPE": "22",
+				"LAST_NUM": "22",
+				"SAMLL_CATEGORY_NAME": null,
+				"ID": "2",
+				"D_NAME": "22",
+				"CHARACTER": "11"
+			}],
+			"initHandleList": [{
+				"UNIT": "吨",
+				"EN_NAME_CZ": "中海油能源发展股份有限公司安全环保分公司（碧海环保）",
+				"LAST_NUM": "33",
+				"HANDLE_TYPE": "11",
+				"LICENSE_NO": "111",
+				"SAMLL_CATEGORY_ID": null,
+				"ID": "1",
+				"D_NAME": "22",
+				"TP_ID": "TP201810020531260014",
+				"EN_ID_CZ": "EP201410280908450011",
+				"YEAR_NUM": "22",
+				"BIG_CATEGORY_ID": null
+			}, {
+				"UNIT": "个",
+				"EN_NAME_CZ": "天津江源环保科技有限公司",
+				"LAST_NUM": "22",
+				"HANDLE_TYPE": "11",
+				"LICENSE_NO": "11",
+				"SAMLL_CATEGORY_ID": null,
+				"ID": "2",
+				"D_NAME": "11",
+				"TP_ID": "TP201810020531260014",
+				"EN_ID_CZ": "EP201410281429170043",
+				"YEAR_NUM": "11",
+				"BIG_CATEGORY_ID": null
+			}],
+			"IWBSESSION": "BROWSER-20181007062257",
+			"HANDLE_TYPE_LIST": ["R1", "R2", "R3", "R4", "R5", "R7", "R8", "R9", "R10", "R11", "R12", "R13", "R14", "R15", "D1", "D9", "D10", "D16", "C1", "C2", "C3", "Y10", "Y11", "Y12", "Y13", "Y16", "G21", "G22", "G23", "G24", "G29"],
+			"realName": "",
+			"contextPath": "",
+			"orgSeq": ""
+		}
 		this.userRole = res.userType
 		// let lastNum = ""
 		// let yearNum = ""
@@ -343,6 +298,7 @@ export default {
 			let item = {}
 			item.value = res.initEpCzList[i].EN_ID_CZ
 			item.label = res.initEpCzList[i].EN_NAME_CZ
+			item.category = res.initEpCzList[i].LICENSE_NO
 			this.cateList.push(item)
 		}
 		this.cateList2 = []
@@ -350,45 +306,59 @@ export default {
 			let item = {}
 			item.value = res.initOverviewList[i].D_NAME
 			item.label = res.initOverviewList[i].D_NAME
+			item.big_name = res.initOverviewList[i].BIG_CATEGORY_ID
+			item.small_name = res.initOverviewList[i].SAMLL_CATEGORY_ID
 			this.cateList2.push(item)
 		}
+		this.cateList3 = []
+		for (let i in res.HANDLE_TYPE_LIST) {
+			let item = {}
+			item.value = res.HANDLE_TYPE_LIST[i]
+			item.label = res.HANDLE_TYPE_LIST[i]
+			this.cateList3.push(item)
+		}
+
 		if (res.initHandleList.length > 0) {
 			this.title1fromList = []
 			for (let i in res.initHandleList) {
 				let item = {
 					index: i + 1,
 					itemList: [{
-						type: "selectDIY",
-						text: res.initHandleList[i].EN_ID_CZ,
-						title: "委托利用处置单位名称",
+						type: "selectLevelText",
+						text1: res.initHandleList[i].EN_ID_CZ,
+						title1: "委托利用处置单位名称",
+						text2: res.initHandleList[i].LICENSE_NO,
+						title2: "许可证编号",
 						isSingle: true
 					}, {
-						type: "input",
-						text: res.initHandleList[i].LINCENSE_NO,
-						title: "许可证编号",
+						type: "selectLevelTwoText",
+						title1: "废物名称",
+						text1: res.initHandleList[i].D_NAME,
+						title2: "废物类别",
+						text2: res.initHandleList[i].BIG_CATEGORY_ID,
+						title3: "废物代码",
+						text3: res.initHandleList[i].SAMLL_CATEGORY_ID,
+						isSingle: true
 					}, {
 						type: "selectDIY",
-						text: res.initHandleList[i].D_NAME,
-						title: "废物名称",
-						num: "1"
+						text: res.initHandleList[i].HANDLE_TYPE,
+						title: "利用处置方式"
 					}, {
 						type: "select",
 						text: res.initHandleList[i].UNIT,
 						title: "单位"
 					}, {
-						type: "input",
-						text: res.initHandleList[i].HANDLE_TYPE,
-						title: "利用处置方式"
-					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: res.initHandleList[i].YEAR_NUM,
 						title: "本年度计划委托利用处置量",
-						isSingle: true
+						isSingle: true,
+						unit: res.initHandleList[i].UNIT
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: res.initHandleList[i].LAST_NUM,
 						title: "上年度实际委托利用处置量",
-						isSingle: true
+						isSingle: true,
+						unit: res.initHandleList[i].UNIT
 					}]
 				}
 				this.title1fromList.push(item)
@@ -397,53 +367,57 @@ export default {
 			this.title1fromList = [{
 				index: 1,
 				itemList: [{
-					type: "selectDIY",
-					text: "",
-					title: "委托利用处置单位名称",
+					type: "selectLevelText",
+					text1: '',
+					title1: "委托利用处置单位名称",
+					text2: '',
+					title2: "许可证编号",
 					isSingle: true
 				}, {
-					type: "input",
-					text: "",
-					title: "许可证编号",
+					type: "selectLevelTwoText",
+					title1: "废物名称",
+					text1: "",
+					title2: "废物类别",
+					text2: "",
+					title3: "废物代码",
+					text3: "",
+					isSingle: true
 				}, {
 					type: "selectDIY",
 					text: "",
-					title: "废物名称",
-					num: "1"
+					title: "利用处置方式"
 				}, {
 					type: "select",
 					text: "",
 					title: "单位"
 				}, {
-					type: "input",
-					text: "",
-					title: "利用处置方式"
-				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划委托利用处置量",
-					isSingle: true
+					isSingle: true,
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年度实际委托利用处置量",
-					isSingle: true
+					isSingle: true,
+					unit: ""
 				}]
 			}]
 		}
 
-		})
+		// })
 	},
 	methods: {
 		doSubmit () {
 			let checkFlag = true
 			for (let i in this.title1fromList) {
-				if (this.title1fromList[i].itemList[0].text === '' || this.title1fromList[i].itemList[1].text === '' || this.title1fromList[i].itemList[2].text === '' || this.title1fromList[i].itemList[3].text === '' || this.title1fromList[i].itemList[4].text === '' || this.title1fromList[i].itemList[5].text === '' || this.title1fromList[i].itemList[6].text === '') {
+				if (this.title1fromList[i].itemList[0].text1 === '' || this.title1fromList[i].itemList[1].text1 === '' || this.title1fromList[i].itemList[2].text === '' || this.title1fromList[i].itemList[3].text === '' || this.title1fromList[i].itemList[4].text === '' || this.title1fromList[i].itemList[5].text === '') {
 					checkFlag = false
 					break
 				}
 			}
-			if(!checkFlag){
+			if (!checkFlag) {
 				this.$notify.error({
 					title: '警告',
 					message: "请填全卡片所有内容"
@@ -463,16 +437,19 @@ export default {
 
 			for (let i in this.title1fromList) {
 				let item = {}
-				item.EN_ID_CZ = this.title1fromList[i].itemList[0].text
-				item.LINCENSE_NO = this.title1fromList[i].itemList[1].text
-				item.D_NAME = this.title1fromList[i].itemList[2].text
+				item.EN_ID_CZ = this.title1fromList[i].itemList[0].text1
+				item.LICENSE_NO = this.title1fromList[i].itemList[0].text2
+				item.D_NAME = this.title1fromList[i].itemList[1].text1
+				item.BIG_CATEGORY_ID = this.title1fromList[i].itemList[1].text2
+				item.SMALL_CATEGORY_ID = this.title1fromList[i].itemList[1].text3
+				item.HANDLE_TYPE = this.title1fromList[i].itemList[2].text
 				item.UNIT = this.title1fromList[i].itemList[3].text
-				item.HANDLE_TYPE = this.title1fromList[i].itemList[4].text
-				item.YEAR_NUM = this.title1fromList[i].itemList[5].text
-				item.LAST_NUM = this.title1fromList[i].itemList[6].text
+				item.YEAR_NUM = this.title1fromList[i].itemList[4].text
+				item.LAST_NUM = this.title1fromList[i].itemList[5].text
 
 				submitData.LIST.push(item)
 			}
+			console.log(submitData.LIST)
 
 			for (let key in this.queryJson) {
 				submitData[key] = this.queryJson[key]
@@ -502,37 +479,41 @@ export default {
 			this.title1fromList = [{
 				index: 1,
 				itemList: [{
-					type: "selectDIY",
-					text: "",
-					title: "委托利用处置单位名称",
+					type: "selectLevelText",
+					text1: "",
+					title1: "委托利用处置单位名称",
+					text2: "",
+					title2: "许可证编号",
 					isSingle: true
 				}, {
-					type: "input",
-					text: "",
-					title: "许可证编号",
+					type: "selectLevelTwoText",
+					title1: "废物名称",
+					text1: "",
+					title2: "废物类别",
+					text2: "",
+					title3: "废物代码",
+					text3: "",
+					isSingle: true
 				}, {
 					type: "selectDIY",
 					text: "",
-					title: "废物名称",
-					num: "1"
+					title: "利用处置方式"
 				}, {
 					type: "select",
 					text: "",
 					title: "单位"
 				}, {
-					type: "input",
-					text: "",
-					title: "利用处置方式"
-				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划委托利用处置量",
-					isSingle: true
+					isSingle: true,
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年度实际委托利用处置量",
-					isSingle: true
+					isSingle: true,
+					unit: ""
 				}]
 			}]
 		}
