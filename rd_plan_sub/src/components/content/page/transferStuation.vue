@@ -8,7 +8,7 @@
 			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" @doReset="resetInfo2"></assTitle>
 			<assForm :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData"></assForm>
 			<assTitle :userRole="userRole" :titleInfo="title3" titleType="textarea"></assTitle>
-			<assSwitch :userRole="userRole" title="运输措施" :switchInfo="switchInfo2"></assSwitch>
+			<!-- <assSwitch :userRole="userRole" title="运输措施" :switchInfo="switchInfo2"></assSwitch>
 			<el-form ref="form" :model="compInfo" :rules="rules" label-width="80px" class="transferStuationFrom">
 				<el-row :gutter="20">
 					<el-col :span="12">
@@ -25,7 +25,9 @@
 					</el-col>
 				</el-row>
 			</el-form>
-			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle> -->
+			<assTitle :userRole="userRole" :titleInfo="title4" titleType="reset" @doReset="resetInfo3"></assTitle>
+			<assTransferFrom :userRole="userRole" :formList="transferFromList"></assTransferFrom>
 			<assTitle :userRole="userRole" :titleInfo="title5" titleType="hint"></assTitle>
 			<div class="footerSign"></div>
 		</div>
@@ -36,6 +38,7 @@ import Aside from '../Aside.vue';
 import assTitle from '../../common/assTitle.vue'
 import assForm from '../../common/assForm.vue'
 import assSwitch from '../../common/assSwitch.vue'
+import assTransferFrom from '../../common/assTransferFrom.vue'
 import { checkBrowser, getQueryString } from '../../utils/browserCheck.js'
 import fetch from '../../utils/fetch.js'
 export default {
@@ -67,9 +70,7 @@ export default {
 				text: ""
 			},
 			title4: {
-				subTitle: "运输过程中采取的污染防治措施（如自行运输危险废物的，还应包括工具种类、载重量、使用年限等）",
-				placeholder: "必填",
-				text: ""
+				title: "运输措施",
 			},
 			title5: {
 				title: "转移计划",
@@ -155,39 +156,43 @@ export default {
 				name: "是否通过建设项目环境影响评价审批及竣工环境保护验收",
 				value: ""
 			}],
-			switchInfo2: [{
-				id: "1",
-				name: "运输过程中是否遵守危险货物运输管理的规定",
-				value: ""
-			}, {
-				id: "2",
-				name: "是否按危险废物特性分类运输",
-				value: ""
-			}, {
-				id: "3",
-				name: "是否委托运输",
-				value: ""
-			}],
-			compInfo: {
-				compName: "",
-				compVal: ""
-			},
+			// switchInfo2: [{
+			// 	id: "1",
+			// 	name: "运输过程中是否遵守危险货物运输管理的规定",
+			// 	value: ""
+			// }, {
+			// 	id: "2",
+			// 	name: "是否按危险废物特性分类运输",
+			// 	value: ""
+			// }, {
+			// 	id: "3",
+			// 	name: "是否委托运输",
+			// 	value: ""
+			// }],
+			// compInfo: {
+			// 	compName: "",
+			// 	compVal: ""
+			// },
 			levelOneData: [],
-			rules: {
-				compName: [
-					{ required: true, message: '请输入单位名称', trigger: 'blur' }
-				],
-				compVal: [
-					{ required: true, message: '请输入运输资质', trigger: 'blur' }
-				]
-			}
+			transferFromList:[{
+				index: "1",
+				itemList: [{
+					switchValue1: "0",
+					switchValue2: "0",
+					switchValue3: "0",
+					compName: "",
+					compVal: "",
+					textarea: ""
+				}]
+			}]
 		}
 	},
 	components: {
 		'my-aside': Aside,
 		'assTitle': assTitle,
 		'assForm': assForm,
-		'assSwitch': assSwitch
+		'assSwitch': assSwitch,
+		'assTransferFrom': assTransferFrom
 	},
 	watch: {
 	},
@@ -567,12 +572,36 @@ export default {
 			this.title3.text = res.initTransfer.CC_PROCESS
 
 			if (res.initProductYs.length > 0) {
-				this.switchInfo2[0].value = res.initProductYs[0].YS_1 ? res.initProductYs[0].YS_1 + "" : "0"
-				this.switchInfo2[1].value = res.initProductYs[0].YS_2 ? res.initProductYs[0].YS_2 + "" : "0"
-				this.switchInfo2[2].value = res.initProductYs[0].YS_3 ? res.initProductYs[0].YS_3 + "" : "0"
-				this.compInfo.compName = res.initProductYs[0].EN_NAME_YS
-				this.compInfo.compVal = res.initProductYs[0].YS_ZZ
-				this.title4.text = res.initProductYs[0].YS_PROCESS
+				this.transferFromList = []
+				for (let i in res.initProductCc) {
+					let item = {
+						index: i + 1,
+						switchValue1: res.initProductYs[0].YS_1 ? res.initProductYs[0].YS_1 + "" : "0",
+						switchValue2: res.initProductYs[0].YS_2 ? res.initProductYs[0].YS_2 + "" : "0",
+						switchValue3: res.initProductYs[0].YS_3 ? res.initProductYs[0].YS_3 + "" : "0",
+						compName: res.initProductYs[0].EN_NAME_YS,
+						compVal: res.initProductYs[0].YS_ZZ,
+						textarea: res.initProductYs[0].YS_PROCESS
+					}
+					this.transferFromList.push(item)
+				}
+				// this.switchInfo2[0].value = res.initProductYs[0].YS_1 ? res.initProductYs[0].YS_1 + "" : "0"
+				// this.switchInfo2[1].value = res.initProductYs[0].YS_2 ? res.initProductYs[0].YS_2 + "" : "0"
+				// this.switchInfo2[2].value = res.initProductYs[0].YS_3 ? res.initProductYs[0].YS_3 + "" : "0"
+				// this.compInfo.compName = res.initProductYs[0].EN_NAME_YS
+				// this.compInfo.compVal = res.initProductYs[0].YS_ZZ
+				// this.title4.text = res.initProductYs[0].YS_PROCESS
+				
+			}else{
+				this.transferFromList = [{
+					index: "1",
+					switchValue1: "0",
+					switchValue2: "0",
+					switchValue3: "0",
+					compName: "",
+					compVal: "",
+					textarea: ""
+				}]
 			}
 
 		})
@@ -593,15 +622,17 @@ export default {
 			submitData.CC_PROCESS = this.title3.text
 
 			submitData.TRANSFER_YS = []
-			let transItem = {}
-			transItem.YS_1 = this.switchInfo2[0].value
-			transItem.YS_2 = this.switchInfo2[1].value
-			transItem.YS_3 = this.switchInfo2[2].value
-			transItem.EN_NAME_YS = this.compInfo.compName
-			transItem.YS_ZZ = this.compInfo.compVal
-			transItem.YS_PROCESS = this.title4.text
-			submitData.TRANSFER_YS.push(transItem)
-
+			for(let i in this.transferFromList){
+				let transItem = {}
+				transItem.YS_1 = this.transferFromList[i].switchValue1 + ""
+				transItem.YS_2 = this.transferFromList[i].switchValue2 + ""
+				transItem.YS_3 = this.transferFromList[i].switchValue3 + ""
+				transItem.EN_NAME_YS = this.transferFromList[i].compName
+				transItem.YS_ZZ = this.transferFromList[i].compVal
+				transItem.YS_PROCESS = this.transferFromList[i].textarea
+				submitData.TRANSFER_YS.push(transItem)
+			}
+			
 			submitData.TRANSFER_FACILITY = []
 			for (let i in this.title1fromList) {
 				let item = {}
@@ -656,16 +687,26 @@ export default {
 					}
 				}
 			}
-			let checkFlag = false
-			this.$refs['form'].validate((valid) => {
-				if (valid) {
-					checkFlag = true
-				} else {
-					checkFlag = false
+			// let checkFlag = false
+			// this.$refs['form'].validate((valid) => {
+			// 	if (valid) {
+			// 		checkFlag = true
+			// 	} else {
+			// 		checkFlag = false
+			// 	}
+			// });
+			// if (!checkFlag) {
+			// 	return
+			// }
+
+			for(let i in submitData.TRANSFER_YS){
+				if(submitData.TRANSFER_YS[i].EN_NAME_YS === '' || submitData.TRANSFER_YS[i].YS_ZZ === '' || submitData.TRANSFER_YS[i].YS_PROCESS === ''){
+					this.$notify.error({
+						title: '警告',
+						message: "请填全[运输措施]所有内容"
+					});
+					return
 				}
-			});
-			if (!checkFlag) {
-				return
 			}
 			if (submitData.CC_PROCESS === '') {
 				this.$notify.error({
@@ -674,13 +715,13 @@ export default {
 				});
 				return
 			}
-			if (this.title4.text === '') {
-				this.$notify.error({
-					title: '警告',
-					message: "请填写运输过程中采取的污染防治措施"
-				});
-				return
-			}
+			// if (this.title4.text === '') {
+			// 	this.$notify.error({
+			// 		title: '警告',
+			// 		message: "请填写运输过程中采取的污染防治措施"
+			// 	});
+			// 	return
+			// }
 
 			const loading = this.$loading({
 				lock: true,
@@ -770,6 +811,17 @@ export default {
 					text: "",
 					title: "贮存原因"
 				}]
+			}]
+		},
+		resetInfo3 () {
+			this.transferFromList = [{
+				index: "1",
+				switchValue1: "0",
+				switchValue2: "0",
+				switchValue3: "0",
+				compName: "",
+				compVal: "",
+				textarea: ""
 			}]
 		}
 	}
