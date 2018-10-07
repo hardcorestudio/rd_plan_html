@@ -77,7 +77,7 @@ export default {
 		this.queryJson = getQueryString()
 
 		fetch({
-			url: '/plan/initHandle',
+			url: '/plan/initEnv',
 			method: 'POST',
 			data: 'params=' + JSON.stringify(this.queryJson)
 		}).then(res => {
@@ -176,7 +176,7 @@ export default {
 				submitData[key] = this.queryJson[key]
 			}
 			fetch({
-				url: '',
+				url: '/plan/saveEnv',
 				method: 'POST',
 				data: 'params=' + JSON.stringify(submitData)
 			}).then(res => {

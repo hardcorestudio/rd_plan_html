@@ -125,14 +125,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        // var p = {};
-        // p.TP_ID = $stateParams.tpId
-        // Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
-        //     console.log(data)
-        //     console.log("sssssssssssss")
-        //    console.log(JSON.stringify(data))
-        // },function(data,header,config,status){
-        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
+            console.log(data)
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initEnv', p, function(data,header,config,status){
@@ -141,14 +141,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initLastInfo', p, function(data,header,config,status){
-            console.log(data)
-            console.log("sssssssssssss")
-           console.log(JSON.stringify(data))
-        },function(data,header,config,status){
-        });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initLastInfo', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
     }
     $scope.test = function(pathname){
         // var p = {};
@@ -569,25 +569,25 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
            
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId;
-        p.LI_1 = '测试1'
-        p.LI_2 = '测试2'
-        p.C_1 = 1
-        p.C_2 = 0
-        p.C_3 = 1
-        p.C_4 = 0
-        p.C_5 = 1
-        p.C_6 = 0
-        p.C_7 = 1
-        p.C_8 = 0
-        p.C_9 = 0
-        console.log(JSON.stringify(p));
-        Init.iwbhttp('/plan/saveLastInfo', p, function(data,header,config,status){
-            console.log(data)
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId;
+        // p.LI_1 = '测试1'
+        // p.LI_2 = '测试2'
+        // p.C_1 = 1
+        // p.C_2 = 0
+        // p.C_3 = 1
+        // p.C_4 = 0
+        // p.C_5 = 1
+        // p.C_6 = 0
+        // p.C_7 = 1
+        // p.C_8 = 0
+        // p.C_9 = 0
+        // console.log(JSON.stringify(p));
+        // Init.iwbhttp('/plan/saveLastInfo', p, function(data,header,config,status){
+        //     console.log(data)
            
-        },function(data,header,config,status){
-        });
+        // },function(data,header,config,status){
+        // });
     }
     //返回上一页
     $scope.back = function (){

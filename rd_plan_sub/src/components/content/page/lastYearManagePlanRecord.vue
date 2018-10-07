@@ -111,7 +111,7 @@ export default {
 		this.queryJson = getQueryString()
 
 		fetch({
-			url: '/plan/initHandle',
+			url: '/plan/initLastInfo',
 			method: 'POST',
 			data: 'params=' + JSON.stringify(this.queryJson)
 		}).then(res => {
@@ -221,7 +221,7 @@ export default {
 				submitData[key] = this.queryJson[key]
 			}
 			fetch({
-				url: '',
+				url: '/plan/saveLastInfo',
 				method: 'POST',
 				data: 'params=' + JSON.stringify(submitData)
 			}).then(res => {
