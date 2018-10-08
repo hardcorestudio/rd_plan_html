@@ -576,12 +576,12 @@ export default {
 				for (let i in res.initProductYs) {
 					let item = {
 						index: i + 1,
-						switchValue1: res.initProductYs[0].YS_1 ? res.initProductYs[0].YS_1 + "" : "0",
-						switchValue2: res.initProductYs[0].YS_2 ? res.initProductYs[0].YS_2 + "" : "0",
-						switchValue3: res.initProductYs[0].YS_3 ? res.initProductYs[0].YS_3 + "" : "0",
-						compName: res.initProductYs[0].EN_NAME_YS,
-						compVal: res.initProductYs[0].YS_ZZ,
-						textarea: res.initProductYs[0].YS_PROCESS
+						switchValue1: res.initProductYs[i].YS_1 ? res.initProductYs[i].YS_1 + "" : "0",
+						switchValue2: res.initProductYs[i].YS_2 ? res.initProductYs[i].YS_2 + "" : "0",
+						switchValue3: res.initProductYs[i].YS_3 ? res.initProductYs[i].YS_3 + "" : "0",
+						compName: res.initProductYs[i].EN_NAME_YS,
+						compVal: res.initProductYs[i].YS_ZZ,
+						textarea: res.initProductYs[i].YS_PROCESS
 					}
 					this.transferFromList.push(item)
 				}
