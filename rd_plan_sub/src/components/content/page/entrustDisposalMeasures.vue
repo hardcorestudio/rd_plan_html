@@ -98,183 +98,183 @@ export default {
 		})
 		this.queryJson = getQueryString()
 
-		// fetch({
-		// 	url: '/plan/initHandle',
-		// 	method: 'POST',
-		// 	data: 'params=' + JSON.stringify(this.queryJson)
-		// }).then(res => {
-		let res = {
-			"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY0lYVit5TXR5YnVlT1VSdytZeEN3WT0=",
-			"sumHandleList": [{
-				"last_num_sum": "33.00吨",
-				"year_num_sum": "22.00吨"
-			}, {
-				"last_num_sum": "22.00个",
-				"year_num_sum": "11.00个"
-			}],
-			"operatorId": "",
-			"empId": "",
-			"initEpCzList": [{
-				"EN_NAME_CZ": "中海油能源发展股份有限公司安全环保分公司碧海环保服务公司",
-				"LICENSE_NO": "TJHW011",
-				"EN_ID_CZ": "EP201410280908450011"
-			}, {
-				"EN_NAME_CZ": "天津合佳威立雅环境服务有限公司",
-				"LICENSE_NO": "TJHW004",
-				"EN_ID_CZ": "EP201410280910450012"
-			}, {
-				"EN_NAME_CZ": "天津昱隆泰再生资源环保处理有限公司",
-				"LICENSE_NO": "TJHW003",
-				"EN_ID_CZ": "EP201410280946090018"
-			}, {
-				"EN_NAME_CZ": "天津东邦铅资源再生有限公司",
-				"LICENSE_NO": "TJHW017",
-				"EN_ID_CZ": "EP201410281131110030"
-			}, {
-				"EN_NAME_CZ": "天津市海丰化工有限公司",
-				"LICENSE_NO": "TJHW014",
-				"EN_ID_CZ": "EP201410281233290032"
-			}, {
-				"EN_NAME_CZ": "天津江源环保科技有限公司",
-				"LICENSE_NO": "TJHW006",
-				"EN_ID_CZ": "EP201410281429170043"
-			}, {
-				"EN_NAME_CZ": "天津市环通金属制品有限公司",
-				"LICENSE_NO": "TJHW002",
-				"EN_ID_CZ": "EP201410281648190057"
-			}, {
-				"EN_NAME_CZ": "泰鼎(天津）环保科技有限公司",
-				"LICENSE_NO": "TJHW021",
-				"EN_ID_CZ": "EP201410291352330074"
-			}, {
-				"EN_NAME_CZ": "天津仁新玻璃材料有限公司",
-				"LICENSE_NO": "TJHW020",
-				"EN_ID_CZ": "EP201410291732000084"
-			}, {
-				"EN_NAME_CZ": "天津滨海合佳威立雅环境服务有限公司",
-				"LICENSE_NO": "TJHW010",
-				"EN_ID_CZ": "EP201411031103580169"
-			}, {
-				"EN_NAME_CZ": "天津友信材料科技有限公司",
-				"LICENSE_NO": "TJHW012",
-				"EN_ID_CZ": "EP201501071338330387"
-			}, {
-				"EN_NAME_CZ": "天津市益康环保服务公司",
-				"LICENSE_NO": "TJHW009",
-				"EN_ID_CZ": "EP201504091955520499"
-			}, {
-				"EN_NAME_CZ": "天津瀚洋汇和环保科技有限公司",
-				"LICENSE_NO": "TJHW005",
-				"EN_ID_CZ": "EP201505291554270613"
-			}, {
-				"EN_NAME_CZ": "天津市雅环再生资源回收利用有限公司",
-				"LICENSE_NO": "TJHW013",
-				"EN_ID_CZ": "EP201508141009471304"
-			}, {
-				"EN_NAME_CZ": "中能（天津）环保再生资源利用有限公司",
-				"LICENSE_NO": "TJHW015",
-				"EN_ID_CZ": "EP201512021411072294"
-			}, {
-				"EN_NAME_CZ": "天津华庆百胜能源有限公司（试点）",
-				"LICENSE_NO": "TJHW016",
-				"EN_ID_CZ": "EP201602251339212631"
-			}, {
-				"EN_NAME_CZ": "天津市腾源环保科技有限公司",
-				"LICENSE_NO": "TJHW018",
-				"EN_ID_CZ": "EP201606031641393014"
-			}, {
-				"EN_NAME_CZ": "天津壹鸣环境污染治理有限公司",
-				"LICENSE_NO": "TJHW008",
-				"EN_ID_CZ": "EP201607110955513122"
-			}, {
-				"EN_NAME_CZ": "德鸿泰（天津）环保科技有限公司",
-				"LICENSE_NO": "TJHW019",
-				"EN_ID_CZ": "EP201611221430103497"
-			}, {
-				"EN_NAME_CZ": "天津莱奥西斯环保科技有限公司",
-				"LICENSE_NO": "TJHW001",
-				"EN_ID_CZ": "EP201707251144524521"
-			}],
-			"userType": "CSEP",
-			"newGuideFlag": "",
-			"belongQ": "",
-			"belongS": "",
-			"nickName": "天津合佳威立雅环境服务有限公司",
-			"orgCode": "",
-			"userId": "EP201410280910450012",
-			"userName": "",
-			"sepaName": "津南区",
-			"status": "",
-			"ifLogin": "0",
-			"ROLEID": "CSEP",
-			"epName": "天津合佳威立雅环境服务有限公司",
-			"epId": "EP201410280910450012",
-			"belongSepa": "JNQ",
-			"userPortrait": "",
-			"initOverviewList": [{
-				"BIG_CATEGORY_NAME": "123",
-				"UNIT": "吨",
-				"W_NAME": "11",
-				"SOURCE_PROCESS": "11",
-				"SAMLL_CATEGORY_ID": "831-003-01",
-				"TP_ID": "TP201810020531260014",
-				"YEAR_NUM": "22",
-				"BIG_CATEGORY_ID": "HW01",
-				"W_SHAPE": "11",
-				"LAST_NUM": "11",
-				"SAMLL_CATEGORY_NAME": null,
-				"ID": "1",
-				"D_NAME": "11",
-				"CHARACTER": "11"
-			}, {
-				"BIG_CATEGORY_NAME": null,
-				"UNIT": "个",
-				"W_NAME": "11",
-				"SOURCE_PROCESS": "22",
-				"SAMLL_CATEGORY_ID": "266-003-05",
-				"TP_ID": "TP201810020531260014",
-				"YEAR_NUM": "22",
-				"BIG_CATEGORY_ID": "HW05",
-				"W_SHAPE": "22",
-				"LAST_NUM": "22",
-				"SAMLL_CATEGORY_NAME": null,
-				"ID": "2",
-				"D_NAME": "22",
-				"CHARACTER": "11"
-			}],
-			"initHandleList": [{
-				"UNIT": "吨",
-				"EN_NAME_CZ": "中海油能源发展股份有限公司安全环保分公司（碧海环保）",
-				"LAST_NUM": "33",
-				"HANDLE_TYPE": "11",
-				"LICENSE_NO": "111",
-				"SAMLL_CATEGORY_ID": null,
-				"ID": "1",
-				"D_NAME": "22",
-				"TP_ID": "TP201810020531260014",
-				"EN_ID_CZ": "EP201410280908450011",
-				"YEAR_NUM": "22",
-				"BIG_CATEGORY_ID": null
-			}, {
-				"UNIT": "个",
-				"EN_NAME_CZ": "天津江源环保科技有限公司",
-				"LAST_NUM": "22",
-				"HANDLE_TYPE": "11",
-				"LICENSE_NO": "11",
-				"SAMLL_CATEGORY_ID": null,
-				"ID": "2",
-				"D_NAME": "11",
-				"TP_ID": "TP201810020531260014",
-				"EN_ID_CZ": "EP201410281429170043",
-				"YEAR_NUM": "11",
-				"BIG_CATEGORY_ID": null
-			}],
-			"IWBSESSION": "BROWSER-20181007062257",
-			"HANDLE_TYPE_LIST": ["R1", "R2", "R3", "R4", "R5", "R7", "R8", "R9", "R10", "R11", "R12", "R13", "R14", "R15", "D1", "D9", "D10", "D16", "C1", "C2", "C3", "Y10", "Y11", "Y12", "Y13", "Y16", "G21", "G22", "G23", "G24", "G29"],
-			"realName": "",
-			"contextPath": "",
-			"orgSeq": ""
-		}
+		fetch({
+			url: '/plan/initHandle',
+			method: 'POST',
+			data: 'params=' + JSON.stringify(this.queryJson)
+		}).then(res => {
+		// let res = {
+		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY0lYVit5TXR5YnVlT1VSdytZeEN3WT0=",
+		// 	"sumHandleList": [{
+		// 		"last_num_sum": "33.00吨",
+		// 		"year_num_sum": "22.00吨"
+		// 	}, {
+		// 		"last_num_sum": "22.00个",
+		// 		"year_num_sum": "11.00个"
+		// 	}],
+		// 	"operatorId": "",
+		// 	"empId": "",
+		// 	"initEpCzList": [{
+		// 		"EN_NAME_CZ": "中海油能源发展股份有限公司安全环保分公司碧海环保服务公司",
+		// 		"LICENSE_NO": "TJHW011",
+		// 		"EN_ID_CZ": "EP201410280908450011"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津合佳威立雅环境服务有限公司",
+		// 		"LICENSE_NO": "TJHW004",
+		// 		"EN_ID_CZ": "EP201410280910450012"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津昱隆泰再生资源环保处理有限公司",
+		// 		"LICENSE_NO": "TJHW003",
+		// 		"EN_ID_CZ": "EP201410280946090018"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津东邦铅资源再生有限公司",
+		// 		"LICENSE_NO": "TJHW017",
+		// 		"EN_ID_CZ": "EP201410281131110030"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津市海丰化工有限公司",
+		// 		"LICENSE_NO": "TJHW014",
+		// 		"EN_ID_CZ": "EP201410281233290032"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津江源环保科技有限公司",
+		// 		"LICENSE_NO": "TJHW006",
+		// 		"EN_ID_CZ": "EP201410281429170043"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津市环通金属制品有限公司",
+		// 		"LICENSE_NO": "TJHW002",
+		// 		"EN_ID_CZ": "EP201410281648190057"
+		// 	}, {
+		// 		"EN_NAME_CZ": "泰鼎(天津）环保科技有限公司",
+		// 		"LICENSE_NO": "TJHW021",
+		// 		"EN_ID_CZ": "EP201410291352330074"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津仁新玻璃材料有限公司",
+		// 		"LICENSE_NO": "TJHW020",
+		// 		"EN_ID_CZ": "EP201410291732000084"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津滨海合佳威立雅环境服务有限公司",
+		// 		"LICENSE_NO": "TJHW010",
+		// 		"EN_ID_CZ": "EP201411031103580169"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津友信材料科技有限公司",
+		// 		"LICENSE_NO": "TJHW012",
+		// 		"EN_ID_CZ": "EP201501071338330387"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津市益康环保服务公司",
+		// 		"LICENSE_NO": "TJHW009",
+		// 		"EN_ID_CZ": "EP201504091955520499"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津瀚洋汇和环保科技有限公司",
+		// 		"LICENSE_NO": "TJHW005",
+		// 		"EN_ID_CZ": "EP201505291554270613"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津市雅环再生资源回收利用有限公司",
+		// 		"LICENSE_NO": "TJHW013",
+		// 		"EN_ID_CZ": "EP201508141009471304"
+		// 	}, {
+		// 		"EN_NAME_CZ": "中能（天津）环保再生资源利用有限公司",
+		// 		"LICENSE_NO": "TJHW015",
+		// 		"EN_ID_CZ": "EP201512021411072294"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津华庆百胜能源有限公司（试点）",
+		// 		"LICENSE_NO": "TJHW016",
+		// 		"EN_ID_CZ": "EP201602251339212631"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津市腾源环保科技有限公司",
+		// 		"LICENSE_NO": "TJHW018",
+		// 		"EN_ID_CZ": "EP201606031641393014"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津壹鸣环境污染治理有限公司",
+		// 		"LICENSE_NO": "TJHW008",
+		// 		"EN_ID_CZ": "EP201607110955513122"
+		// 	}, {
+		// 		"EN_NAME_CZ": "德鸿泰（天津）环保科技有限公司",
+		// 		"LICENSE_NO": "TJHW019",
+		// 		"EN_ID_CZ": "EP201611221430103497"
+		// 	}, {
+		// 		"EN_NAME_CZ": "天津莱奥西斯环保科技有限公司",
+		// 		"LICENSE_NO": "TJHW001",
+		// 		"EN_ID_CZ": "EP201707251144524521"
+		// 	}],
+		// 	"userType": "CSEP",
+		// 	"newGuideFlag": "",
+		// 	"belongQ": "",
+		// 	"belongS": "",
+		// 	"nickName": "天津合佳威立雅环境服务有限公司",
+		// 	"orgCode": "",
+		// 	"userId": "EP201410280910450012",
+		// 	"userName": "",
+		// 	"sepaName": "津南区",
+		// 	"status": "",
+		// 	"ifLogin": "0",
+		// 	"ROLEID": "CSEP",
+		// 	"epName": "天津合佳威立雅环境服务有限公司",
+		// 	"epId": "EP201410280910450012",
+		// 	"belongSepa": "JNQ",
+		// 	"userPortrait": "",
+		// 	"initOverviewList": [{
+		// 		"BIG_CATEGORY_NAME": "123",
+		// 		"UNIT": "吨",
+		// 		"W_NAME": "11",
+		// 		"SOURCE_PROCESS": "11",
+		// 		"SAMLL_CATEGORY_ID": "831-003-01",
+		// 		"TP_ID": "TP201810020531260014",
+		// 		"YEAR_NUM": "22",
+		// 		"BIG_CATEGORY_ID": "HW01",
+		// 		"W_SHAPE": "11",
+		// 		"LAST_NUM": "11",
+		// 		"SAMLL_CATEGORY_NAME": null,
+		// 		"ID": "1",
+		// 		"D_NAME": "11",
+		// 		"CHARACTER": "11"
+		// 	}, {
+		// 		"BIG_CATEGORY_NAME": null,
+		// 		"UNIT": "个",
+		// 		"W_NAME": "11",
+		// 		"SOURCE_PROCESS": "22",
+		// 		"SAMLL_CATEGORY_ID": "266-003-05",
+		// 		"TP_ID": "TP201810020531260014",
+		// 		"YEAR_NUM": "22",
+		// 		"BIG_CATEGORY_ID": "HW05",
+		// 		"W_SHAPE": "22",
+		// 		"LAST_NUM": "22",
+		// 		"SAMLL_CATEGORY_NAME": null,
+		// 		"ID": "2",
+		// 		"D_NAME": "22",
+		// 		"CHARACTER": "11"
+		// 	}],
+		// 	"initHandleList": [{
+		// 		"UNIT": "吨",
+		// 		"EN_NAME_CZ": "中海油能源发展股份有限公司安全环保分公司（碧海环保）",
+		// 		"LAST_NUM": "33",
+		// 		"HANDLE_TYPE": "11",
+		// 		"LICENSE_NO": "111",
+		// 		"SAMLL_CATEGORY_ID": null,
+		// 		"ID": "1",
+		// 		"D_NAME": "22",
+		// 		"TP_ID": "TP201810020531260014",
+		// 		"EN_ID_CZ": "EP201410280908450011",
+		// 		"YEAR_NUM": "22",
+		// 		"BIG_CATEGORY_ID": null
+		// 	}, {
+		// 		"UNIT": "个",
+		// 		"EN_NAME_CZ": "天津江源环保科技有限公司",
+		// 		"LAST_NUM": "22",
+		// 		"HANDLE_TYPE": "11",
+		// 		"LICENSE_NO": "11",
+		// 		"SAMLL_CATEGORY_ID": null,
+		// 		"ID": "2",
+		// 		"D_NAME": "11",
+		// 		"TP_ID": "TP201810020531260014",
+		// 		"EN_ID_CZ": "EP201410281429170043",
+		// 		"YEAR_NUM": "11",
+		// 		"BIG_CATEGORY_ID": null
+		// 	}],
+		// 	"IWBSESSION": "BROWSER-20181007062257",
+		// 	"HANDLE_TYPE_LIST": ["R1", "R2", "R3", "R4", "R5", "R7", "R8", "R9", "R10", "R11", "R12", "R13", "R14", "R15", "D1", "D9", "D10", "D16", "C1", "C2", "C3", "Y10", "Y11", "Y12", "Y13", "Y16", "G21", "G22", "G23", "G24", "G29"],
+		// 	"realName": "",
+		// 	"contextPath": "",
+		// 	"orgSeq": ""
+		// }
 		this.userRole = res.userType
 		// let lastNum = ""
 		// let yearNum = ""
@@ -406,7 +406,7 @@ export default {
 			}]
 		}
 
-		// })
+		})
 	},
 	methods: {
 		doSubmit () {
