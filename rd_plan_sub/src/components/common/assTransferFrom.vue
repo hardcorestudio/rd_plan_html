@@ -52,14 +52,22 @@
 				</el-col>
 			</el-row>
 			<el-row :gutter="20" class="assSwitchItem_row" >
-				<el-col :span="12">
+				<el-col :span="12" class="assFromItem_inputBg">
 					<div class="assFromItem_title">单位名称</div>
 					<div class="assFromItem_right">
-						<el-input v-if="userRole=== 'CSEP'" v-model="item.compName" placeholder="必填"></el-input>
+						<el-select v-if="userRole=== 'CSEP'" placeholder="请选择" v-model="item.compId" @change="onSelectChange($event,item)">
+							<el-option
+								v-for="uItem in compList"
+								:key="uItem.value"
+								:label="uItem.label"
+								:value="uItem.value">
+							</el-option>
+						</el-select>
+						<!-- <el-input v-if="userRole=== 'CSEP'" v-model="item.compName" placeholder="必填"></el-input> -->
 						<el-row v-else>{{item.compName}}</el-row>
 					</div>
 				</el-col>
-				<el-col :span="12">
+				<el-col :span="12" class="assFromItem_inputBg">
 					<div class="assFromItem_title">运输资质</div>
 					<div class="assFromItem_right">
 						<el-input v-if="userRole=== 'CSEP'" v-model="item.compVal" placeholder="必填"></el-input>
@@ -99,7 +107,8 @@
   export default {
 		props: {
 			formList: Array,
-			userRole: String
+			userRole: String,
+			compList: Array
 		},
     data() {
       return {
@@ -130,6 +139,14 @@
 				if(myIndex !== ""){
 					this.formList.splice(myIndex, 1)
 				}
+			},
+			onSelectChange (val,item){
+				for(let i in this.compList){
+					if(this.compList[i].value === val){
+						item.compName = this.compList[i].label
+						break
+					}
+				}
 			}
     }
   }
@@ -156,6 +173,13 @@
 	margin: 0!important;
 	margin-top: 24px!important;
 	float: left;
+}
+.assFromItem_inputBg{
+	display: flex;
+	flex-direction: row;
+}
+.assFromItem_right{
+	flex: 1;
 }
 .assSwitchItem_rowBtn{
 	width: 100%;

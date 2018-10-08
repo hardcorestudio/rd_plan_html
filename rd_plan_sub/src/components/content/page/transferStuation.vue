@@ -27,7 +27,7 @@
 			</el-form>
 			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle> -->
 			<assTitle :userRole="userRole" :titleInfo="title4" titleType="reset" @doReset="resetInfo3"></assTitle>
-			<assTransferFrom :userRole="userRole" :formList="transferFromList"></assTransferFrom>
+			<assTransferFrom :userRole="userRole" :formList="transferFromList" :compList="compList"></assTransferFrom>
 			<assTitle :userRole="userRole" :titleInfo="title5" titleType="hint"></assTitle>
 			<div class="footerSign"></div>
 		</div>
@@ -174,17 +174,19 @@ export default {
 			// 	compVal: ""
 			// },
 			levelOneData: [],
-			transferFromList:[{
+			transferFromList: [{
 				index: "1",
 				itemList: [{
 					switchValue1: "0",
 					switchValue2: "0",
 					switchValue3: "0",
 					compName: "",
+					compId: "",
 					compVal: "",
 					textarea: ""
 				}]
-			}]
+			}],
+			compList: []
 		}
 	},
 	components: {
@@ -214,91 +216,40 @@ export default {
 		}).then(res => {
 
 			// let res = {
-			// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY25iUjlwN2tRVmdZb2xRRVl6WEl2QT0=",
+			// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiYjR6dGFhL3V2Y3dVR01JVXVhOVluRT0=",
 			// 	"initProductFacility": [{
-			// 		"UNIT": "吨",
-			// 		"NAME": "111",
+			// 		"UNIT": "个",
+			// 		"NAME": "11",
 			// 		"AREA_UNIT": "平方米",
-			// 		"AREA": "100",
+			// 		"AREA": "11",
 			// 		"ID": "1",
 			// 		"NUM_UNIT": "个",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"NUM": "100.00",
-			// 		"STORE": "111111",
-			// 		"TYPE": "bbb"
-			// 	}, {
-			// 		"UNIT": "吨",
-			// 		"NAME": "111",
-			// 		"AREA_UNIT": "平方米",
-			// 		"AREA": "100",
-			// 		"ID": "2",
-			// 		"NUM_UNIT": "个",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"NUM": "100.00",
-			// 		"STORE": "111111",
-			// 		"TYPE": "bbb"
+			// 		"TP_ID": "TP201810020531260014",
+			// 		"NUM": "11",
+			// 		"STORE": "22",
+			// 		"TYPE": "22"
 			// 	}],
 			// 	"operatorId": "",
 			// 	"initProductYs": [{
-			// 		"EN_NAME_YS": "aaa",
-			// 		"EN_ID_YS": "111",
-			// 		"YS_PROCESS": "aaaaaaaaa",
+			// 		"EN_NAME_YS": "11",
+			// 		"EN_ID_YS": null,
+			// 		"YS_PROCESS": "321",
 			// 		"ID": "1",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YS_2": 0,
-			// 		"YS_ZZ": "bbb",
-			// 		"YS_1": 1,
-			// 		"YS_3": 1
+			// 		"TP_ID": "TP201810020531260014",
+			// 		"YS_2": 1,
+			// 		"YS_ZZ": "123",
+			// 		"YS_1": 0,
+			// 		"YS_3": 0
 			// 	}, {
-			// 		"EN_NAME_YS": "bbb",
-			// 		"EN_ID_YS": "222",
-			// 		"YS_PROCESS": "bbbbbbbbbbb",
+			// 		"EN_NAME_YS": "fda",
+			// 		"EN_ID_YS": null,
+			// 		"YS_PROCESS": "fdsa",
 			// 		"ID": "2",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YS_2": 0,
-			// 		"YS_ZZ": "bbb",
+			// 		"TP_ID": "TP201810020531260014",
+			// 		"YS_2": 1,
+			// 		"YS_ZZ": "111",
 			// 		"YS_1": 1,
-			// 		"YS_3": 1
-			// 	}, {
-			// 		"EN_NAME_YS": "aaa",
-			// 		"EN_ID_YS": "111",
-			// 		"YS_PROCESS": "aaaaaaaaa",
-			// 		"ID": "3",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YS_2": 0,
-			// 		"YS_ZZ": "bbb",
-			// 		"YS_1": 1,
-			// 		"YS_3": 1
-			// 	}, {
-			// 		"EN_NAME_YS": "bbb",
-			// 		"EN_ID_YS": "222",
-			// 		"YS_PROCESS": "bbbbbbbbbbb",
-			// 		"ID": "4",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YS_2": 0,
-			// 		"YS_ZZ": "bbb",
-			// 		"YS_1": 1,
-			// 		"YS_3": 1
-			// 	}, {
-			// 		"EN_NAME_YS": "aaa",
-			// 		"EN_ID_YS": "111",
-			// 		"YS_PROCESS": "aaaaaaaaa",
-			// 		"ID": "5",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YS_2": 0,
-			// 		"YS_ZZ": "bbb",
-			// 		"YS_1": 1,
-			// 		"YS_3": 1
-			// 	}, {
-			// 		"EN_NAME_YS": "bbb",
-			// 		"EN_ID_YS": "222",
-			// 		"YS_PROCESS": "bbbbbbbbbbb",
-			// 		"ID": "6",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YS_2": 0,
-			// 		"YS_ZZ": "bbb",
-			// 		"YS_1": 1,
-			// 		"YS_3": 1
+			// 		"YS_3": 0
 			// 	}],
 			// 	"empId": "",
 			// 	"userType": "CSEP",
@@ -309,6 +260,250 @@ export default {
 			// 	"orgCode": "",
 			// 	"userId": "EP201410280910450012",
 			// 	"userName": "",
+			// 	"initEPys": [{
+			// 		"EP_NAME": "天津市龙汉达物流有限公司",
+			// 		"EP_ID": "EP201410280826300007"
+			// 	}, {
+			// 		"EP_NAME": "天津壹鸣环境工程有限公司",
+			// 		"EP_ID": "EP201410280833480008"
+			// 	}, {
+			// 		"EP_NAME": "天津合佳威立雅环境服务有限公司",
+			// 		"EP_ID": "EP201410280910450012"
+			// 	}, {
+			// 		"EP_NAME": "天津佛强再生资源环保科技有限公司",
+			// 		"EP_ID": "EP201410280912430013"
+			// 	}, {
+			// 		"EP_NAME": "沧州市利达运输队（天津市海丰化工有限公司）",
+			// 		"EP_ID": "EP201410281234460033"
+			// 	}, {
+			// 		"EP_NAME": "天津市中一国际货运代理有限公司",
+			// 		"EP_ID": "EP201410281453080045"
+			// 	}, {
+			// 		"EP_NAME": "唐山汉沽东方特种货物运输有限公司（天津东邦铅协议）",
+			// 		"EP_ID": "EP201410281459210046"
+			// 	}, {
+			// 		"EP_NAME": "盐山县东方运输队（天津市海丰化工有限公司）",
+			// 		"EP_ID": "EP201410281556500050"
+			// 	}, {
+			// 		"EP_NAME": "天津市塘沽危险品运输场",
+			// 		"EP_ID": "EP201410281953030058"
+			// 	}, {
+			// 		"EP_NAME": "津交二运",
+			// 		"EP_ID": "EP201410290939020062"
+			// 	}, {
+			// 		"EP_NAME": "天津开发区安远物流有限公司",
+			// 		"EP_ID": "EP201410291415340076"
+			// 	}, {
+			// 		"EP_NAME": "天津港琪物流有限公司",
+			// 		"EP_ID": "EP201410301510200117"
+			// 	}, {
+			// 		"EP_NAME": "天津市塘沽危险品运输有限公司（禹通物流）",
+			// 		"EP_ID": "EP201410311049020128"
+			// 	}, {
+			// 		"EP_NAME": "南皮县骏捷物流有限公司（合佳威立雅运输商）",
+			// 		"EP_ID": "EP201410311215130132"
+			// 	}, {
+			// 		"EP_NAME": "江西安泰物流有限公司（合佳威立雅运输商）",
+			// 		"EP_ID": "EP201410311219360133"
+			// 	}, {
+			// 		"EP_NAME": "东光县英华汽车销售有限公司（环通协议）",
+			// 		"EP_ID": "EP201411021317210148"
+			// 	}, {
+			// 		"EP_NAME": "天津滨海合佳威立雅环境服务有限公司",
+			// 		"EP_ID": "EP201411031103580169"
+			// 	}, {
+			// 		"EP_NAME": "天津市东建物流有限公司",
+			// 		"EP_ID": "EP201411040956130193"
+			// 	}, {
+			// 		"EP_NAME": "天津市永兴运输场",
+			// 		"EP_ID": "EP201411041029570196"
+			// 	}, {
+			// 		"EP_NAME": "天津金宏立运输有限公司",
+			// 		"EP_ID": "EP201411041352150202"
+			// 	}, {
+			// 		"EP_NAME": "沧州市新华区利达运输队（合佳威立雅运输商）",
+			// 		"EP_ID": "EP201411051447110218"
+			// 	}, {
+			// 		"EP_NAME": "天津市伟达储运有限公司",
+			// 		"EP_ID": "EP201411061622300229"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市隆达运输队（海澜协议）",
+			// 		"EP_ID": "EP201411181126200285"
+			// 	}, {
+			// 		"EP_NAME": "沧州临港方政运输队（海澜协议）",
+			// 		"EP_ID": "EP201411181137460286"
+			// 	}, {
+			// 		"EP_NAME": "东光县英华汽车销售有限公司临港分公司（环通协议）",
+			// 		"EP_ID": "EP201411261857310314"
+			// 	}, {
+			// 		"EP_NAME": "天津市和平危险品运输有限公司",
+			// 		"EP_ID": "EP201412081843020336"
+			// 	}, {
+			// 		"EP_NAME": "沧州市南大港管理区运达物流有限公司（仁新协议）",
+			// 		"EP_ID": "EP201412151630120349"
+			// 	}, {
+			// 		"EP_NAME": "青县通诚汽车运输有限公司（合佳威立雅运输商）",
+			// 		"EP_ID": "EP201412221052070364"
+			// 	}, {
+			// 		"EP_NAME": "场内运输",
+			// 		"EP_ID": "EP2015001"
+			// 	}, {
+			// 		"EP_NAME": "管道运输",
+			// 		"EP_ID": "EP2015002"
+			// 	}, {
+			// 		"EP_NAME": "公用仓库",
+			// 		"EP_ID": "EP2015003"
+			// 	}, {
+			// 		"EP_NAME": "河北世嘉伟业物流有限公司（合佳威立雅运输商）",
+			// 		"EP_ID": "EP201501050906350382"
+			// 	}, {
+			// 		"EP_NAME": "天津市泰瑞鑫国际物流有限公司",
+			// 		"EP_ID": "EP201501211621150403"
+			// 	}, {
+			// 		"EP_NAME": "江西安泰物流有限公司(泰鼎)",
+			// 		"EP_ID": "EP201502051605470430"
+			// 	}, {
+			// 		"EP_NAME": "天津恒致达物流有限公司",
+			// 		"EP_ID": "EP201502281431230450"
+			// 	}, {
+			// 		"EP_NAME": "天津大港油田运输有限责任公司",
+			// 		"EP_ID": "EP201503031123430453"
+			// 	}, {
+			// 		"EP_NAME": "大城县供销社运输公司危险物品运输队（昱隆泰协议）",
+			// 		"EP_ID": "EP201503031504110454"
+			// 	}, {
+			// 		"EP_NAME": "天津壹鸣环境科技股份有限公司",
+			// 		"EP_ID": "EP201505151246570569"
+			// 	}, {
+			// 		"EP_NAME": "沧州临港赫阳运输有限公司（友信协议）",
+			// 		"EP_ID": "EP201505181621390576"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市交通货运服务中心（友信协议）",
+			// 		"EP_ID": "EP201505251518030602"
+			// 	}, {
+			// 		"EP_NAME": "沧州临港宏泰运输队（友信协议）",
+			// 		"EP_ID": "EP201505251520340603"
+			// 	}, {
+			// 		"EP_NAME": "天津瀚洋汇和环保科技有限公司",
+			// 		"EP_ID": "EP201505291554270613"
+			// 	}, {
+			// 		"EP_NAME": "沧州市新华区利达运输队（环通协议）",
+			// 		"EP_ID": "EP201506252312470751"
+			// 	}, {
+			// 		"EP_NAME": "天津创锦真空涂装制品有限公司",
+			// 		"EP_ID": "EP201507140922331009"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市隆达运输队（江源协议）",
+			// 		"EP_ID": "EP201507210854241085"
+			// 	}, {
+			// 		"EP_NAME": "沧县天源汽车运输队（海澜协议）",
+			// 		"EP_ID": "EP201507310947151185"
+			// 	}, {
+			// 		"EP_NAME": "天津天山国际货运有限公司",
+			// 		"EP_ID": "EP201507311144361191"
+			// 	}, {
+			// 		"EP_NAME": "天津市鑫来化工有限公司",
+			// 		"EP_ID": "EP201508111726081271"
+			// 	}, {
+			// 		"EP_NAME": "利安隆博华（天津）医药化学有限公司",
+			// 		"EP_ID": "EP201508141038071310"
+			// 	}, {
+			// 		"EP_NAME": "天津市广捷物流有限公司",
+			// 		"EP_ID": "EP201508210851041390"
+			// 	}, {
+			// 		"EP_NAME": "天津市双狮涂料有限公司",
+			// 		"EP_ID": "EP201508251353151440"
+			// 	}, {
+			// 		"EP_NAME": "天津市博丰海信运输有限公司",
+			// 		"EP_ID": "EP201509060934491546"
+			// 	}, {
+			// 		"EP_NAME": "唐山汉沽东方特种货物运输有限公司（友信协议）",
+			// 		"EP_ID": "EP201509220953301746"
+			// 	}, {
+			// 		"EP_NAME": "天津开发区通华国际货运代理有限公司",
+			// 		"EP_ID": "EP201509300819171803"
+			// 	}, {
+			// 		"EP_NAME": "天津市祥源盛自行车配件有限公司",
+			// 		"EP_ID": "EP201510101504241835"
+			// 	}, {
+			// 		"EP_NAME": "天津津交二运物流有限公司",
+			// 		"EP_ID": "EP201510280815371992"
+			// 	}, {
+			// 		"EP_NAME": "沧州临港方政运输队（江源协议）",
+			// 		"EP_ID": "EP201601061531522487"
+			// 	}, {
+			// 		"EP_NAME": "天津市万路丰道路运输有限公司",
+			// 		"EP_ID": "EP201603021801332651"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市东达运输有限公司（合佳威立雅运输商）",
+			// 		"EP_ID": "EP201603111614452688"
+			// 	}, {
+			// 		"EP_NAME": "北京市通县永升化工厂（昱隆泰协议）",
+			// 		"EP_ID": "EP201603301329372762"
+			// 	}, {
+			// 		"EP_NAME": "天津市天润运输有限公司",
+			// 		"EP_ID": "EP201604191439232840"
+			// 	}, {
+			// 		"EP_NAME": "沧州临港赫阳运输有限公司（江源协议）",
+			// 		"EP_ID": "EP201605161538542937"
+			// 	}, {
+			// 		"EP_NAME": "天津市龙盛汽车配件有限公司",
+			// 		"EP_ID": "EP201606141610003031"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市六通运输队（天津市海丰化工有限公司）",
+			// 		"EP_ID": "EP201606251054163072"
+			// 	}, {
+			// 		"EP_NAME": "天津市广会通物流有限公司",
+			// 		"EP_ID": "EP201606301335533088"
+			// 	}, {
+			// 		"EP_NAME": "沧州临港鹏达运输队（腾源协议）",
+			// 		"EP_ID": "EP201607070903033110"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市隆达运输队（腾源协议）",
+			// 		"EP_ID": "EP201607071055583111"
+			// 	}, {
+			// 		"EP_NAME": "天津德利得供应链管理股份有限公司",
+			// 		"EP_ID": "EP201609070950073254"
+			// 	}, {
+			// 		"EP_NAME": "东光县英华汽车销售有限公司（腾源协议）",
+			// 		"EP_ID": "EP201609181048113284"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市前进运输队（腾源协议）",
+			// 		"EP_ID": "EP201609190801213287"
+			// 	}, {
+			// 		"EP_NAME": "沧州临港宏泰运输队（腾源协议）",
+			// 		"EP_ID": "EP201609190802523288"
+			// 	}, {
+			// 		"EP_NAME": "天津华庆百胜运输有限公司",
+			// 		"EP_ID": "EP201609241559513310"
+			// 	}, {
+			// 		"EP_NAME": "沧州临港昌骅运输队（腾源协议）",
+			// 		"EP_ID": "EP201610011001303337"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市德盛运输有限公司（腾源协议）",
+			// 		"EP_ID": "EP201610111317193364"
+			// 	}, {
+			// 		"EP_NAME": "天津兴百物流有限公司",
+			// 		"EP_ID": "EP201611020907063414"
+			// 	}, {
+			// 		"EP_NAME": "天津市万通胜运输有限公司",
+			// 		"EP_ID": "EP201611111358513447"
+			// 	}, {
+			// 		"EP_NAME": "沧州澳太运输有限公司",
+			// 		"EP_ID": "EP201612121303343568"
+			// 	}, {
+			// 		"EP_NAME": "河北郑明物流有限公司",
+			// 		"EP_ID": "EP201612131311343572"
+			// 	}, {
+			// 		"EP_NAME": "大城县供销社运输公司危险物品运输队（腾源协议）",
+			// 		"EP_ID": "EP201612281057553613"
+			// 	}, {
+			// 		"EP_NAME": "黄骅市泰安运输有限公司",
+			// 		"EP_ID": "EP201702171323503679"
+			// 	}, {
+			// 		"EP_NAME": "沧州市南大港管理区泰星运输有限公司（合佳威立雅运输商）",
+			// 		"EP_ID": "EP201702281349383713"
+			// 	}],
 			// 	"sepaName": "津南区",
 			// 	"status": "",
 			// 	"ifLogin": "0",
@@ -317,110 +512,78 @@ export default {
 			// 		"CC_2": 1,
 			// 		"CC_1": 0,
 			// 		"CC_5": 0,
-			// 		"sysdate": 1537051428310,
-			// 		"CC_4": 1,
-			// 		"CC_3": 0,
-			// 		"TP_ID": "TP201809120707190010",
+			// 		"sysdate": 1538960430343,
+			// 		"CC_4": 0,
+			// 		"CC_3": 1,
+			// 		"TP_ID": "TP201810020531260014",
 			// 		"STATUS": "00",
-			// 		"CC_PROCESS": "aaa"
+			// 		"CC_PROCESS": "多少啊"
 			// 	},
 			// 	"epName": "天津合佳威立雅环境服务有限公司",
 			// 	"epId": "EP201410280910450012",
 			// 	"belongSepa": "JNQ",
 			// 	"userPortrait": "",
-			// 	"IWBSESSION": "BROWSER-20180917065100",
 			// 	"initOverviewList": [{
-			// 		"BIG_CATEGORY_NAME": "范德萨",
+			// 		"BIG_CATEGORY_NAME": "医疗废物",
 			// 		"UNIT": "吨",
-			// 		"W_NAME": "范德萨",
-			// 		"SOURCE_PROCESS": "afd",
-			// 		"SAMLL_CATEGORY_ID": "1124325432",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YEAR_NUM": "1000",
+			// 		"W_NAME": "11",
+			// 		"SOURCE_PROCESS": "11",
+			// 		"SAMLL_CATEGORY_ID": "831-003-01",
+			// 		"TP_ID": "TP201810020531260014",
+			// 		"YEAR_NUM": "22",
 			// 		"BIG_CATEGORY_ID": "HW01",
-			// 		"W_SHAPE": "范德萨",
-			// 		"LAST_NUM": "100",
-			// 		"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
+			// 		"W_SHAPE": "11",
+			// 		"LAST_NUM": "11",
+			// 		"SAMLL_CATEGORY_NAME": "病理性废物",
 			// 		"ID": "1",
-			// 		"D_NAME": "aa",
-			// 		"CHARACTER": "啊啊啊"
+			// 		"D_NAME": "11",
+			// 		"CHARACTER": "11"
 			// 	}, {
-			// 		"BIG_CATEGORY_NAME": "范德萨",
-			// 		"UNIT": "吨",
-			// 		"W_NAME": "范德萨",
-			// 		"SOURCE_PROCESS": "afd",
-			// 		"SAMLL_CATEGORY_ID": "1124325432",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YEAR_NUM": "1000",
-			// 		"BIG_CATEGORY_ID": "HW01",
-			// 		"W_SHAPE": "范德萨",
-			// 		"LAST_NUM": "100",
-			// 		"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
+			// 		"BIG_CATEGORY_NAME": "木材防腐剂废物",
+			// 		"UNIT": "个",
+			// 		"W_NAME": "11",
+			// 		"SOURCE_PROCESS": "22",
+			// 		"SAMLL_CATEGORY_ID": "266-003-05",
+			// 		"TP_ID": "TP201810020531260014",
+			// 		"YEAR_NUM": "22",
+			// 		"BIG_CATEGORY_ID": "HW05",
+			// 		"W_SHAPE": "22",
+			// 		"LAST_NUM": "22",
+			// 		"SAMLL_CATEGORY_NAME": "木材防腐化学品生产配制产生的废弃产品及过期原料",
 			// 		"ID": "2",
-			// 		"D_NAME": "aa",
-			// 		"CHARACTER": "啊啊啊"
-			// 	}, {
-			// 		"BIG_CATEGORY_NAME": "范德萨",
-			// 		"UNIT": "吨",
-			// 		"W_NAME": "范德萨",
-			// 		"SOURCE_PROCESS": "afd",
-			// 		"SAMLL_CATEGORY_ID": "1124325432",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"YEAR_NUM": "1000",
-			// 		"BIG_CATEGORY_ID": "HW01",
-			// 		"W_SHAPE": "范德萨",
-			// 		"LAST_NUM": "100",
-			// 		"SAMLL_CATEGORY_NAME": "范德萨发撒发撒的",
-			// 		"ID": "3",
-			// 		"D_NAME": "aa",
-			// 		"CHARACTER": "啊啊啊"
+			// 		"D_NAME": "22",
+			// 		"CHARACTER": "11"
 			// 	}],
+			// 	"IWBSESSION": "BROWSER-20181008091641",
 			// 	"realName": "",
 			// 	"contextPath": "",
 			// 	"initProductCc": [{
 			// 		"STORE_LAST_UNIT": "个",
-			// 		"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-			// 		"STORE_REASON": "啊啊啊",
-			// 		"STORE_LAST": "1000.00",
+			// 		"BIG_CATEGORY_NAME": null,
+			// 		"STORE_REASON": "11",
+			// 		"STORE_LAST": "22",
 			// 		"ID": "1",
-			// 		"D_NAME": "111",
-			// 		"STORE_LASTSUM": "吨",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"STORE_LASTSUM_UNIT": null,
-			// 		"STORE_PLAN_UNIT": "吨",
-			// 		"STORE_PLAN": "1000.00",
-			// 		"BIG_CATEGORY_ID": "HW01"
-			// 	}, {
-			// 		"STORE_LAST_UNIT": "个",
-			// 		"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-			// 		"STORE_REASON": "啊啊啊",
-			// 		"STORE_LAST": "1000.00",
-			// 		"ID": "2",
-			// 		"D_NAME": "111",
-			// 		"STORE_LASTSUM": "吨",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"STORE_LASTSUM_UNIT": null,
-			// 		"STORE_PLAN_UNIT": "吨",
-			// 		"STORE_PLAN": "1000.00",
-			// 		"BIG_CATEGORY_ID": "HW01"
-			// 	}, {
-			// 		"STORE_LAST_UNIT": "个",
-			// 		"BIG_CATEGORY_NAME": "放大睡觉了；房间打扫；",
-			// 		"STORE_REASON": "啊啊啊",
-			// 		"STORE_LAST": "1000.00",
-			// 		"ID": "3",
-			// 		"D_NAME": "111",
-			// 		"STORE_LASTSUM": "吨",
-			// 		"TP_ID": "TP201809120707190010",
-			// 		"STORE_LASTSUM_UNIT": null,
-			// 		"STORE_PLAN_UNIT": "吨",
-			// 		"STORE_PLAN": "1000.00",
+			// 		"D_NAME": "11",
+			// 		"STORE_LASTSUM": "22",
+			// 		"TP_ID": "TP201810020531260014",
+			// 		"STORE_LASTSUM_UNIT": "个",
+			// 		"STORE_PLAN_UNIT": "个",
+			// 		"STORE_PLAN": "11",
 			// 		"BIG_CATEGORY_ID": "HW01"
 			// 	}],
 			// 	"orgSeq": ""
 			// }
 
 			this.userRole = res.userType
+
+			this.compList = []
+			for (let i in res.initEPys) {
+				let item = {}
+				item.label = res.initEPys[i].EP_NAME
+				item.value = res.initEPys[i].EP_ID
+				this.compList.push(item)
+			}
+
 			this.switchInfo1[0].value = res.initTransfer.CC_1 ? res.initTransfer.CC_1 + "" : '0'
 			this.switchInfo1[1].value = res.initTransfer.CC_2 ? res.initTransfer.CC_2 + "" : '0'
 			this.switchInfo1[2].value = res.initTransfer.CC_3 ? res.initTransfer.CC_3 + "" : '0'
@@ -580,6 +743,7 @@ export default {
 						switchValue2: res.initProductYs[i].YS_2 ? res.initProductYs[i].YS_2 + "" : "0",
 						switchValue3: res.initProductYs[i].YS_3 ? res.initProductYs[i].YS_3 + "" : "0",
 						compName: res.initProductYs[i].EN_NAME_YS,
+						compId: res.initProductYs[i].EN_ID_YS,
 						compVal: res.initProductYs[i].YS_ZZ,
 						textarea: res.initProductYs[i].YS_PROCESS
 					}
@@ -591,14 +755,15 @@ export default {
 				// this.compInfo.compName = res.initProductYs[0].EN_NAME_YS
 				// this.compInfo.compVal = res.initProductYs[0].YS_ZZ
 				// this.title4.text = res.initProductYs[0].YS_PROCESS
-				
-			}else{
+
+			} else {
 				this.transferFromList = [{
 					index: "1",
 					switchValue1: "0",
 					switchValue2: "0",
 					switchValue3: "0",
 					compName: "",
+					compId: "",
 					compVal: "",
 					textarea: ""
 				}]
@@ -622,17 +787,18 @@ export default {
 			submitData.CC_PROCESS = this.title3.text
 
 			submitData.TRANSFER_YS = []
-			for(let i in this.transferFromList){
+			for (let i in this.transferFromList) {
 				let transItem = {}
 				transItem.YS_1 = this.transferFromList[i].switchValue1 + ""
 				transItem.YS_2 = this.transferFromList[i].switchValue2 + ""
 				transItem.YS_3 = this.transferFromList[i].switchValue3 + ""
 				transItem.EN_NAME_YS = this.transferFromList[i].compName
+				transItem.EN_ID_YS = this.transferFromList[i].compId
 				transItem.YS_ZZ = this.transferFromList[i].compVal
 				transItem.YS_PROCESS = this.transferFromList[i].textarea
 				submitData.TRANSFER_YS.push(transItem)
 			}
-			
+
 			submitData.TRANSFER_FACILITY = []
 			for (let i in this.title1fromList) {
 				let item = {}
@@ -699,8 +865,8 @@ export default {
 			// 	return
 			// }
 
-			for(let i in submitData.TRANSFER_YS){
-				if(submitData.TRANSFER_YS[i].EN_NAME_YS === '' || submitData.TRANSFER_YS[i].YS_ZZ === '' || submitData.TRANSFER_YS[i].YS_PROCESS === ''){
+			for (let i in submitData.TRANSFER_YS) {
+				if (submitData.TRANSFER_YS[i].EN_NAME_YS === '' || submitData.TRANSFER_YS[i].YS_ZZ === '' || submitData.TRANSFER_YS[i].YS_PROCESS === '') {
 					this.$notify.error({
 						title: '警告',
 						message: "请填全[运输措施]所有内容"
@@ -820,6 +986,7 @@ export default {
 				switchValue2: "0",
 				switchValue3: "0",
 				compName: "",
+				compId: "",
 				compVal: "",
 				textarea: ""
 			}]
