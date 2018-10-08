@@ -573,7 +573,7 @@ export default {
 
 			if (res.initProductYs.length > 0) {
 				this.transferFromList = []
-				for (let i in res.initProductCc) {
+				for (let i in res.initProductYs) {
 					let item = {
 						index: i + 1,
 						switchValue1: res.initProductYs[0].YS_1 ? res.initProductYs[0].YS_1 + "" : "0",
