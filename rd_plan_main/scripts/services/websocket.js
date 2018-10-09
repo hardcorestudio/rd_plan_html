@@ -3,22 +3,22 @@
  */
 angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','localStorageService', function($websocket, $rootScope,localStorageService) {
 //  var ws = $websocket('ws://localhost:9001/mywebsocket');
-  var wsurl = $rootScope.websocketUrlController+'?userId='+localStorageService.get('userId');;
+  var wsurl = $rootScope.websocketUrlController+'?IWBSESSION='+localStorageService.get('IWBSESSION');
   console.log(wsurl)
   var ws = $websocket(wsurl);
   var collection = [];
-  ws.onMessage(function(event) {
-    console.log('message: ', event);
-    var res;
-    try {
-      res = (new Function("return " + event.data))();
-    } catch(e) {
-      res = {
-          'userId': $rootScope.userId,
-          'message': event.data
-      };
-    }
-  });
+  // ws.onMessage(function(event) {
+  //   console.log('message: ', event);
+  //   var res;
+  //   try {
+  //     res = (new Function("return " + event.data))();
+  //   } catch(e) {
+  //     res = {
+  //         'userId': $rootScope.userId,
+  //         'message': event.data
+  //     };
+  //   }
+  // });
   ws.onError(function(event) {
     console.log('connection Error', event);
   });
@@ -27,7 +27,7 @@ angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','l
   });
   ws.onOpen(function() {
     console.log('connection open');
-   ws.send('{"key":"hello","val":"woody"}');
+    ws.send('{"key":"hello woody","val":"connection open"}');
   });
   return {
     collection: collection,
@@ -43,6 +43,23 @@ angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','l
       {
         ws.send(JSON.stringify(message));
       }
+    },
+    onMe:function(callback){
+      ws.onMessage(function(event) {
+        console.log('ws message: ', event);
+        var res;
+        try {
+          res = (new Function("return " + event.data))();
+          callback(res);
+        } catch(e) {
+          console.log(e)
+          res = {
+              'userId': localStorageService.get('userId'),
+              'message': event.data
+          }
+          console.log(res)
+        }
+      })
     }
   };
 }]);

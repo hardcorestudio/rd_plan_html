@@ -1,6 +1,58 @@
 'use strict';
 angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','Init','CheckBrowser','$state','$stateParams','localStorageService','Modal','$location','WebSocket','$timeout','$interval', function ($rootScope,$scope,Init,CheckBrowser,$state,$stateParams,localStorageService,Modal,$location,WebSocket,$timeout,$interval) {
     $scope.WebSocket = WebSocket;
+    $scope.WebSocket.onMe(function(obj){
+        if(obj.key == 'env'){
+            if(obj.value == 'func_done'){
+                $scope.envClass = $scope.func_done
+            }
+        }
+    });
+    $scope.func_class = {
+        "display":"flex",
+        "justify-content": "center",
+        "align-items": "center",
+        "width":"20%",
+        "height":"80px",
+        "border-radius": "5px",
+        "border-width": "1px",
+        "border-color":"#fafafa",
+        "border-style": "solid",
+        "-moz-box-shadow":"1px 3px 6px #33333360",
+        "-webkit-box-shadow":"1px 3px 6px #33333360",
+        "box-shadow":"1px 3px 6px #33333360",
+        "background-color": "#fafafa",
+        "color":"#343434",
+        "margin-right": "38px",
+        "margin-top": "16px"
+    }
+    $scope.func_done = {
+        "display":"flex",
+        "justify-content": "center",
+        "align-items": "center",
+        "width":"20%",
+        "height":"80px",
+        "border-radius": "5px",
+        "border-width": "1px",
+        "border-color":"#4FC08D",
+        "border-style": "solid",
+        "-moz-box-shadow":"1px 3px 6px #33333360",
+        "-webkit-box-shadow":"1px 3px 6px #33333360",
+        "box-shadow":"1px 3px 6px #33333360",
+        "background-color": "rgb(61, 185, 129)",
+        "color":"#fff",
+        "margin-right": "38px",
+        "margin-top": "16px"
+    }
+    $scope.baseInfoClass = $scope.func_class
+    $scope.productionSituationClass = $scope.func_class
+    $scope.produceSituationClass = $scope.func_class
+    $scope.decrementPlanClass = $scope.func_class
+    $scope.transferStuationClass = $scope.func_class
+    $scope.selfDisposalMeasuresClass = $scope.func_class
+    $scope.entrustDisposalMeasuresClass = $scope.func_class
+    $scope.envClass = $scope.func_class
+    $scope.lastClass = $scope.func_class
     CheckBrowser.check();
     //弹框参数
     var resolve = {};
@@ -11,16 +63,6 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         $state.go("dashboard.index");
         return;
     }
-
-    $scope.baseInfoClass = false;
-    $scope.productionSituationClass = false;
-    $scope.produceSituationClass = false;
-    $scope.decrementPlanClass = false;
-    $scope.transferStuationClass = false;
-    $scope.selfDisposalMeasuresClass = false;
-    $scope.entrustDisposalMeasuresClass = false;
-    $scope.envClass = false;
-    $scope.lastClass = false;
     
     $scope.param = {TP_ID:$stateParams.tpId}
     $scope.taskFlag = $stateParams.from.indexOf('Task') > -1 ? true : false;
@@ -35,31 +77,31 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
             $scope.applyBtnFlag = true;
         }
         if(data.baseInfoFlag == '1'){
-            $scope.baseInfoClass = true
+            $scope.baseInfoClass = $scope.func_done
         }
         if(data.productionSituationFlag == '1'){
-            $scope.productionSituationClass = true
+            $scope.productionSituationClass = $scope.func_done
         }
         if(data.produceSituationFlag == '1'){
-            $scope.produceSituationClass = true
+            $scope.produceSituationClass = $scope.func_done
         }
         if(data.decrementPlanFlag == '1'){
-            $scope.decrementPlanClass = true
+            $scope.decrementPlanClass = $scope.func_done
         }
         if(data.transferStuationFlag == '1'){
-            $scope.transferStuationClass = true
+            $scope.transferStuationClass = $scope.func_done
         }
         if(data.selfDisposalMeasuresFlag == '1'){
-            $scope.selfDisposalMeasuresClass = true
+            $scope.selfDisposalMeasuresClass = $scope.func_done
         }
         if(data.entrustDisposalMeasuresFlag == '1'){
-            $scope.entrustDisposalMeasuresClass = true
+            $scope.entrustDisposalMeasuresClass = $scope.func_done
         }
         if(data.envFlag == '1'){
-            $scope.envClass = true
+            $scope.envClass = $scope.func_done
         }
         if(data.lastInfoFlag == '1'){
-            $scope.lastClass = true
+            $scope.lastClass = $scope.func_done
         }
     },function(data,header,config,status){
     });
@@ -115,14 +157,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        // var p = {};
-        // p.TP_ID = $stateParams.tpId
-        // Init.iwbhttp('/plan/initTransfer', p, function(data,header,config,status){
-        //     console.log(data)
-        //     console.log("sssssssssssss")
-        //    console.log(JSON.stringify(data))
-        // },function(data,header,config,status){
-        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initTransfer', p, function(data,header,config,status){
+            console.log(data)
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initHandleSelf', p, function(data,header,config,status){
@@ -131,14 +173,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
-            console.log(data)
-            console.log("sssssssssssss")
-           console.log(JSON.stringify(data))
-        },function(data,header,config,status){
-        });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initEnv', p, function(data,header,config,status){
