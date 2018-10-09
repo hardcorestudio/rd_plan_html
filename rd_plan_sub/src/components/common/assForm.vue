@@ -7,11 +7,11 @@
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title}}</div>
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
-							<div v-else>
-								<div v-if="fItem.type === 'input'" class="assFromItem_right">
+							<div v-else class="assFromItem_right">
+								<div v-if="fItem.type === 'input'">
 									<el-input v-model="fItem.text" placeholder="必填"></el-input>
 								</div>
-								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_right">
+								<div v-else-if="fItem.type === 'selectDIY'">
 									<el-select v-if="fItem.num && fItem.num === '1'" placeholder="请选择" v-model="fItem.text">
 										<el-option
 											v-for="uItem in cateList2"
@@ -29,8 +29,8 @@
 										</el-option>
 									</el-select>
 								</div>
-								<div v-else-if="fItem.type === 'select'" class="assFromItem_right">
-									<el-select placeholder="吨/个" v-model="fItem.text">
+								<div v-else-if="fItem.type === 'select'" class="assFromItem_unitBg">
+									<el-select placeholder="吨/个" v-model="fItem.text" @change="unitChange(item.index,fItem.text)" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in units"
 											:key="uItem.value"
@@ -39,8 +39,8 @@
 										</el-option>
 									</el-select>
 								</div>
-								<div v-else-if="fItem.type === 'selectThree'" class="assFromItem_right">
-									<el-select placeholder="吨/个/公升" v-model="fItem.text">
+								<div v-else-if="fItem.type === 'selectThree'" class="assFromItem_unitBg">
+									<el-select placeholder="吨/个/公升" v-model="fItem.text" @change="unitChange(item.index,fItem.text)" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in unitsThree"
 											:key="uItem.value"
@@ -49,12 +49,12 @@
 										</el-option>
 									</el-select>
 								</div>
-								<div v-else-if="fItem.type === 'inputWithUnit'" class="assFromItem_right">
+								<div v-else-if="fItem.type === 'inputWithUnit' || fItem.type === 'inputWithUnitSelect'">
 									<el-input v-model="fItem.text" placeholder="必填(限9位)" type="number" maxlength="9">
 										<template slot="append">{{fItem.unit}}</template>
 									</el-input>
 								</div>
-								<div v-else-if="fItem.type === 'unit'" class="assFromItem_right unitShow">{{fItem.text}}</div>
+								<div v-else-if="fItem.type === 'unit'" class="unitShow">{{fItem.text}}</div>
 							</div>
 						</el-row>
 					</el-col>
@@ -220,6 +220,19 @@
 						break
 					}
 				}
+			},
+			unitChange(index,text) {
+				for(let i in this.formList){
+					if(this.formList[i].index === index){
+						for(let j in this.formList[i].itemList){
+							let item = this.formList[i].itemList[j]
+							if(item.type === "inputWithUnitSelect"){
+								item.unit = text
+							}
+						}
+						break
+					}
+				}
 			}
     }
   }
@@ -237,6 +250,12 @@
 	background: #f3f5f7;
 	box-shadow: 1px 1px 5px #989898;
 	margin-bottom: 16px;
+}
+.assFromItem_right{
+	flex: 1;
+}
+.assFromItem_right >div{
+	width: 100%;
 }
 .assFromItem_row{
 	/* height: 42px; */
@@ -285,6 +304,12 @@
 	float: right;
 	width: 30px;
 	padding: 0 4px;
+}
+.assFromItem_unitBg{
+	width: 100%;
+}
+.assFromItem_unitBgSelect{
+	width: 100%;
 }
 
 </style>

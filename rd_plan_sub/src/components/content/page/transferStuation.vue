@@ -89,7 +89,8 @@ export default {
 				}, {
 					type: "input",
 					text: "",
-					title: "数量"
+					title: "数量",
+					unit: "个"
 				}, {
 					type: "input",
 					text: "",
@@ -100,9 +101,10 @@ export default {
 					title: "面积",
 					unit: "平方米"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "贮存能力"
+					title: "贮存能力",
+					unit: ""
 				}]
 			}],
 			title2fromList: [{
@@ -118,17 +120,20 @@ export default {
 					text: "",
 					title: "单位",
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "拟贮存量",
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年度贮存量",
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "截止上年度年底累计贮存量",
+					unit: ""
 				}, {
 					type: "input",
 					text: "",
@@ -605,9 +610,10 @@ export default {
 							title: "数量",
 							unit: "个"
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initProductFacility[i].STORE,
-							title: "贮存能力"
+							title: "贮存能力",
+							unit: res.initProductFacility[i].UNIT
 						}, {
 							type: "select",
 							text: res.initProductFacility[i].UNIT,
@@ -638,9 +644,10 @@ export default {
 						title: "数量",
 						unit: "个"
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
-						title: "贮存能力"
+						title: "贮存能力",
+						unit: ""
 					}, {
 						type: "select",
 						text: "",
@@ -681,17 +688,20 @@ export default {
 							text: res.initProductCc[i].STORE_PLAN_UNIT,
 							title: "单位",
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initProductCc[i].STORE_PLAN,
 							title: "拟贮存量",
+							unit: res.initProductCc[i].STORE_PLAN_UNIT
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initProductCc[i].STORE_LAST,
 							title: "上年度贮存量",
+							unit: res.initProductCc[i].STORE_PLAN_UNIT
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initProductCc[i].STORE_LASTSUM,
 							title: "截止上年度年底累计贮存量",
+							unit: res.initProductCc[i].STORE_PLAN_UNIT
 						}, {
 							type: "input",
 							text: res.initProductCc[i].STORE_REASON,
@@ -714,17 +724,20 @@ export default {
 						text: "",
 						title: "单位",
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
 						title: "拟贮存量",
+						unit: ""
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
 						title: "上年度贮存量",
+						unit: ""
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
 						title: "截止上年度年底累计贮存量",
+						unit: ""
 					}, {
 						type: "input",
 						text: "",
@@ -928,9 +941,10 @@ export default {
 					title: "数量",
 					unit: "个"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "贮存能力"
+					title: "贮存能力",
+					unit: ""
 				}, {
 					type: "select",
 					text: "",
@@ -961,17 +975,20 @@ export default {
 					text: "",
 					title: "单位",
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "拟贮存量",
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年度贮存量",
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "截止上年度年底累计贮存量",
+					unit: ""
 				}, {
 					type: "input",
 					text: "",

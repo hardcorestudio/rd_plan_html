@@ -61,13 +61,15 @@ export default {
 					text: "",
 					title: "单位"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "上年度消耗量"
+					title: "上年度消耗量",
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "本年度计划消耗量"
+					title: "本年度计划消耗量",
+					unit: ""
 				}]
 			}],
 			title2fromList: [{
@@ -100,13 +102,15 @@ export default {
 					text: "",
 					title: "单位"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "上年度产量"
+					title: "上年度产量",
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "本年度计划产量"
+					title: "本年度计划产量",
+					unit: ""
 				}]
 			}],
 		}
@@ -238,13 +242,15 @@ export default {
 							text: res.initProductOri[i].UNIT,
 							title: "单位"
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initProductOri[i].LAST_NUM,
-							title: "上年度消耗量"
+							title: "上年度消耗量",
+							unit: res.initProductOri[i].UNIT
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initProductOri[i].YEAR_NUM,
-							title: "本年度计划消耗量"
+							title: "本年度计划消耗量",
+							unit: res.initProductOri[i].UNIT
 						}]
 					}
 					this.title1fromList.push(item)
@@ -261,13 +267,15 @@ export default {
 						text: "",
 						title: "单位"
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
-						title: "上年度消耗量"
+						title: "上年度消耗量",
+						unit: ""
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
-						title: "本年度计划消耗量"
+						title: "本年度计划消耗量",
+						unit: ""
 					}]
 				}]
 			}
@@ -332,13 +340,15 @@ export default {
 							text: res.initProductOutput[i].UNIT,
 							title: "单位"
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initProductOutput[i].LAST_NUM,
-							title: "上年度产量"
+							title: "上年度产量",
+							unit: res.initProductOutput[i].UNIT
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initProductOutput[i].YEAR_NUM,
-							title: "本年度计划产量"
+							title: "本年度计划产量",
+							unit: res.initProductOutput[i].UNIT
 						}]
 					}
 					this.title3fromList.push(item)
@@ -355,13 +365,15 @@ export default {
 						text: "",
 						title: "单位"
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
-						title: "上年度产量"
+						title: "上年度产量",
+						unit: ""
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
-						title: "本年度计划产量"
+						title: "本年度计划产量",
+						unit: ""
 					}]
 				}]
 			}

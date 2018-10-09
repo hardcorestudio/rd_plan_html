@@ -55,7 +55,7 @@
 				<el-col :span="12" class="assFromItem_inputBg">
 					<div class="assFromItem_title">单位名称</div>
 					<div class="assFromItem_right">
-						<el-select v-if="userRole=== 'CSEP'" placeholder="请选择" v-model="item.compId" @change="onSelectChange($event,item)">
+						<el-select v-if="userRole=== 'CSEP'" placeholder="请选择" v-model="item.compId" @change="onSelectChange($event,item)" class="assFromItem_rightSelect">
 							<el-option
 								v-for="uItem in compList"
 								:key="uItem.value"
@@ -262,5 +262,8 @@
 	float: left;
 	padding: 0 10px;
 	box-sizing: border-box;
+}
+.assFromItem_rightSelect{
+	width: 100%;
 }
 </style>

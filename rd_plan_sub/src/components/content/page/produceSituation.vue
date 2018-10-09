@@ -66,17 +66,19 @@ export default {
 					text: "",
 					title: "危险特性"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "计划生产量"
+					title: "计划生产量",
+					unit: ""
 				}, {
 					type: "select",
 					text: "",
 					title: "单位"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "实际生产量"
+					title: "实际生产量",
+					unit: ""
 				},{
 					type: "input",
 					text: "",
@@ -8640,17 +8642,19 @@ export default {
 						text: res.initOverviewList[i].CHARACTER,
 						title: "危险特性"
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].YEAR_NUM,
-						title: "计划生产量"
+						title: "计划生产量",
+						unit: res.initOverviewList[i].UNIT
 					}, {
 						type: "select",
 						text: res.initOverviewList[i].UNIT,
 						title: "单位"
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].LAST_NUM,
-						title: "实际生产量"
+						title: "实际生产量",
+						unit: res.initOverviewList[i].UNIT
 					}, {
 						type: "input",
 						text: res.initOverviewList[i].SOURCE_PROCESS,
@@ -8687,17 +8691,19 @@ export default {
 					text: "",
 					title: "危险特性"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "计划生产量"
+					title: "计划生产量",
+					unit:""
 				}, {
 					type: "select",
 					text: "",
 					title: "单位"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "实际生产量"
+					title: "实际生产量",
+					unit: ""
 				}, {
 					type: "input",
 					text: "",
@@ -8846,17 +8852,19 @@ export default {
 					text: "",
 					title: "危险特性"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "计划生产量"
+					title: "计划生产量",
+					unit: ""
 				}, {
 					type: "select",
 					text: "",
 					title: "单位"
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
-					title: "实际生产量"
+					title: "实际生产量",
+					unit: ""
 				}, {
 					type: "input",
 					text: "",

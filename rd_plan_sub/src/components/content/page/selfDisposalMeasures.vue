@@ -382,15 +382,17 @@ export default {
 							title: "单位",
 							isSingle: true,
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initHandleSelfList[i].STORE_YEAR,
 							title: "本年度计划利用处置量",
 							isSingle: true,
+							unit: res.initHandleSelfList[i].STORE_PLAN_UNIT
 						}, {
-							type: "input",
+							type: "inputWithUnitSelect",
 							text: res.initHandleSelfList[i].STORE_LAST,
 							title: "上年度实际利用处置量",
 							isSingle: true,
+							unit: res.initHandleSelfList[i].STORE_PLAN_UNIT
 						}]
 					}
 					this.title1fromList.push(item)
@@ -409,15 +411,17 @@ export default {
 						title: "单位",
 						isSingle: true,
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
 						title: "本年度计划利用处置量",
 						isSingle: true,
+						unit: ""
 					}, {
-						type: "input",
+						type: "inputWithUnitSelect",
 						text: "",
 						title: "上年度实际利用处置量",
 						isSingle: true,
+						unit: ""
 					}]
 				}]
 			}
@@ -541,15 +545,17 @@ export default {
 					title: "单位",
 					isSingle: true,
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划利用处置量",
 					isSingle: true,
+					unit: ""
 				}, {
-					type: "input",
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年度实际利用处置量",
 					isSingle: true,
+					unit: ""
 				}]
 			}]
 		}

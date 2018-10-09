@@ -7,12 +7,12 @@
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title}}</div>
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
-							<div v-else>
-								<div v-if="fItem.type === 'input'" class="assFromItem_right">
+							<div v-else class="assFromItem_right">
+								<div v-if="fItem.type === 'input'">
 									<el-input v-model="fItem.text" placeholder="必填"></el-input>
 								</div>
-								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_right">
-									<el-select placeholder="请选择" v-model="fItem.text">
+								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_unitBg">
+									<el-select placeholder="请选择" v-model="fItem.text" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in cateList"
 											:key="uItem.value"
@@ -21,8 +21,8 @@
 										</el-option>
 									</el-select>
 								</div>
-								<div v-else-if="fItem.type === 'select'" class="assFromItem_right">
-									<el-select placeholder="吨/个" v-model="fItem.text" @change="unitChange(item.index,fItem.text)">
+								<div v-else-if="fItem.type === 'select'" class="assFromItem_unitBg">
+									<el-select placeholder="吨/个" v-model="fItem.text" @change="unitChange(item.index,fItem.text)" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in units"
 											:key="uItem.value"
@@ -31,8 +31,8 @@
 										</el-option>
 									</el-select>
 								</div>
-								<div v-else-if="fItem.type === 'selectThree'" class="assFromItem_right">
-									<el-select placeholder="吨/个/公升" v-model="fItem.text" @change="unitChange(item.index,fItem.text)">
+								<div v-else-if="fItem.type === 'selectThree'" class="assFromItem_unitBg">
+									<el-select placeholder="吨/个/公升" v-model="fItem.text" @change="unitChange(item.index,fItem.text)" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in unitsThree"
 											:key="uItem.value"
@@ -41,12 +41,12 @@
 										</el-option>
 									</el-select>
 								</div>
-								<div v-else-if="fItem.type === 'inputWithUnit' || fItem.type === 'inputWithUnitSelect'" class="assFromItem_right">
+								<div v-else-if="fItem.type === 'inputWithUnit' || fItem.type === 'inputWithUnitSelect'">
 									<el-input v-model="fItem.text" placeholder="必填(限9位)" type="number" maxlength="9">
 										<template slot="append">{{fItem.unit}}</template>
 									</el-input>
 								</div>
-								<div v-else-if="fItem.type === 'unit'" class="assFromItem_right unitShow">{{fItem.text}}</div>
+								<div v-else-if="fItem.type === 'unit'" class="unitShow">{{fItem.text}}</div>
 							</div>
 						</el-row>
 					</el-col>
@@ -55,7 +55,7 @@
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
 							<div v-else class="assFromItem_right">
-								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelOneChange(fItem)">
+								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelOneChange(fItem)" class="assFromItem_unitBgSelect">
 									<el-option
 										v-for="uItem in levelTwoData"
 										:key="uItem.value"
@@ -83,7 +83,7 @@
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
 							<div v-else class="assFromItem_right">
-								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelChange(fItem)">
+								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelChange(fItem)" class="assFromItem_unitBgSelect">
 									<el-option
 										v-for="uItem in levelOneData"
 										:key="uItem.value"
@@ -289,5 +289,13 @@
 	width: 30px;
 	padding: 0 4px;
 }
-
+.assFromItem_unitBg{
+	width: 100%;
+}
+.assFromItem_unitBgSelect{
+	width: 100%;
+}
+.assFromItem_right{
+	flex: 1;
+}
 </style>
