@@ -2,8 +2,9 @@
 	<div id='entrustDisposalMeasures'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="entrustDisposalMeasuresPlan">
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="doReset" :numTitle="numTitle"></assTitle>
-			<assFormCascade :formList="title1fromList" :type="userRole !== 'CSEP' ? 'label' : ''" :levelOneData="cateList" :levelTwoData="cateList2" :cateList="cateList3"></assFormCascade>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus" @doReset="doReset" :numTitle="numTitle" @formStatusChange="formStatusChange"></assTitle>
+			<assFormCascade v-if="formStatus === 'card'" :formList="title1fromList" :type="userRole !== 'CSEP' ? 'label' : ''" :levelOneData="cateList" :levelTwoData="cateList2" :cateList="cateList3"></assFormCascade>
+			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -11,6 +12,7 @@
 <script>
 import Aside from '../Aside.vue';
 import assTitle from '../../common/assTitle.vue'
+import assTable from '../../common/assTable.vue'
 import assFormCascade from '../../common/assFormCascade.vue'
 import { checkBrowser, getQueryString } from '../../utils/browserCheck.js'
 import fetch from '../../utils/fetch.js'
@@ -75,15 +77,46 @@ export default {
 					unit: ""
 				}]
 			}],
+			formDataListTitle: [{
+				title: '委托利用处置单位名称',
+				key: 'EN_NAME_CZ'
+			},{
+				title: '许可证编号',
+				key: 'LICENSE_NO'
+			},{
+				title: '废物名称',
+				key: 'D_NAME'
+			},{
+				title: '废物类别',
+				key: 'BIG_CATEGORY_NAME'
+			},{
+				title: '废物代码',
+				key: 'SAMLL_CATEGORY_NAME'
+			},{
+				title: '利用处置方式',
+				key: 'HANDLE_TYPE'
+			},{
+				title: '单位',
+				key: 'UNIT'
+			},{
+				title: '本年度计划委托利用处置量',
+				key: 'YEAR_NUM'
+			},{
+				title: '上年度实际委托利用处置量',
+				key: 'LAST_NUM'
+			}],
+			formDataList: [],
 			cateList: [],
 			cateList2: [],
-			cateList3: []
+			cateList3: [],
+			formStatus: 'card'
 		}
 	},
 	components: {
 		'my-aside': Aside,
 		'assTitle': assTitle,
-		'assFormCascade': assFormCascade
+		'assFormCascade': assFormCascade,
+		'assTable': assTable
 	},
 	watch: {
 	},
@@ -97,6 +130,8 @@ export default {
 			this.$router.push({ path: '/pageIncompatible' })
 		})
 		this.queryJson = getQueryString()
+
+		this.formStatus = "card"
 
 		fetch({
 			url: '/plan/initHandle',
@@ -195,7 +230,7 @@ export default {
 		// 		"LICENSE_NO": "TJHW001",
 		// 		"EN_ID_CZ": "EP201707251144524521"
 		// 	}],
-		// 	"userType": "CSEP",
+		// 	"userType": "admin",
 		// 	"newGuideFlag": "",
 		// 	"belongQ": "",
 		// 	"belongS": "",
@@ -318,6 +353,7 @@ export default {
 			this.cateList3.push(item)
 		}
 
+		this.formDataList = res.initHandleList
 		if (res.initHandleList.length > 0) {
 			this.title1fromList = []
 			for (let i in res.initHandleList) {
@@ -516,6 +552,9 @@ export default {
 					unit: ""
 				}]
 			}]
+		},
+		formStatusChange(status){
+			this.formStatus = status
 		}
 	}
 }

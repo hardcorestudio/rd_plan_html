@@ -3,10 +3,12 @@
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="transFerStiationArea">
 			<assSwitch :userRole="userRole" title="贮存措施" :switchInfo="switchInfo1"></assSwitch>
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="resetInfo1"></assTitle>
-			<assForm :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
-			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" @doReset="resetInfo2"></assTitle>
-			<assForm :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1" @doReset="resetInfo1" @formStatusChange="formStatusChange1"></assTitle>
+			<assForm v-if="formStatus1 === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assTable v-else-if="formStatus1 === 'table'" :tableList="formDataList1" :tableTitleList="formDataListTitle1"></assTable>
+			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2" @doReset="resetInfo2" @formStatusChange="formStatusChange2"></assTitle>
+			<assForm v-if="formStatus2 === 'card'" :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData"></assForm>
+			<assTable v-else-if="formStatus2 === 'table'" :tableList="formDataList2" :tableTitleList="formDataListTitle2"></assTable>
 			<assTitle :userRole="userRole" :titleInfo="title3" titleType="textarea"></assTitle>
 			<!-- <assSwitch :userRole="userRole" title="运输措施" :switchInfo="switchInfo2"></assSwitch>
 			<el-form ref="form" :model="compInfo" :rules="rules" label-width="80px" class="transferStuationFrom">
@@ -38,6 +40,7 @@ import Aside from '../Aside.vue';
 import assTitle from '../../common/assTitle.vue'
 import assForm from '../../common/assForm.vue'
 import assSwitch from '../../common/assSwitch.vue'
+import assTable from '../../common/assTable.vue'
 import assTransferFrom from '../../common/assTransferFrom.vue'
 import { checkBrowser, getQueryString } from '../../utils/browserCheck.js'
 import fetch from '../../utils/fetch.js'
@@ -81,16 +84,21 @@ export default {
 				itemList: [{
 					type: "input",
 					text: "",
-					title: "设施名称"
+					title: "设施名称" 
+				}, {
+					type: "inputWithUnit",
+					text: "",
+					title: "数量",
+					unit: "个"
+				}, {
+					type: "inputWithUnitSelect",
+					text: "",
+					title: "贮存能力",
+					unit: ""
 				}, {
 					type: "select",
 					text: "",
 					title: "单位"
-				}, {
-					type: "input",
-					text: "",
-					title: "数量",
-					unit: "个"
 				}, {
 					type: "input",
 					text: "",
@@ -100,18 +108,12 @@ export default {
 					text: "",
 					title: "面积",
 					unit: "平方米"
-				}, {
-					type: "inputWithUnitSelect",
-					text: "",
-					title: "贮存能力",
-					unit: ""
 				}]
 			}],
-			title2fromList: [{
+			title2fromList: [{ 
 				index: 1,
 				itemList: [{
 					type: "selectLevelText",
-					text1: "",
 					title1: "名称",
 					text2: "",
 					title2: "类别"
@@ -191,7 +193,52 @@ export default {
 					textarea: ""
 				}]
 			}],
-			compList: []
+			compList: [],
+			formStatus1: 'card',
+			formStatus2: 'card',
+			formDataList1: [],
+			formDataList2: [],
+			formDataListTitle1: [{ 
+				title: '设施名称',
+				key: 'NAME'
+			}, {
+				title: '数量(个)',
+				key: 'NUM'
+			}, {
+				title: '贮存能力',
+				key: 'STORE'
+			}, {
+				title: '单位',
+				key: 'UNIT'
+			}, {
+				title: '类型',
+				key: 'TYPE'
+			}, {
+				title: '面积(平方米)',
+				key: 'AREA'
+			}],
+			formDataListTitle2: [{     
+				title: '名称',
+				key: 'D_NAME'
+			}, {
+				title: '类别',
+				key: 'BIG_CATEGORY_NAME'
+			}, {
+				title: '单位',
+				key: 'STORE_PLAN_UNIT'
+			}, {
+				title: '拟贮存量',
+				key: 'STORE_PLAN'
+			}, {
+				title: '上年度贮存量',
+				key: 'STORE_LAST'
+			}, {
+				title: '截止上年度年底累计贮存量',
+				key: 'STORE_LASTSUM'
+			}, {
+				title: '贮存原因',
+				key: 'STORE_REASON'
+			}],
 		}
 	},
 	components: {
@@ -199,7 +246,8 @@ export default {
 		'assTitle': assTitle,
 		'assForm': assForm,
 		'assSwitch': assSwitch,
-		'assTransferFrom': assTransferFrom
+		'assTransferFrom': assTransferFrom,
+		'assTable': assTable
 	},
 	watch: {
 	},
@@ -213,6 +261,9 @@ export default {
 			this.$router.push({ path: '/pageIncompatible' })
 		})
 		this.queryJson = getQueryString()
+
+		this.formStatus1 = 'card'
+		this.formStatus2 = 'card'
 
 		fetch({
 			url: '/plan/initTransfer',
@@ -257,7 +308,7 @@ export default {
 			// 		"YS_3": 0
 			// 	}],
 			// 	"empId": "",
-			// 	"userType": "CSEP",
+			// 	"userType": "admin",
 			// 	"newGuideFlag": "",
 			// 	"belongQ": "",
 			// 	"belongS": "",
@@ -595,6 +646,7 @@ export default {
 			this.switchInfo1[3].value = res.initTransfer.CC_4 ? res.initTransfer.CC_4 + "" : '0'
 			this.switchInfo1[4].value = res.initTransfer.CC_5 ? res.initTransfer.CC_5 + "" : '0'
 
+			this.formDataList1 = res.initProductFacility
 			if (res.initProductFacility.length > 0) {
 				this.title1fromList = []
 				for (let i in res.initProductFacility) {
@@ -672,6 +724,8 @@ export default {
 				item.category = res.initOverviewList[i].BIG_CATEGORY_ID
 				this.levelOneData.push(item)
 			}
+
+			this.formDataList2 = res.initProductCc
 			if (res.initProductCc.length > 0) {
 				this.title2fromList = []
 				for (let i in res.initProductCc) {
@@ -1007,6 +1061,12 @@ export default {
 				compVal: "",
 				textarea: ""
 			}]
+		},
+		formStatusChange1 (status) {
+			this.formStatus1 = status
+		},
+		formStatusChange2 (status) {
+			this.formStatus2 = status
 		}
 	}
 }

@@ -71,8 +71,9 @@
 				</el-form-item>
 			</el-form>
 			<assSwitch :userRole="userRole" :switchInfo="switchInfo"></assSwitch>
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="doReset"></assTitle>
-			<assForm :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'" :cateList="levelOneData"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus" @doReset="doReset" @formStatusChange="formStatusChange"></assTitle>
+			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'" :cateList="levelOneData"></assForm>
+			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<assTitle :userRole="userRole" :titleInfo="textareaInfo1" titleType="textarea"></assTitle>
 			<assTitle :userRole="userRole" :titleInfo="textareaInfo2" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
@@ -83,6 +84,7 @@
 import Aside from '../Aside.vue';
 import assTitle from '../../common/assTitle.vue'
 import assForm from '../../common/assForm.vue'
+import assTable from '../../common/assTable.vue'
 import assSwitch from '../../common/assSwitch.vue'
 import { checkBrowser, getQueryString } from '../../utils/browserCheck.js'
 import fetch from '../../utils/fetch.js'
@@ -129,17 +131,20 @@ export default {
 					title: "自行利用处置废物名称",
 					isSingle: true,
 				}, {
-					type: "inputWithUnit",
+					type: "select",
 					text: "",
-					title: "本年度计划利用处置量",
-					unit: "吨",
+					title: "单位",
 					isSingle: true,
 				}, {
-					type: "inputWithUnit",
+					type: "inputWithUnitSelect",
+					text: "",
+					title: "本年度计划利用处置量",
+					unit: ""
+				}, {
+					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年度实际利用处置量",
-					unit: "吨",
-					isSingle: true,
+					unit: ""
 				}]
 			}],
 			levelOneData: [],
@@ -200,13 +205,29 @@ export default {
 				placeholder: "必填",
 				text: ""
 			},
+			formStatus: "card",   
+			formDataListTitle: [{
+				title: '自行利用处置废物名称',
+				key: 'D_NAME'
+			},{
+				title: '单位',
+				key: 'STORE_PLAN_UNIT'
+			},{
+				title: '本年度计划利用处置量',
+				key: 'STORE_YEAR'
+			},{
+				title: '上年度实际利用处置量',
+				key: 'STORE_LAST'
+			}],
+			formDataList: []
 		}
 	},
 	components: {
 		'my-aside': Aside,
 		'assTitle': assTitle,
 		'assForm': assForm,
-		'assSwitch': assSwitch
+		'assSwitch': assSwitch,
+		'assTable': assTable
 	},
 	watch: {
 	},
@@ -221,6 +242,8 @@ export default {
 		})
 		this.queryJson = getQueryString()
 
+		this.formStatus = "card"
+		
 		fetch({
 			url: '/plan/initHandleSelf',
 			method: 'POST',
@@ -230,7 +253,7 @@ export default {
 			// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiVGxudHdidmxmclhIenN5WSsrYU9TOD0=",
 			// 	"operatorId": "",
 			// 	"empId": "",
-			// 	"userType": "CSEP",
+			// 	"userType": "admin",
 			// 	"newGuideFlag": "",
 			// 	"belongQ": "",
 			// 	"belongS": "",
@@ -323,7 +346,7 @@ export default {
 			// 			"STORE_LAST_UNIT": "个",
 			// 			"STORE_LAST": "500",
 			// 			"ID": "1",
-			// 			"D_NAME": "",
+			// 			"D_NAME": "1123",
 			// 			"TP_ID": "TP201809120707190010",
 			// 			"STORE_PLAN_UNIT": "吨",
 			// 			"STORE_YEAR": "100"
@@ -332,7 +355,7 @@ export default {
 			// 			"STORE_LAST_UNIT": "个",
 			// 			"STORE_LAST": "2000",
 			// 			"ID": "2",
-			// 			"D_NAME": "",
+			// 			"D_NAME": "232",
 			// 			"TP_ID": "TP201809120707190010",
 			// 			"STORE_PLAN_UNIT": "吨",
 			// 			"STORE_YEAR": "200"
@@ -366,6 +389,8 @@ export default {
 				item.label = res.initOverviewList[i].D_NAME
 				this.levelOneData.push(item)
 			}
+
+			this.formDataList = res.initHandleSelfList
 			if (res.initHandleSelfList.length > 0) {
 				this.title1fromList = []
 				for (let i in res.initHandleSelfList) {
@@ -385,13 +410,11 @@ export default {
 							type: "inputWithUnitSelect",
 							text: res.initHandleSelfList[i].STORE_YEAR,
 							title: "本年度计划利用处置量",
-							isSingle: true,
 							unit: res.initHandleSelfList[i].STORE_PLAN_UNIT
 						}, {
 							type: "inputWithUnitSelect",
 							text: res.initHandleSelfList[i].STORE_LAST,
 							title: "上年度实际利用处置量",
-							isSingle: true,
 							unit: res.initHandleSelfList[i].STORE_PLAN_UNIT
 						}]
 					}
@@ -414,13 +437,11 @@ export default {
 						type: "inputWithUnitSelect",
 						text: "",
 						title: "本年度计划利用处置量",
-						isSingle: true,
 						unit: ""
 					}, {
 						type: "inputWithUnitSelect",
 						text: "",
 						title: "上年度实际利用处置量",
-						isSingle: true,
 						unit: ""
 					}]
 				}]
@@ -548,16 +569,17 @@ export default {
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划利用处置量",
-					isSingle: true,
 					unit: ""
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年度实际利用处置量",
-					isSingle: true,
 					unit: ""
 				}]
 			}]
+		},
+		formStatusChange(status){
+			this.formStatus = status
 		}
 	}
 }

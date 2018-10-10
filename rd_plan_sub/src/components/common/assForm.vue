@@ -11,8 +11,8 @@
 								<div v-if="fItem.type === 'input'">
 									<el-input v-model="fItem.text" placeholder="必填"></el-input>
 								</div>
-								<div v-else-if="fItem.type === 'selectDIY'">
-									<el-select v-if="fItem.num && fItem.num === '1'" placeholder="请选择" v-model="fItem.text">
+								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_unitBg">
+									<el-select v-if="fItem.num && fItem.num === '1'" placeholder="请选择" v-model="fItem.text" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in cateList2"
 											:key="uItem.value"
@@ -20,7 +20,7 @@
 											:value="uItem.value">
 										</el-option>
 									</el-select>
-									<el-select v-else placeholder="请选择" v-model="fItem.text">
+									<el-select v-else placeholder="请选择" v-model="fItem.text" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in cateList"
 											:key="uItem.value"

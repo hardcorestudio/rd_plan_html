@@ -2,12 +2,15 @@
 	<div id='productionSituation'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="dangerRubbishManagerPlan">
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
-			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
-			<assTitle :userRole="userRole" :titleInfo="title3" titleType="reset" @doReset="resetRawMaterial"></assTitle>
-			<assForm :formList="title3fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1" @doReset="resetRawMaterial" @formStatusChange="formStatusChange1"></assTitle>
+			<assForm v-if="formStatus1 === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assTable v-else-if="formStatus1 === 'table'" :tableList="formDataList1" :tableTitleList="formDataListTitle1"></assTable>
+			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2" @doReset="resetRawMaterial" @formStatusChange="formStatusChange2"></assTitle>
+			<assForm v-if="formStatus2 === 'card'" :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assTable v-else-if="formStatus2 === 'table'" :tableList="formDataList2" :tableTitleList="formDataListTitle2"></assTable>
+			<assTitle :userRole="userRole" :titleInfo="title3" titleType="reset" :formStatus="formStatus3" @doReset="resetRawMaterial" @formStatusChange="formStatusChange3"></assTitle>
+			<assForm v-if="formStatus3 === 'card'" :formList="title3fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assTable v-else-if="formStatus3 === 'table'" :tableList="formDataList3" :tableTitleList="formDataListTitle3"></assTable>
 			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
@@ -17,6 +20,7 @@
 import Aside from '../Aside.vue';
 import assTitle from '../../common/assTitle.vue'
 import assForm from '../../common/assForm.vue'
+import assTable from '../../common/assTable.vue'
 import { checkBrowser, getQueryString } from '../../utils/browserCheck.js'
 import fetch from '../../utils/fetch.js'
 export default {
@@ -113,12 +117,55 @@ export default {
 					unit: ""
 				}]
 			}],
+			formStatus1: 'card',
+			formStatus2: 'card',
+			formStatus3: 'card',          
+			formDataListTitle1: [{
+				title: '原辅材料名称',
+				key: 'NAME'
+			},{
+				title: '单位',
+				key: 'UNIT'
+			},{
+				title: '上年度消耗量',
+				key: 'LAST_NUM'
+			},{
+				title: '本年度计划消耗量',
+				key: 'YEAR_NUM'
+			}],
+			formDataListTitle2: [{
+				title: '设备名称',
+				key: 'NAME'
+			},{
+				title: '上年度数量(台)',
+				key: 'LAST_NUM'
+			},{
+				title: '本年度数量(台)',
+				key: 'YEAR_NUM'
+			}],
+			formDataListTitle3: [{
+				title: '产品名称',
+				key: 'NAME'
+			},{
+				title: '单位',
+				key: 'UNIT'
+			},{
+				title: '上年度产量',
+				key: 'LAST_NUM'
+			},{
+				title: '本年度计划产量',
+				key: 'YEAR_NUM'
+			}],
+			formDataList1: [],
+			formDataList2: [],
+			formDataList3: [],
 		}
 	},
 	components: {
 		'my-aside': Aside,
 		'assTitle': assTitle,
-		'assForm': assForm
+		'assForm': assForm,
+		'assTable': assTable
 	},
 	watch: {
 	},
@@ -133,6 +180,10 @@ export default {
 		})
 		this.queryJson = getQueryString()
 
+		this.formStatus1 = 'card'
+		this.formStatus2 = 'card'
+		this.formStatus3 = 'card'
+		
 		fetch({
 			url: '/plan/initProductInfo',
 			method: 'POST',
@@ -160,7 +211,7 @@ export default {
 			// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY0phWnd2KzhIdkFaa0JCSFNUWk1xQT0=",
 			// 	"operatorId": "",
 			// 	"empId": "",
-			// 	"userType": "CSEP",
+			// 	"userType": "admin",
 			// 	"initProductOri": [
 			// 		{
 			// 			"UNIT": "吨",
@@ -228,6 +279,7 @@ export default {
 			this.EP_ID = this.queryJson.EP_ID
 			this.TP_ID = this.queryJson.TP_ID
 
+			this.formDataList1 = res.initProductOri
 			if (res.initProductOri.length > 0) {
 				this.title1fromList = []
 				for (let i in res.initProductOri) {
@@ -280,6 +332,7 @@ export default {
 				}]
 			}
 
+			this.formDataList2 = res.initProductEqu
 			if (res.initProductEqu.length > 0) {
 				this.title2fromList = []
 				for (let i in res.initProductEqu) {
@@ -326,6 +379,7 @@ export default {
 				}]
 			}
 
+			this.formDataList3 = res.initProductOutput
 			if (res.initProductOutput.length > 0) {
 				this.title3fromList = []
 				for (let i in res.initProductOutput) {
@@ -349,7 +403,7 @@ export default {
 							text: res.initProductOutput[i].YEAR_NUM,
 							title: "本年度计划产量",
 							unit: res.initProductOutput[i].UNIT
-						}]
+						}] 
 					}
 					this.title3fromList.push(item)
 				}
@@ -490,6 +544,15 @@ export default {
 		},
 		resetRawMaterial () {
 			console.log("原辅材料及消耗量");
+		},
+		formStatusChange1(status){
+			this.formStatus1 = status
+		},
+		formStatusChange2(status){
+			this.formStatus2 = status
+		},
+		formStatusChange3(status){
+			this.formStatus3 = status
 		}
 	}
 }

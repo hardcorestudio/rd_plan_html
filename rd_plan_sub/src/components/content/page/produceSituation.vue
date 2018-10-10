@@ -2,8 +2,9 @@
 	<div id='produceSituation'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="produceSituationPlan">
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" @doReset="doReset" :numTitle="numTitle"></assTitle>
-			<assForm :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData" :levelTwoData="levelTwoData"></assForm>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus" @doReset="doReset" :numTitle="numTitle" @formStatusChange="formStatusChange"></assTitle>
+			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData" :levelTwoData="levelTwoData"></assForm>
+			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -11,6 +12,7 @@
 <script>
 import Aside from '../Aside.vue';
 import assTitle from '../../common/assTitle.vue'
+import assTable from '../../common/assTable.vue'
 import assForm from '../../common/assForm.vue'
 import { checkBrowser, getQueryString } from '../../utils/browserCheck.js'
 import fetch from '../../utils/fetch.js'
@@ -84,13 +86,47 @@ export default {
 					text: "",
 					title: "来源及产生工序",
 				}]
-			}]
+			}],
+			formStatus: 'card',
+			formDataListTitle: [{
+				title: '废物名称',
+				key: 'D_NAME'
+			},{
+				title: '类别选择',
+				key: 'BIG_CATEGORY_NAME'
+			},{
+				title: '废物代码',
+				key: 'SAMLL_CATEGORY_NAME'
+			},{
+				title: '有害物质名称',
+				key: 'W_NAME'
+			},{
+				title: '物理性状',
+				key: 'W_SHAPE'
+			},{
+				title: '危险特性',
+				key: 'CHARACTER'
+			},{
+				title: 'YEAR_NUM',
+				key: 'UNIT'
+			},{
+				title: '单位',
+				key: 'UNIT'
+			},{
+				title: '实际生产量',
+				key: 'LAST_NUM'
+			},{
+				title: '来源及产生工序',
+				key: 'SOURCE_PROCESS'
+			}],
+			formDataList: [],
 		}
 	},
 	components: {
 		'my-aside': Aside,
 		'assTitle': assTitle,
-		'assForm': assForm
+		'assForm': assForm,
+		'assTable': assTable
 	},
 	watch: {
 
@@ -105,6 +141,8 @@ export default {
 			this.$router.push({ path: '/pageIncompatible' })
 		})
 		this.queryJson = getQueryString()
+
+		this.formStatus = 'card'
 
 		fetch({
 			url: '/plan/initOverview',
@@ -347,7 +385,7 @@ export default {
 		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiYkNROUI5enFkV3NxRUVzTkRVMm5pcz0=",
 		// 	"operatorId": "",
 		// 	"empId": "",
-		// 	"userType": "CSEP",
+		// 	"userType": "admin",
 		// 	"newGuideFlag": "",
 		// 	"belongQ": "",
 		// 	"belongS": "",
@@ -8601,9 +8639,7 @@ export default {
 		// 	"belongSepa": "XQQ",
 		// 	"userPortrait": "",
 		// 	"IWBSESSION": "BROWSER-20180916150551",
-		// 	"initOverviewList": [
-
-		// 	],
+		// 	"initOverviewList": [],
 		// 	"sumOverviewList": [
 
 		// 	],
@@ -8612,6 +8648,8 @@ export default {
 		// 	"orgSeq": ""
 		// }
 		this.userRole = res.userType
+
+		this.formDataList = res.initOverviewList
 		if (res.initOverviewList.length > 0) {
 			this.title1fromList = []
 			for (let i in res.initOverviewList) {
