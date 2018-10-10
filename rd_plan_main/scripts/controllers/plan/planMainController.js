@@ -5,11 +5,13 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         console.log("heart ping ====================");
         $scope.WebSocket.send("ping")
     },110000);
-    $scope.WebSocket.onClose(function(){})
     $scope.WebSocket.onMe(function(obj){
         if(obj.key == 'ping'){
             $scope.pingFlag = false;
             console.log('still concetion!!!!!!!')
+        }
+        if(obj.key == 'close'){
+            $scope.WebSocket.doClose();
         }
         if(obj.key == 'baseInfo'){
             if(obj.value == 'func_done'){
