@@ -22,9 +22,9 @@ angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','l
   ws.onError(function(event) {
     console.log('connection Error', event);
   });
-  ws.onClose(function(event) {
-    console.log('connection closed', event);
-  });
+  // ws.onClose(function(event) {
+  //   console.log('connection closed', event);
+  // });
   ws.onOpen(function() {
     console.log('connection open');
     ws.send('{"key":"hello woody","val":"connection open"}');
@@ -60,6 +60,12 @@ angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','l
           console.log(res)
         }
       })
+    },
+    onClose:function(callback){
+      ws.onClose(function(event) {
+        console.log('connection closed', event);
+        callback()
+      });
     }
   };
 }]);
