@@ -8921,6 +8921,9 @@ export default {
 				}
 			}
 			return false
+		},
+		formStatusChange(status){
+			this.formStatus = status
 		}
 	}
 }
