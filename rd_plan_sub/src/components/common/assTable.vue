@@ -1,7 +1,7 @@
 <template>
 	<div id="assTable">
 		<el-table :data="tableList" border style="width: 100%">
-      <el-table-column v-for="item in tableTitleList" :key="item"
+      <el-table-column v-for="item in tableTitleList" :key="item" show-overflow-tooltip 
         :prop="item.key"
         :label="item.title">
       </el-table-column>
