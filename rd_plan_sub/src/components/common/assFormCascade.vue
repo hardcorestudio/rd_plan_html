@@ -9,7 +9,7 @@
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
 							<div v-else class="assFromItem_right">
 								<div v-if="fItem.type === 'input'">
-									<el-input v-model="fItem.text" placeholder="必填"></el-input>
+									<el-input v-model="fItem.text" :placeholder="'必填' + fItem.limit ? '(限' + fItem.limit + '位)' : ''" :maxlength="fItem.limit ? fItem.limit : '500'"></el-input>
 								</div>
 								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_unitBg">
 									<el-select placeholder="请选择" v-model="fItem.text" class="assFromItem_unitBgSelect">
@@ -42,7 +42,7 @@
 									</el-select>
 								</div>
 								<div v-else-if="fItem.type === 'inputWithUnit' || fItem.type === 'inputWithUnitSelect'">
-									<el-input v-model="fItem.text" placeholder="必填(限9位)" type="number" maxlength="9">
+									<el-input v-model="fItem.text" placeholder="必填(限10位)" type="number" maxlength="10">
 										<template slot="append">{{fItem.unit}}</template>
 									</el-input>
 								</div>

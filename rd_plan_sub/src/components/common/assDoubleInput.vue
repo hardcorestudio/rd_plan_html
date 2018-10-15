@@ -9,13 +9,13 @@
 				<el-row :gutter="20">
 					<el-col v-if="itemTitleLeft && itemTitleLeft !== ''" :span="11">
 						<el-form-item :label="itemTitleLeft">
-							<el-input v-if="userRole=== 'CSEP'" v-model="item.text1" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="item.text1" placeholder="必填(限32位)" maxlength="32"></el-input>
 							<el-row v-else>{{item.text1}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col v-if="itemTitleRight && itemTitleRight !== ''" :span="11">
 						<el-form-item :label="itemTitleRight">
-							<el-input v-if="userRole=== 'CSEP'" v-model="item.text2" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="item.text2" placeholder="必填(限32位)" maxlength="32"></el-input>
 							<el-row v-else>{{item.text2}}</el-row>
 						</el-form-item>
 					</el-col>

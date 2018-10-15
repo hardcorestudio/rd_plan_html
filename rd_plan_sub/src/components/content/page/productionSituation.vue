@@ -59,7 +59,8 @@ export default {
 				itemList: [{
 					type: "input",
 					text: "",
-					title: "原辅材料名称"
+					title: "原辅材料名称",
+					limit: "32"
 				}, {
 					type: "selectThree",
 					text: "",
@@ -82,7 +83,8 @@ export default {
 					type: "input",
 					text: "",
 					title: "设备名称",
-					isSingle: "1"
+					isSingle: "1",
+					limit: "32"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -100,7 +102,8 @@ export default {
 				itemList: [{
 					type: "input",
 					text: "",
-					title: "产品名称"
+					title: "产品名称",
+					limit: "32"
 				}, {
 					type: "select",
 					text: "",
@@ -288,7 +291,8 @@ export default {
 						itemList: [{
 							type: "input",
 							text: res.initProductOri[i].NAME,
-							title: "原辅材料名称"
+							title: "原辅材料名称",
+							limit: "32"
 						}, {
 							type: "selectThree",
 							text: res.initProductOri[i].UNIT,
@@ -313,7 +317,8 @@ export default {
 					itemList: [{
 						type: "input",
 						text: "",
-						title: "原辅材料名称"
+						title: "原辅材料名称",
+						limit: "32"
 					}, {
 						type: "selectThree",
 						text: "",
@@ -342,7 +347,8 @@ export default {
 							type: "input",
 							isSingle: "1",
 							text: res.initProductEqu[i].NAME,
-							title: "设备名称"
+							title: "设备名称",
+							limit: "32"
 						}, {
 							type: "inputWithUnit",
 							unit: "台",
@@ -364,7 +370,8 @@ export default {
 						type: "input",
 						text: "",
 						isSingle: "1",
-						title: "设备名称"
+						title: "设备名称",
+						limit: "32"
 					}, {
 						type: "inputWithUnit",
 						unit: "台",
@@ -388,7 +395,8 @@ export default {
 						itemList: [{
 							type: "input",
 							text: res.initProductOutput[i].NAME,
-							title: "产品名称"
+							title: "产品名称",
+							limit: "32"
 						}, {
 							type: "select",
 							text: res.initProductOutput[i].UNIT,
@@ -413,7 +421,8 @@ export default {
 					itemList: [{
 						type: "input",
 						text: "",
-						title: "产品名称"
+						title: "产品名称",
+						limit: "32"
 					}, {
 						type: "select",
 						text: "",

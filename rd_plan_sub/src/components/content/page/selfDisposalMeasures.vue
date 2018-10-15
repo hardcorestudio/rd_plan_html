@@ -6,25 +6,25 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="设施名称" prop="equipmentName">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.equipmentName" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.equipmentName" placeholder="必填(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.equipmentName}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="设施类别" prop="category">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.category" placeholder="利用处置方式"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.category" placeholder="利用处置方式(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.category}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-form-item label="设施地址" prop="addr">
-					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.addr" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.addr" placeholder="必填(限100位)" maxlength="100"></el-input>
 					<el-row v-else>{{selfDisposalMeasuresData.addr}}</el-row>
 				</el-form-item>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资" prop="amount">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="selfDisposalMeasuresData.amount" placeholder="必填" maxlength="9">
+							<el-input v-if="userRole=== 'CSEP'" v-model.number="selfDisposalMeasuresData.amount" placeholder="必填(限10位)" maxlength="10">
 								<template slot="append">{{selfDisposalMeasuresData.amountUnit}}</template>
 							</el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.amount}} {{selfDisposalMeasuresData.amountUnit}}</el-row>
@@ -32,7 +32,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="设计能力" prop="can">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.can" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.can" placeholder="必填(限500位)" maxlength="500"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.can}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -40,13 +40,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="设计使用年限" prop="years">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.years" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.years" placeholder="必填(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.years}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="投入运行时间" prop="startDate">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.startDate" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.startDate" placeholder="必填(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.startDate}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -54,7 +54,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="运行费用" prop="price">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="selfDisposalMeasuresData.price" placeholder="必填">
+							<el-input v-if="userRole=== 'CSEP'" v-model.number="selfDisposalMeasuresData.price" placeholder="必填(限10位)" maxlength="10">
 								<template slot="append">万元</template>
 							</el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.price}}万元</el-row>
@@ -62,11 +62,11 @@
 					</el-col>
 				</el-row>
 				<el-form-item label="主要设备及数量" prop="mainEquAndNum">
-					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.mainEquAndNum" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.mainEquAndNum" placeholder="必填(限500位)" maxlength="500"></el-input>
 					<el-row v-else>{{selfDisposalMeasuresData.mainEquAndNum}}</el-row>
 				</el-form-item>
 				<el-form-item label="危险废物利用处置效果" prop="how">
-					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.how" placeholder="必填"></el-input>
+					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.how" placeholder="必填(限500位)" maxlength="500"></el-input>
 					<el-row v-else>{{selfDisposalMeasuresData.how}}</el-row>
 				</el-form-item>
 			</el-form>

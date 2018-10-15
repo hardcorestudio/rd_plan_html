@@ -47,7 +47,8 @@ export default {
 					type: "input",
 					text: "",
 					title: "废物名称",
-					isSingle: "1"
+					isSingle: "1",
+					limit: "200"
 				}, {
 					type: "selectLevel",
 					text1: "",
@@ -58,15 +59,18 @@ export default {
 				}, {
 					type: "input",
 					text: "",
-					title: "有害物质名称"
+					title: "有害物质名称",
+					limit: "200"
 				}, {
 					type: "input",
 					text: "",
-					title: "物理性状"
+					title: "物理性状",
+					limit: "50"
 				}, {
 					type: "input",
 					text: "",
-					title: "危险特性"
+					title: "危险特性",
+					limit: "200"
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
@@ -85,6 +89,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "来源及产生工序",
+					limit: "500"
 				}]
 			}],
 			formStatus: 'card',
@@ -8659,7 +8664,8 @@ export default {
 						type: "input",
 						text: res.initOverviewList[i].D_NAME,
 						title: "废物名称",
-						isSingle: "1"
+						isSingle: "1",
+						limit: "200"
 					}, {
 						type: "selectLevel",
 						text1: res.initOverviewList[i].BIG_CATEGORY_ID,
@@ -8670,15 +8676,18 @@ export default {
 					}, {
 						type: "input",
 						text: res.initOverviewList[i].W_NAME,
-						title: "有害物质名称"
+						title: "有害物质名称",
+						limit: "200"
 					}, {
 						type: "input",
 						text: res.initOverviewList[i].W_SHAPE,
-						title: "物理性状"
+						title: "物理性状",
+						limit: "50"
 					}, {
 						type: "input",
 						text: res.initOverviewList[i].CHARACTER,
-						title: "危险特性"
+						title: "危险特性",
+						limit: "200"	
 					}, {
 						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].YEAR_NUM,
@@ -8697,6 +8706,7 @@ export default {
 						type: "input",
 						text: res.initOverviewList[i].SOURCE_PROCESS,
 						title: "来源及产生工序",
+						limit: "500"
 					}]
 				}
 				this.title1fromList.push(item)
@@ -8708,7 +8718,8 @@ export default {
 					type: "input",
 					text: "",
 					title: "废物名称",
-					isSingle: "1"
+					isSingle: "1",
+					limit: "200"
 				}, {
 					type: "selectLevel",
 					text1: "",
@@ -8719,15 +8730,18 @@ export default {
 				}, {
 					type: "input",
 					text: "",
-					title: "有害物质名称"
+					title: "有害物质名称",
+					limit: "200"
 				}, {
 					type: "input",
 					text: "",
-					title: "物理性状"
+					title: "物理性状",
+					limit: "50"
 				}, {
 					type: "input",
 					text: "",
-					title: "危险特性"
+					title: "危险特性",
+					limit: "200"
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
@@ -8746,6 +8760,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "来源及产生工序",
+					limit: "500"
 				}]
 			}]
 		}
@@ -8869,7 +8884,8 @@ export default {
 					type: "input",
 					text: "",
 					title: "废物名称",
-					isSingle: "1"
+					isSingle: "1",
+					limit: "200"
 				}, {
 					type: "selectLevel",
 					text1: "",
@@ -8880,15 +8896,18 @@ export default {
 				}, {
 					type: "input",
 					text: "",
-					title: "有害物质名称"
+					title: "有害物质名称",
+					limit: "200"
 				}, {
 					type: "input",
 					text: "",
-					title: "物理性状"
+					title: "物理性状",
+					limit: "50"
 				}, {
 					type: "input",
 					text: "",
-					title: "危险特性"
+					title: "危险特性",
+					limit: "200"
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
@@ -8907,6 +8926,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "来源及产生工序",
+					limit: "500"
 				}]
 			}]
 		},

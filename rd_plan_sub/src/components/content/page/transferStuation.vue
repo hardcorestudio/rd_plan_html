@@ -84,7 +84,8 @@ export default {
 				itemList: [{
 					type: "input",
 					text: "",
-					title: "设施名称" 
+					title: "设施名称",
+					limit: "32"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -102,7 +103,8 @@ export default {
 				}, {
 					type: "input",
 					text: "",
-					title: "类型"
+					title: "类型",
+					limit: "32"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -139,7 +141,8 @@ export default {
 				}, {
 					type: "input",
 					text: "",
-					title: "贮存原因"
+					title: "贮存原因",
+					limit: "500"
 				}]
 			}],
 			switchInfo1: [{
@@ -655,7 +658,8 @@ export default {
 						itemList: [{
 							type: "input",
 							text: res.initProductFacility[i].NAME,
-							title: "设施名称"
+							title: "设施名称",
+							limit: "32"
 						}, {
 							type: "inputWithUnit",
 							text: res.initProductFacility[i].NUM,
@@ -673,7 +677,8 @@ export default {
 						}, {
 							type: "input",
 							text: res.initProductFacility[i].TYPE,
-							title: "类型"
+							title: "类型",
+							limit: "32"
 						}, {
 							type: "inputWithUnit",
 							text: res.initProductFacility[i].AREA,
@@ -689,7 +694,8 @@ export default {
 					itemList: [{
 						type: "input",
 						text: "",
-						title: "设施名称"
+						title: "设施名称",
+						limit: "32"
 					}, {
 						type: "inputWithUnit",
 						text: "",
@@ -707,7 +713,8 @@ export default {
 					}, {
 						type: "input",
 						text: "",
-						title: "类型"
+						title: "类型",
+						limit: "32"
 					}, {
 						type: "inputWithUnit",
 						text: "",
@@ -759,7 +766,8 @@ export default {
 						}, {
 							type: "input",
 							text: res.initProductCc[i].STORE_REASON,
-							title: "贮存原因"
+							title: "贮存原因",
+							limit: "500"
 						}]
 					}
 					this.title2fromList.push(item)
@@ -795,7 +803,8 @@ export default {
 					}, {
 						type: "input",
 						text: "",
-						title: "贮存原因"
+						title: "贮存原因",
+						limit: "500"
 					}]
 				}]
 			}
@@ -988,7 +997,8 @@ export default {
 				itemList: [{
 					type: "input",
 					text: "",
-					title: "设施名称"
+					title: "设施名称",
+					limit: "32"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -1006,7 +1016,8 @@ export default {
 				}, {
 					type: "input",
 					text: "",
-					title: "类型"
+					title: "类型",
+					limit: "32"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -1046,7 +1057,8 @@ export default {
 				}, {
 					type: "input",
 					text: "",
-					title: "贮存原因"
+					title: "贮存原因",
+					limit: "500"
 				}]
 			}]
 		},
