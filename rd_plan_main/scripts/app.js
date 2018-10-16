@@ -800,6 +800,74 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
+        .state('dashboard.monitorForAdminIndex', {
+            url: '/monitorForAdminIndex',
+            templateUrl: 'views/dashboard/monitorAdmin/monitorForAdminIndex.html',
+            controller: 'MonitorForAdminIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/monitorAdmin/monitorForAdminIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.monitorForAdminIndex.monitorForAdminList', {
+            url: '/monitorForAdminList',
+            templateUrl: 'views/dashboard/monitorAdmin/monitorForAdminList.html',
+            controller: 'MonitorForAdminListCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/monitorAdmin/monitorForAdminListController.js',
+                            'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.monitorForAdminIndex.monitorForAdminMain', {
+            url: '/monitorForAdminMain',
+            controller: 'PlanMainCtrl',
+            templateUrl: 'views/dashboard/plan/planMain.html',
+            params: {
+                "tpId": null,
+                "from": null,
+                "bizId": null,
+                "applyId": null,
+                "btnFlag": null,
+                "epId": null,
+                "epName": null,
+            },
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/plan/index.css',
+                            'scripts/controllers/admin/approveDetailModalController.js',
+                            'scripts/controllers/admin/approveDisagreeModalController.js',
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/modal/confirmModalController.js',
+                            'scripts/controllers/plan/planMainController.js'
+                        ]
+                    })
+                }
+            }
+        })
         .state('dashboard.epForAdminIndex', {
             url: '/epForAdminIndex',
             templateUrl: 'views/dashboard/enterpriseAdmin/epForAdminIndex.html',
