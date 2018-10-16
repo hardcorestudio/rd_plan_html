@@ -3,7 +3,7 @@
 		<div v-if="titleInfo.title && titleInfo.title !== ''" class="assTitle_titleArea">
 			<div class="assTitleArea_text">{{ titleInfo.title }}</div>
 			<div v-if="titleType === 'reset' && userRole === 'CSEP'" class="assTitleArea_reset" @click="doReset">重置</div>
-			<div v-if="formStatus && titleType === 'reset' && userRole !== 'CSEP'" class="assTitleArea_reset" @click="formStatusChange">{{formStatus === 'card' ? '表格' : '卡片'}}</div>
+			<div v-if="formStatus && titleType === 'reset' && userRole !== 'CSEP' && userRole !== 'ifsave'" class="assTitleArea_reset" @click="formStatusChange">{{formStatus === 'card' ? '表格' : '卡片'}}</div>
 			<div v-if="numTitle && numTitle.length > 0" class="assTitleArea_num">
 				<div :class="numTitle.length == '1' ? 'assTitleArea_numItem' : ''" v-for="numItem in numTitle" :key="numItem">计划产生量合计：{{numItem.year_num_sum}} 实际产生量合计：{{numItem.last_num_sum}}</div>
 			</div>

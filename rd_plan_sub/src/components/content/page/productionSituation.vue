@@ -2,16 +2,29 @@
 	<div id='productionSituation'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="dangerRubbishManagerPlan">
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1" @doReset="resetRawMaterial" @formStatusChange="formStatusChange1"></assTitle>
-			<assForm v-if="formStatus1 === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<div class="productCompSwitchBg">
+				<div class="productCompSwitch_title">是否为非生产型企业</div>
+				<el-switch
+					class="productCompSwitch_switch" 
+					v-model="ifsave" 
+					@change="ifsaveCheck" 
+					active-color="#13ce66"
+					active-text="是"
+					inactive-text="否"
+					active-value="1"
+					inactive-value="0">
+				</el-switch>
+			</div>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1" @doReset="resetRawMaterial1" @formStatusChange="formStatusChange1"></assTitle>
+			<assForm v-if="formStatus1 === 'card'" :formList="title1fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTable v-else-if="formStatus1 === 'table'" :tableList="formDataList1" :tableTitleList="formDataListTitle1"></assTable>
-			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2" @doReset="resetRawMaterial" @formStatusChange="formStatusChange2"></assTitle>
-			<assForm v-if="formStatus2 === 'card'" :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2" @doReset="resetRawMaterial2" @formStatusChange="formStatusChange2"></assTitle>
+			<assForm v-if="formStatus2 === 'card'" :formList="title2fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTable v-else-if="formStatus2 === 'table'" :tableList="formDataList2" :tableTitleList="formDataListTitle2"></assTable>
-			<assTitle :userRole="userRole" :titleInfo="title3" titleType="reset" :formStatus="formStatus3" @doReset="resetRawMaterial" @formStatusChange="formStatusChange3"></assTitle>
-			<assForm v-if="formStatus3 === 'card'" :formList="title3fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title3" titleType="reset" :formStatus="formStatus3" @doReset="resetRawMaterial3" @formStatusChange="formStatusChange3"></assTitle>
+			<assForm v-if="formStatus3 === 'card'" :formList="title3fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTable v-else-if="formStatus3 === 'table'" :tableList="formDataList3" :tableTitleList="formDataListTitle3"></assTable>
-			<assTitle :userRole="userRole" :titleInfo="title4" titleType="textarea"></assTitle>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title4" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -37,6 +50,8 @@ export default {
 				]
 			},
 			userRole: '',
+			ifsave: "0",
+			ifsaveUserRole: '',
 			EP_ID: "",
 			TP_ID: "",
 			queryJson: {},
@@ -214,7 +229,7 @@ export default {
 			// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiY0phWnd2KzhIdkFaa0JCSFNUWk1xQT0=",
 			// 	"operatorId": "",
 			// 	"empId": "",
-			// 	"userType": "admin",
+			// 	"userType": "CSEP",
 			// 	"initProductOri": [
 			// 		{
 			// 			"UNIT": "吨",
@@ -276,9 +291,12 @@ export default {
 			// 		"STATUS": "00",
 			// 		"EP_ID": "EP201410280910450012"
 			// 	},
-			// 	"orgSeq": ""
+			// 	"orgSeq": "",
+			// 	"ifsave" : "1"
 			// }
 			this.userRole = res.userType
+			this.ifsave = res.ifsave
+			this.ifsaveUserRole = this.ifsave === '0' ?  this.userRole : 'ifsave'
 			this.EP_ID = this.queryJson.EP_ID
 			this.TP_ID = this.queryJson.TP_ID
 
@@ -440,88 +458,89 @@ export default {
 					}]
 				}]
 			}
-			this.title4.text = res.initProductInfo.PRODUCT_DESC
+			this.title4.text = res.initProductInfo.PRODUCT_DESC ? res.initProductInfo.PRODUCT_DESC : ""
 		})
 	},
 	methods: {
 		doSubmit () {
-
 			let submitData = {}
 			submitData.EP_ID = this.EP_ID
 			submitData.TP_ID = this.TP_ID
-			submitData.PRODUCT_DESC = this.title4.text
-			submitData.PRODUCT_ORI = []
-			submitData.PRODUCT_EQU = []
-			submitData.PRODUCT_OUTPUT = []
+			if(this.ifsave === '0'){
+				submitData.PRODUCT_DESC = this.title4.text
+				submitData.PRODUCT_ORI = []
+				submitData.PRODUCT_EQU = []
+				submitData.PRODUCT_OUTPUT = []
 
-			for (let i in this.title1fromList) {
-				let item = {}
-				item.NAME = this.title1fromList[i].itemList[0].text
-				item.UNIT = this.title1fromList[i].itemList[1].text
-				item.LAST_NUM = this.title1fromList[i].itemList[2].text
-				item.YEAR_NUM = this.title1fromList[i].itemList[3].text
+				for (let i in this.title1fromList) {
+					let item = {}
+					item.NAME = this.title1fromList[i].itemList[0].text
+					item.UNIT = this.title1fromList[i].itemList[1].text
+					item.LAST_NUM = this.title1fromList[i].itemList[2].text
+					item.YEAR_NUM = this.title1fromList[i].itemList[3].text
 
-				submitData.PRODUCT_ORI.push(item)
-			}
-			for (let i in this.title2fromList) {
-				let item = {}
-				item.NAME = this.title2fromList[i].itemList[0].text
-				item.UNIT = "台"
-				item.LAST_NUM = this.title2fromList[i].itemList[1].text
-				item.YEAR_NUM = this.title2fromList[i].itemList[2].text
+					submitData.PRODUCT_ORI.push(item)
+				}
+				for (let i in this.title2fromList) {
+					let item = {}
+					item.NAME = this.title2fromList[i].itemList[0].text
+					item.UNIT = "台"
+					item.LAST_NUM = this.title2fromList[i].itemList[1].text
+					item.YEAR_NUM = this.title2fromList[i].itemList[2].text
 
-				submitData.PRODUCT_EQU.push(item)
-			}
-			for (let i in this.title3fromList) {
-				let item = {}
-				item.NAME = this.title3fromList[i].itemList[0].text
-				item.UNIT = this.title3fromList[i].itemList[1].text
-				item.LAST_NUM = this.title3fromList[i].itemList[2].text
-				item.YEAR_NUM = this.title3fromList[i].itemList[3].text
+					submitData.PRODUCT_EQU.push(item)
+				}
+				for (let i in this.title3fromList) {
+					let item = {}
+					item.NAME = this.title3fromList[i].itemList[0].text
+					item.UNIT = this.title3fromList[i].itemList[1].text
+					item.LAST_NUM = this.title3fromList[i].itemList[2].text
+					item.YEAR_NUM = this.title3fromList[i].itemList[3].text
 
-				submitData.PRODUCT_OUTPUT.push(item)
-			}
-			for (let i in submitData.PRODUCT_ORI) {
-				for (let key in submitData.PRODUCT_ORI[i]) {
-					if (submitData.PRODUCT_ORI[i][key] === "") {
-						this.$notify.error({
-							title: '警告',
-							message: "请填全[原辅材料及消耗量]所有内容"
-						});
-						return
+					submitData.PRODUCT_OUTPUT.push(item)
+				}
+				for (let i in submitData.PRODUCT_ORI) {
+					for (let key in submitData.PRODUCT_ORI[i]) {
+						if (submitData.PRODUCT_ORI[i][key] === "") {
+							this.$notify.error({
+								title: '警告',
+								message: "请填全[原辅材料及消耗量]所有内容"
+							});
+							return
+						}
 					}
 				}
-			}
-			for (let i in submitData.PRODUCT_EQU) {
-				for (let key in submitData.PRODUCT_EQU[i]) {
-					if (submitData.PRODUCT_EQU[i][key] === "") {
-						this.$notify.error({
-							title: '警告',
-							message: "请填全[生产设备及数量]所有内容"
-						});
-						return
+				for (let i in submitData.PRODUCT_EQU) {
+					for (let key in submitData.PRODUCT_EQU[i]) {
+						if (submitData.PRODUCT_EQU[i][key] === "") {
+							this.$notify.error({
+								title: '警告',
+								message: "请填全[生产设备及数量]所有内容"
+							});
+							return
+						}
 					}
 				}
-			}
-			for (let i in submitData.PRODUCT_OUTPUT) {
-				for (let key in submitData.PRODUCT_OUTPUT[i]) {
-					if (submitData.PRODUCT_OUTPUT[i][key] === "") {
-						this.$notify.error({
-							title: '警告',
-							message: "请填全[产品及产量]所有内容"
-						});
-						return
+				for (let i in submitData.PRODUCT_OUTPUT) {
+					for (let key in submitData.PRODUCT_OUTPUT[i]) {
+						if (submitData.PRODUCT_OUTPUT[i][key] === "") {
+							this.$notify.error({
+								title: '警告',
+								message: "请填全[产品及产量]所有内容"
+							});
+							return
+						}
 					}
 				}
-			}
-			if (submitData.PRODUCT_DESC === "") {
-				this.$notify.error({
-					title: '警告',
-					message: "请填写生产工艺说明"
-				});
-				return
-			}
-
+				if (submitData.PRODUCT_DESC === "") {
+					this.$notify.error({
+						title: '警告',
+						message: "请填写生产工艺说明"
+					});
+					return
+				}
+			}		
+			submitData.ifsave = this.ifsave
 			for (let key in this.queryJson) {
 				submitData[key] = this.queryJson[key]
 			}
@@ -551,8 +570,77 @@ export default {
 				loading.close();
 			})
 		},
-		resetRawMaterial () {
-			console.log("原辅材料及消耗量");
+		resetRawMaterial1 () {
+			this.title1fromList = [{
+				index: 1,
+				itemList: [{
+					type: "input",
+					text: "",
+					title: "原辅材料名称",
+					limit: "32"
+				}, {
+					type: "selectThree",
+					text: "",
+					title: "单位"
+				}, {
+					type: "inputWithUnitSelect",
+					text: "",
+					title: "上年度消耗量",
+					unit: ""
+				}, {
+					type: "inputWithUnitSelect",
+					text: "",
+					title: "本年度计划消耗量",
+					unit: ""
+				}]
+			}]
+		},
+		resetRawMaterial2 () {
+			this.title2fromList = [{
+				index: 1,
+				itemList: [{
+					type: "input",
+					text: "",
+					isSingle: "1",
+					title: "设备名称",
+					limit: "32"
+				}, {
+					type: "inputWithUnit",
+					unit: "台",
+					text: "",
+					title: "上年度数量"
+				}, {
+					type: "inputWithUnit",
+					unit: "台",
+					text: "",
+					title: "本年度数量"
+				}]
+			}]
+		},
+		resetRawMaterial3 () {
+			this.title3fromList = [{
+				index: 1,
+				itemList: [{
+					type: "input",
+					text: "",
+					title: "产品名称",
+					limit: "32"
+				}, {
+					type: "select",
+					text: "",
+					title: "单位"
+				}, {
+					type: "inputWithUnitSelect",
+					text: "",
+					title: "上年度产量",
+					unit: ""
+				}, {
+					type: "inputWithUnitSelect",
+					text: "",
+					title: "本年度计划产量",
+					unit: ""
+				}]
+			}]
 		},
 		formStatusChange1(status){
 			this.formStatus1 = status
@@ -562,11 +650,34 @@ export default {
 		},
 		formStatusChange3(status){
 			this.formStatus3 = status
+		},
+		ifsaveCheck(val) {
+			this.$confirm('切换后数据将会被清空，是否确定?', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				if (val === '1') {
+					this.resetRawMaterial1()
+					this.resetRawMaterial2()
+					this.resetRawMaterial3()
+					this.title4.text = ""
+					this.ifsaveUserRole = "ifsave"
+				}else {
+					this.ifsaveUserRole = this.userRole
+				}
+			}).catch(() => {
+				 if(val === '1'){
+					 this.ifsave = "0"
+				 }else{
+					 this.ifsave = "1"
+				 }    
+			});
 		}
 	}
 }
 </script>
-<style scoped>
+<style>
 #productionSituation {
   display: -webkit-flex; /* Safari */
   display: flex;
@@ -589,5 +700,21 @@ export default {
   width: 100%;
   height: 50px;
   float: left;
+}
+.productCompSwitchBg{
+	width: 100%;
+	float: left;
+}
+.productCompSwitch_title{
+	font-size: 18px;
+	padding: 6px 0 12px;
+	float: left;
+}
+.productCompSwitch_switch{
+	float: left;
+	margin: 8px 0 0 15px;
+}
+.productCompSwitch_switch .el-switch__label.is-active{ 
+	color:#13ce66;
 }
 </style>
