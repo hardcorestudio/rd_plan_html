@@ -46,9 +46,22 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
     $scope.envClass = $scope.func_class
     $scope.lastClass = $scope.func_class
     CheckBrowser.check();
-
+    //弹框参数
+    var resolve = {};
+    var url = "";
+    var ctrlName = "";
+    $scope.param = {TP_ID:$stateParams.tpId}
+    $scope.taskFlag = $stateParams.from.indexOf('Task') > -1 ? true : false;
+    $scope.btnFlag = $stateParams.btnFlag;
+    $scope.userType = localStorageService.get('userType');
+    $scope.epId = $stateParams.epId;
+    $scope.epName = $stateParams.epName;
+    $scope.applyBtnFlag = false;
+    $scope.applyId = $stateParams.applyId;
+    
     if($scope.userType != 'admin'){
         $scope.WebSocket = WebSocket;
+        $scope.WebSocket.doOpen();
         $interval(function(){
             console.log("heart ping ====================");
             $scope.WebSocket.send("ping")
@@ -108,24 +121,13 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
             }
         });
     }
-    //弹框参数
-    var resolve = {};
-    var url = "";
-    var ctrlName = "";
+    
     if($stateParams.from == null || $stateParams.from == ""){
         localStorageService.set("collapse", 0);
         $state.go("dashboard.index");
         return;
     }
     
-    $scope.param = {TP_ID:$stateParams.tpId}
-    $scope.taskFlag = $stateParams.from.indexOf('Task') > -1 ? true : false;
-    $scope.btnFlag = $stateParams.btnFlag;
-    $scope.userType = localStorageService.get('userType');
-    $scope.epId = $stateParams.epId;
-    $scope.epName = $stateParams.epName;
-    $scope.applyBtnFlag = false;
-    $scope.applyId = $stateParams.applyId;
     Init.iwbhttp('/plan/checkPlan', $scope.param, function(data,header,config,status){
         if(data.applyListStatus == "" || data.applyListStatus == "00" || data.applyListStatus == "03" || data.applyListStatus == "04"){
             $scope.applyBtnFlag = true;

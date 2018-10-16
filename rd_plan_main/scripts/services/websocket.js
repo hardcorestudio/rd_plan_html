@@ -5,7 +5,8 @@ angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','l
 //  var ws = $websocket('ws://localhost:9001/mywebsocket');
   var wsurl = $rootScope.websocketUrlController+'?IWBSESSION='+localStorageService.get('IWBSESSION');
   console.log(wsurl)
-  var ws = $websocket(wsurl);
+  // var ws = $websocket(wsurl);
+  var ws = "";
   var collection = [];
   // ws.onMessage(function(event) {
   //   console.log('message: ', event);
@@ -19,16 +20,7 @@ angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','l
   //     };
   //   }
   // });
-  ws.onError(function(event) {
-    console.log('connection Error', event);
-  });
-  ws.onClose(function(event) {
-    console.log('connection closed', event);
-  });
-  ws.onOpen(function() {
-    console.log('connection open');
-    ws.send('{"key":"hello woody","val":"connection open"}');
-  });
+  
   return {
     collection: collection,
     status: function() {
@@ -63,6 +55,19 @@ angular.module('sbAdminApp').factory('WebSocket', ['$websocket', '$rootScope','l
     },
     doClose:function(){
       ws.close();
+    },
+    doOpen:function(){
+      ws = $websocket(wsurl);
+      ws.onError(function(event) {
+        console.log('connection Error', event);
+      });
+      ws.onClose(function(event) {
+        console.log('connection closed', event);
+      });
+      ws.onOpen(function() {
+        console.log('connection open');
+        ws.send('{"key":"hello woody","val":"connection open"}');
+      });
     }
   };
 }]);

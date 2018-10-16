@@ -716,17 +716,85 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
-        .state('dashboard.modifyPwd', {
-            templateUrl: 'views/dashboard/modifyPwd.html',
-            url: '/modifyPwd',
-            controller: 'ModifyPwdCtrl',
+        // .state('dashboard.modifyPwd', {
+        //     templateUrl: 'views/dashboard/modifyPwd.html',
+        //     url: '/modifyPwd',
+        //     controller: 'ModifyPwdCtrl',
+        //     resolve: {
+        //         loadMyFile: function ($ocLazyLoad) {
+        //             return $ocLazyLoad.load({
+        //                 name: 'sbAdminApp',
+        //                 files: [
+        //                     'scripts/controllers/modifyPwdController.js',
+        //                     'scripts/controllers/modal/promptModalController.js'
+        //                 ]
+        //             })
+        //         }
+        //     }
+        // })
+        .state('dashboard.planForAdminIndex', {
+            url: '/planForAdminIndex',
+            templateUrl: 'views/dashboard/planAdmin/planForAdminIndex.html',
+            controller: 'PlanForAdminIndexCtrl',
             resolve: {
-                loadMyFile: function ($ocLazyLoad) {
+                loadMyFiles: function ($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name: 'sbAdminApp',
                         files: [
-                            'scripts/controllers/modifyPwdController.js',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/planAdmin/planForAdminIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.planForAdminIndex.planForAdminList', {
+            url: '/planForAdminList',
+            templateUrl: 'views/dashboard/planAdmin/planForAdminList.html',
+            controller: 'PlanForAdminListCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/planAdmin/planForAdminListController.js',
                             'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.planForAdminIndex.planForAdminMain', {
+            url: '/planForAdminMain',
+            controller: 'PlanMainCtrl',
+            templateUrl: 'views/dashboard/plan/planMain.html',
+            params: {
+                "tpId": null,
+                "from": null,
+                "bizId": null,
+                "applyId": null,
+                "btnFlag": null,
+                "epId": null,
+                "epName": null,
+            },
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/plan/index.css',
+                            'scripts/controllers/admin/approveDetailModalController.js',
+                            'scripts/controllers/admin/approveDisagreeModalController.js',
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/modal/confirmModalController.js',
+                            'scripts/controllers/plan/planMainController.js'
                         ]
                     })
                 }
