@@ -3,7 +3,7 @@
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="dangerRubbishManagerPlan">
 			<div class="productCompSwitchBg">
-				<div class="productCompSwitch_title">是否为非生产型企业</div>
+				<div class="productCompSwitch_title">是否为生产型企业</div>
 				<el-switch
 					class="productCompSwitch_switch" 
 					v-model="ifsave" 
@@ -292,11 +292,11 @@ export default {
 			// 		"EP_ID": "EP201410280910450012"
 			// 	},
 			// 	"orgSeq": "",
-			// 	"ifsave" : "1"
+			// 	"ifsave" : "0"
 			// }
 			this.userRole = res.userType
 			this.ifsave = res.ifsave
-			this.ifsaveUserRole = this.ifsave === '0' ?  this.userRole : 'ifsave'
+			this.ifsaveUserRole = this.ifsave === '1' ?  this.userRole : 'ifsave'
 			this.EP_ID = this.queryJson.EP_ID
 			this.TP_ID = this.queryJson.TP_ID
 
@@ -466,7 +466,7 @@ export default {
 			let submitData = {}
 			submitData.EP_ID = this.EP_ID
 			submitData.TP_ID = this.TP_ID
-			if(this.ifsave === '0'){
+			if(this.ifsave === '1'){
 				submitData.PRODUCT_DESC = this.title4.text
 				submitData.PRODUCT_ORI = []
 				submitData.PRODUCT_EQU = []
@@ -658,13 +658,13 @@ export default {
 				type: 'warning'
 			}).then(() => {
 				if (val === '1') {
+					this.ifsaveUserRole = this.userRole
+				}else {
 					this.resetRawMaterial1()
 					this.resetRawMaterial2()
 					this.resetRawMaterial3()
 					this.title4.text = ""
 					this.ifsaveUserRole = "ifsave"
-				}else {
-					this.ifsaveUserRole = this.userRole
 				}
 			}).catch(() => {
 				 if(val === '1'){
