@@ -2,29 +2,42 @@
 	<div id='selfDisposalMeasures'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="selfDisposalMeasuresArea">
-			<el-form ref="form" :model="selfDisposalMeasuresData" :rules="rules" label-width="80px">
+			<div class="productCompSwitchBg">
+				<div class="productCompSwitch_title">是否有自行处理措施</div>
+				<el-switch
+					class="productCompSwitch_switch" 
+					v-model="ifsave" 
+					@change="ifsaveCheck" 
+					active-color="#13ce66"
+					active-text="是"
+					inactive-text="否"
+					active-value="1"
+					inactive-value="0">
+				</el-switch>
+			</div>
+			<el-form ref="form" :model="selfDisposalMeasuresData" :rules="rules" label-width="80px" class="selfDisposalMeasures_form">
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="设施名称" prop="equipmentName">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.equipmentName" placeholder="必填(限50位)" maxlength="50"></el-input>
+							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.equipmentName" placeholder="必填(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.equipmentName}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="设施类别" prop="category">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.category" placeholder="利用处置方式(限50位)" maxlength="50"></el-input>
+							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.category" placeholder="利用处置方式(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.category}}</el-row>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-form-item label="设施地址" prop="addr">
-					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.addr" placeholder="必填(限100位)" maxlength="100"></el-input>
+					<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.addr" placeholder="必填(限100位)" maxlength="100"></el-input>
 					<el-row v-else>{{selfDisposalMeasuresData.addr}}</el-row>
 				</el-form-item>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资" prop="amount">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="selfDisposalMeasuresData.amount" placeholder="必填(限10位)" maxlength="10">
+							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model.number="selfDisposalMeasuresData.amount" placeholder="必填(限10位)" maxlength="10">
 								<template slot="append">{{selfDisposalMeasuresData.amountUnit}}</template>
 							</el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.amount}} {{selfDisposalMeasuresData.amountUnit}}</el-row>
@@ -32,7 +45,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="设计能力" prop="can">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.can" placeholder="必填(限500位)" maxlength="500"></el-input>
+							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.can" placeholder="必填(限500位)" maxlength="500"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.can}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -40,13 +53,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="设计使用年限" prop="years">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.years" placeholder="必填(限50位)" maxlength="50"></el-input>
+							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.years" placeholder="必填(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.years}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="投入运行时间" prop="startDate">
-							<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.startDate" placeholder="必填(限50位)" maxlength="50"></el-input>
+							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.startDate" placeholder="必填(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.startDate}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -54,7 +67,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="运行费用" prop="price">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="selfDisposalMeasuresData.price" placeholder="必填(限10位)" maxlength="10">
+							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model.number="selfDisposalMeasuresData.price" placeholder="必填(限10位)" maxlength="10">
 								<template slot="append">万元</template>
 							</el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.price}}万元</el-row>
@@ -62,20 +75,20 @@
 					</el-col>
 				</el-row>
 				<el-form-item label="主要设备及数量" prop="mainEquAndNum">
-					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.mainEquAndNum" placeholder="必填(限500位)" maxlength="500"></el-input>
+					<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.mainEquAndNum" placeholder="必填(限500位)" maxlength="500"></el-input>
 					<el-row v-else>{{selfDisposalMeasuresData.mainEquAndNum}}</el-row>
 				</el-form-item>
 				<el-form-item label="危险废物利用处置效果" prop="how">
-					<el-input v-if="userRole=== 'CSEP'" v-model="selfDisposalMeasuresData.how" placeholder="必填(限500位)" maxlength="500"></el-input>
+					<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.how" placeholder="必填(限500位)" maxlength="500"></el-input>
 					<el-row v-else>{{selfDisposalMeasuresData.how}}</el-row>
 				</el-form-item>
 			</el-form>
-			<assSwitch :userRole="userRole" :switchInfo="switchInfo"></assSwitch>
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus" @doReset="doReset" @formStatusChange="formStatusChange"></assTitle>
-			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'" :cateList="levelOneData"></assForm>
+			<assSwitch :userRole="ifsaveUserRole" :switchInfo="switchInfo"></assSwitch>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus" @doReset="doReset" @formStatusChange="formStatusChange"></assTitle>
+			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'" :cateList="levelOneData"></assForm>
 			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
-			<assTitle :userRole="userRole" :titleInfo="textareaInfo1" titleType="textarea"></assTitle>
-			<assTitle :userRole="userRole" :titleInfo="textareaInfo2" titleType="textarea"></assTitle>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="textareaInfo1" titleType="textarea"></assTitle>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="textareaInfo2" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -109,6 +122,8 @@ export default {
 				]
 			},
 			userRole: '',
+			ifsave: "0",
+			ifsaveUserRole: '',
 			queryJson: {},
 			switchInfo: [{
 				id: "1",
@@ -253,7 +268,7 @@ export default {
 			// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiVGxudHdidmxmclhIenN5WSsrYU9TOD0=",
 			// 	"operatorId": "",
 			// 	"empId": "",
-			// 	"userType": "admin",
+			// 	"userType": "CSEP",
 			// 	"newGuideFlag": "",
 			// 	"belongQ": "",
 			// 	"belongS": "",
@@ -363,9 +378,13 @@ export default {
 			// 	],
 			// 	"contextPath": "",
 			// 	"realName": "",
-			// 	"orgSeq": ""
+			// 	"orgSeq": "",
+			// 	"ifsave": "0"
 			// }
 			this.userRole = res.userType
+			this.ifsave = res.ifsave
+			this.ifsaveUserRole = this.ifsave === '1' ?  this.userRole : 'ifsave'
+
 			this.selfDisposalMeasuresData.equipmentName = res.initHandleSelf.FACILITY_NAME
 			this.selfDisposalMeasuresData.category = res.initHandleSelf.FACILITY_TYPE
 			this.selfDisposalMeasuresData.addr = res.initHandleSelf.FACILITY_ADDRESS
@@ -446,7 +465,6 @@ export default {
 					}]
 				}]
 			}
-
 		})
 	},
 	methods: {
@@ -466,63 +484,67 @@ export default {
 
 			let submitData = {}
 			submitData.TP_ID = this.queryJson.TP_ID
-			submitData.FACILITY_NAME = this.selfDisposalMeasuresData.equipmentName
-			submitData.FACILITY_TYPE = this.selfDisposalMeasuresData.category
-			submitData.FACILITY_ADDRESS = this.selfDisposalMeasuresData.addr
-			submitData.INVEST_SUM = this.selfDisposalMeasuresData.amount
-			submitData.INVEST_SUM_UNIT = this.selfDisposalMeasuresData.amountUnit
-			submitData.RUN_MONEY_UNIT = this.selfDisposalMeasuresData.amountUnit
-			submitData.DESIGN = this.selfDisposalMeasuresData.can
-			submitData.DESIGN_TIME = this.selfDisposalMeasuresData.years
-			submitData.RUN_TIME = this.selfDisposalMeasuresData.startDate
-			submitData.RUN_MONEY = this.selfDisposalMeasuresData.price
-			submitData.FACILITY_SUM = this.selfDisposalMeasuresData.mainEquAndNum
-			submitData.HANDLE_EFFECT = this.selfDisposalMeasuresData.how
 
-			submitData.HANDLE_LIST = []
-			for (let i in this.title1fromList) {
-				let item = {}
-				item.D_NAME = this.title1fromList[i].itemList[0].text
-				item.STORE_PLAN_UNIT = this.title1fromList[i].itemList[1].text
-				item.STORE_LAST_UNIT = this.title1fromList[i].itemList[1].text
-				item.STORE_YEAR = this.title1fromList[i].itemList[2].text
-				item.STORE_LAST = this.title1fromList[i].itemList[3].text
+			if(this.ifsave === '1'){
+				submitData.FACILITY_NAME = this.selfDisposalMeasuresData.equipmentName
+				submitData.FACILITY_TYPE = this.selfDisposalMeasuresData.category
+				submitData.FACILITY_ADDRESS = this.selfDisposalMeasuresData.addr
+				submitData.INVEST_SUM = this.selfDisposalMeasuresData.amount
+				submitData.INVEST_SUM_UNIT = this.selfDisposalMeasuresData.amountUnit
+				submitData.RUN_MONEY_UNIT = this.selfDisposalMeasuresData.amountUnit
+				submitData.DESIGN = this.selfDisposalMeasuresData.can
+				submitData.DESIGN_TIME = this.selfDisposalMeasuresData.years
+				submitData.RUN_TIME = this.selfDisposalMeasuresData.startDate
+				submitData.RUN_MONEY = this.selfDisposalMeasuresData.price
+				submitData.FACILITY_SUM = this.selfDisposalMeasuresData.mainEquAndNum
+				submitData.HANDLE_EFFECT = this.selfDisposalMeasuresData.how
 
-				submitData.HANDLE_LIST.push(item)
-			}
-			submitData.DB_1 = this.switchInfo[0].value + ""
-			submitData.DB_2 = this.switchInfo[1].value + ""
-			submitData.DESC_CONTENT = this.textareaInfo1.text
-			submitData.MEASURE = this.textareaInfo2.text
+				submitData.HANDLE_LIST = []
+				for (let i in this.title1fromList) {
+					let item = {}
+					item.D_NAME = this.title1fromList[i].itemList[0].text
+					item.STORE_PLAN_UNIT = this.title1fromList[i].itemList[1].text
+					item.STORE_LAST_UNIT = this.title1fromList[i].itemList[1].text
+					item.STORE_YEAR = this.title1fromList[i].itemList[2].text
+					item.STORE_LAST = this.title1fromList[i].itemList[3].text
 
-			for (let i in submitData.HANDLE_LIST) {
-				for (let key in submitData.HANDLE_LIST[i]) {
-					if (submitData.HANDLE_LIST[i][key] === "") {
-						this.$notify.error({
-							title: '警告',
-							message: "请填全[危险废物自行利用处置情况]所有内容"
-						});
-						return
+					submitData.HANDLE_LIST.push(item)
+				}
+				submitData.DB_1 = this.switchInfo[0].value + ""
+				submitData.DB_2 = this.switchInfo[1].value + ""
+				submitData.DESC_CONTENT = this.textareaInfo1.text
+				submitData.MEASURE = this.textareaInfo2.text
+
+				for (let i in submitData.HANDLE_LIST) {
+					for (let key in submitData.HANDLE_LIST[i]) {
+						if (submitData.HANDLE_LIST[i][key] === "") {
+							this.$notify.error({
+								title: '警告',
+								message: "请填全[危险废物自行利用处置情况]所有内容"
+							});
+							return
+						}
 					}
+				}
+
+
+				if (submitData.DESC_CONTENT === '') {
+					this.$notify.error({
+						title: '警告',
+						message: "请填写危险废物自行利用处置工艺说明"
+					});
+					return
+				}
+				if (submitData.MEASURE === '') {
+					this.$notify.error({
+						title: '警告',
+						message: "请填写二次环境污染控制和事故预防措施"
+					});
+					return
 				}
 			}
 
-
-			if (submitData.DESC_CONTENT === '') {
-				this.$notify.error({
-					title: '警告',
-					message: "请填写危险废物自行利用处置工艺说明"
-				});
-				return
-			}
-			if (submitData.MEASURE === '') {
-				this.$notify.error({
-					title: '警告',
-					message: "请填写二次环境污染控制和事故预防措施"
-				});
-				return
-			}
-
+			submitData.ifsave = this.ifsave
 			for (let key in this.queryJson) {
 				submitData[key] = this.queryJson[key]
 			}
@@ -580,6 +602,53 @@ export default {
 		},
 		formStatusChange(status){
 			this.formStatus = status
+		},
+		ifsaveCheck(val) {
+			this.$confirm('切换后数据将会被清空，是否确定?', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				if (val === '1') {
+					this.ifsaveUserRole = this.userRole
+				}else {
+					//清理数据
+					this.doReset()
+					this.selfDisposalMeasuresData = {
+						equipmentName: "",
+						category: "",
+						addr: "",
+						amount: "",
+						amountUnit: "万元",
+						can: "",
+						years: "",
+						startDate: "",
+						price: "",
+						mainEquAndNum: "",
+						how: "",
+					}
+					this.textareaInfo1.text = ""
+					this.textareaInfo2.text = ""
+					this.switchInfo = [{
+						id: "1",
+						name: "是否定期监测污染物排放情况",
+						value: ""
+					}, {
+						id: "2",
+						name: "污染物排放达标情况",
+						value: "",
+						type: 'reach'
+					}]
+
+					this.ifsaveUserRole = "ifsave"
+				}
+			}).catch(() => {
+				 if(val === '1'){
+					 this.ifsave = "0"
+				 }else{
+					 this.ifsave = "1"
+				 }    
+			});
 		}
 	}
 }
@@ -623,5 +692,25 @@ export default {
   width: 100%;
   height: 50px;
   float: left;
+}
+.productCompSwitchBg{
+	width: 100%;
+	float: left;
+}
+.productCompSwitch_title{
+	font-size: 18px;
+	padding: 6px 0 12px;
+	float: left;
+}
+.productCompSwitch_switch{
+	float: left;
+	margin: 8px 0 0 15px;
+}
+.productCompSwitch_switch .el-switch__label.is-active{ 
+	color:#13ce66;
+}
+.selfDisposalMeasures_form{
+	width: 100%;
+	float: left;
 }
 </style>
