@@ -15,7 +15,7 @@
 					inactive-value="0">
 				</el-switch>
 			</div>
-			<el-form ref="form" :model="selfDisposalMeasuresData" :rules="rules" label-width="80px" class="selfDisposalMeasures_form">
+			<el-form ref="form" :model="selfDisposalMeasuresData" :rules="rules" :show-message="ifsaveUserRole=== 'CSEP'" label-width="80px" class="selfDisposalMeasures_form">
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="设施名称" prop="equipmentName">
@@ -288,7 +288,7 @@ export default {
 			// 		"FACILITY_NAME": "放大",
 			// 		"RUN_MONEY_UNIT": "万元",
 			// 		"DESC_CONTENT": "范德萨范德萨发大水萨法",
-			// 		"INVEST_SUM": "1",
+			// 		"INVEST_SUM": "aa",
 			// 		"FACILITY_SUM": "放大书法大赛",
 			// 		"sysdate": 1537053927987,
 			// 		"MEASURE": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊",

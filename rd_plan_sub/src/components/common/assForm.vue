@@ -9,7 +9,7 @@
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
 							<div v-else class="assFromItem_right">
 								<div v-if="fItem.type === 'input'">
-									<el-input v-model="fItem.text" :placeholder="'必填' + fItem.limit ? '(限' + fItem.limit + '位)' : ''" :maxlength="fItem.limit ? fItem.limit : '500'"></el-input>
+									<el-input v-model="fItem.text" :placeholder="'必填' + (fItem.limit ? '(限' + fItem.limit + '位)' : '')" :maxlength="fItem.limit ? fItem.limit : '500'"></el-input>
 								</div>
 								<div v-else-if="fItem.type === 'selectDIY'" class="assFromItem_unitBg">
 									<el-select v-if="fItem.num && fItem.num === '1'" placeholder="请选择" v-model="fItem.text" class="assFromItem_unitBgSelect">
@@ -181,6 +181,9 @@
 						}
 						if(arr[i].num){
 							arrItem.num = arr[i].num
+						}
+						if(arr[i].limit){
+							arrItem.limit = arr[i].limit
 						}
 					}
 					if(arr[i].isSingle){
