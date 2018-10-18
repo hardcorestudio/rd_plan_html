@@ -77,46 +77,64 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
             if(obj.key == 'baseInfo'){
                 if(obj.value == 'func_done'){
                     $scope.baseInfoClass = $scope.func_done
+                }else{
+                    $scope.baseInfoClass = $scope.func_class
                 }
             }
             if(obj.key == 'productInfo'){
                 if(obj.value == 'func_done'){
                     $scope.productionSituationClass = $scope.func_done
+                }else{
+                    $scope.productionSituationClass = $scope.func_class
                 }
             }
             if(obj.key == 'overview'){
                 if(obj.value == 'func_done'){
                     $scope.produceSituationClass = $scope.func_done
+                }else{
+                    $scope.produceSituationClass = $scope.func_class
                 }
             }
             if(obj.key == 'reduction'){
                 if(obj.value == 'func_done'){
                     $scope.decrementPlanClass = $scope.func_done
+                }else{
+                    $scope.decrementPlanClass = $scope.func_class
                 }
             }
             if(obj.key == 'transfer'){
                 if(obj.value == 'func_done'){
                     $scope.transferStuationClass = $scope.func_done
+                }else{
+                    $scope.transferStuationClass = $scope.func_class
                 }
             }
             if(obj.key == 'handleSelf'){
                 if(obj.value == 'func_done'){
                     $scope.selfDisposalMeasuresClass = $scope.func_done
+                }else{
+                    $scope.selfDisposalMeasuresClass = $scope.func_class
                 }
             }
             if(obj.key == 'handle'){
                 if(obj.value == 'func_done'){
                     $scope.entrustDisposalMeasuresClass = $scope.func_done
+                }else{
+                    $scope.entrustDisposalMeasuresClass = $scope.func_class
                 }
             }
             if(obj.key == 'env'){
                 if(obj.value == 'func_done'){
                     $scope.envClass = $scope.func_done
+                }else{
+                    $scope.envClass = $scope.func_class
                 }
             }
             if(obj.key == 'lastInfo'){
                 if(obj.value == 'func_done'){
                     $scope.lastClass = $scope.func_done
+                }else{
+                    $scope.lastClass = $scope.func_class
                 }
             }
         });
