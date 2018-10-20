@@ -81,9 +81,6 @@
         // isCollapse: false
       };
 		},
-		mounted: {
-			
-		},
     methods: {
 			doReset() {
 				this.formList = [];

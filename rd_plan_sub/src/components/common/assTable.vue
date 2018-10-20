@@ -19,9 +19,6 @@
         // isCollapse: false
       };
 		},
-		mounted: {
-			
-		},
     methods: {
 			
     }

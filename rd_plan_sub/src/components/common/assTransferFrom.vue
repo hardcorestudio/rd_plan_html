@@ -115,8 +115,6 @@
         
       };
 		},
-		mounted: {
-		},
     methods: {
 			addSign() {
 				let listItem = {};

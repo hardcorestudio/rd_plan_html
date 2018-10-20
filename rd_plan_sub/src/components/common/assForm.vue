@@ -157,8 +157,6 @@
 				}],
       };
 		},
-		mounted: {
-		},
     methods: {
 			addSign() {
 				let item = {};

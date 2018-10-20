@@ -35,9 +35,6 @@
         // isCollapse: false
       };
 		},
-		mounted: {
-			
-		},
     methods: {
 			doReset() {
 				this.$emit('doReset')
