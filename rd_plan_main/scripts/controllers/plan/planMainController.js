@@ -215,14 +215,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //     console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        // var p = {};
-        // p.TP_ID = $stateParams.tpId
-        // Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
-        //     console.log(data)
-        //     console.log("sssssssssssss")
-        //    console.log(JSON.stringify(data))
-        // },function(data,header,config,status){
-        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
+            console.log(data)
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initReduction', p, function(data,header,config,status){
@@ -231,14 +231,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initTransfer', p, function(data,header,config,status){
-            console.log(data)
-            console.log("sssssssssssss")
-           console.log(JSON.stringify(data))
-        },function(data,header,config,status){
-        });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initTransfer', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initHandleSelf', p, function(data,header,config,status){
@@ -733,6 +733,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
             };
             var modalInstance = Modal.modal(url, ctrlName, resolve, function (returnData) {
                 Init.iwbhttp('/plan/apply2q', returnData, function(data,header,config,status){
+                    console.log(data)
                     if(data.resFlag == '0'){
                         $scope.applyBtnFlag = false;
                         $scope.open('提交成功');
@@ -742,7 +743,6 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                 },function(data,header,config,status){
                 });
             }, function () {
-
             });
         }, 500);
     }
