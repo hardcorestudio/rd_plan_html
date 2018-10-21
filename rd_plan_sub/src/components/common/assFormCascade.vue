@@ -55,7 +55,7 @@
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
 							<div v-else class="assFromItem_right">
-								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelOneChange(fItem)" class="assFromItem_unitBgSelect">
+								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelOneChange(fItem,item.index)" class="assFromItem_unitBgSelect">
 									<el-option
 										v-for="uItem in levelTwoData"
 										:key="uItem.value"
@@ -158,11 +158,24 @@
 						arrItem.title1 = arr[i].title1
 						arrItem.text2 = ""
 						arrItem.title2 = arr[i].title2
+					}else if(arr[i].type === "selectLevelTwoText"){
+						arrItem.text1 = ""
+						arrItem.title1 = arr[i].title1
+						arrItem.text2 = ""
+						arrItem.title2 = arr[i].title2
+						arrItem.text3 = ""
+						arrItem.title3 = arr[i].title3
+						if(arr[i].unit){
+							arrItem.unit = arr[i].unit
+						}
 					}else{
 						arrItem.text = ""
 						arrItem.title = arr[i].title
 						if(arr[i].unit){
 							arrItem.unit = arr[i].unit
+						}
+						if(arr[i].limit){
+							arrItem.limit = arr[i].limit
 						}
 					}
 					if(arr[i].isSingle){
@@ -192,11 +205,27 @@
 					this.formList.splice(myIndex, 1)
 				}
 			},
-			levelOneChange(item){
+			levelOneChange(item,index){
 				for(let i in this.levelTwoData){
 					if(this.levelTwoData[i].value === item.text1){
 						item.text2 = this.levelTwoData[i].big_name
 						item.text3 = this.levelTwoData[i].small_name
+						if(item.unit && item.unit === '1'){
+							for(let m in this.formList){
+								if(this.formList[m].index === index){
+									for(let j in this.formList[m].itemList){
+										let formItem = this.formList[m].itemList[j]
+										// if(formItem.type === "selectThree" || formItem.type === "select"){
+										// 	formItem.text = this.levelTwoData[i].UNIT
+										// }
+										if(formItem.type === "inputWithUnitSelect"){
+											formItem.unit = this.levelTwoData[i].UNIT
+										}
+									}
+									break
+								}
+							}
+						}
 						break
 					}
 				}

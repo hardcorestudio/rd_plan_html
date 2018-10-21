@@ -133,9 +133,6 @@ export default {
 		'assForm': assForm,
 		'assTable': assTable
 	},
-	watch: {
-
-	},
 	mounted () {
 		checkBrowser(() => {
 			// this.$message({

@@ -128,11 +128,11 @@ export default {
 			switchInfo: [{
 				id: "1",
 				name: "是否定期监测污染物排放情况",
-				value: ""
+				value: "0"
 			}, {
 				id: "2",
 				name: "污染物排放达标情况",
-				value: "",
+				value: "0",
 				type: 'reach'
 			}],
 			title1: {
@@ -145,12 +145,15 @@ export default {
 					text: "",
 					title: "自行利用处置废物名称",
 					isSingle: true,
-				}, {
-					type: "select",
-					text: "",
-					title: "单位",
-					isSingle: true,
-				}, {
+					unit: "1"
+				}, 
+				// {
+				// 	type: "select",
+				// 	text: "",
+				// 	title: "单位",
+				// 	isSingle: true,
+				// }, 
+				{
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划利用处置量",
@@ -224,10 +227,12 @@ export default {
 			formDataListTitle: [{
 				title: '自行利用处置废物名称',
 				key: 'D_NAME'
-			},{
-				title: '单位',
-				key: 'STORE_PLAN_UNIT'
-			},{
+			},
+			// {
+			// 	title: '单位',
+			// 	key: 'STORE_PLAN_UNIT'
+			// },
+			{
 				title: '本年度计划利用处置量',
 				key: 'STORE_YEAR'
 			},{
@@ -243,8 +248,6 @@ export default {
 		'assForm': assForm,
 		'assSwitch': assSwitch,
 		'assTable': assTable
-	},
-	watch: {
 	},
 	mounted () {
 		checkBrowser(() => {
@@ -288,7 +291,7 @@ export default {
 			// 		"FACILITY_NAME": "放大",
 			// 		"RUN_MONEY_UNIT": "万元",
 			// 		"DESC_CONTENT": "范德萨范德萨发大水萨法",
-			// 		"INVEST_SUM": "aa",
+			// 		"INVEST_SUM": "15",
 			// 		"FACILITY_SUM": "放大书法大赛",
 			// 		"sysdate": 1537053927987,
 			// 		"MEASURE": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
@@ -385,27 +388,30 @@ export default {
 			this.ifsave = res.ifsave
 			this.ifsaveUserRole = this.ifsave === '1' ?  this.userRole : 'ifsave'
 
-			this.selfDisposalMeasuresData.equipmentName = res.initHandleSelf.FACILITY_NAME
-			this.selfDisposalMeasuresData.category = res.initHandleSelf.FACILITY_TYPE
-			this.selfDisposalMeasuresData.addr = res.initHandleSelf.FACILITY_ADDRESS
-			this.selfDisposalMeasuresData.amount = parseFloat(res.initHandleSelf.INVEST_SUM)
-			this.selfDisposalMeasuresData.can = res.initHandleSelf.DESIGN
-			this.selfDisposalMeasuresData.years = res.initHandleSelf.DESIGN_TIME
-			this.selfDisposalMeasuresData.startDate = res.initHandleSelf.RUN_TIME
-			this.selfDisposalMeasuresData.price = parseFloat(res.initHandleSelf.RUN_MONEY)
-			this.selfDisposalMeasuresData.mainEquAndNum = res.initHandleSelf.FACILITY_SUM
-			this.selfDisposalMeasuresData.how = res.initHandleSelf.HANDLE_EFFECT
+			if(res.initHandleSelf){
+				this.selfDisposalMeasuresData.equipmentName = res.initHandleSelf.FACILITY_NAME
+				this.selfDisposalMeasuresData.category = res.initHandleSelf.FACILITY_TYPE
+				this.selfDisposalMeasuresData.addr = res.initHandleSelf.FACILITY_ADDRESS
+				this.selfDisposalMeasuresData.amount = parseFloat(res.initHandleSelf.INVEST_SUM)
+				this.selfDisposalMeasuresData.can = res.initHandleSelf.DESIGN
+				this.selfDisposalMeasuresData.years = res.initHandleSelf.DESIGN_TIME
+				this.selfDisposalMeasuresData.startDate = res.initHandleSelf.RUN_TIME
+				this.selfDisposalMeasuresData.price = parseFloat(res.initHandleSelf.RUN_MONEY)
+				this.selfDisposalMeasuresData.mainEquAndNum = res.initHandleSelf.FACILITY_SUM
+				this.selfDisposalMeasuresData.how = res.initHandleSelf.HANDLE_EFFECT
 
-			this.switchInfo[0].value = res.initHandleSelf.DB_1 ? res.initHandleSelf.DB_1 + "" : '0'
-			this.switchInfo[1].value = res.initHandleSelf.DB_2 ? res.initHandleSelf.DB_2 + "" : '0'
-			this.textareaInfo1.text = res.initHandleSelf.DESC_CONTENT
-			this.textareaInfo2.text = res.initHandleSelf.MEASURE
+				this.switchInfo[0].value = res.initHandleSelf.DB_1 ? res.initHandleSelf.DB_1 + "" : '0'
+				this.switchInfo[1].value = res.initHandleSelf.DB_2 ? res.initHandleSelf.DB_2 + "" : '0'
+				this.textareaInfo1.text = res.initHandleSelf.DESC_CONTENT
+				this.textareaInfo2.text = res.initHandleSelf.MEASURE
+			}
 
 			this.levelOneData = []
 			for (let i in res.initOverviewList) {
 				let item = {}
 				item.value = res.initOverviewList[i].D_NAME
 				item.label = res.initOverviewList[i].D_NAME
+				item.UNIT = res.initOverviewList[i].UNIT
 				this.levelOneData.push(item)
 			}
 
@@ -420,12 +426,15 @@ export default {
 							text: res.initHandleSelfList[i].D_NAME,
 							title: "自行利用处置废物名称",
 							isSingle: true,
-						}, {
-							type: "select",
-							text: res.initHandleSelfList[i].STORE_PLAN_UNIT,
-							title: "单位",
-							isSingle: true,
-						}, {
+							unit: "1"
+						}, 
+						// {
+						// 	type: "select",
+						// 	text: res.initHandleSelfList[i].STORE_PLAN_UNIT,
+						// 	title: "单位",
+						// 	isSingle: true,
+						// }, 
+						{
 							type: "inputWithUnitSelect",
 							text: res.initHandleSelfList[i].STORE_YEAR,
 							title: "本年度计划利用处置量",
@@ -447,12 +456,15 @@ export default {
 						text: "",
 						title: "自行利用处置废物名称",
 						isSingle: true,
-					}, {
-						type: "select",
-						text: "",
-						title: "单位",
-						isSingle: true,
-					}, {
+						unit: "1"
+					}, 
+					// {
+					// 	type: "select",
+					// 	text: "",
+					// 	title: "单位",
+					// 	isSingle: true,
+					// }, 
+					{
 						type: "inputWithUnitSelect",
 						text: "",
 						title: "本年度计划利用处置量",
@@ -503,10 +515,10 @@ export default {
 				for (let i in this.title1fromList) {
 					let item = {}
 					item.D_NAME = this.title1fromList[i].itemList[0].text
-					item.STORE_PLAN_UNIT = this.title1fromList[i].itemList[1].text
-					item.STORE_LAST_UNIT = this.title1fromList[i].itemList[1].text
-					item.STORE_YEAR = this.title1fromList[i].itemList[2].text
-					item.STORE_LAST = this.title1fromList[i].itemList[3].text
+					item.STORE_YEAR = this.title1fromList[i].itemList[1].text
+					item.STORE_PLAN_UNIT = this.title1fromList[i].itemList[1].unit
+					item.STORE_LAST_UNIT = this.title1fromList[i].itemList[1].unit
+					item.STORE_LAST = this.title1fromList[i].itemList[2].text
 
 					submitData.HANDLE_LIST.push(item)
 				}
@@ -582,12 +594,15 @@ export default {
 					text: "",
 					title: "自行利用处置废物名称",
 					isSingle: true,
-				}, {
-					type: "select",
-					text: "",
-					title: "单位",
-					isSingle: true,
-				}, {
+					unit: "1"
+				}, 
+				// {
+				// 	type: "select",
+				// 	text: "",
+				// 	title: "单位",
+				// 	isSingle: true,
+				// }, 
+				{
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划利用处置量",
@@ -604,14 +619,14 @@ export default {
 			this.formStatus = status
 		},
 		ifsaveCheck(val) {
-			this.$confirm('切换后数据将会被清空，是否确定?', '提示', {
-				confirmButtonText: '确定',
-				cancelButtonText: '取消',
-				type: 'warning'
-			}).then(() => {
-				if (val === '1') {
-					this.ifsaveUserRole = this.userRole
-				}else {
+			if (val === '1') {
+				this.ifsaveUserRole = this.userRole
+			}else {
+				this.$confirm('切换后数据将会被清空，是否确定?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
 					//清理数据
 					this.doReset()
 					this.selfDisposalMeasuresData = {
@@ -632,23 +647,23 @@ export default {
 					this.switchInfo = [{
 						id: "1",
 						name: "是否定期监测污染物排放情况",
-						value: ""
+						value: "0"
 					}, {
 						id: "2",
 						name: "污染物排放达标情况",
-						value: "",
+						value: "0",
 						type: 'reach'
 					}]
 
 					this.ifsaveUserRole = "ifsave"
-				}
-			}).catch(() => {
-				 if(val === '1'){
-					 this.ifsave = "0"
-				 }else{
-					 this.ifsave = "1"
-				 }    
-			});
+				}).catch(() => {
+					if(val === '1'){
+						this.ifsave = "0"
+					}else{
+						this.ifsave = "1"
+					}    
+				});
+			}
 		}
 	}
 }

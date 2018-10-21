@@ -250,23 +250,23 @@ export default {
 				id1: "1",
 				id2: "2",
 				title1: "管理制度",
-				text1: "",
+				text1: "0",
 				title2: "岗位责任制度",
-				text2: ""
+				text2: "0"
 			}, {
 				id1: "1",
 				id2: "2",
 				title1: "安全操作规程",
-				text1: "",
+				text1: "0",
 				title2: "管理台账",
-				text2: ""
+				text2: "0"
 			}, {
 				id1: "1",
 				id2: "2",
 				title1: "培训制度",
-				text1: "",
+				text1: "0",
 				title2: "意外事故防范措施和应急预案",
-				text2: ""
+				text2: "0"
 			}],
 			manageDes: {
 				title: "管理组织描述",
@@ -410,44 +410,49 @@ export default {
 		}).then(res => {
 			this.EP_ID = this.queryJson.EP_ID
 			this.userRole = res.userType
-			this.baseInfoData.planDate = res.initRes.planYear
-			this.baseInfoData.compName = res.initRes.EP_NAME
-			this.baseInfoData.compAddr = res.initRes.epAdress
-			this.baseInfoData.factoryAddr = res.initRes.sbAdress
-			this.baseInfoData.legalPerson = res.initRes.LINKMAN
-			this.baseInfoData.postNo = res.initRes.POSTAL_CODE
-			this.baseInfoData.category = res.initRes.dictname
-			this.baseInfoData.totalInvestment = parseInt(res.initEpExtend.TOTAL_INVESTMENT)
-			this.baseInfoData.totalOutputValue = parseInt(res.initEpExtend.TOTAL_OUTPUTVALUE)
-			this.baseInfoData.areaCovered = parseInt(res.initEpExtend.FLOOR_AREA)
-			this.baseInfoData.personNum = parseInt(res.initEpExtend.EMPLOYEES_NUM)
-			this.baseInfoData.chargeMan = res.initEpExtend.PRINCIPAL
-			this.baseInfoData.person = res.initEpExtend.LINKMAN
-			this.baseInfoData.phone = res.initEpExtend.LINK_NUM
-			this.baseInfoData.tel = res.initEpExtend.FAX_TEL
-			this.baseInfoData.mail = res.initEpExtend.MAIL
-			this.baseInfoData.webside = res.initEpExtend.WEBSITE
-			this.baseInfoData.department = res.initEpExtend.DEPARTMENT
-			this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
-			this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
-
-			if (res.initEpExtend.sons && res.initEpExtend.sons.length > 0) {
-				this.managerList = []
-				for (let i in res.initEpExtend.sons) {
-					let item = {}
-					item.index = parseInt(i) + 1
-					item.text1 = res.initEpExtend.sons[i].TECHNICAL_DIRECTER
-					item.text2 = res.initEpExtend.sons[i].EDU_LEVEL
-					this.managerList.push(item)
-				}
+			if(res.initRes){
+				this.baseInfoData.planDate = res.initRes.planYear
+				this.baseInfoData.compName = res.initRes.EP_NAME
+				this.baseInfoData.compAddr = res.initRes.epAdress
+				this.baseInfoData.factoryAddr = res.initRes.sbAdress
+				this.baseInfoData.legalPerson = res.initRes.LINKMAN
+				this.baseInfoData.postNo = res.initRes.POSTAL_CODE
+				this.baseInfoData.category = res.initRes.dictname
 			}
-			this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER ? res.initEpExtend.SYS_MANAGER + "" : "0"
-			this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY ? res.initEpExtend.SYS_RESPONSIBILITY + "" : "0"
-			this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION ? res.initEpExtend.SYS_OPERATION + "" : "0"
-			this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER ? res.initEpExtend.SYS_LEDGER + "" : "0"
-			this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING ? res.initEpExtend.SYS_TRAINING + "" : "0"
-			this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT ? res.initEpExtend.SYS_ACCIDENT + "" : "0"
-			this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
+			if(res.initEpExtend){
+				this.baseInfoData.totalInvestment = parseInt(res.initEpExtend.TOTAL_INVESTMENT)
+				this.baseInfoData.totalOutputValue = parseInt(res.initEpExtend.TOTAL_OUTPUTVALUE)
+				this.baseInfoData.areaCovered = parseInt(res.initEpExtend.FLOOR_AREA)
+				this.baseInfoData.personNum = parseInt(res.initEpExtend.EMPLOYEES_NUM)
+				this.baseInfoData.chargeMan = res.initEpExtend.PRINCIPAL
+				this.baseInfoData.person = res.initEpExtend.LINKMAN
+				this.baseInfoData.phone = res.initEpExtend.LINK_NUM
+				this.baseInfoData.tel = res.initEpExtend.FAX_TEL
+				this.baseInfoData.mail = res.initEpExtend.MAIL
+				this.baseInfoData.webside = res.initEpExtend.WEBSITE
+				this.baseInfoData.department = res.initEpExtend.DEPARTMENT
+				this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
+				this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
+
+				if (res.initEpExtend.sons && res.initEpExtend.sons.length > 0) {
+					this.managerList = []
+					for (let i in res.initEpExtend.sons) {
+						let item = {}
+						item.index = parseInt(i) + 1
+						item.text1 = res.initEpExtend.sons[i].TECHNICAL_DIRECTER
+						item.text2 = res.initEpExtend.sons[i].EDU_LEVEL
+						this.managerList.push(item)
+					}
+				}
+				this.switchList[0].text1 = res.initEpExtend.SYS_MANAGER ? res.initEpExtend.SYS_MANAGER + "" : "0"
+				this.switchList[0].text2 = res.initEpExtend.SYS_RESPONSIBILITY ? res.initEpExtend.SYS_RESPONSIBILITY + "" : "0"
+				this.switchList[1].text1 = res.initEpExtend.SYS_OPERATION ? res.initEpExtend.SYS_OPERATION + "" : "0"
+				this.switchList[1].text2 = res.initEpExtend.SYS_LEDGER ? res.initEpExtend.SYS_LEDGER + "" : "0"
+				this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING ? res.initEpExtend.SYS_TRAINING + "" : "0"
+				this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT ? res.initEpExtend.SYS_ACCIDENT + "" : "0"
+				this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
+			}
+			
 		})
 
 

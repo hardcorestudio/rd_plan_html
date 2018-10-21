@@ -20,7 +20,7 @@
 											:value="uItem.value">
 										</el-option>
 									</el-select>
-									<el-select v-else placeholder="请选择" v-model="fItem.text" class="assFromItem_unitBgSelect">
+									<el-select v-else placeholder="请选择" v-model="fItem.text" @change="selectUnitChange(fItem,item.index)" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in cateList"
 											:key="uItem.value"
@@ -232,6 +232,29 @@
 							}
 						}
 						break
+					}
+				}
+			},
+			selectUnitChange(item,index){
+				if(item.unit && item.unit === '1'){
+					for(let i in this.cateList){
+						if(this.cateList[i].value === item.text){
+							for(let m in this.formList){
+								if(this.formList[m].index === index){
+									for(let j in this.formList[m].itemList){
+										let formItem = this.formList[m].itemList[j]
+										// if(formItem.type === "selectThree" || formItem.type === "select"){
+										// 	formItem.text = this.cateList[i].UNIT
+										// }
+										if(formItem.type === "inputWithUnitSelect"){
+											formItem.unit = this.cateList[i].UNIT
+										}
+									}
+									break
+								}
+							}
+							break
+						}
 					}
 				}
 			}

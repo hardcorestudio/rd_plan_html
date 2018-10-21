@@ -54,16 +54,19 @@ export default {
 					text2: "",
 					title3: "废物代码",
 					text3: "",
-					isSingle: true
+					isSingle: true,
+					unit: "1"
 				}, {
 					type: "selectDIY",
 					text: "",
 					title: "利用处置方式"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
+				}, 
+				// {
+				// 	type: "select",
+				// 	text: "",
+				// 	title: "单位"
+				// }, 
+				{
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划委托利用处置量",
@@ -95,10 +98,12 @@ export default {
 			},{
 				title: '利用处置方式',
 				key: 'HANDLE_TYPE'
-			},{
-				title: '单位',
-				key: 'UNIT'
-			},{
+			},
+			// {
+			// 	title: '单位',
+			// 	key: 'UNIT'
+			// },
+			{
 				title: '本年度计划委托利用处置量',
 				key: 'YEAR_NUM'
 			},{
@@ -230,7 +235,7 @@ export default {
 		// 		"LICENSE_NO": "TJHW001",
 		// 		"EN_ID_CZ": "EP201707251144524521"
 		// 	}],
-		// 	"userType": "admin",
+		// 	"userType": "CSEP",
 		// 	"newGuideFlag": "",
 		// 	"belongQ": "",
 		// 	"belongS": "",
@@ -278,7 +283,7 @@ export default {
 		// 		"CHARACTER": "11"
 		// 	}],
 		// 	"initHandleList": [{
-		// 		"UNIT": "吨",
+		// 		"UNIT": "个",
 		// 		"EN_NAME_CZ": "中海油能源发展股份有限公司安全环保分公司（碧海环保）",
 		// 		"LAST_NUM": "33",
 		// 		"HANDLE_TYPE": "11",
@@ -291,7 +296,7 @@ export default {
 		// 		"YEAR_NUM": "22",
 		// 		"BIG_CATEGORY_ID": null
 		// 	}, {
-		// 		"UNIT": "个",
+		// 		"UNIT": "吨",
 		// 		"EN_NAME_CZ": "天津江源环保科技有限公司",
 		// 		"LAST_NUM": "22",
 		// 		"HANDLE_TYPE": "11",
@@ -343,6 +348,7 @@ export default {
 			item.label = res.initOverviewList[i].D_NAME
 			item.big_name = res.initOverviewList[i].BIG_CATEGORY_ID
 			item.small_name = res.initOverviewList[i].SAMLL_CATEGORY_ID
+			item.UNIT = res.initOverviewList[i].UNIT
 			this.cateList2.push(item)
 		}
 		this.cateList3 = []
@@ -358,7 +364,7 @@ export default {
 			this.title1fromList = []
 			for (let i in res.initHandleList) {
 				let item = {
-					index: i + 1,
+					index: parseInt(i) + 1,
 					itemList: [{
 						type: "selectLevelText",
 						text1: res.initHandleList[i].EN_ID_CZ,
@@ -374,16 +380,19 @@ export default {
 						text2: res.initHandleList[i].BIG_CATEGORY_ID,
 						title3: "废物代码",
 						text3: res.initHandleList[i].SAMLL_CATEGORY_ID,
-						isSingle: true
+						isSingle: true,
+						unit: "1"
 					}, {
 						type: "selectDIY",
 						text: res.initHandleList[i].HANDLE_TYPE,
 						title: "利用处置方式"
-					}, {
-						type: "select",
-						text: res.initHandleList[i].UNIT,
-						title: "单位"
-					}, {
+					},
+					// {
+					// 	type: "select",
+					// 	text: res.initHandleList[i].UNIT,
+					// 	title: "单位"
+					// },
+					{
 						type: "inputWithUnitSelect",
 						text: res.initHandleList[i].YEAR_NUM,
 						title: "本年度计划委托利用处置量",
@@ -417,16 +426,19 @@ export default {
 					text2: "",
 					title3: "废物代码",
 					text3: "",
-					isSingle: true
+					isSingle: true,
+					unit: "1"
 				}, {
 					type: "selectDIY",
 					text: "",
 					title: "利用处置方式"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
+				}, 
+				// {
+				// 	type: "select",
+				// 	text: "",
+				// 	title: "单位"
+				// }, 
+				{
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划委托利用处置量",
@@ -441,14 +453,13 @@ export default {
 				}]
 			}]
 		}
-
 		})
 	},
 	methods: {
 		doSubmit () {
 			let checkFlag = true
 			for (let i in this.title1fromList) {
-				if (this.title1fromList[i].itemList[0].text1 === '' || this.title1fromList[i].itemList[1].text1 === '' || this.title1fromList[i].itemList[2].text === '' || this.title1fromList[i].itemList[3].text === '' || this.title1fromList[i].itemList[4].text === '' || this.title1fromList[i].itemList[5].text === '') {
+				if (this.title1fromList[i].itemList[0].text1 === '' || this.title1fromList[i].itemList[1].text1 === '' || this.title1fromList[i].itemList[2].text === '' || this.title1fromList[i].itemList[3].text === '' || this.title1fromList[i].itemList[4].text === '') {
 					checkFlag = false
 					break
 				}
@@ -479,9 +490,9 @@ export default {
 				item.BIG_CATEGORY_ID = this.title1fromList[i].itemList[1].text2
 				item.SMALL_CATEGORY_ID = this.title1fromList[i].itemList[1].text3
 				item.HANDLE_TYPE = this.title1fromList[i].itemList[2].text
-				item.UNIT = this.title1fromList[i].itemList[3].text
-				item.YEAR_NUM = this.title1fromList[i].itemList[4].text
-				item.LAST_NUM = this.title1fromList[i].itemList[5].text
+				item.UNIT = this.title1fromList[i].itemList[3].unit
+				item.YEAR_NUM = this.title1fromList[i].itemList[3].text
+				item.LAST_NUM = this.title1fromList[i].itemList[4].text
 
 				submitData.LIST.push(item)
 			}
@@ -529,16 +540,19 @@ export default {
 					text2: "",
 					title3: "废物代码",
 					text3: "",
-					isSingle: true
+					isSingle: true,
+					unit: "1"
 				}, {
 					type: "selectDIY",
 					text: "",
 					title: "利用处置方式"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
+				}, 
+				// {
+				// 	type: "select",
+				// 	text: "",
+				// 	title: "单位"
+				// }, 
+				{
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年度计划委托利用处置量",

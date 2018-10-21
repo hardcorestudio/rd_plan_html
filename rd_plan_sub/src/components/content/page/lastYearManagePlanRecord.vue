@@ -53,43 +53,43 @@ export default {
 			switchInfo1: [{
 				id: "1",
 				name: "是否将危险废物委托给有资质的单位收集、贮存、利用、处置",
-				value: ""
+				value: "0"
 			}, {
 				id: "2",
 				name: "是否与有资质的单位签订危险废物利用处置合同/协议",
-				value: ""
+				value: "0"
 			}, {
 				id: "3",
 				name: "是否对危险废物许可证进行审查确认",
-				value: ""
+				value: "0"
 			}],
 			switchInfo2: [{
 				id: "1",
 				name: "转移危险废物是否经过环保部门批准",
-				value: ""
+				value: "0"
 			}],
 			switchInfo3: [{
 				id: "1",
 				name: "危险废物收集、贮存、处置设施场所是否设置危险废物识别标志",
-				value: ""
+				value: "0"
 			}, {
 				id: "2",
 				name: "危险废物的容器和包装物是否设置危险废物标签",
-				value: ""
+				value: "0"
 			}],
 			switchInfo4: [{
 				id: "1",
 				name: "是否按照国家规定建立危险废物台账",
-				value: ""
+				value: "0"
 			}],
 			switchInfo5: [{
 				id: "1",
 				name: "危险废物收集、贮存、处置等污染防治设施是否通过环评审批",
-				value: ""
+				value: "0"
 			}, {
 				id: "2",
 				name: "上述危险废物相关污染防治设施是否与主体工程同时通过环保验收",
-				value: ""
+				value: "0"
 			}]
 		}
 	},

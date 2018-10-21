@@ -148,23 +148,23 @@ export default {
 			switchInfo1: [{
 				id: "1",
 				name: "贮存场所是否符合《危险废物贮存污染控制标准》有关要求",
-				value: ""
+				value: "0"
 			}, {
 				id: "2",
 				name: "是否按危险废物特性分类收集、贮存",
-				value: ""
+				value: "0"
 			}, {
 				id: "3",
 				name: "是否混合贮存未经安全性处置且性质不相容的危险废物",
-				value: ""
+				value: "0"
 			}, {
 				id: "4",
 				name: "是否将危险废物混入非危险废物中贮存",
-				value: ""
+				value: "0"
 			}, {
 				id: "5",
 				name: "是否通过建设项目环境影响评价审批及竣工环境保护验收",
-				value: ""
+				value: "0"
 			}],
 			// switchInfo2: [{
 			// 	id: "1",
@@ -643,11 +643,11 @@ export default {
 				this.compList.push(item)
 			}
 
-			this.switchInfo1[0].value = res.initTransfer.CC_1 ? res.initTransfer.CC_1 + "" : '0'
-			this.switchInfo1[1].value = res.initTransfer.CC_2 ? res.initTransfer.CC_2 + "" : '0'
-			this.switchInfo1[2].value = res.initTransfer.CC_3 ? res.initTransfer.CC_3 + "" : '0'
-			this.switchInfo1[3].value = res.initTransfer.CC_4 ? res.initTransfer.CC_4 + "" : '0'
-			this.switchInfo1[4].value = res.initTransfer.CC_5 ? res.initTransfer.CC_5 + "" : '0'
+			this.switchInfo1[0].value = res.initTransfer && res.initTransfer.CC_1 ? res.initTransfer.CC_1 + "" : '0'
+			this.switchInfo1[1].value = res.initTransfer && res.initTransfer.CC_2 ? res.initTransfer.CC_2 + "" : '0'
+			this.switchInfo1[2].value = res.initTransfer && res.initTransfer.CC_3 ? res.initTransfer.CC_3 + "" : '0'
+			this.switchInfo1[3].value = res.initTransfer && res.initTransfer.CC_4 ? res.initTransfer.CC_4 + "" : '0'
+			this.switchInfo1[4].value = res.initTransfer && res.initTransfer.CC_5 ? res.initTransfer.CC_5 + "" : '0'
 
 			this.formDataList1 = res.initProductFacility
 			if (res.initProductFacility.length > 0) {

@@ -185,8 +185,6 @@ export default {
 		'assForm': assForm,
 		'assTable': assTable
 	},
-	watch: {
-	},
 	mounted () {
 		checkBrowser(() => {
 			// this.$message({
@@ -458,7 +456,7 @@ export default {
 					}]
 				}]
 			}
-			this.title4.text = res.initProductInfo.PRODUCT_DESC ? res.initProductInfo.PRODUCT_DESC : ""
+			this.title4.text = res.initProductInfo && res.initProductInfo.PRODUCT_DESC ? res.initProductInfo.PRODUCT_DESC : ""
 		})
 	},
 	methods: {
@@ -652,27 +650,29 @@ export default {
 			this.formStatus3 = status
 		},
 		ifsaveCheck(val) {
-			this.$confirm('切换后数据将会被清空，是否确定?', '提示', {
-				confirmButtonText: '确定',
-				cancelButtonText: '取消',
-				type: 'warning'
-			}).then(() => {
-				if (val === '1') {
-					this.ifsaveUserRole = this.userRole
-				}else {
+			if (val === '1') {
+				this.ifsaveUserRole = this.userRole
+			}else {
+				this.$confirm('切换后数据将会被清空，是否确定?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
 					this.resetRawMaterial1()
 					this.resetRawMaterial2()
 					this.resetRawMaterial3()
 					this.title4.text = ""
 					this.ifsaveUserRole = "ifsave"
-				}
-			}).catch(() => {
-				 if(val === '1'){
-					 this.ifsave = "0"
-				 }else{
-					 this.ifsave = "1"
-				 }    
-			});
+				}).catch(() => {
+					if(val === '1'){
+						this.ifsave = "0"
+					}else{
+						this.ifsave = "1"
+					}    
+				});
+				
+			}
+			
 		}
 	}
 }
