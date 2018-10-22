@@ -6,7 +6,7 @@
 					<el-col v-if="fItem.type!=='selectLevel' && fItem.type!=='selectLevelText' && fItem.type!=='selectLevelTwoText'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title}}</div>
-							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}}</div>
+							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text}} {{fItem.unit && fItem.unit !== '' && fItem.unit !== '1'? fItem.unit : ''}}</div>
 							<div v-else class="assFromItem_right">
 								<div v-if="fItem.type === 'input'">
 									<el-input v-model="fItem.text" :placeholder="'必填' + fItem.limit ? '(限' + fItem.limit + '位)' : ''" :maxlength="fItem.limit ? fItem.limit : '500'"></el-input>

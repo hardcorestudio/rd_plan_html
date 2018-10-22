@@ -481,23 +481,21 @@ export default {
 	},
 	methods: {
 		doSubmit () {
-			let checkFlag = false
-			this.$refs['form'].validate((valid) => {
-				if (valid) {
-					checkFlag = true
-				} else {
-					checkFlag = false
-				}
-			});
-			if (!checkFlag) {
-				return
-			}
-
-
 			let submitData = {}
 			submitData.TP_ID = this.queryJson.TP_ID
 
 			if(this.ifsave === '1'){
+				let checkFlag = false
+				this.$refs['form'].validate((valid) => {
+					if (valid) {
+						checkFlag = true
+					} else {
+						checkFlag = false
+					}
+				});
+				if (!checkFlag) {
+					return
+				}
 				submitData.FACILITY_NAME = this.selfDisposalMeasuresData.equipmentName
 				submitData.FACILITY_TYPE = this.selfDisposalMeasuresData.category
 				submitData.FACILITY_ADDRESS = this.selfDisposalMeasuresData.addr
