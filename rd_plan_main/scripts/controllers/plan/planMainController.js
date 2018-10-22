@@ -737,7 +737,11 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                     if(data.resFlag == '0'){
                         $scope.applyBtnFlag = false;
                         $scope.open('提交成功');
-                    }else{
+                    }
+                    else if(data.resFlag == '3'){
+                        $scope.open(data.resMsg);
+                    }
+                    else{
                         $scope.open('提交失败');
                     }
                 },function(data,header,config,status){
