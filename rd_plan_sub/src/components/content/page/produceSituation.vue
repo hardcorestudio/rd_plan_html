@@ -97,10 +97,10 @@ export default {
 				key: 'D_NAME'
 			}, {
 				title: '类别选择',
-				key: 'BIG_CATEGORY_NAME'
+				key: 'BIG_CATEGORY_ID'
 			}, {
 				title: '废物代码',
-				key: 'SAMLL_CATEGORY_NAME'
+				key: 'SAMLL_CATEGORY_ID'
 			}, {
 				title: '有害物质名称',
 				key: 'W_NAME'

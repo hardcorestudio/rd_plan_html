@@ -91,10 +91,10 @@ export default {
 				key: 'D_NAME'
 			},{
 				title: '废物类别',
-				key: 'BIG_CATEGORY_NAME'
+				key: 'BIG_CATEGORY_ID'
 			},{
 				title: '废物代码',
-				key: 'SAMLL_CATEGORY_NAME'
+				key: 'SAMLL_CATEGORY_ID'
 			},{
 				title: '利用处置方式',
 				key: 'HANDLE_TYPE'
