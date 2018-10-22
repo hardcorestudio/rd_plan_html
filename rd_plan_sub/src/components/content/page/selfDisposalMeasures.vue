@@ -25,7 +25,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="设施类别" prop="category">
-							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.category" placeholder="利用处置方式(限50位)" maxlength="50"></el-input>
+							<el-input v-if="ifsaveUserRole=== 'CSEP'" v-model="selfDisposalMeasuresData.category" placeholder="必填(限50位)" maxlength="50"></el-input>
 							<el-row v-else>{{selfDisposalMeasuresData.category}}</el-row>
 						</el-form-item>
 					</el-col>
