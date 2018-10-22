@@ -111,8 +111,8 @@ export default {
 				title: '危险特性',
 				key: 'CHARACTER'
 			}, {
-				title: 'YEAR_NUM',
-				key: 'UNIT'
+				title: '计划生产量',
+				key: 'YEAR_NUM'
 			}, {
 				title: '单位',
 				key: 'UNIT'

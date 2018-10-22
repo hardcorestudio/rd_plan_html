@@ -2,7 +2,7 @@
 	<div id='productionSituation'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="dangerRubbishManagerPlan">
-			<div class="productCompSwitchBg">
+			<div v-if="userRole === 'CSEP'"  class="productCompSwitchBg">
 				<div class="productCompSwitch_title">是否为生产型企业</div>
 				<el-switch
 					class="productCompSwitch_switch" 

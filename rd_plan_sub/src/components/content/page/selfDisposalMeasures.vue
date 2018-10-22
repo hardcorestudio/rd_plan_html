@@ -2,7 +2,7 @@
 	<div id='selfDisposalMeasures'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="selfDisposalMeasuresArea">
-			<div class="productCompSwitchBg">
+			<div v-if="userRole === 'CSEP'" class="productCompSwitchBg">
 				<div class="productCompSwitch_title">是否有自行处理措施</div>
 				<el-switch
 					class="productCompSwitch_switch" 
@@ -227,11 +227,10 @@ export default {
 			formDataListTitle: [{
 				title: '自行利用处置废物名称',
 				key: 'D_NAME'
+			},{
+				title: '单位',
+				key: 'STORE_PLAN_UNIT'
 			},
-			// {
-			// 	title: '单位',
-			// 	key: 'STORE_PLAN_UNIT'
-			// },
 			{
 				title: '本年度计划利用处置量',
 				key: 'STORE_YEAR'

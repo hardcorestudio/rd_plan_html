@@ -98,11 +98,10 @@ export default {
 			},{
 				title: '利用处置方式',
 				key: 'HANDLE_TYPE'
+			},{
+				title: '单位',
+				key: 'UNIT'
 			},
-			// {
-			// 	title: '单位',
-			// 	key: 'UNIT'
-			// },
 			{
 				title: '本年度计划委托利用处置量',
 				key: 'YEAR_NUM'
