@@ -67,13 +67,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="环保部门负责人" prop="chargeMan">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.chargeMan" placeholder="必填(限20位)" maxlength="20"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.chargeMan" placeholder="必填(限10位)" maxlength="10"></el-input>
 							<el-row v-else>{{baseInfoData.chargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="联系人" prop="person">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.person" placeholder="必填(限20位)" maxlength="20"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.person" placeholder="必填(限10位)" maxlength="10"></el-input>
 							<el-row v-else>{{baseInfoData.person}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -101,7 +101,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="单位网站">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.webside" placeholder="选填(限32位)" maxlength="32"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.webside" placeholder="选填(限16位)" maxlength="16"></el-input>
 							<el-row v-else>{{baseInfoData.webside}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -110,7 +110,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="管理部门" prop="department">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.department" placeholder="必填(限32位)" maxlength="32"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.department" placeholder="必填(限16位)" maxlength="16"></el-input>
 							<el-row v-else>{{baseInfoData.department}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -118,7 +118,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="部门负责人" prop="departmentChargeMan">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.departmentChargeMan" placeholder="必填(限32位)" maxlength="32"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.departmentChargeMan" placeholder="必填(限16位)" maxlength="16"></el-input>
 							<el-row v-else>{{baseInfoData.departmentChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -126,7 +126,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="废物管理负责人" prop="trashChargeMan">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.trashChargeMan" placeholder="必填(限32位)" maxlength="32"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.trashChargeMan" placeholder="必填(限16位)" maxlength="16"></el-input>
 							<el-row v-else>{{baseInfoData.trashChargeMan}}</el-row>
 						</el-form-item>
 					</el-col>
