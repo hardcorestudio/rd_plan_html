@@ -99,16 +99,15 @@ export default {
 				title: '利用处置方式',
 				key: 'HANDLE_TYPE'
 			},{
-				title: '单位',
-				key: 'UNIT'
-			},
-			{
 				title: '本年度计划委托利用处置量',
 				key: 'YEAR_NUM'
 			},{
 				title: '上年度实际委托利用处置量',
 				key: 'LAST_NUM'
-			}],
+			},{
+				title: '单位',
+				key: 'UNIT'
+			},],
 			formDataList: [],
 			cateList: [],
 			cateList2: [],

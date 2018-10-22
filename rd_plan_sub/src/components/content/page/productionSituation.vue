@@ -142,14 +142,14 @@ export default {
 				title: '原辅材料名称',
 				key: 'NAME'
 			},{
-				title: '单位',
-				key: 'UNIT'
-			},{
 				title: '上年度消耗量',
 				key: 'LAST_NUM'
 			},{
 				title: '本年度计划消耗量',
 				key: 'YEAR_NUM'
+			},{
+				title: '单位',
+				key: 'UNIT'
 			}],
 			formDataListTitle2: [{
 				title: '设备名称',
@@ -165,14 +165,14 @@ export default {
 				title: '产品名称',
 				key: 'NAME'
 			},{
-				title: '单位',
-				key: 'UNIT'
-			},{
 				title: '上年度产量',
 				key: 'LAST_NUM'
 			},{
 				title: '本年度计划产量',
 				key: 'YEAR_NUM'
+			},{
+				title: '单位',
+				key: 'UNIT'
 			}],
 			formDataList1: [],
 			formDataList2: [],

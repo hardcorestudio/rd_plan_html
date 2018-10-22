@@ -228,15 +228,14 @@ export default {
 				title: '自行利用处置废物名称',
 				key: 'D_NAME'
 			},{
-				title: '单位',
-				key: 'STORE_PLAN_UNIT'
-			},
-			{
 				title: '本年度计划利用处置量',
 				key: 'STORE_YEAR'
 			},{
 				title: '上年度实际利用处置量',
 				key: 'STORE_LAST'
+			},{
+				title: '单位',
+				key: 'STORE_PLAN_UNIT'
 			}],
 			formDataList: []
 		}

@@ -227,9 +227,6 @@ export default {
 				title: '类别',
 				key: 'BIG_CATEGORY_NAME'
 			}, {
-				title: '单位',
-				key: 'STORE_PLAN_UNIT'
-			}, {
 				title: '拟贮存量',
 				key: 'STORE_PLAN'
 			}, {
@@ -238,6 +235,9 @@ export default {
 			}, {
 				title: '截止上年度年底累计贮存量',
 				key: 'STORE_LASTSUM'
+			}, {
+				title: '单位',
+				key: 'STORE_PLAN_UNIT'
 			}, {
 				title: '贮存原因',
 				key: 'STORE_REASON'

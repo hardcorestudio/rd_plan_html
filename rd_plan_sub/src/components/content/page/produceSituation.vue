@@ -73,7 +73,7 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "计划生产量",
+					title: "本年计划生产量",
 					unit: ""
 				}, {
 					type: "select",
@@ -82,7 +82,7 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "实际生产量",
+					title: "上年实际生产量",
 					unit: ""
 				}, {
 					type: "input",
@@ -111,14 +111,14 @@ export default {
 				title: '危险特性',
 				key: 'CHARACTER'
 			}, {
-				title: '计划生产量',
+				title: '本年计划生产量',
 				key: 'YEAR_NUM'
+			}, {
+				title: '上年实际生产量',
+				key: 'LAST_NUM'
 			}, {
 				title: '单位',
 				key: 'UNIT'
-			}, {
-				title: '实际生产量',
-				key: 'LAST_NUM'
 			}, {
 				title: '来源及产生工序',
 				key: 'SOURCE_PROCESS'
@@ -4282,7 +4282,7 @@ export default {
 					}, {
 						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].YEAR_NUM,
-						title: "计划生产量",
+						title: "本年计划生产量",
 						unit: res.initOverviewList[i].UNIT
 					}, {
 						type: "select",
@@ -4291,7 +4291,7 @@ export default {
 					}, {
 						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].LAST_NUM,
-						title: "实际生产量",
+						title: "上年实际生产量",
 						unit: res.initOverviewList[i].UNIT
 					}, {
 						type: "input",
@@ -4335,7 +4335,7 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "计划生产量",
+					title: "本年计划生产量",
 					unit: ""
 				}, {
 					type: "select",
@@ -4344,7 +4344,7 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "实际生产量",
+					title: "上年实际生产量",
 					unit: ""
 				}, {
 					type: "input",
@@ -4508,7 +4508,7 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "计划生产量",
+					title: "本年计划生产量",
 					unit: ""
 				}, {
 					type: "select",
@@ -4517,7 +4517,7 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "实际生产量",
+					title: "上年实际生产量",
 					unit: ""
 				}, {
 					type: "input",
