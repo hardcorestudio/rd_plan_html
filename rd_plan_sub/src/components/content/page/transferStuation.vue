@@ -85,7 +85,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "设施名称",
-					limit: "32"
+					limit: "16"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -104,7 +104,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "类型",
-					limit: "32"
+					limit: "16"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -142,7 +142,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "贮存原因",
-					limit: "500"
+					limit: "250"
 				}]
 			}],
 			switchInfo1: [{
@@ -659,7 +659,7 @@ export default {
 							type: "input",
 							text: res.initProductFacility[i].NAME,
 							title: "设施名称",
-							limit: "32"
+							limit: "16"
 						}, {
 							type: "inputWithUnit",
 							text: res.initProductFacility[i].NUM,
@@ -678,7 +678,7 @@ export default {
 							type: "input",
 							text: res.initProductFacility[i].TYPE,
 							title: "类型",
-							limit: "32"
+							limit: "16"
 						}, {
 							type: "inputWithUnit",
 							text: res.initProductFacility[i].AREA,
@@ -695,7 +695,7 @@ export default {
 						type: "input",
 						text: "",
 						title: "设施名称",
-						limit: "32"
+						limit: "16"
 					}, {
 						type: "inputWithUnit",
 						text: "",
@@ -714,7 +714,7 @@ export default {
 						type: "input",
 						text: "",
 						title: "类型",
-						limit: "32"
+						limit: "16"
 					}, {
 						type: "inputWithUnit",
 						text: "",
@@ -767,7 +767,7 @@ export default {
 							type: "input",
 							text: res.initProductCc[i].STORE_REASON,
 							title: "贮存原因",
-							limit: "500"
+							limit: "250"
 						}]
 					}
 					this.title2fromList.push(item)
@@ -804,7 +804,7 @@ export default {
 						type: "input",
 						text: "",
 						title: "贮存原因",
-						limit: "500"
+						limit: "250"
 					}]
 				}]
 			}
@@ -998,7 +998,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "设施名称",
-					limit: "32"
+					limit: "16"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -1017,7 +1017,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "类型",
-					limit: "32"
+					limit: "16"
 				}, {
 					type: "inputWithUnit",
 					text: "",
@@ -1058,7 +1058,7 @@ export default {
 					type: "input",
 					text: "",
 					title: "贮存原因",
-					limit: "500"
+					limit: "250"
 				}]
 			}]
 		},
