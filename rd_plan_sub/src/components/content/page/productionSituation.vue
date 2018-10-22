@@ -15,13 +15,13 @@
 					inactive-value="0">
 				</el-switch>
 			</div>
-			<assTitle :userRole="ifsaveUserRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1" @doReset="resetRawMaterial1" @formStatusChange="formStatusChange1"></assTitle>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1 === 'card' ? '0' : '1'" @doReset="resetRawMaterial1" @formStatusChange="formStatusChange1"></assTitle>
 			<assForm v-if="formStatus1 === 'card'" :formList="title1fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTable v-else-if="formStatus1 === 'table'" :tableList="formDataList1" :tableTitleList="formDataListTitle1"></assTable>
-			<assTitle :userRole="ifsaveUserRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2" @doReset="resetRawMaterial2" @formStatusChange="formStatusChange2"></assTitle>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2 === 'card' ? '0' : '1'" @doReset="resetRawMaterial2" @formStatusChange="formStatusChange2"></assTitle>
 			<assForm v-if="formStatus2 === 'card'" :formList="title2fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTable v-else-if="formStatus2 === 'table'" :tableList="formDataList2" :tableTitleList="formDataListTitle2"></assTable>
-			<assTitle :userRole="ifsaveUserRole" :titleInfo="title3" titleType="reset" :formStatus="formStatus3" @doReset="resetRawMaterial3" @formStatusChange="formStatusChange3"></assTitle>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title3" titleType="reset" :formStatus="formStatus3 === 'card' ? '0' : '1'" @doReset="resetRawMaterial3" @formStatusChange="formStatusChange3"></assTitle>
 			<assForm v-if="formStatus3 === 'card'" :formList="title3fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTable v-else-if="formStatus3 === 'table'" :tableList="formDataList3" :tableTitleList="formDataListTitle3"></assTable>
 			<assTitle :userRole="ifsaveUserRole" :titleInfo="title4" titleType="textarea"></assTitle>

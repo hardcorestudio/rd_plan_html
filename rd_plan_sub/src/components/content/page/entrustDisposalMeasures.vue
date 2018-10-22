@@ -2,7 +2,7 @@
 	<div id='entrustDisposalMeasures'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="entrustDisposalMeasuresPlan">
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus" @doReset="doReset" :numTitle="numTitle" @formStatusChange="formStatusChange"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus === 'card' ? '0' : '1'" @doReset="doReset" :numTitle="numTitle" @formStatusChange="formStatusChange"></assTitle>
 			<assFormCascade v-if="formStatus === 'card'" :formList="title1fromList" :type="userRole !== 'CSEP' ? 'label' : ''" :levelOneData="cateList" :levelTwoData="cateList2" :cateList="cateList3"></assFormCascade>
 			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<div class="footerSign"></div>

@@ -84,7 +84,7 @@
 				</el-form-item>
 			</el-form>
 			<assSwitch :userRole="ifsaveUserRole" :switchInfo="switchInfo"></assSwitch>
-			<assTitle :userRole="ifsaveUserRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus" @doReset="doReset" @formStatusChange="formStatusChange"></assTitle>
+			<assTitle :userRole="ifsaveUserRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus === 'card' ? '0' : '1'" @doReset="doReset" @formStatusChange="formStatusChange"></assTitle>
 			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'" :cateList="levelOneData"></assForm>
 			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<assTitle :userRole="ifsaveUserRole" :titleInfo="textareaInfo1" titleType="textarea"></assTitle>

@@ -2,7 +2,7 @@
 	<div id='produceSituation'>
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="produceSituationPlan">
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus" @doReset="doReset" :numTitle="numTitle" @formStatusChange="formStatusChange"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus === 'card' ? '0' : '1'" @doReset="doReset" :numTitle="numTitle" @formStatusChange="formStatusChange"></assTitle>
 			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'" :cateList="cateList" :levelOneData="levelOneData" :levelTwoData="levelTwoData"></assForm>
 			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<div class="footerSign"></div>

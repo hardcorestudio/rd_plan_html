@@ -3,7 +3,19 @@
 		<div v-if="titleInfo.title && titleInfo.title !== ''" class="assTitle_titleArea">
 			<div class="assTitleArea_text">{{ titleInfo.title }}</div>
 			<div v-if="titleType === 'reset' && userRole === 'CSEP'" class="assTitleArea_reset" @click="doReset">重置</div>
-			<div v-if="formStatus && titleType === 'reset' && userRole !== 'CSEP' && userRole !== 'ifsave'" class="assTitleArea_reset" @click="formStatusChange">{{formStatus === 'card' ? '表格' : '卡片'}}</div>
+			<div v-if="formStatus && titleType === 'reset' && userRole !== 'CSEP' && userRole !== 'ifsave'" class="assTitleArea_switchBg">
+				<el-switch
+					class="assTitleArea_switch" 
+					v-model="formStatus" 
+					@change="formStatusChange" 
+					active-color="#13ce66"
+					active-text="卡片"
+					inactive-text="表格"
+					active-value="0"
+					inactive-value="1">
+				</el-switch>
+			</div>
+			<!-- <div  class="assTitleArea_reset" @click="formStatusChange">{{formStatus === 'card' ? '表格' : '卡片'}}</div> -->
 			<div v-if="numTitle && numTitle.length > 0" class="assTitleArea_num">
 				<div :class="numTitle.length == '1' ? 'assTitleArea_numItem' : ''" v-for="numItem in numTitle" :key="numItem">计划产生量合计：{{numItem.year_num_sum}} 实际产生量合计：{{numItem.last_num_sum}}</div>
 			</div>
@@ -36,22 +48,23 @@
 		},
     data() {
       return {
-        // isCollapse: false
+				// isCollapse: false
       };
 		},
     methods: {
 			doReset() {
 				this.$emit('doReset')
 			},
-			formStatusChange() {
-				if(this.formStatus === 'card'){
-					this.formStatus = 'table'
+			formStatusChange(v) {
+				let formStatus = ''
+				if(v === '1'){
+					formStatus = 'table'
 				}else{
-					this.formStatus = 'card'
+					formStatus = 'card'
 				}
-				this.$emit('formStatusChange',this.formStatus)
+				this.$emit('formStatusChange',formStatus)
 			}
-    }
+		}
   }
 </script>
 <style>
@@ -112,5 +125,16 @@
 }
 .colorBlack textarea{
 	color: #000!important;
+}
+.assTitleArea_switchBg{
+	/* width: 100%; */
+	float: left;
+}
+.assTitleArea_switch{
+	float: left;
+	margin: 12px 0 0 15px;
+}
+.assTitleArea_switch .el-switch__label.is-active{ 
+	color:#13ce66;
 }
 </style>

@@ -3,10 +3,10 @@
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="transFerStiationArea">
 			<assSwitch :userRole="userRole" title="贮存措施" :switchInfo="switchInfo1"></assSwitch>
-			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1" @doReset="resetInfo1" @formStatusChange="formStatusChange1"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1 === 'card' ? '0' : '1'" @doReset="resetInfo1" @formStatusChange="formStatusChange1"></assTitle>
 			<assForm v-if="formStatus1 === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTable v-else-if="formStatus1 === 'table'" :tableList="formDataList1" :tableTitleList="formDataListTitle1"></assTable>
-			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2" @doReset="resetInfo2" @formStatusChange="formStatusChange2"></assTitle>
+			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2 === 'card' ? '0' : '1'" @doReset="resetInfo2" @formStatusChange="formStatusChange2"></assTitle>
 			<assForm v-if="formStatus2 === 'card'" :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData"></assForm>
 			<assTable v-else-if="formStatus2 === 'table'" :tableList="formDataList2" :tableTitleList="formDataListTitle2"></assTable>
 			<assTitle :userRole="userRole" :titleInfo="title3" titleType="textarea"></assTitle>
