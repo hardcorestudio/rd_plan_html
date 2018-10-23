@@ -71,6 +71,10 @@ export default {
 					text: "",
 					title: "危险特性"
 				}, {
+					type: "select",
+					text: "",
+					title: "单位"
+				}, {
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年计划生产量",
@@ -80,10 +84,6 @@ export default {
 					text: "",
 					title: "上年实际生产量",
 					unit: ""
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
 				}, {
 					type: "input",
 					text: "",
@@ -4280,6 +4280,10 @@ export default {
 						text: res.initOverviewList[i].CHARACTER,
 						title: "危险特性"
 					}, {
+						type: "select",
+						text: res.initOverviewList[i].UNIT,
+						title: "单位"
+					}, {
 						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].YEAR_NUM,
 						title: "本年计划生产量",
@@ -4289,10 +4293,6 @@ export default {
 						text: res.initOverviewList[i].LAST_NUM,
 						title: "上年实际生产量",
 						unit: res.initOverviewList[i].UNIT
-					}, {
-						type: "select",
-						text: res.initOverviewList[i].UNIT,
-						title: "单位"
 					}, {
 						type: "input",
 						text: res.initOverviewList[i].SOURCE_PROCESS,
@@ -4333,6 +4333,10 @@ export default {
 					text: "",
 					title: "危险特性"
 				}, {
+					type: "select",
+					text: "",
+					title: "单位"
+				}, {
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年计划生产量",
@@ -4342,10 +4346,6 @@ export default {
 					text: "",
 					title: "上年实际生产量",
 					unit: ""
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
 				}, {
 					type: "input",
 					text: "",
@@ -4420,8 +4420,8 @@ export default {
 				item.W_NAME = this.title1fromList[i].itemList[2].text
 				item.W_SHAPE = this.title1fromList[i].itemList[3].text
 				item.CHARACTER = this.title1fromList[i].itemList[4].text
-				item.YEAR_NUM = this.title1fromList[i].itemList[5].text
-				item.UNIT = this.title1fromList[i].itemList[6].text
+				item.UNIT = this.title1fromList[i].itemList[5].text
+				item.YEAR_NUM = this.title1fromList[i].itemList[6].text
 				item.LAST_NUM = this.title1fromList[i].itemList[7].text
 				item.SOURCE_PROCESS = this.title1fromList[i].itemList[8].text
 				// item.BIG_CATEGORY_NAME
@@ -4506,6 +4506,10 @@ export default {
 					text: "",
 					title: "危险特性"
 				}, {
+					type: "select",
+					text: "",
+					title: "单位"
+				}, {
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "本年计划生产量",
@@ -4515,10 +4519,6 @@ export default {
 					text: "",
 					title: "上年实际生产量",
 					unit: ""
-				}, {
-					type: "select",
-					text: "",
-					title: "单位"
 				}, {
 					type: "input",
 					text: "",
