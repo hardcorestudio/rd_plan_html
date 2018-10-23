@@ -59,7 +59,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="职工人数" prop="personNum">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.personNum" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.personNum" placeholder="必填(限10位)" maxlength="10"></el-input>
 							<el-row v-else>{{baseInfoData.personNum}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -81,13 +81,13 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="联系电话" prop="phone">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.phone" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.phone" placeholder="必填(限18位)" maxlength="18"></el-input>
 							<el-row v-else>{{baseInfoData.phone}}</el-row>
 						</el-form-item>
 					</el-col>
 					<el-col :span="12">
-						<el-form-item label="传真电话">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.tel" placeholder="选填"></el-input>
+						<el-form-item label="传真电话" prop="tel">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.tel" placeholder="选填(限18位)" maxlength="18"></el-input>
 							<el-row v-else>{{baseInfoData.tel}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -95,7 +95,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="电子邮箱" prop="mail">
-							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.mail" placeholder="必填"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.mail" placeholder="必填(限32位)" maxlength="32"></el-input>
 							<el-row v-else>{{baseInfoData.mail}}</el-row>
 						</el-form-item>
 					</el-col>
@@ -152,6 +152,58 @@ import fetch from '../../utils/fetch.js'
 export default {
 	name: 'baseInfo',
 	data () {
+		var validateTel = (rule, value, callback) => {
+			if (value !== '') {
+				var regBox = {
+						regEmail : /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,//邮箱
+						regMobile : /^0?1[3|4|5|8][0-9]\d{8}$/,//手机
+						regTel : /^0[\d]{2,3}-[\d]{7,8}$/
+				}
+				var tflag = regBox.regTel.test(value);
+				if (!tflag) {
+					callback(new Error('请输入正确的电话号码'));
+				}else{
+					callback();
+				};
+			} else {
+				callback();
+			}
+		};
+		var validatePhone = (rule, value, callback) => {
+			if (value === '') {
+				callback(new Error('请输入'));
+			} else {
+				var regBox = {
+						regEmail : /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,//邮箱
+						regMobile : /^0?1[3|4|5|8][0-9]\d{8}$/,//手机
+						regTel : /^0[\d]{2,3}-[\d]{7,8}$/
+				}
+				var mflag = regBox.regMobile.test(value);
+				var tflag = regBox.regTel.test(value);
+				if (mflag || tflag) {
+					callback();
+				}else{
+					callback(new Error('请输入正确的电话号码'));
+				};
+			}
+		};
+		var validateMail = (rule, value, callback) => {
+			if (value === '') {
+				callback(new Error('请输入'));
+			} else {
+				var regBox = {
+						regEmail : /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,//邮箱
+						regMobile : /^0?1[3|4|5|8][0-9]\d{8}$/,//手机
+						regTel : /^0[\d]{2,3}-[\d]{7,8}$/
+				}
+				var mflag = regBox.regEmail.test(value);
+				if (!mflag) {
+						callback(new Error('请输入正确的邮箱'));
+				}else{
+						callback();
+				};
+			}
+		};
 		return {
 			myTitleInfo: {
 				title: "基本信息",
@@ -226,10 +278,13 @@ export default {
 					{ required: true, message: '请输入联系人', trigger: 'blur' }
 				],
 				phone: [
-					{ required: true, message: '请输入联系电话', trigger: 'blur' }
+					{ required: true, trigger: 'change', validator: validatePhone},
+				],
+				tel: [
+					{ required: false, trigger: 'change', validator: validateTel},
 				],
 				mail: [
-					{ required: true, message: '请输入电子邮箱', trigger: 'blur' }
+					{ required: true, message: '请输入电子邮箱', trigger: 'change', validator: validateMail }
 				],
 				department: [
 					{ required: true, message: '请输入管理部门', trigger: 'blur' }
@@ -452,10 +507,7 @@ export default {
 				this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT ? res.initEpExtend.SYS_ACCIDENT + "" : "0"
 				this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
 			}
-			
 		})
-
-
 	},
 	methods: {
 		doSubmit () {
