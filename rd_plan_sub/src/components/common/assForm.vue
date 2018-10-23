@@ -95,7 +95,7 @@
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
 							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
 							<div v-else class="assFromItem_right">
-								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelChange(fItem)">
+								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelChange(fItem,item.index)">
 									<el-option
 										v-for="uItem in levelOneData"
 										:key="uItem.value"
@@ -214,10 +214,14 @@
 			levelOneChange(item){
 				item.text2 = ""
 			},
-			levelChange(item){
+			levelChange(item,index){
 				for(let i in this.levelOneData){
 					if(this.levelOneData[i].value === item.text1){
 						item.text2 = this.levelOneData[i].category
+						if(this.levelOneData[i].UNIT && this.levelOneData[i].UNIT != ""){
+							item.unit = this.levelOneData[i].UNIT
+							this.unitChange(index,this.levelOneData[i].UNIT)
+						}
 						break
 					}
 				}

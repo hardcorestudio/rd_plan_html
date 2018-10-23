@@ -118,12 +118,15 @@ export default {
 					type: "selectLevelText",
 					title1: "名称",
 					text2: "",
-					title2: "类别"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位",
-				}, {
+					title2: "类别",
+					unit: ""
+				}, 
+				// {
+				// 	type: "select",
+				// 	text: "",
+				// 	title: "单位",
+				// }, 
+				{
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "拟贮存量",
@@ -311,7 +314,7 @@ export default {
 			// 		"YS_3": 0
 			// 	}],
 			// 	"empId": "",
-			// 	"userType": "admin",
+			// 	"userType": "CSEP",
 			// 	"newGuideFlag": "",
 			// 	"belongQ": "",
 			// 	"belongS": "",
@@ -729,6 +732,7 @@ export default {
 				item.value = res.initOverviewList[i].D_NAME
 				item.label = res.initOverviewList[i].D_NAME
 				item.category = res.initOverviewList[i].BIG_CATEGORY_ID
+				item.UNIT = res.initOverviewList[i].UNIT
 				this.levelOneData.push(item)
 			}
 
@@ -743,12 +747,15 @@ export default {
 							text1: res.initProductCc[i].D_NAME,
 							title1: "名称",
 							text2: res.initProductCc[i].BIG_CATEGORY_ID,
-							title2: "类别"
-						}, {
-							type: "select",
-							text: res.initProductCc[i].STORE_PLAN_UNIT,
-							title: "单位",
-						}, {
+							title2: "类别",
+							unit: res.initProductCc[i].STORE_PLAN_UNIT
+						}
+						// , {
+						// 	type: "select",
+						// 	text: res.initProductCc[i].STORE_PLAN_UNIT,
+						// 	title: "单位",
+						// }
+						, {
 							type: "inputWithUnitSelect",
 							text: res.initProductCc[i].STORE_PLAN,
 							title: "拟贮存量",
@@ -780,12 +787,15 @@ export default {
 						text1: "",
 						title1: "名称",
 						text2: "",
-						title2: "类别"
-					}, {
-						type: "select",
-						text: "",
-						title: "单位",
-					}, {
+						title2: "类别",
+						unit: ""
+					}, 
+					// {
+					// 	type: "select",
+					// 	text: "",
+					// 	title: "单位",
+					// }, 
+					{
 						type: "inputWithUnitSelect",
 						text: "",
 						title: "拟贮存量",
@@ -896,13 +906,13 @@ export default {
 				let item = {}
 				item.D_NAME = this.title2fromList[i].itemList[0].text1
 				item.BIG_CATEGORY_ID = this.title2fromList[i].itemList[0].text2
-				item.STORE_PLAN_UNIT = this.title2fromList[i].itemList[1].text
-				item.STORE_LAST_UNIT = this.title2fromList[i].itemList[1].text
-				item.STORE_LASTSUM_UNIT = this.title2fromList[i].itemList[1].text
-				item.STORE_PLAN = this.title2fromList[i].itemList[2].text
-				item.STORE_LAST = this.title2fromList[i].itemList[3].text
-				item.STORE_LASTSUM = this.title2fromList[i].itemList[4].text
-				item.STORE_REASON = this.title2fromList[i].itemList[5].text
+				item.STORE_PLAN_UNIT = this.title2fromList[i].itemList[0].unit
+				item.STORE_LAST_UNIT = this.title2fromList[i].itemList[0].unit
+				item.STORE_LASTSUM_UNIT = this.title2fromList[i].itemList[0].unit
+				item.STORE_PLAN = this.title2fromList[i].itemList[1].text
+				item.STORE_LAST = this.title2fromList[i].itemList[2].text
+				item.STORE_LASTSUM = this.title2fromList[i].itemList[3].text
+				item.STORE_REASON = this.title2fromList[i].itemList[4].text
 
 				submitData.TRANSFER_CC.push(item)
 			}
@@ -1034,12 +1044,15 @@ export default {
 					text1: "",
 					title1: "名称",
 					text2: "",
-					title2: "类别"
-				}, {
-					type: "select",
-					text: "",
-					title: "单位",
-				}, {
+					title2: "类别",
+					unit: ""
+				}, 
+				// {
+				// 	type: "select",
+				// 	text: "",
+				// 	title: "单位",
+				// }, 
+				{
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "拟贮存量",
