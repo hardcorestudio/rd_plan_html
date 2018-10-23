@@ -154,14 +154,15 @@ export default {
 	data () {
 		var validateTel = (rule, value, callback) => {
 			if (value !== '') {
-				var regBox = {
-						regEmail : /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,//邮箱
-						regMobile : /^0?1[3|4|5|8][0-9]\d{8}$/,//手机
-						regTel : /^0[\d]{2,3}-[\d]{7,8}$/
-				}
-				var tflag = regBox.regTel.test(value);
+				// var regBox = {
+				// 		regEmail : /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,//邮箱
+				// 		regMobile : /^0?1[3|4|5|8][0-9]\d{8}$/,//手机
+				// 		regTel : /^0[\d]{2,3}-[\d]{7,8}$/
+				// }
+				var numCheck = /^[0-9]\d*$/; 
+				var tflag = numCheck.test(value);
 				if (!tflag) {
-					callback(new Error('请输入正确的电话号码'));
+					callback(new Error('请输入数字'));
 				}else{
 					callback();
 				};
@@ -278,7 +279,7 @@ export default {
 					{ required: true, message: '请输入联系人', trigger: 'blur' }
 				],
 				phone: [
-					{ required: true, trigger: 'change', validator: validatePhone},
+					{ required: true, trigger: 'change', validator: validateTel},
 				],
 				tel: [
 					{ required: false, trigger: 'change', validator: validateTel},
