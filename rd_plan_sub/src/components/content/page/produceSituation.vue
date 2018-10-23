@@ -76,14 +76,14 @@ export default {
 					title: "本年计划生产量",
 					unit: ""
 				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年实际生产量",
 					unit: ""
+				}, {
+					type: "select",
+					text: "",
+					title: "单位"
 				}, {
 					type: "input",
 					text: "",
@@ -4285,14 +4285,14 @@ export default {
 						title: "本年计划生产量",
 						unit: res.initOverviewList[i].UNIT
 					}, {
-						type: "select",
-						text: res.initOverviewList[i].UNIT,
-						title: "单位"
-					}, {
 						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].LAST_NUM,
 						title: "上年实际生产量",
 						unit: res.initOverviewList[i].UNIT
+					}, {
+						type: "select",
+						text: res.initOverviewList[i].UNIT,
+						title: "单位"
 					}, {
 						type: "input",
 						text: res.initOverviewList[i].SOURCE_PROCESS,
@@ -4338,14 +4338,14 @@ export default {
 					title: "本年计划生产量",
 					unit: ""
 				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年实际生产量",
 					unit: ""
+				}, {
+					type: "select",
+					text: "",
+					title: "单位"
 				}, {
 					type: "input",
 					text: "",
@@ -4511,14 +4511,14 @@ export default {
 					title: "本年计划生产量",
 					unit: ""
 				}, {
-					type: "select",
-					text: "",
-					title: "单位"
-				}, {
 					type: "inputWithUnitSelect",
 					text: "",
 					title: "上年实际生产量",
 					unit: ""
+				}, {
+					type: "select",
+					text: "",
+					title: "单位"
 				}, {
 					type: "input",
 					text: "",
