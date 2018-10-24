@@ -16,6 +16,10 @@
 			<el-button type="info" plain @click="doSubmit('unagree')">不同意</el-button> -->
 			<el-button type="info" plain @click="doClose">关闭</el-button>
 		</div>
+		<div v-else-if="userRole === 'download'" class="leftAside_btnArea">
+			<el-button v-if="titleInfo.title" class="saveBtn" plain @click="doSubmit('down')">下载</el-button>
+			<el-button type="info" plain @click="doClose">关闭</el-button>
+		</div>
 		<div v-else class="leftAside_btnArea">
 			<el-button type="info" plain @click="doClose">关闭</el-button>
 		</div>
