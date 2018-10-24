@@ -711,6 +711,18 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         // },function(data,header,config,status){
         // });
     }
+
+    $scope.previewPlan = function(){
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        p.EP_ID = $stateParams.epId
+        Init.iwbhttp('/plan/previewPlan', p, function(data,header,config,status){
+            console.log(data)
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
+    }
     //返回上一页
     $scope.back = function (){
         console.log($stateParams)
