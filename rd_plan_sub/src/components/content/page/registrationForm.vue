@@ -149,7 +149,7 @@ export default {
 		this.queryJson = getQueryString()
 
 		fetch({
-			url: '',
+			url: '/plan/previewPlan',
 			method: 'POST',
 			data: 'params=' + JSON.stringify(this.queryJson)
 		}).then(res => {

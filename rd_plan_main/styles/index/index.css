@@ -107,7 +107,9 @@ a:active,a:hover {
 .content-1 {
 	font-size: 17px;
     background-image:-webkit-linear-gradient(270deg,#54e7c7,#54e7c7);
-    background-image:linear-gradient(180deg,#54e7c7,#54e7c7);
+	background-image:linear-gradient(180deg,#54e7c7,#54e7c7);
+	display: flex;
+	justify-content: center;
 }
 
 .content-1-img {
@@ -160,6 +162,13 @@ a:active,a:hover {
     padding: 65px 65px 65px 100px;
 	background-image:-webkit-linear-gradient(270deg,#FFBCB7,#FFBCB7);
 	background-image:linear-gradient(180deg,#FFBCB7,#FFBCB7);
+}
+
+.content-10 {
+	height: auto;
+    padding: 65px 65px 65px 100px;
+	background-image:-webkit-linear-gradient(270deg,#fff,#fff);
+	background-image:linear-gradient(180deg,#fff,#fff);
 }
 
 .content-detail {
