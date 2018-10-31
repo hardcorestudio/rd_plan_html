@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-
+var shelljs = require('shelljs')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -9,7 +9,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/html/test/dist/',
+    publicPath: '/rdplan/rd_plan_sub/dist/',
     filename: 'build.js'
   },
   module: {
@@ -84,3 +84,4 @@ if (process.env.NODE_ENV === 'production') {
     })
   ])
 }
+shelljs.cp('-R', 'src/components/utils/canvas', path.resolve(__dirname, './dist'))
