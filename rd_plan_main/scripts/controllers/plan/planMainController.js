@@ -145,8 +145,9 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         $state.go("dashboard.index");
         return;
     }
-    
+    $scope.applyStatus = "" //审批记录的状态 00-已保存；01-待审批；02-在审批；03-被否决；04-审批通过；05-市级否决
     Init.iwbhttp('/plan/checkPlan', $scope.param, function(data,header,config,status){
+        $scope.applyStatus = data.applyListStatus;
         if(data.applyListStatus == "" || data.applyListStatus == "00" || data.applyListStatus == "03" || data.applyListStatus == "04"){
             $scope.applyBtnFlag = true;
         }
@@ -189,7 +190,12 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                 showflag = $stateParams.btnFlag 
             }else{
                 if($scope.applyBtnFlag && $scope.btnFlag ){
-                    showflag = true
+                    if($scope.applyStatus != '04'){
+                        showflag = true
+                    }
+                    if($scope.applyStatus == '04' && (pathname == 'baseInfo' || pathname == 'selfDisposalMeasures' || pathname == 'entrustDisposalMeasures')){
+                        showflag = true
+                    }
                 }
             }
             var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId+"&showflag="+showflag ;
@@ -717,9 +723,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         p.TP_ID = $stateParams.tpId
         p.EP_ID = $stateParams.epId
         Init.iwbhttp('/plan/previewPlan', p, function(data,header,config,status){
-            console.log(data)
-            console.log("sssssssssssss")
-           console.log(JSON.stringify(data))
+
         },function(data,header,config,status){
         });
     }
