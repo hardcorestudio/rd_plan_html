@@ -469,12 +469,6 @@ export default {
 				});
 				return
 			}
-			const loading = this.$loading({
-				lock: true,
-				text: 'Loading',
-				spinner: 'el-icon-loading',
-				background: 'rgba(0, 0, 0, 0.3)'
-			});
 			let submitData = {}
 			submitData.TP_ID = this.queryJson.TP_ID
 
@@ -494,11 +488,23 @@ export default {
 
 				submitData.LIST.push(item)
 			}
-			console.log(submitData.LIST)
-
+			var trimArr = this.unique(submitData.LIST,"LICENSE_NO","D_NAME");
+			if(submitData.LIST.length > 1 && trimArr.length < submitData.LIST.length ) {
+				this.$notify.error({
+					title: '警告',
+					message: "同一单位下废物名称不能重复"
+				});
+				return
+			}
 			for (let key in this.queryJson) {
 				submitData[key] = this.queryJson[key]
 			}
+			const loading = this.$loading({
+				lock: true,
+				text: 'Loading',
+				spinner: 'el-icon-loading',
+				background: 'rgba(0, 0, 0, 0.3)'
+			});
 			fetch({
 				url: '/plan/saveHandle',
 				method: 'POST',
@@ -520,7 +526,6 @@ export default {
 			})
 		},
 		doReset () {
-			console.log("原辅材料及消耗量");
 			this.title1fromList = [{
 				index: 1,
 				itemList: [{
@@ -567,6 +572,18 @@ export default {
 		},
 		formStatusChange(status){
 			this.formStatus = status
+		},
+		unique(arr,mkey,nkey){
+			var re = [arr[0][mkey]];
+			var res = [arr[0][nkey]];
+			var result = [];
+			result.push(arr[0])
+			for (var i =1;i<arr.length;i++){
+					if(arr[i][mkey]  != re[re.length-1] || arr[i][nkey]  != res[res.length-1]){
+							result.push(arr[i])
+					}
+			}
+			return result;
 		}
 	}
 }

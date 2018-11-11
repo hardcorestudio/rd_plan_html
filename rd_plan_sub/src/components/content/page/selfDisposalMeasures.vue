@@ -534,6 +534,14 @@ export default {
 						}
 					}
 				}
+				var trimArr = this.unique(submitData.HANDLE_LIST,"D_NAME");
+				if(submitData.HANDLE_LIST.length > 1 && trimArr.length < submitData.HANDLE_LIST.length ) {
+					this.$notify.error({
+						title: '警告',
+						message: "[贮存危险废物情况]名称不能重复"
+					});
+					return
+				}
 
 
 				if (submitData.DESC_CONTENT === '') {
@@ -660,6 +668,15 @@ export default {
 					}    
 				});
 			}
+		},
+		unique(arr,mkey){
+			var re = [arr[0][mkey]];
+			for (var i =1;i<arr.length;i++){
+					if( arr[i][mkey]  != re[re.length-1] ){
+							re.push(arr[i][mkey]);
+					}
+			}
+			return re;
 		}
 	}
 }
