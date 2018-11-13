@@ -42,7 +42,7 @@
 									</el-select>
 								</div>
 								<div v-else-if="fItem.type === 'inputWithUnit' || fItem.type === 'inputWithUnitSelect'">
-									<el-input v-model="fItem.text" placeholder="必填(限10位)" type="number" maxlength="10">
+									<el-input v-model="fItem.text" placeholder="必填(限10位)" type="number" maxlength="10" oninput="if(value.length>10)value=value.slice(0,10)">
 										<template slot="append">{{fItem.unit}}</template>
 									</el-input>
 								</div>
