@@ -330,7 +330,7 @@ export default {
 		// 	yearNum = "0"
 		// }
 		// this.numTitle = "本年度计划委托利用处置量：" + yearNum + "   上年度实际委托利用处置量：" + lastNum
-		this.numTitle = res.sumHandleList
+		// this.numTitle = res.sumHandleList
 		this.cateList = []
 		for (let i in res.initEpCzList) {
 			let item = {}
@@ -585,6 +585,52 @@ export default {
 			}
 			return result;
 		}
+	},
+	watch: {
+		title1fromList: {
+　　　　handler(newValue, oldValue) {
+					//TODO LDC
+					this.numTitle = [];
+					var itemGe = {
+						"last_num_sum": 0,
+						"year_num_sum": 0
+					}
+					var itemDun = {
+						"last_num_sum": 0,
+						"year_num_sum": 0
+					}
+					for(var i in newValue){
+						var ysi = newValue[i].itemList[3].text == "" ? "0" : newValue[i].itemList[3].text
+						if(newValue[i].itemList[3].unit === "个"){
+							itemGe.year_num_sum = parseInt(itemGe.year_num_sum) + parseInt(ysi)
+						}else if(newValue[i].itemList[3].unit === "吨"){
+							itemDun.year_num_sum = parseInt(itemDun.year_num_sum) + parseInt(ysi)
+						}
+						var lsi = newValue[i].itemList[4].text == "" ? "0" : newValue[i].itemList[4].text
+						if(newValue[i].itemList[4].unit === "个"){
+							itemGe.last_num_sum = parseInt(itemGe.last_num_sum) + parseInt(lsi)
+						}else if(newValue[i].itemList[4].unit === "吨"){
+							itemDun.last_num_sum = parseInt(itemDun.last_num_sum) + parseInt(lsi)
+						}
+						if(i == newValue.length - 1){
+							itemGe.last_num_sum = itemGe.last_num_sum != 0 ? itemGe.last_num_sum + "个" : itemGe.last_num_sum
+							itemGe.year_num_sum = itemGe.year_num_sum != 0 ? itemGe.year_num_sum + "个" : itemGe.year_num_sum
+
+							if(itemGe.last_num_sum != 0 || itemGe.year_num_sum != 0){
+								this.numTitle.push(itemGe)
+							}
+
+							itemDun.last_num_sum = itemDun.last_num_sum != 0 ? itemDun.last_num_sum + "吨" : itemDun.last_num_sum
+							itemDun.year_num_sum = itemDun.year_num_sum != 0 ? itemDun.year_num_sum + "吨" : itemDun.year_num_sum
+							
+							if(itemDun.last_num_sum != 0 || itemDun.year_num_sum != 0){
+								this.numTitle.push(itemDun)
+							}
+						}
+					}
+　　　　},
+　　　　deep: true
+　　}
 	}
 }
 </script>
