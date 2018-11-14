@@ -939,7 +939,7 @@ export default {
 					}
 				}
 			}
-			var trimArr = this.unique(submitData.TRANSFER_CC,"BIG_CATEGORY_ID");
+			var trimArr = this.unique(submitData.TRANSFER_CC,"D_NAME");
 			if(submitData.TRANSFER_CC.length > 1 && trimArr.length < submitData.TRANSFER_CC.length ) {
 				this.$notify.error({
 					title: '警告',
