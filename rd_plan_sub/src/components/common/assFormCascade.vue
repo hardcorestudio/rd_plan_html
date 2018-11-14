@@ -53,7 +53,9 @@
 					<el-col v-if="fItem.type==='selectLevelTwoText'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
-							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
+							<div v-if="type === 'label'" class="assFromItem_right">
+								<div v-for="lItem in levelTwoData" :key="lItem.value" v-if="lItem.value === fItem.text1">{{lItem.label}}</div>
+							</div>
 							<div v-else class="assFromItem_right">
 								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelOneChange(fItem,item.index)" class="assFromItem_unitBgSelect">
 									<el-option
@@ -81,7 +83,9 @@
 					<el-col v-if="fItem.type==='selectLevelText'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
-							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
+							<div v-if="type === 'label'" class="assFromItem_right">
+								<div v-for="lItem in levelOneData" :key="lItem.value" v-if="lItem.value === fItem.text1">{{lItem.label}}</div>
+							</div>
 							<div v-else class="assFromItem_right">
 								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelChange(fItem)" class="assFromItem_unitBgSelect">
 									<el-option

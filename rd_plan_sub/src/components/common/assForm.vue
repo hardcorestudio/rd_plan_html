@@ -61,7 +61,9 @@
 					<el-col v-if="fItem.type==='selectLevel'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
-							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
+							<div v-if="type === 'label'" class="assFromItem_right">
+								<div v-for="lItem in levelOneData" :key="lItem.value" v-if="lItem.value === fItem.text1">{{lItem.value + ' ' + lItem.label}}</div>
+							</div>
 							<div v-else class="assFromItem_right">
 								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelOneChange(fItem)">
 									<el-option
@@ -77,7 +79,9 @@
 					<el-col v-if="fItem.type==='selectLevel'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row	v-if="fItem.type==='selectLevel'" class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title2}}</div>
-							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text2}}</div>
+							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text2}}
+								<div v-for="lItem in levelTwoData[fItem.text1]" :key="lItem.value" v-if="lItem.value === fItem.text2">{{lItem.value + ' ' + lItem.label}}</div>
+							</div>
 							<div v-else class="assFromItem_right">
 								<el-select placeholder="请选择" v-model="fItem.text2">
 									<el-option
@@ -93,7 +97,9 @@
 					<el-col v-if="fItem.type==='selectLevelText'" class="assFromItem_col" :span="fItem.isSingle ? '24' : '12'">
 						<el-row class="assFromItem_itemRow">
 							<div :class="fItem.isSingle ? 'assFromItem_titleSingle' : 'assFromItem_title'">{{fItem.title1}}</div>
-							<div v-if="type === 'label'" class="assFromItem_right">{{fItem.text1}}</div>
+							<div v-if="type === 'label'" class="assFromItem_right">
+								<div v-for="lItem in levelOneData" :key="lItem.value" v-if="lItem.value === fItem.text1">{{lItem.label}}</div>
+							</div>
 							<div v-else class="assFromItem_right">
 								<el-select placeholder="请选择" v-model="fItem.text1" @change="levelChange(fItem,item.index)">
 									<el-option
