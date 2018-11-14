@@ -489,7 +489,11 @@ export default {
 				submitData.LIST.push(item)
 			}
 			var trimArr = this.unique(submitData.LIST,"LICENSE_NO","D_NAME");
-			if(submitData.LIST.length > 1 && trimArr.length < submitData.LIST.length ) {
+			var trimArrLength = 0;
+			for(var key in trimArr){
+				trimArrLength++
+			}
+			if(submitData.LIST.length > 1 && trimArrLength < submitData.LIST.length ) {
 				this.$notify.error({
 					title: '警告',
 					message: "同一单位下废物名称不能重复"
@@ -574,16 +578,11 @@ export default {
 			this.formStatus = status
 		},
 		unique(arr,mkey,nkey){
-			var re = [arr[0][mkey]];
-			var res = [arr[0][nkey]];
-			var result = [];
-			result.push(arr[0])
-			for (var i =1;i<arr.length;i++){
-					if(arr[i][mkey]  != re[re.length-1] || arr[i][nkey]  != res[res.length-1]){
-							result.push(arr[i])
-					}
+			var arrJson = {}
+			for(var i in arr){
+				arrJson[arr[i][mkey] + arr[i][nkey]] = arr[i][mkey] + arr[i][nkey]			
 			}
-			return result;
+			return arrJson;
 		}
 	},
 	watch: {
@@ -602,15 +601,15 @@ export default {
 					for(var i in newValue){
 						var ysi = newValue[i].itemList[3].text == "" ? "0" : newValue[i].itemList[3].text
 						if(newValue[i].itemList[3].unit === "个"){
-							itemGe.year_num_sum = parseInt(itemGe.year_num_sum) + parseInt(ysi)
+							itemGe.year_num_sum = parseFloat(itemGe.year_num_sum) + parseFloat(ysi)
 						}else if(newValue[i].itemList[3].unit === "吨"){
-							itemDun.year_num_sum = parseInt(itemDun.year_num_sum) + parseInt(ysi)
+							itemDun.year_num_sum = parseFloat(itemDun.year_num_sum) + parseFloat(ysi)
 						}
 						var lsi = newValue[i].itemList[4].text == "" ? "0" : newValue[i].itemList[4].text
 						if(newValue[i].itemList[4].unit === "个"){
-							itemGe.last_num_sum = parseInt(itemGe.last_num_sum) + parseInt(lsi)
+							itemGe.last_num_sum = parseFloat(itemGe.last_num_sum) + parseFloat(lsi)
 						}else if(newValue[i].itemList[4].unit === "吨"){
-							itemDun.last_num_sum = parseInt(itemDun.last_num_sum) + parseInt(lsi)
+							itemDun.last_num_sum = parseFloat(itemDun.last_num_sum) + parseFloat(lsi)
 						}
 						if(i == newValue.length - 1){
 							itemGe.last_num_sum = itemGe.last_num_sum != 0 ? itemGe.last_num_sum + "个" : itemGe.last_num_sum
