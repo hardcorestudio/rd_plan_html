@@ -85,7 +85,7 @@
 			</el-form>
 			<assSwitch :userRole="ifsaveUserRole" :switchInfo="switchInfo"></assSwitch>
 			<assTitle :userRole="ifsaveUserRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus === 'card' ? '0' : '1'" @doReset="doReset" @formStatusChange="formStatusChange"></assTitle>
-			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'" :cateList="levelOneData"></assForm>
+			<assForm v-if="formStatus === 'card'" pageId="selfDisposalMeasures" :formList="title1fromList" :type="ifsaveUserRole === 'CSEP' ? '' : 'label'" :cateList="levelOneData"></assForm>
 			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<assTitle :userRole="ifsaveUserRole" :titleInfo="textareaInfo1" titleType="textarea"></assTitle>
 			<assTitle :userRole="ifsaveUserRole" :titleInfo="textareaInfo2" titleType="textarea"></assTitle>
@@ -106,7 +106,7 @@ export default {
 	data () {
 		return {
 			myTitleInfo: {
-				title: "自行利用/处置措施",
+				title: "自行利用/处置措施", //表六
 				textInfoList: [
 					'建有危险废物自行利用处置设施的均需填写本表，每座设施分别填写一份。设有自行利用设施的，在表头的利用下划√;设有处置设施的，在表头的处置下划√;',
 					'自行利用危险废物产生相应副产品的，应将相应副产品的质量检验检测报告复印件作为本管理计划表的附件一并装订成册，该检测报告必须由质监部门认定的产品质量检测单位出具;',
@@ -523,17 +523,38 @@ export default {
 				submitData.DESC_CONTENT = this.textareaInfo1.text
 				submitData.MEASURE = this.textareaInfo2.text
 
-				for (let i in submitData.HANDLE_LIST) {
-					for (let key in submitData.HANDLE_LIST[i]) {
-						if (submitData.HANDLE_LIST[i][key] === "") {
-							this.$notify.error({
-								title: '警告',
-								message: "请填全[危险废物自行利用处置情况]所有内容"
-							});
-							return
+
+				if(submitData.HANDLE_LIST.length === 1){
+					let emptyNum = 0
+					for (let key in submitData.HANDLE_LIST[0]) {
+						if (key !== 'STORE_PLAN_UNIT' && key !== 'STORE_LAST_UNIT' && submitData.HANDLE_LIST[0][key] !== "") {
+							emptyNum++
+						}
+					}
+					if (emptyNum > 0 && emptyNum < 3) {
+						this.$notify.error({
+							title: '警告',
+							message: "请填全[危险废物自行利用处置情况]所有内容"
+						});
+						return
+					}else if(emptyNum === 0){
+						//增加一个变量证明需要清空数据
+						submitData.HANDLE_LIST[0].toBeEmpty = "1";
+					}
+				}else{
+					for (let i in submitData.HANDLE_LIST) {
+						for (let key in submitData.HANDLE_LIST[i]) {
+							if (submitData.HANDLE_LIST[i][key] === "") {
+								this.$notify.error({
+									title: '警告',
+									message: "请填全[危险废物自行利用处置情况]所有内容"
+								});
+								return
+							}
 						}
 					}
 				}
+
 				var trimArr = this.unique(submitData.HANDLE_LIST,"D_NAME");
 				if(submitData.HANDLE_LIST.length > 1 && trimArr.length < submitData.HANDLE_LIST.length ) {
 					this.$notify.error({

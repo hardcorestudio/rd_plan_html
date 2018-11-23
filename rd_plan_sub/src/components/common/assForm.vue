@@ -125,7 +125,8 @@
 					<!-- <img v-if="index === formList.length - 1" @click="addSign" src="../../assets/images/plus.png">
 					<img v-if="index > 0" @click="reduceSign(item)" src="../../assets/images/reduce.png"> -->
 					<div v-if="index === formList.length - 1" @click="addSign">增加</div>
-					<div v-if="index > 0" @click="reduceSign(item)">减少</div>
+					<div v-if="pageId && (pageId == 'transferStuation' || pageId == 'selfDisposalMeasures')" @click="reduceSign(item)">减少</div>
+					<div v-else-if="index > 0" @click="reduceSign(item)">减少</div>
 				</div>
 			</el-row>
 		</div>
@@ -134,6 +135,7 @@
 <script>
   export default {
 		props: {
+			pageId: String,
 			formList: Array,
 			listType: String,
 			type: String,
@@ -206,15 +208,27 @@
 				// 	}
 				// }
 				// this.formList = myFormList;
-
-				let myIndex = ""
-				for(let i in this.formList) {
-					if(this.formList[i].index === item.index){
-						myIndex = i
+				if(this.formList.length > 1){
+					let myIndex = ""
+					for(let i in this.formList) {
+						if(this.formList[i].index === item.index){
+							myIndex = i
+						}
 					}
-				}
-				if(myIndex !== ""){
-					this.formList.splice(myIndex, 1)
+					if(myIndex !== ""){
+						this.formList.splice(myIndex, 1)
+					}
+				}else{
+					for(let i in this.formList){
+						this.formList[i].index = "1";
+						for(let j in this.formList[i].itemList){
+							for(let k in this.formList[i].itemList[j]){
+								if(k === "text" || k === "text1" || k === "text2"){
+									this.formList[i].itemList[j][k] = "";
+								}
+							}
+						}
+					}
 				}
 			},
 			levelOneChange(item){
