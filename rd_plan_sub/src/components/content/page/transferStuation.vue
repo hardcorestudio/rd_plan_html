@@ -4,7 +4,7 @@
 		<div id="transFerStiationArea">
 			<assSwitch :userRole="userRole" title="贮存措施" :switchInfo="switchInfo1"></assSwitch>
 			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus1 === 'card' ? '0' : '1'" @doReset="resetInfo1" @formStatusChange="formStatusChange1"></assTitle>
-			<assForm v-if="formStatus1 === 'card'" pageId="transferStuation" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
+			<assForm v-if="formStatus1 === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'"></assForm>
 			<assTable v-else-if="formStatus1 === 'table'" :tableList="formDataList1" :tableTitleList="formDataListTitle1"></assTable>
 			<assTitle :userRole="userRole" :titleInfo="title2" titleType="reset" :formStatus="formStatus2 === 'card' ? '0' : '1'" @doReset="resetInfo2" @formStatusChange="formStatusChange2"></assTitle>
 			<assForm v-if="formStatus2 === 'card'" pageId="transferStuation" :formList="title2fromList" :type="userRole === 'CSEP' ? '' : 'label'" :levelOneData="levelOneData"></assForm>
@@ -916,24 +916,24 @@ export default {
 				submitData.TRANSFER_CC.push(item)
 			}
 
-			if(submitData.TRANSFER_FACILITY.length === 1){
-				let emptyNum = 0
-				for (let key in submitData.TRANSFER_FACILITY[0]) {
-					if (key !== 'NUM_UNIT' && key !== 'AREA_UNIT' && submitData.TRANSFER_FACILITY[0][key] !== "") {
-						emptyNum++
-					}
-				}
-				if (emptyNum > 0 && emptyNum < 6) {
-					this.$notify.error({
-						title: '警告',
-						message: "请填全[危险废物贮存设施现状]所有内容"
-					});
-					return
-				}else if(emptyNum === 0){
-					//增加一个变量证明需要清空数据
-					submitData.TRANSFER_FACILITY[0].toBeEmpty = "1";
-				}
-			}else{
+			// if(submitData.TRANSFER_FACILITY.length === 1){
+			// 	let emptyNum = 0
+			// 	for (let key in submitData.TRANSFER_FACILITY[0]) {
+			// 		if (key !== 'NUM_UNIT' && key !== 'AREA_UNIT' && submitData.TRANSFER_FACILITY[0][key] !== "") {
+			// 			emptyNum++
+			// 		}
+			// 	}
+			// 	if (emptyNum > 0 && emptyNum < 6) {
+			// 		this.$notify.error({
+			// 			title: '警告',
+			// 			message: "请填全[危险废物贮存设施现状]所有内容"
+			// 		});
+			// 		return
+			// 	}else if(emptyNum === 0){
+			// 		//增加一个变量证明需要清空数据
+			// 		submitData.TRANSFER_FACILITY[0].toBeEmpty = "1";
+			// 	}
+			// }else{
 				for (let i in submitData.TRANSFER_FACILITY) {
 					for (let key in submitData.TRANSFER_FACILITY[i]) {
 						if (submitData.TRANSFER_FACILITY[i][key] === "") {
@@ -945,7 +945,7 @@ export default {
 						}
 					}
 				}
-			}
+			// }
 			if(submitData.TRANSFER_CC.length === 1){
 				let ccEmptyNum = 0
 				for (let key in submitData.TRANSFER_CC[0]) {
