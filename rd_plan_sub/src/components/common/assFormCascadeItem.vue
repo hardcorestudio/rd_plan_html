@@ -146,6 +146,9 @@ import fetch from '../utils/fetch.js'
 					let queryJson = getQueryString()
 					queryJson.D_NAME = this.formItem.D_NAME
 					queryJson.EN_ID_CZ = this.formItem.EN_ID_CZ
+					queryJson.UNIT = this.formItem.UNIT
+					queryJson.BIG_CATEGORY_ID = this.formItem.BIG_CATEGORY_ID
+					queryJson.SAMLL_CATEGORY_ID = this.formItem.SAMLL_CATEGORY_ID
 					const loading = this.$loading({
 						lock: true,
 						text: 'Loading',
@@ -192,6 +195,9 @@ import fetch from '../utils/fetch.js'
 					let queryJson = getQueryString()
 					queryJson.D_NAME = this.formItem.D_NAME
 					queryJson.EN_ID_CZ = this.formItem.EN_ID_CZ
+					queryJson.UNIT = this.formItem.UNIT
+					queryJson.BIG_CATEGORY_ID = this.formItem.BIG_CATEGORY_ID
+					queryJson.SAMLL_CATEGORY_ID = this.formItem.SAMLL_CATEGORY_ID
 					const loading = this.$loading({
 						lock: true,
 						text: 'Loading',
