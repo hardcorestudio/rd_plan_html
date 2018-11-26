@@ -156,14 +156,12 @@ import fetch from '../utils/fetch.js'
 						background: 'rgba(0, 0, 0, 0.3)'
 					});
 					fetch({
-						url: '',
+						url: '/plan/getLastTBSum',
 						method: 'POST',
 						data: 'params=' + JSON.stringify(queryJson)
 					}).then(res => {
 						if (res.resFlag == '0') {
-							let thisYear = "121"
-							let lastYear = "222"
-							this.formItem.YEAR_NUM = thisYear
+							let lastYear = res.last_unit_num
 							this.formItem.LAST_NUM = lastYear
 
 							this.$emit('numChange')
@@ -205,14 +203,12 @@ import fetch from '../utils/fetch.js'
 						background: 'rgba(0, 0, 0, 0.3)'
 					});
 					fetch({
-						url: '',
+						url: '/plan/getLastTBSum',
 						method: 'POST',
 						data: 'params=' + JSON.stringify(queryJson)
 					}).then(res => {
 						if (res.resFlag == '0') {
-							let thisYear = "121"
-							let lastYear = "222"
-							this.formItem.YEAR_NUM = thisYear
+							let lastYear = res.last_unit_num;
 							this.formItem.LAST_NUM = lastYear
 
 							this.$emit('numChange')

@@ -84,22 +84,22 @@ angular.module('sbAdminApp').controller('IndexCtrl', ['$scope','Init','Modal','l
             li_class : '',
             div_class : '',
             step : '第一步',
-            title : '管理员登录',
-            content : '操作员可以直接用危废系统中的用户名和密码进行登录系统。'
+            title : '每年申报管理计划',
+            content : '每年年初，需要申报危险废物管理计划。'
         },
         {
             li_class : 'timeline-inverted',
             div_class : ' warning',
             step : '第二步',
-            title : '审批',
-            content : '审批“单位信息维护”、“单位信息变更”、“管理员变更”，“医疗维护转移计划”等流程'
+            title : '完成管理计划内容',
+            content : '管理计划功能中有多个申报表，需要一一填写申报。'
         },
         {
             li_class : '',
             div_class : ' danger',
             step : '第三步',
-            title : '查询统计',
-            content : '查询统计“转移汇总（按产生单位）”、“转移汇总（按处置单位）”'
+            title : '提交审核',
+            content : '保存之后，可以在待办任务页，点击【提交】按钮，该申请就会提交至所属区级，进行审批流程。'
         }
     ];
 
