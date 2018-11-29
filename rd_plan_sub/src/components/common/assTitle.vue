@@ -17,7 +17,7 @@
 			</div>
 			<!-- <div  class="assTitleArea_reset" @click="formStatusChange">{{formStatus === 'card' ? '表格' : '卡片'}}</div> -->
 			<div v-if="numTitle && numTitle.length > 0" class="assTitleArea_num">
-				<div :class="numTitle.length == '1' ? 'assTitleArea_numItem' : ''" v-for="numItem in numTitle" :key="numItem">计划产生量合计：{{numItem.year_num_sum}} 实际产生量合计：{{numItem.last_num_sum}}</div>
+				<div :class="numTitle.length == '1' ? 'assTitleArea_numItem' : ''" v-for="numItem in numTitle" :key="numItem">本年度计划量合计：{{numItem.year_num_sum}} 上年度实际量合计：{{numItem.last_num_sum}}</div>
 			</div>
 		</div>
 		<div v-if="titleType === 'textarea' || titleType === 'hint'" :class="titleType === 'hint' ? 'colorGreen assTitle_textarea' : 'assTitle_textarea'">
