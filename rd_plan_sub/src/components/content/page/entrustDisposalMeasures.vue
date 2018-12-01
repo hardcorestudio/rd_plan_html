@@ -301,7 +301,7 @@ export default {
 			// 	yearNum = "0"
 			// }
 			// this.numTitle = "本年度计划委托利用处置量：" + yearNum + "   上年度实际委托利用处置量：" + lastNum
-			// this.numTitle = res.sumHandleList
+			this.numTitle = res.sumHandleList
 			this.compList = res.initEpCzList
 			this.nameList = res.initOverviewList
 			this.methodList = res.HANDLE_TYPE_LIST
