@@ -33,7 +33,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资" prop="totalInvestment">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.totalInvestment" placeholder="必填(限10位)" maxlength="10">
+							<el-input v-if="userRole=== 'CSEP'" oninput="if(value.length>10)value=value.slice(0,10)" type="number" v-model.number="baseInfoData.totalInvestment" placeholder="必填(限10位)" maxlength="10">
 								<template slot="append">{{baseInfoData.TOTAL_INVESTMENT_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.totalInvestment}} {{baseInfoData.TOTAL_INVESTMENT_UNIT}}</el-row>
@@ -41,7 +41,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="总产值" prop="totalOutputValue">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.totalOutputValue" placeholder="必填(限10位)" maxlength="10">
+							<el-input v-if="userRole=== 'CSEP'" oninput="if(value.length>10)value=value.slice(0,10)" type="number" v-model.number="baseInfoData.totalOutputValue" placeholder="必填(限10位)" maxlength="10">
 								<template slot="append">{{baseInfoData.TOTAL_OUTPUTVALUE_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.totalOutputValue}} {{baseInfoData.TOTAL_OUTPUTVALUE_UNIT}}</el-row>
@@ -51,7 +51,7 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="占地面积" prop="areaCovered">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.areaCovered" placeholder="必填(限10位)" maxlength="10">
+							<el-input v-if="userRole=== 'CSEP'" oninput="if(value.length>10)value=value.slice(0,10)" type="number" v-model.number="baseInfoData.areaCovered" placeholder="必填(限10位)" maxlength="10">
 								<template slot="append">{{baseInfoData.FLOOR_AREA_UNIT}}</template>
 							</el-input>
 							<el-row v-else>{{baseInfoData.areaCovered}} {{baseInfoData.FLOOR_AREA_UNIT}}</el-row>
@@ -59,7 +59,7 @@
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="职工人数" prop="personNum">
-							<el-input v-if="userRole=== 'CSEP'" v-model.number="baseInfoData.personNum" placeholder="必填(限10位)" maxlength="10"></el-input>
+							<el-input v-if="userRole=== 'CSEP'" oninput="if(value.length>10)value=value.slice(0,10)" type="number" v-model.number="baseInfoData.personNum" placeholder="必填(限10位)" maxlength="10"></el-input>
 							<el-row v-else>{{baseInfoData.personNum}}</el-row>
 						</el-form-item>
 					</el-col>
