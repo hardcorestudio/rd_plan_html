@@ -346,7 +346,7 @@ export default {
 				item.YEAR_NUM = this.formList[i].YEAR_NUM
 				item.LAST_NUM = this.formList[i].LAST_NUM
 				item.BIG_CATEGORY_NAME = this.formList[i].BIG_CATEGORY_NAME
-				item.SAMLL_CATEGORY_NAME = this.formList[i].SAMLL_CATEGORY_NAME
+				item.SMALL_CATEGORY_NAME = this.formList[i].SAMLL_CATEGORY_NAME
 
 				submitData.LIST.push(item)
 			}
