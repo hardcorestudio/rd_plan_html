@@ -94,7 +94,7 @@
 					<el-col :span="24" class="rf_columnBg">
 						<div class="rf_column">
 							<div class="rf_description">你单位上报的《危险废物管理计划》经形式审查，符合要求，予以备案。</div>
-							<div class="rf_date">年 &nbsp;&nbsp;&nbsp;月 &nbsp;&nbsp;&nbsp;日（企业公章）</div>
+							<div class="rf_date">年 &nbsp;&nbsp;&nbsp;月 &nbsp;&nbsp;&nbsp;日（环保部门公章）</div>
 						</div>
 					</el-col>
 				</el-row>

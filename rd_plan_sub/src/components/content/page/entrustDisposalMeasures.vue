@@ -336,23 +336,25 @@ export default {
 			for (let i in this.formList) {
 				let item = {}
 				item.EN_ID_CZ = this.formList[i].EN_ID_CZ
+				item.EN_NAME_CZ = this.formList[i].EN_NAME_CZ
 				item.LICENSE_NO = this.formList[i].LICENSE_NO
 				item.D_NAME = this.formList[i].D_NAME
 				item.BIG_CATEGORY_ID = this.formList[i].BIG_CATEGORY_ID
-				item.SMALL_CATEGORY_ID = this.formList[i].SMALL_CATEGORY_ID
+				item.SAMLL_CATEGORY_ID = this.formList[i].SAMLL_CATEGORY_ID
 				item.HANDLE_TYPE = this.formList[i].HANDLE_TYPE
 				item.UNIT = this.formList[i].UNIT
 				item.YEAR_NUM = this.formList[i].YEAR_NUM
 				item.LAST_NUM = this.formList[i].LAST_NUM
 				item.BIG_CATEGORY_NAME = this.formList[i].BIG_CATEGORY_NAME
-				item.SMALL_CATEGORY_NAME = this.formList[i].SMALL_CATEGORY_NAME
+				item.SAMLL_CATEGORY_NAME = this.formList[i].SAMLL_CATEGORY_NAME
 
 				submitData.LIST.push(item)
 			}
+			console.log(this.formList);
 			if(this.formList.length === 1){
-				if (this.formList[0].EN_NAME_CZ === '' && this.formList[0].D_NAME === '' && this.formList[0].HANDLE_TYPE === '' && this.formList[0].YEAR_NUM === '' && this.formList[0].LAST_NUM === '') {
+				if (this.formList[0].EN_ID_CZ === '' && this.formList[0].D_NAME === '' && this.formList[0].HANDLE_TYPE === '' && this.formList[0].YEAR_NUM === '' && this.formList[0].LAST_NUM === '') {
 					submitData.LIST[0].toBeEmpty = "1"
-				}else if(this.formList[0].EN_NAME_CZ === '' || this.formList[0].D_NAME === '' || this.formList[0].HANDLE_TYPE === '' || this.formList[0].YEAR_NUM === '' || this.formList[0].LAST_NUM === ''){
+				}else if(this.formList[0].EN_ID_CZ === '' || this.formList[0].D_NAME === '' || this.formList[0].HANDLE_TYPE === '' || this.formList[0].YEAR_NUM === '' || this.formList[0].LAST_NUM === ''){
 					this.$notify.error({
 						title: '警告',
 						message: "请填全卡片所有内容"
@@ -362,7 +364,7 @@ export default {
 			}else{
 				let checkFlag = true
 				for (let i in this.formList) {
-					if (this.formList[i].EN_NAME_CZ === '' || this.formList[i].D_NAME === '' || this.formList[i].HANDLE_TYPE === '' || this.formList[i].YEAR_NUM === '' || this.formList[i].LAST_NUM === '') {
+					if (this.formList[i].EN_ID_CZ === '' || this.formList[i].D_NAME === '' || this.formList[i].HANDLE_TYPE === '' || this.formList[i].YEAR_NUM === '' || this.formList[i].LAST_NUM === '') {
 						checkFlag = false
 						break
 					}
@@ -431,13 +433,34 @@ export default {
 				"EN_ID_CZ": "",
 				"YEAR_NUM": "",
 				"BIG_CATEGORY_ID": "",
-				"SMALL_CATEGORY_NAME": "",
+				"SAMLL_CATEGORY_NAME": "",
 				"BIG_CATEGORY_NAME": ""
 			}
 			this.formList.push(item)
 		},
 		reduceSign(index){
-			this.formList.splice(index, 1)
+			if(this.formList.length === 1){
+				this.formList = []
+				let item = {
+					"UNIT": "",
+					"EN_NAME_CZ": "",
+					"LAST_NUM": "",
+					"HANDLE_TYPE": "",
+					"LICENSE_NO": "",
+					"SAMLL_CATEGORY_ID": "",
+					"ID": "",
+					"D_NAME": "",
+					"TP_ID": "",
+					"EN_ID_CZ": "",
+					"YEAR_NUM": "",
+					"BIG_CATEGORY_ID": "",
+					"SAMLL_CATEGORY_NAME": "",
+					"BIG_CATEGORY_NAME": ""
+				}
+				this.formList.push(item)
+			}else{
+				this.formList.splice(index, 1)
+			}
 		},
 		numChange(){
 			this.numTitle = [];
@@ -490,7 +513,7 @@ export default {
 				"EN_ID_CZ": "",
 				"YEAR_NUM": "",
 				"BIG_CATEGORY_ID": "",
-				"SMALL_CATEGORY_NAME": "",
+				"SAMLL_CATEGORY_NAME": "",
 				"BIG_CATEGORY_NAME": ""
 			}]
 		},

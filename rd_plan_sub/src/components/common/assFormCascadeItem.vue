@@ -132,10 +132,12 @@ import fetch from '../utils/fetch.js'
 			},
 			reduceSign() {
 				this.$emit('reduceSign',this.index)
+				this.$emit('numChange')
 			},
 			compChange(){
 				for(let i in this.compList){
 					if(this.compList[i].EN_ID_CZ === this.formItem.EN_ID_CZ){
+						this.formItem.EN_NAME_CZ = this.compList[i].EN_NAME_CZ
 						this.formItem.LICENSE_NO = this.compList[i].LICENSE_NO
 						break
 					}

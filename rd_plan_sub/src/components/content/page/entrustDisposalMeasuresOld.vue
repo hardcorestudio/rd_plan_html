@@ -480,7 +480,7 @@ export default {
 				item.LICENSE_NO = this.title1fromList[i].itemList[0].text2
 				item.D_NAME = this.title1fromList[i].itemList[1].text1
 				item.BIG_CATEGORY_ID = this.title1fromList[i].itemList[1].text2
-				item.SMALL_CATEGORY_ID = this.title1fromList[i].itemList[1].text3
+				item.SAMLL_CATEGORY_ID = this.title1fromList[i].itemList[1].text3
 				item.HANDLE_TYPE = this.title1fromList[i].itemList[2].text
 				item.UNIT = this.title1fromList[i].itemList[3].unit
 				item.YEAR_NUM = this.title1fromList[i].itemList[3].text
