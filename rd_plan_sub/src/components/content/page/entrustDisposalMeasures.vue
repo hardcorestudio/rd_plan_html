@@ -340,7 +340,7 @@ export default {
 				item.LICENSE_NO = this.formList[i].LICENSE_NO
 				item.D_NAME = this.formList[i].D_NAME
 				item.BIG_CATEGORY_ID = this.formList[i].BIG_CATEGORY_ID
-				item.SAMLL_CATEGORY_ID = this.formList[i].SAMLL_CATEGORY_ID
+				item.SMALL_CATEGORY_ID = this.formList[i].SAMLL_CATEGORY_ID
 				item.HANDLE_TYPE = this.formList[i].HANDLE_TYPE
 				item.UNIT = this.formList[i].UNIT
 				item.YEAR_NUM = this.formList[i].YEAR_NUM
@@ -350,7 +350,6 @@ export default {
 
 				submitData.LIST.push(item)
 			}
-			console.log(this.formList);
 			if(this.formList.length === 1){
 				if (this.formList[0].EN_ID_CZ === '' && this.formList[0].D_NAME === '' && this.formList[0].HANDLE_TYPE === '' && this.formList[0].YEAR_NUM === '' && this.formList[0].LAST_NUM === '') {
 					submitData.LIST[0].toBeEmpty = "1"
