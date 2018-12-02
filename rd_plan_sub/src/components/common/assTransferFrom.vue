@@ -68,7 +68,7 @@
 					</div>
 				</el-col>
 				<el-col :span="12" class="assFromItem_inputBg">
-					<div class="assFromItem_title">运输资质</div>
+					<div class="assFromItem_title">道路危险货物运输许可证</div>
 					<div class="assFromItem_right">
 						<el-input v-if="userRole=== 'CSEP'" v-model="item.compVal" placeholder="必填"></el-input>
 						<el-row v-else>{{item.compVal}}</el-row>
