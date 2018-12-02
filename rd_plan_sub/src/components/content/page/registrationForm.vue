@@ -3,6 +3,7 @@
 		<my-aside userRole="download" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="registrationFormContent">
 			<div id="result_area" class="rf_bg">
+				<el-row class="rf_formTitle">管理计划备案登记表</el-row>
 				<el-row class="rf_title">备案编号：{{queryJson.TP_ID}}</el-row>
 				<el-row class="rf_rowBg">
 					<el-col :span="6" class="rf_columnBg"> 
@@ -259,16 +260,25 @@ export default {
   height: 50px;
   float: left;
 }
-.rf_title{
+.rf_formTitle{
 	width: 100%;
 	height: 44px;
 	line-height: 44px;
+	font-size: 20px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.rf_title{
+	width: 100%;
+	height: 32px;
+	line-height: 32px;
 	font-size: 16px;
 	box-sizing: border-box;
 	padding: 0 5px;
 }
 .rf_bg{
 	width: 100%;
+	max-width: 750px;
 }
 .rf_rowBg {
 	border: 1px solid #a4a4a4;
