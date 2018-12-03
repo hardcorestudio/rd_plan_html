@@ -347,12 +347,8 @@ export default {
 	},
 	mounted () {
 		checkBrowser(() => {
-			// this.$message({
-			// 	showClose: true,
-			// 	message: '您当前使用的浏览器不支持本模块功能，建议使用Chrome浏览器',
-			// 	type: 'warning'
-			// });
-			this.$router.push({ path: '/pageIncompatible' })
+			// this.$router.push({ path: '/pageIncompatible' })
+			window.location.href = "pageIncompatible.html";
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()

@@ -100,7 +100,8 @@ export default {
 	},
 	mounted () {
 		checkBrowser(() => {
-			this.$router.push({ path: '/pageIncompatible' })
+			// this.$router.push({ path: '/pageIncompatible' })
+			window.location.href = "pageIncompatible.html";
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
