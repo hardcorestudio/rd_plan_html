@@ -26,6 +26,8 @@ export default {
 	name: 'lastYearManagePlanRecord',
 	data () {
 		return {
+			repaetClickTime: 2,
+			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "上年度管理计划回顾",
 				textInfoList: [
@@ -108,6 +110,7 @@ export default {
 			// });
 			this.$router.push({ path: '/pageIncompatible' })
 		})
+		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
 
 		fetch({
@@ -180,6 +183,19 @@ export default {
 	},
 	methods: {
 		doSubmit () {
+			if(!this.repeatClickFlag){
+				this.repeatClickFlag = true
+				setTimeout(() => {
+					this.repeatClickFlag = false
+				}, this.repaetClickTime * 1000 );
+			}else{
+				this.$notify.error({
+					title: '警告',
+					message: this.repaetClickTime + "秒内不得重复提交"
+				});
+				return;
+			}
+
 			if (this.title1.text === '') {
 				this.$notify.error({
 					title: '警告',

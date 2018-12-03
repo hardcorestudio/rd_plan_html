@@ -40,6 +40,8 @@ export default {
 	name: 'productionSituation',
 	data () {
 		return {
+			repaetClickTime: 2,
+			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "产品生产情况",
 				textInfoList: [
@@ -194,6 +196,7 @@ export default {
 			// });
 			this.$router.push({ path: '/pageIncompatible' })
 		})
+		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
 
 		this.formStatus1 = 'card'
@@ -461,6 +464,19 @@ export default {
 	},
 	methods: {
 		doSubmit () {
+			if(!this.repeatClickFlag){
+				this.repeatClickFlag = true
+				setTimeout(() => {
+					this.repeatClickFlag = false
+				}, this.repaetClickTime * 1000 );
+			}else{
+				this.$notify.error({
+					title: '警告',
+					message: this.repaetClickTime + "秒内不得重复提交"
+				});
+				return;
+			}
+
 			let submitData = {}
 			submitData.EP_ID = this.EP_ID
 			submitData.TP_ID = this.TP_ID

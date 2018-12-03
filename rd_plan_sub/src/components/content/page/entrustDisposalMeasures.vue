@@ -20,6 +20,8 @@ export default {
 	name: 'entrustDisposalMeasures',
 	data () {
 		return {
+			repaetClickTime: 2,
+			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "危废委托利用/处置措施", //表七
 				textInfoList: [
@@ -100,6 +102,7 @@ export default {
 		checkBrowser(() => {
 			this.$router.push({ path: '/pageIncompatible' })
 		})
+		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
 		this.formStatus = "card"
 
@@ -285,22 +288,6 @@ export default {
 			// 	"orgSeq": ""
 			// }
 			this.userRole = res.userType
-			// let lastNum = ""
-			// let yearNum = ""
-			// for (let i in res.sumHandleList) {
-			// 	if (i === 0) {
-			// 		lastNum = res.sumHandleList[i].last_num_sum
-			// 		yearNum = res.sumHandleList[i].year_num_sum
-			// 	} else {
-			// 		lastNum += ' ' + res.sumHandleList[i].last_num_sum
-			// 		yearNum += ' ' + res.sumHandleList[i].year_num_sum
-			// 	}
-			// }
-			// if (res.sumHandleList.length === 0) {
-			// 	lastNum = "0"
-			// 	yearNum = "0"
-			// }
-			// this.numTitle = "本年度计划委托利用处置量：" + yearNum + "   上年度实际委托利用处置量：" + lastNum
 			this.numTitle = res.sumHandleList
 			this.compList = res.initEpCzList
 			this.nameList = res.initOverviewList
@@ -329,6 +316,19 @@ export default {
 	},
 	methods: {
 		doSubmit () {
+			
+			if(!this.repeatClickFlag){
+				this.repeatClickFlag = true
+				setTimeout(() => {
+					this.repeatClickFlag = false
+				}, this.repaetClickTime * 1000 );
+			}else{
+				this.$notify.error({
+					title: '警告',
+					message: this.repaetClickTime + "秒内不得重复提交"
+				});
+				return;
+			}
 			let submitData = {}
 			submitData.TP_ID = this.queryJson.TP_ID
 			submitData.LIST = []

@@ -206,6 +206,8 @@ export default {
 			}
 		};
 		return {
+			repaetClickTime: 2,
+			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "基本信息",
 				textInfoList: [
@@ -352,6 +354,7 @@ export default {
 			// });
 			this.$router.push({ path: '/pageIncompatible' })
 		})
+		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
 
 		// let res = {
@@ -512,6 +515,19 @@ export default {
 	},
 	methods: {
 		doSubmit () {
+			if(!this.repeatClickFlag){
+				this.repeatClickFlag = true
+				setTimeout(() => {
+					this.repeatClickFlag = false
+				}, this.repaetClickTime * 1000 );
+			}else{
+				this.$notify.error({
+					title: '警告',
+					message: this.repaetClickTime + "秒内不得重复提交"
+				});
+				return;
+			}
+
 			let _this = this
 			let checkFlag = false
 			_this.$refs['form'].validate((valid) => {
