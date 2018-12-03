@@ -4,7 +4,7 @@
 		<div id="entrustDisposalMeasuresPlan">
 			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus === 'card' ? '0' : '1'" @doReset="doReset" :numTitle="numTitle" @formStatusChange="formStatusChange"></assTitle>
 			<assFormCascadeItem v-if="formStatus === 'card'" :type="userRole !== 'CSEP' ? 'label' : ''" v-for="(item,index) in formList" :key="index" :formItem="item" :index="index" :listLength="formList.length" :compList="compList" :nameList="nameList" :methodList="methodList" @addSign="addSign" @reduceSign="reduceSign" @numChange="numChange"></assFormCascadeItem>
-			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
+			<assTable v-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<div class="footerSign"></div>
 		</div>
 	</div>
