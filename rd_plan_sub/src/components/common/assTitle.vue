@@ -1,7 +1,8 @@
 <template>
 	<div id="assTitle">
 		<div v-if="titleInfo.title && titleInfo.title !== ''" class="assTitle_titleArea">
-			<div class="assTitleArea_text">{{ titleInfo.title }}</div>
+			<div v-if="titleSize && titleSize === 'small'" class="assTitleArea_textSmall">{{ titleInfo.title }}</div>
+			<div v-else="" class="assTitleArea_text">{{ titleInfo.title }}</div>
 			<div v-if="titleType === 'reset' && userRole === 'CSEP'" class="assTitleArea_reset" @click="doReset">重置</div>
 			<div v-if="formStatus && titleType === 'reset' && userRole !== 'CSEP' && userRole !== 'ifsave'" class="assTitleArea_switchBg">
 				<el-switch
@@ -44,7 +45,8 @@
 			titleType: String,
 			numTitle: Array,
 			userRole: String,
-			formStatus: String
+			formStatus: String,
+			titleSize: String
 		},
     data() {
       return {
@@ -82,6 +84,14 @@
 	height: 100%;
 	float: left;
 	font-size: 20px;
+	color: black;
+	font-weight: bold;
+	line-height: 44px;
+}
+.assTitleArea_textSmall{
+	height: 100%;
+	float: left;
+	font-size: 18px;
 	color: black;
 	font-weight: bold;
 	line-height: 44px;

@@ -305,12 +305,14 @@ export default {
 					"HANDLE_TYPE": "",
 					"LICENSE_NO": "",
 					"SAMLL_CATEGORY_ID": "",
+					"SAMLL_CATEGORY_NAME": "",
 					"ID": "",
 					"D_NAME": "",
 					"TP_ID": "",
 					"EN_ID_CZ": "",
 					"YEAR_NUM": "",
-					"BIG_CATEGORY_ID": ""
+					"BIG_CATEGORY_ID": "",
+					"BIG_CATEGORY_NAME": ""
 				}]
 			}
 		})
@@ -448,13 +450,13 @@ export default {
 					"HANDLE_TYPE": "",
 					"LICENSE_NO": "",
 					"SAMLL_CATEGORY_ID": "",
+					"SAMLL_CATEGORY_NAME": "",
 					"ID": "",
 					"D_NAME": "",
 					"TP_ID": "",
 					"EN_ID_CZ": "",
 					"YEAR_NUM": "",
 					"BIG_CATEGORY_ID": "",
-					"SAMLL_CATEGORY_NAME": "",
 					"BIG_CATEGORY_NAME": ""
 				}
 				this.formList.push(item)
@@ -507,13 +509,13 @@ export default {
 				"HANDLE_TYPE": "",
 				"LICENSE_NO": "",
 				"SAMLL_CATEGORY_ID": "",
+				"SAMLL_CATEGORY_NAME": "",
 				"ID": "",
 				"D_NAME": "",
 				"TP_ID": "",
 				"EN_ID_CZ": "",
 				"YEAR_NUM": "",
 				"BIG_CATEGORY_ID": "",
-				"SAMLL_CATEGORY_NAME": "",
 				"BIG_CATEGORY_NAME": ""
 			}]
 		},
