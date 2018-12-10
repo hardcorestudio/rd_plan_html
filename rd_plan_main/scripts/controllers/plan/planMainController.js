@@ -2,9 +2,49 @@
 angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','Init','CheckBrowser','$state','$stateParams','localStorageService','Modal','$location','WebSocket','$timeout','$interval', function ($rootScope,$scope,Init,CheckBrowser,$state,$stateParams,localStorageService,Modal,$location,WebSocket,$timeout,$interval) {
     $scope.WebSocket = WebSocket;
     $scope.WebSocket.onMe(function(obj){
+        if(obj.key == 'baseInfo'){
+            if(obj.value == 'func_done'){
+                $scope.baseInfoClass = $scope.func_done
+            }
+        }
+        if(obj.key == 'productInfo'){
+            if(obj.value == 'func_done'){
+                $scope.productionSituationClass = $scope.func_done
+            }
+        }
+        if(obj.key == 'overview'){
+            if(obj.value == 'func_done'){
+                $scope.produceSituationClass = $scope.func_done
+            }
+        }
+        if(obj.key == 'reduction'){
+            if(obj.value == 'func_done'){
+                $scope.decrementPlanClass = $scope.func_done
+            }
+        }
+        if(obj.key == 'transfer'){
+            if(obj.value == 'func_done'){
+                $scope.transferStuationClass = $scope.func_done
+            }
+        }
+        if(obj.key == 'handleSelf'){
+            if(obj.value == 'func_done'){
+                $scope.selfDisposalMeasuresClass = $scope.func_done
+            }
+        }
+        if(obj.key == 'handle'){
+            if(obj.value == 'func_done'){
+                $scope.entrustDisposalMeasuresClass = $scope.func_done
+            }
+        }
         if(obj.key == 'env'){
             if(obj.value == 'func_done'){
                 $scope.envClass = $scope.func_done
+            }
+        }
+        if(obj.key == 'lastInfo'){
+            if(obj.value == 'func_done'){
+                $scope.lastClass = $scope.func_done
             }
         }
     });
