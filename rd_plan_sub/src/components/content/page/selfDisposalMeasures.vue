@@ -109,6 +109,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "自行利用/处置措施", //表六
+				epName: "",
 				textInfoList: [
 					'建有危险废物自行利用处置设施的均需填写本表，每座设施分别填写一份。设有自行利用设施的，在表头的利用下划√;设有处置设施的，在表头的处置下划√;',
 					'自行利用危险废物产生相应副产品的，应将相应副产品的质量检验检测报告复印件作为本管理计划表的附件一并装订成册，该检测报告必须由质监部门认定的产品质量检测单位出具;',
@@ -261,6 +262,8 @@ export default {
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
+
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		this.formStatus = "card"
 		

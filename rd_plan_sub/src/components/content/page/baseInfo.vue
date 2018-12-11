@@ -210,6 +210,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "基本信息",
+				epName: "",
 				textInfoList: [
 					"单位注册地址：法人登记或者工商行政主管部门注册的办公地址；",
 					"生产设施地址：产生危险废物的生产设施所在的地址；",
@@ -353,6 +354,7 @@ export default {
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
 
+		this.myTitleInfo.epName = this.queryJson.epName
 		// let res = {
 		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiV2Z4Z0RySVp5WUw3ZlUyVEZZRGc2Yz0=",
 		// 	"sepaName": "津南区",

@@ -52,6 +52,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "危险废物转移情况", //表五
+				epName: "",
 				textInfoList: [
 					"贮存措施：废物收集、贮存相关环保制度的执行情概况，根据实际情况勾选，同时填写废物的贮存设施现状及贮存情况，贮存方面的相关要求，如数量。面积以及采取的污染防治措施；",
 					"运输措施：废物运输过程中相关环保制度的执行情况，根据实际情概况勾选，同时填写废物运输过程中采取的污染防治措施；",
@@ -271,6 +272,7 @@ export default {
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		this.formStatus1 = 'card'
 		this.formStatus2 = 'card'

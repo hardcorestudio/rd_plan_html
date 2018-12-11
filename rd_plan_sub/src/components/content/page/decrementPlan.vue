@@ -22,6 +22,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "危废减量化计划和措施",
+				epName: "",
 				textInfoList: []
 			},
 			userRole: '',
@@ -57,6 +58,8 @@ export default {
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
+
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		fetch({
 			url: '/plan/initReduction',

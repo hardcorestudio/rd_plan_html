@@ -31,7 +31,7 @@ export function getQueryString(){
   for(var i = 0; i < result.length; i++){
       var resultStr = result[i].substring(1);
       var key = subStringByBefore(resultStr);
-      var value = subStringByAfter(resultStr);
+      var value = subStringByAfter(decodeURIComponent(resultStr));
       qsJson[key] = value;
   }
   return qsJson;

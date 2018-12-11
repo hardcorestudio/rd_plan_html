@@ -5,6 +5,7 @@
 			<div v-if="titleInfo.title" class="leftAside_subtitle">{{titleInfo.title}}</div>
 		</div>
 		<div class="leftAside_contentArea">
+			<div class="leftAside_textItemEpName">单位名称：{{titleInfo.epName}}</div>
 			<div v-if="titleInfo.textInfoList" class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
 		</div>
 		<div v-if="userRole === 'CSEP' && showflag == 'true'" class="leftAside_btnArea">
@@ -90,6 +91,11 @@
 .leftAside_contentArea .leftAside_textItem{
 	font-size: 10px;
 	margin-bottom: 5px;
+}
+.leftAside_contentArea .leftAside_textItemEpName{
+	font-size: 12px;
+	margin-bottom: 5px;
+	font-weight: bold;
 }
 .leftAside_btnArea{
 	width: 100%;

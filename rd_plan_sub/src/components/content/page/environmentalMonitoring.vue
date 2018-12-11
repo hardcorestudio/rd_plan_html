@@ -25,6 +25,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "环境监测情况",
+				epName: "",
 				textInfoList: [
 					"利用处置运行设施监测：利用处置设施如危险废物焚烧设施运行的工艺参数、焚烧残渣热灼减率、活性炭和燃料油等主要原辅材料消耗情况等；",
 					"污染物监测指标及频次：废水、废气的特征污染物和主要污染物，噪声以及监测频率、时间安排等；",
@@ -79,6 +80,7 @@ export default {
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		fetch({
 			url: '/plan/initEnv',

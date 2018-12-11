@@ -44,6 +44,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "产品生产情况",
+				epName: "",
 				textInfoList: [
 					"主要原辅材料及消耗量：计划期限上一年度及本年度计划用于生产的主要原辅材料的商品名称或化学名称，及其实际与计划年消耗量；",
 					"主要生产设备及数量：用于生产的主要设备名称及其数量；",
@@ -199,6 +200,7 @@ export default {
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		this.formStatus1 = 'card'
 		this.formStatus2 = 'card'

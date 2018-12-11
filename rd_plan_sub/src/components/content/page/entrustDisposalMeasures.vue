@@ -24,6 +24,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "危废委托利用/处置措施", //表七
+				epName: "",
 				textInfoList: [
 					'凡计划期限上一年已委托或计划期限内拟委托外单位利用处置危险废物(包括自行利用处置过程中产生的废渣)的，需填写表7。委托利用的，在表头的利用下划√;委托处置的，在表头的处置下划√。同时将相应利用处置单位的危险废物经营许可证复印件作为本管理计划表的附件一并装订成册;',
 					'利用处置单位名称、许可证编号:与利用处置单位危险废物经营许可证上的名称、许可证编号一致;',
@@ -106,6 +107,8 @@ export default {
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
 		this.formStatus = "card"
+
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		fetch({
 			url: '/plan/initHandle',

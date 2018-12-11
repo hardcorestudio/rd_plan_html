@@ -30,6 +30,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "上年度管理计划回顾",
+				epName: "",
 				textInfoList: [
 					"上年度各级环保部门检查、环境监测、信息公开情况：如实记录各级环保部门对其检查情况，包括时间、存在的问题、下一步措施；环境监测是否都达标，原因分析；是否公开信息，公开内容等；",
 					"危险废物比较分析：上年度危险废物实际产生数量、种类、贮存、利用处置等情况，并与上年度管理计划中预期结果进行比较分析；",
@@ -113,6 +114,7 @@ export default {
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		fetch({
 			url: '/plan/initLastInfo',

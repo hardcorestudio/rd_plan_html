@@ -24,6 +24,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "危险废物产生概况",
+				epName: "",
 				textInfoList: [
 					'本表应包括产生的所有危险废物(包括自行利用处置过程中产生的废渣)的有关情况;',
 					'废物名称、废物代码、废物类别:根据《国家危险废物名录》中对应的废物名称、代码和类别填写，如某化工厂在生产四氯化碳过程中产生蒸馏残渣，则废物名称为“四氯化碳生产过程中产生的蒸馏残渣”，废物代码为“261-010-11”，废物类别为“HW11精(蒸)馏残渣”;',
@@ -147,6 +148,7 @@ export default {
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		this.formStatus = 'card'
 

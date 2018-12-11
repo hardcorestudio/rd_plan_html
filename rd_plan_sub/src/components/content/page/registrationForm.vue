@@ -118,6 +118,7 @@ export default {
 			repeatClickFlag: false,
 			myTitleInfo: {
 				title: "管理计划备案登记表",
+				epName: "",
 				textInfoList: []
 			},
 			userRole: '',
@@ -152,6 +153,7 @@ export default {
 		})
 		this.repeatClickFlag = false
 		this.queryJson = getQueryString()
+		this.myTitleInfo.epName = this.queryJson.epName
 
 		fetch({
 			url: '/plan/previewPlan',
