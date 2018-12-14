@@ -80,12 +80,12 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "本年计划生产量",
+					title: "本年计划产生量",
 					unit: ""
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "上年实际生产量",
+					title: "上年实际产生量",
 					unit: ""
 				}, {
 					type: "input",
@@ -114,10 +114,10 @@ export default {
 				title: '危险特性',
 				key: 'CHARACTER'
 			}, {
-				title: '本年计划生产量',
+				title: '本年计划产生量',
 				key: 'YEAR_NUM'
 			}, {
-				title: '上年实际生产量',
+				title: '上年实际产生量',
 				key: 'LAST_NUM'
 			}, {
 				title: '单位',
@@ -4292,12 +4292,12 @@ export default {
 					}, {
 						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].YEAR_NUM,
-						title: "本年计划生产量",
+						title: "本年计划产生量",
 						unit: res.initOverviewList[i].UNIT
 					}, {
 						type: "inputWithUnitSelect",
 						text: res.initOverviewList[i].LAST_NUM,
-						title: "上年实际生产量",
+						title: "上年实际产生量",
 						unit: res.initOverviewList[i].UNIT
 					}, {
 						type: "input",
@@ -4345,12 +4345,12 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "本年计划生产量",
+					title: "本年计划产生量",
 					unit: ""
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "上年实际生产量",
+					title: "上年实际产生量",
 					unit: ""
 				}, {
 					type: "input",
@@ -4531,12 +4531,12 @@ export default {
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "本年计划生产量",
+					title: "本年计划产生量",
 					unit: ""
 				}, {
 					type: "inputWithUnitSelect",
 					text: "",
-					title: "上年实际生产量",
+					title: "上年实际产生量",
 					unit: ""
 				}, {
 					type: "input",

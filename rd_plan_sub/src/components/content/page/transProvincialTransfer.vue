@@ -135,7 +135,7 @@ export default {
 				title: "跨省运输单位信息",
 			},
 			title4: {
-				title: "贮存危险废物情况",
+				title: "危险废物情况",
 			},
 			licenceNo: "",
 			compName: "",
@@ -611,7 +611,7 @@ export default {
 				if(this.formList[i].D_NAME === "" || this.formList[i].UNIT_NUM === "" || this.formList[i].SAMLL_CATEGORY_ID === "" || this.formList[i].BIG_CATEGORY_ID === ""){
 					this.$notify.error({
 						title: '警告',
-						message: "请填全[贮存危险废物情况]所有内容"
+						message: "请填全[危险废物情况]所有内容"
 					});
 					return;
 				}
