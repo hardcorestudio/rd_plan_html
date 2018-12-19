@@ -206,7 +206,7 @@ export default {
 				title: '废物代码',
 				key: 'SAMLL_CATEGORY_ID'
 			}, {
-				title: '预计产生量',
+				title: '预计产量',
 				key: 'UNIT_NUM'
 			}],
 			formDataList: [],
