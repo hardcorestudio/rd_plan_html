@@ -80,7 +80,7 @@ export default {
 					title: "原辅材料名称",
 					limit: "16"
 				}, {
-					type: "selectThree",
+					type: "selectMore",
 					text: "",
 					title: "单位"
 				}, {
@@ -123,7 +123,7 @@ export default {
 					title: "产品名称",
 					limit: "16"
 				}, {
-					type: "select",
+					type: "selectMore",
 					text: "",
 					title: "单位"
 				}, {
@@ -316,7 +316,7 @@ export default {
 							title: "原辅材料名称",
 							limit: "16"
 						}, {
-							type: "selectThree",
+							type: "selectMore",
 							text: res.initProductOri[i].UNIT,
 							title: "单位"
 						}, {
@@ -342,7 +342,7 @@ export default {
 						title: "原辅材料名称",
 						limit: "16"
 					}, {
-						type: "selectThree",
+						type: "selectMore",
 						text: "",
 						title: "单位"
 					}, {
@@ -420,7 +420,7 @@ export default {
 							title: "产品名称",
 							limit: "16"
 						}, {
-							type: "select",
+							type: "selectMore",
 							text: res.initProductOutput[i].UNIT,
 							title: "单位"
 						}, {
@@ -446,7 +446,7 @@ export default {
 						title: "产品名称",
 						limit: "16"
 					}, {
-						type: "select",
+						type: "selectMore",
 						text: "",
 						title: "单位"
 					}, {
@@ -596,7 +596,7 @@ export default {
 					title: "原辅材料名称",
 					limit: "16"
 				}, {
-					type: "selectThree",
+					type: "selectMore",
 					text: "",
 					title: "单位"
 				}, {
@@ -643,7 +643,7 @@ export default {
 					title: "产品名称",
 					limit: "16"
 				}, {
-					type: "select",
+					type: "selectMore",
 					text: "",
 					title: "单位"
 				}, {

@@ -77,6 +77,16 @@
 			<assTitle :userRole="userRole" titleSize="small" :titleInfo="title4" titleType="reset" @doReset="doResetSituation"></assTitle>
 			<assFormTptItem v-if="formStatus === 'card'" :type="userRole !== 'CSEP' ? 'label' : ''" v-for="(item,index) in formList" :key="index" :formItem="item" :index="index" :listLength="formList.length" :nameList="nameList" @addSign="addSign" @reduceSign="reduceSign"></assFormTptItem>
 			<assTable v-if="formStatus === 'table'" :tableList="formDataList1" :tableTitleList="formDataListTitle1"></assTable>
+			<el-dialog title="搜索结果" :visible.sync="dialogTableVisible">
+				<el-table :data="searchGridData" @current-change="handleSelectionChange">
+					<el-table-column
+						type="index"
+						width="50">
+					</el-table-column>
+					<el-table-column property="dwmc" label="单位名称"></el-table-column>
+					<el-table-column property="xkzbh" label="许可证编号"></el-table-column>
+				</el-table>
+			</el-dialog>
 			<div class="footerSign"></div>
 		</div>
 	</div>
@@ -114,6 +124,8 @@ export default {
 		return {
 			repaetClickTime: 2,
 			repeatClickFlag: false,
+			dialogTableVisible: false,
+			searchGridData: [],
 			myTitleInfo: {
 				title: "危险废物跨省转移",
 				epName: "",
@@ -219,7 +231,8 @@ export default {
 				"D_NAME": "",
 				"UNIT_NUM": "",
 				"BIG_CATEGORY_ID": "",
-				"BIG_CATEGORY_NAME": ""
+				"BIG_CATEGORY_NAME": "",
+				"LAST_NUM": ""
 			}],
 			nameList: [],
 			rules: {
@@ -250,6 +263,8 @@ export default {
 			window.location.href = "pageIncompatible.html";
 		})
 		this.repeatClickFlag = false
+		this.dialogTableVisible = false
+		this.searchGridData = []
 		this.queryJson = getQueryString()
 
 		this.myTitleInfo.epName = this.queryJson.epName
@@ -302,7 +317,8 @@ export default {
 			// 		"wxfwdm": "100-200-300",
 			// 		"CONTAINER_NUM": null,
 			// 		"CONTAINER_NUM_WC": null,
-			// 		"zysl": "100"
+			// 		"zysl": "100",
+			// 		"LAST_NUM" : "12"
 			// 	}, {
 			// 		"SAMLL_CATEGORY_ID": "100-200-300",
 			// 		"CAPACITY": null,
@@ -328,7 +344,8 @@ export default {
 			// 		"wxfwdm": "100-200-300",
 			// 		"CONTAINER_NUM": null,
 			// 		"CONTAINER_NUM_WC": null,
-			// 		"zysl": "100"
+			// 		"zysl": "100",
+			// 		"LAST_NUM" : "111"
 			// 	}],
 			// 	"initPt": {
 			// 		"ysdwlxrsj": "手机号1$手机号2",
@@ -452,7 +469,8 @@ export default {
 					"D_NAME": "",
 					"UNIT_NUM": "",
 					"BIG_CATEGORY_ID": "",
-					"BIG_CATEGORY_NAME": ""
+					"BIG_CATEGORY_NAME": "",
+					"LAST_NUM": ""
 				}]
 			}
 			let name = [];
@@ -608,7 +626,7 @@ export default {
 				}
 			}
 			for(let i in this.formList){
-				if(this.formList[i].D_NAME === "" || this.formList[i].UNIT_NUM === "" || this.formList[i].SAMLL_CATEGORY_ID === "" || this.formList[i].BIG_CATEGORY_ID === ""){
+				if(this.formList[i].D_NAME === "" || this.formList[i].UNIT_NUM === "" || this.formList[i].SAMLL_CATEGORY_ID === "" || this.formList[i].BIG_CATEGORY_ID === "" || this.formList[i].LAST_NUM === ""){
 					this.$notify.error({
 						title: '警告',
 						message: "请填全[危险废物情况]所有内容"
@@ -748,7 +766,8 @@ export default {
 				"D_NAME": "",
 				"UNIT_NUM": "",
 				"BIG_CATEGORY_ID": "",
-				"BIG_CATEGORY_NAME": ""
+				"BIG_CATEGORY_NAME": "",
+				"LAST_NUM": ""
 			}]
 		},
 		addSign(){
@@ -760,7 +779,8 @@ export default {
 				"D_NAME": "",
 				"UNIT_NUM": "",
 				"BIG_CATEGORY_ID": "",
-				"BIG_CATEGORY_NAME": ""
+				"BIG_CATEGORY_NAME": "",
+				"LAST_NUM": ""
 			}
 			this.formList.push(item)
 		},
@@ -787,7 +807,8 @@ export default {
 					"D_NAME": "",
 					"UNIT_NUM": "",
 					"BIG_CATEGORY_ID": "",
-					"BIG_CATEGORY_NAME": ""
+					"BIG_CATEGORY_NAME": "",
+					"LAST_NUM": ""
 				}
 				this.formList.push(item)
 			}else{
@@ -804,6 +825,29 @@ export default {
 					method: 'POST',
 					data: 'version=2&jsonParam=' + JSON.stringify(param)
 				}).then(res => {
+					// let res = [{
+					// 	dwmc: "121",
+					// 	xkzbh: "1212",
+					// 	dwdz: "12121",
+					// 	xzqhdm: "1111",
+					// 	lxrxm: "asdas",
+					// 	lxrdh: "12121"
+					// },{
+					// 	dwmc: "121",
+					// 	xkzbh: "1212",
+					// 	dwdz: "12121",
+					// 	xzqhdm: "1111",
+					// 	lxrxm: "asdas",
+					// 	lxrdh: "12121"
+					// },{
+					// 	dwmc: "121",
+					// 	xkzbh: "1212",
+					// 	dwdz: "12121",
+					// 	xzqhdm: "1111",
+					// 	lxrxm: "asdas",
+					// 	lxrdh: "12121"
+					// }]
+					this.searchGridData = [];
 					if(res.length == 1){
 						this.tptData.compNameDetail = res[0].dwmc;
 						this.tptData.licenceNoDetail = res[0].xkzbh;
@@ -812,18 +856,20 @@ export default {
 						this.tptData.contactDetail = res[0].lxrxm;
 						this.tptData.contactPhoneDetail = res[0].lxrdh;
 					}else{
-						this.tptData.compNameDetail = ""
-						this.tptData.licenceNoDetail = ""
-						this.tptData.addrDetail = ""
-						this.tptData.cardDetail = ""
-						this.tptData.contactDetail = ""
-						this.tptData.contactPhoneDetail = ""
-						if(res.length > 1){
-							this.$notify.error({
-								title: '警告',
-								message: "系统已查询出多条，请输入更精确的关键词"
-							});
-						}
+						// this.tptData.compNameDetail = ""
+						// this.tptData.licenceNoDetail = ""
+						// this.tptData.addrDetail = ""
+						// this.tptData.cardDetail = ""
+						// this.tptData.contactDetail = ""
+						// this.tptData.contactPhoneDetail = ""
+						// if(res.length > 1){
+						// 	this.$notify.error({
+						// 		title: '警告',
+						// 		message: "系统已查询出多条，请输入更精确的关键词"
+						// 	});
+						// }
+						this.dialogTableVisible = true;
+						this.searchGridData = res;
 					}
 				})
 			}
@@ -832,6 +878,17 @@ export default {
 			var r = /[$"']+/;
 			var m = r.exec(str);
 			return m;
+		},
+		handleSelectionChange(val) {
+			if(val){
+				this.tptData.compNameDetail = val.dwmc;
+				this.tptData.licenceNoDetail = val.xkzbh;
+				this.tptData.addrDetail = val.dwdz;
+				this.tptData.cardDetail = val.xzqhdm;
+				this.tptData.contactDetail = val.lxrxm;
+				this.tptData.contactPhoneDetail = val.lxrdh;
+				this.dialogTableVisible = false;
+			}
 		}
 	}
 }

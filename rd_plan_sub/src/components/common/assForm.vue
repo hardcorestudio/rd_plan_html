@@ -49,6 +49,16 @@
 										</el-option>
 									</el-select>
 								</div>
+								<div v-else-if="fItem.type === 'selectMore'" class="assFromItem_unitBg">
+									<el-select placeholder="选择单位" v-model="fItem.text" @change="unitChange(item.index,fItem.text)" class="assFromItem_unitBgSelect">
+										<el-option
+											v-for="uItem in unitsMore"
+											:key="uItem.value"
+											:label="uItem.label"
+											:value="uItem.value">
+										</el-option>
+									</el-select>
+								</div>
 								<div v-else-if="fItem.type === 'inputWithUnit' || fItem.type === 'inputWithUnitSelect'">
 									<el-input v-model="fItem.text" type="number" placeholder="必填(限10位)" oninput="if(value.length>10)value=value.slice(0,10)" maxlength="10">
 										<template slot="append">{{fItem.unit}}</template>
@@ -162,6 +172,25 @@
 				},{
 					label: "公升",
 					value: "公升"
+				}],
+				unitsMore:[{
+					label: "吨",
+					value: "吨"
+				},{
+					label: "个",
+					value: "个"
+				},{
+					label: "件",
+					value: "件"
+				},{
+					label: "箱",
+					value: "箱"
+				},{
+					label: "平方米",
+					value: "平方米"
+				},{
+					label: "米",
+					value: "米"
 				}],
       };
 		},
