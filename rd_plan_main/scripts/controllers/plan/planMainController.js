@@ -45,6 +45,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
     $scope.entrustDisposalMeasuresClass = $scope.func_class
     $scope.envClass = $scope.func_class
     $scope.lastClass = $scope.func_class
+    $scope.ptClass = $scope.func_class
     CheckBrowser.check();
     //弹框参数
     var resolve = {};
@@ -137,6 +138,13 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                     $scope.lastClass = $scope.func_class
                 }
             }
+            if(obj.key == 'pt'){
+                if(obj.value == 'func_done'){
+                    $scope.ptClass = $scope.func_done
+                }else{
+                    $scope.ptClass = $scope.func_class
+                }
+            }
         });
     }
     
@@ -178,6 +186,9 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         if(data.lastInfoFlag == '1'){
             $scope.lastClass = $scope.func_done
         }
+        if(data.ptFlag == '1'){
+            $scope.ptClass = $scope.func_done
+        }
     },function(data,header,config,status){
     });
 
@@ -198,7 +209,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                     }
                 }
             }
-            var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId+"&showflag="+showflag ;
+            var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId+"&showflag="+showflag+"&epName="+localStorageService.get('epName') ;
             // window.open(sub_url, '_blank')
             newWin.location.href = sub_url;
         },function(data,header,config,status){
@@ -207,13 +218,32 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
 
     $scope.test1 = function(pathname){
         // var p = {};
-        // p.EP_ID = $stateParams.epId;
-        // p.TP_ID = $stateParams.tpId
-        // Init.iwbhttp('/plan/initBaseInfo', p, function(data,header,config,status){
-        //     console.log(JSON.stringify(data))
+        // var p1 = {};
+        // p1.dwmc = "";
+        // p1.xkzh = "鲁危证131号";
+        // p.jsonParam = p1
+        // p.version = 2
+        // $http({
+        //     url:'http://localhost:9091/transProvincial/getXkz',
+        //     data: "jsonParam="+JSON.stringify(p1)+"&version=2",
+        //     headers : { 'Content-Type': 'application/x-www-form-urlencoded' },
+        //     method: 'POST'
+        //     //method:'GET'
+        // }).success(function(data,header,config,status){
+        //     console.log('aaa')
+        // }).error(function(){
+        //     console.log('bbb');
+        // })
+
+
+        var p = {};
+        p.EP_ID = $stateParams.epId;
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initPt', p, function(data,header,config,status){
+            console.log(JSON.stringify(data))
            
-        // },function(data,header,config,status){
-        // });
+        },function(data,header,config,status){
+        });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initProductInfo', p, function(data,header,config,status){
@@ -221,14 +251,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //     console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initOverview', p, function(data,header,config,status){
-            console.log(data)
-            console.log("sssssssssssss")
-           console.log(JSON.stringify(data))
-        },function(data,header,config,status){
-        });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/transProvincial/getXkz', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initReduction', p, function(data,header,config,status){
@@ -716,6 +746,49 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
            
         // },function(data,header,config,status){
         // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId;
+        p.LINKMAN = 'aa';
+        p.LINKTEL = 'bb';
+        p.ysdwmc = '名称1$名称2';
+        p.ysdwdz = '地址1$地址2';
+        p.ysdwlxr = '联系人1$联系人2';
+        p.ysdwlxrsj = '手机号1$手机号2';
+        p.ysdwdlyszh = '道路许可证号1$道路许可证号2';
+        p.fwjsdwwxfwjyxkzh = '处置许可证号';
+        p.yrsxzqhdm = '处置行政区划';
+        p.wfjsdwmc = '处置单位名称';
+        p.wfjsdz = '处置地址';
+        p.wfjsdwlxrsj = '处置联系方式';
+        p.wfjsdwlxr = '处置联系人';
+        p.PT_LIST = [
+            {
+                "UNIT": "吨", 
+                "UNIT_NUM": "100",
+                "BIG_CATEGORY_ID":"HW01",
+                "BIG_CATEGORY_NAME":"aaa",
+                "SAMLL_CATEGORY_ID":"100-200-300",
+                "SAMLL_CATEGORY_NAME":"bbb",
+                "D_NAME":"bbb",
+                "SAMLL_CATEGORY_NAME":"bbb",
+            },
+            {
+                "UNIT": "吨", 
+                "UNIT_NUM": "100",
+                "BIG_CATEGORY_ID":"HW01",
+                "BIG_CATEGORY_NAME":"aaa",
+                "SAMLL_CATEGORY_ID":"100-200-300",
+                "SAMLL_CATEGORY_NAME":"bbb",
+                "D_NAME":"bbb",
+                "SAMLL_CATEGORY_NAME":"bbb",
+            },
+        ]
+        console.log(JSON.stringify(p));
+        Init.iwbhttp('/plan/savePt', p, function(data,header,config,status){
+            console.log(data)
+           
+        },function(data,header,config,status){
+        });
     }
 
     $scope.previewPlan = function(){

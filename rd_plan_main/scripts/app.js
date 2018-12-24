@@ -954,6 +954,60 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
+        .state('dashboard.czlicenseIndex', {
+            url: '/czlicenseIndex',
+            templateUrl: 'views/dashboard/sysadmin/czlicenseIndex.html',
+            controller: 'CzLicenseIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/sysadmin/czLicenseIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.czlicenseIndex.czlicenseList', {
+            url: '/czlicenseList',
+            templateUrl: 'views/dashboard/sysadmin/czlicenseList.html',
+            controller: 'CzLicenseListCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/sysadmin/czLicenseListController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.czlicenseIndex.czlicenseInfo', {
+            url: '/czlicenseInfo',
+            templateUrl: 'views/dashboard/sysadmin/czlicenseInfo.html',
+            controller: 'CzLicenseInfoCtrl',
+            params: {
+                "epId": null,
+                "from": null
+            },
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/sysadmin/czLicenseInfoController.js'
+                        ]
+                    })
+                }
+            }
+        })
     /* $httpProvider.interceptors.push(['$rootScope','$injector','$q',function($rootScope,$injector,$q){
      return {
      'request':function(config){

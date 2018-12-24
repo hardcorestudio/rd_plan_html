@@ -12,8 +12,8 @@
                 <div ng-if="applyId && applyId != ''" class="myaction" ng-click="check()">查看审批记录</div>
                 <div class="myaction" style="font-size: 5px" ng-click="jumpSub('registrationForm')">预览备案登记</div>
                 <div class="myback" ng-click="back()">返回</div>
-                <!-- <div class="myback" ng-click="test1()">初始化</div> -->
-                <!-- <div class="myback" ng-click="test()">测试</div> -->
+                <!-- <div class="myback" ng-click="test1()">初始化</div>
+                <div class="myback" ng-click="test()">测试</div> -->
             </div>
         </div>
         <!-- /.col-lg-12 -->
@@ -52,6 +52,9 @@
                 </div>
                 <div ng-style="entrustDisposalMeasuresClass" ng-click="jumpSub('entrustDisposalMeasures')">
                     <div>危险废物委托利用/处置措施(表7)</div>
+                </div>
+                <div ng-style="ptClass" ng-click="jumpSub('transProvincialTransfer')">
+                    <div>危险废物外省转移</div>
                 </div>
             </div>
         </div>
