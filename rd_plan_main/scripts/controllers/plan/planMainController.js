@@ -204,7 +204,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                     if($scope.applyStatus != '04'){
                         showflag = true
                     }
-                    if($scope.applyStatus == '04' && (pathname == 'baseInfo' || pathname == 'selfDisposalMeasures' || pathname == 'entrustDisposalMeasures')){
+                    if($scope.applyStatus == '04' && (pathname == 'baseInfo' || pathname == 'selfDisposalMeasures' || pathname == 'entrustDisposalMeasures' || pathname == 'transProvincialTransfer')){
                         showflag = true
                     }
                 }

@@ -66,7 +66,7 @@
 						</el-col>
 						<el-col :span="12">
 							<el-form-item label="产生单位联系电话" prop="phone">
-								<el-input v-model="transferData.phone" placeholder="必填"></el-input>
+								<el-input v-model="transferData.phone" placeholder="手机号或区号-座机号码"></el-input>
 							</el-form-item>
 						</el-col>
 					</el-row>
@@ -220,6 +220,9 @@ export default {
 			}, {
 				title: '预计产量',
 				key: 'UNIT_NUM'
+			},{
+				title: '上年实际产量',
+				key: 'LAST_NUM'
 			}],
 			formDataList: [],
 			formDataList1: [],
