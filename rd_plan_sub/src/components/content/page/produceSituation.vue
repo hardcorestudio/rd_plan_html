@@ -4578,15 +4578,15 @@ export default {
 					for(var i in newValue){
 						var ysi = newValue[i].itemList[6].text == "" ? "0" : newValue[i].itemList[6].text
 						if(newValue[i].itemList[6].unit === "个"){
-							itemGe.year_num_sum = parseFloat((parseFloat(itemGe.year_num_sum) + parseFloat(ysi)).toFixed(6))
+							itemGe.year_num_sum = parseFloat((parseFloat(itemGe.year_num_sum) + parseFloat(ysi)).toFixed(6)).toFixed(6)
 						}else if(newValue[i].itemList[6].unit === "吨"){
-							itemDun.year_num_sum = parseFloat((parseFloat(itemDun.year_num_sum) + parseFloat(ysi)).toFixed(6))
+							itemDun.year_num_sum = parseFloat((parseFloat(itemDun.year_num_sum) + parseFloat(ysi)).toFixed(6)).toFixed(6)
 						}
 						var lsi = newValue[i].itemList[7].text == "" ? "0" : newValue[i].itemList[7].text
 						if(newValue[i].itemList[7].unit === "个"){
-							itemGe.last_num_sum = parseFloat((parseFloat(itemGe.last_num_sum) + parseFloat(lsi)).toFixed(6))
+							itemGe.last_num_sum = parseFloat((parseFloat(itemGe.last_num_sum) + parseFloat(lsi)).toFixed(6)).toFixed(6)
 						}else if(newValue[i].itemList[7].unit === "吨"){
-							itemDun.last_num_sum = parseFloat((parseFloat(itemDun.last_num_sum) + parseFloat(lsi)).toFixed(6))
+							itemDun.last_num_sum = parseFloat((parseFloat(itemDun.last_num_sum) + parseFloat(lsi)).toFixed(6)).toFixed(6)
 						}
 						if(i == newValue.length - 1){
 							itemGe.last_num_sum = itemGe.last_num_sum != 0 ? itemGe.last_num_sum + "个" : itemGe.last_num_sum

@@ -195,7 +195,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
     $scope.jumpSub = function(pathname){
         var newWin = window.open('about:blank');//过渡页面的url
         Init.iwbhttp('/plan/planMain', {url:pathname}, function(data,header,config,status){
-            console.log(data)
+            // console.log(data)
             var showflag = false;
             if($scope.userType == 'admin'){
                 showflag = $stateParams.btnFlag 
@@ -204,7 +204,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                     if($scope.applyStatus != '04'){
                         showflag = true
                     }
-                    if($scope.applyStatus == '04' && (pathname == 'baseInfo' || pathname == 'selfDisposalMeasures' || pathname == 'entrustDisposalMeasures' || pathname == 'transProvincialTransfer')){
+                    if($scope.applyStatus == '04' && (pathname == 'baseInfo' || pathname == 'produceSituation' || pathname == 'transferStuation' || pathname == 'selfDisposalMeasures' || pathname == 'entrustDisposalMeasures' || pathname == 'transProvincialTransfer')){
                         showflag = true
                     }
                 }

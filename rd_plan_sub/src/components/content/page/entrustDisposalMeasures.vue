@@ -481,11 +481,11 @@ export default {
 				var ysi = this.formList[i].YEAR_NUM == "" ? "0" : this.formList[i].YEAR_NUM
 				var lsi = this.formList[i].LAST_NUM == "" ? "0" : this.formList[i].LAST_NUM
 				if(this.formList[i].UNIT === "个"){
-					itemGe.year_num_sum = parseFloat((parseFloat(itemGe.year_num_sum) + parseFloat(ysi)).toFixed(6))
-					itemGe.last_num_sum = parseFloat((parseFloat(itemGe.last_num_sum) + parseFloat(lsi)).toFixed(6))
+					itemGe.year_num_sum = parseFloat((parseFloat(itemGe.year_num_sum) + parseFloat(ysi)).toFixed(6)).toFixed(6)
+					itemGe.last_num_sum = parseFloat((parseFloat(itemGe.last_num_sum) + parseFloat(lsi)).toFixed(6)).toFixed(6)
 				}else if(this.formList[i].UNIT === "吨"){
-					itemDun.year_num_sum = parseFloat((parseFloat(itemDun.year_num_sum) + parseFloat(ysi)).toFixed(6))
-					itemDun.last_num_sum = parseFloat((parseFloat(itemDun.last_num_sum) + parseFloat(lsi)).toFixed(6))
+					itemDun.year_num_sum = parseFloat((parseFloat(itemDun.year_num_sum) + parseFloat(ysi)).toFixed(6)).toFixed(6)
+					itemDun.last_num_sum = parseFloat((parseFloat(itemDun.last_num_sum) + parseFloat(lsi)).toFixed(6)).toFixed(6)
 				}
 				if(i == this.formList.length - 1){
 					itemGe.last_num_sum = itemGe.last_num_sum != 0 ? itemGe.last_num_sum + "个" : itemGe.last_num_sum
