@@ -6,7 +6,7 @@
             </h1> -->
             <div class="myHeader">
                 <h1>管理计划</h1>
-                <div ng-if="btnFlag == true && applyBtnFlag == true" class="myaction" ng-click="sub()">确认完成</div>
+                <div ng-if="btnFlag == true && applyBtnFlag == true" class="myaction" ng-click="sub()">确认提交</div>
                 <div ng-if="btnFlag == true && taskFlag == true && userType == 'admin' " class="myaction" id="agreeBtn" ng-click="agree()">同意</div>
                 <div ng-if="btnFlag == true && taskFlag == true && userType == 'admin' " class="myaction" id="disagreeBtn" ng-click="disagree()">不同意</div>
                 <div ng-if="applyId && applyId != ''" class="myaction" ng-click="check()">查看审批记录</div>

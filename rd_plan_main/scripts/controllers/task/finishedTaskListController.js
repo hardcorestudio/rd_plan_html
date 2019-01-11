@@ -54,6 +54,9 @@ angular.module('sbAdminApp').controller('FinishedTaskListCtrl', ['$scope','Init'
                 "data": "STEP_NAME"
             },
             {
+                "data": "STATUSNAME"
+            },
+            {
                 "visible": false,
                 "data": "BELONG_SEPA"
             },
