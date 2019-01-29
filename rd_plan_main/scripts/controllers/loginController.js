@@ -54,7 +54,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', ['$rootScope','$scope','Ini
             $scope.open("密码太短！");
             return;
         }
-        var patrn=/^[A-Za-z0-9]+$/;
+        var patrn=/^[A-Za-z0-9!@#$]+$/;
         if (!patrn.exec($scope.adminPwd)){
             $scope.open("密码格式错误！");
             return;
@@ -102,7 +102,7 @@ angular.module('sbAdminApp').controller('LoginCtrl', ['$rootScope','$scope','Ini
             $scope.open("密码太短！");
             return;
         }
-        var patrn=/^[A-Za-z0-9]+$/;
+        var patrn=/^[A-Za-z0-9!@#$]+$/;
         if (!patrn.exec($scope.epAdminPwd)){
             $scope.open("密码格式错误！");
             return;
