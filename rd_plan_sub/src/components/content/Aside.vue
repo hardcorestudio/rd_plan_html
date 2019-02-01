@@ -6,7 +6,9 @@
 		</div>
 		<div class="leftAside_contentArea">
 			<div class="leftAside_textItemEpName">单位名称：{{titleInfo.epName}}</div>
-			<div v-if="titleInfo.textInfoList" class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
+			<div v-if="titleInfo.textInfoList">
+				<div class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
+			</div>
 		</div>
 		<div v-if="userRole === 'CSEP' && showflag == 'true'" class="leftAside_btnArea">
 			<el-button v-if="titleInfo.title" class="saveBtn" plain @click="doSubmit('save')">保存</el-button>
