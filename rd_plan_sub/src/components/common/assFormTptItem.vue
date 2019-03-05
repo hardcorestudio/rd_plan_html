@@ -75,6 +75,7 @@ import fetch from '../utils/fetch.js'
 			formItem: Object,
 			type: String,
 			nameList: Array,
+			tptIndex: String
 		},
     data() {
       return {
@@ -83,10 +84,13 @@ import fetch from '../utils/fetch.js'
 		},
     methods: {
 			addSign() {
-				this.$emit('addSign')
+				this.$emit('addSign',this.tptIndex)
 			},
 			reduceSign() {
-				this.$emit('reduceSign',this.index)
+				let param = {}
+				param.index = this.index
+				param.tptIndex = this.tptIndex
+				this.$emit('reduceSign',param)
 			},
 			nameChange(){
 				for(let i in this.nameList){
