@@ -764,6 +764,14 @@ export default {
 			this.ifsaveUserRole = this.ifsave === '1' ?  this.userRole : 'ifsave'
 			
 			let selfListLength = res.initHandleSelfs.length
+			this.levelOneData = []
+			for (let i in res.initOverviewList) {
+				let item = {}
+				item.value = res.initOverviewList[i].D_NAME
+				item.label = res.initOverviewList[i].D_NAME
+				item.UNIT = res.initOverviewList[i].UNIT
+				this.levelOneData.push(item)
+			}
 			if(selfListLength > 0){
 				if(selfListLength === 1){
 					this.isFormTwoShow = false
@@ -774,14 +782,6 @@ export default {
 				}else if(selfListLength === 3){
 					this.isFormTwoShow = true
 					this.isFormThreeShow = true
-				}
-				this.levelOneData = []
-				for (let i in res.initOverviewList) {
-					let item = {}
-					item.value = res.initOverviewList[i].D_NAME
-					item.label = res.initOverviewList[i].D_NAME
-					item.UNIT = res.initOverviewList[i].UNIT
-					this.levelOneData.push(item)
 				}
 
 				for(let i = 0;i < selfListLength;i++){
