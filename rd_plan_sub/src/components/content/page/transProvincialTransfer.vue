@@ -723,6 +723,7 @@ export default {
           let person = [];
           let addr = [];
           if (res.initPtInfoList[index].initPt !== "") {
+            dataItem.transferData = {}
             dataItem.transferData.name = res.initPtInfoList[index].initPt.LINKMAN
             dataItem.transferData.phone = res.initPtInfoList[index].initPt.LINKPHONE
 
@@ -732,6 +733,7 @@ export default {
             person = res.initPtInfoList[index].initPt.ysdwlxr.split('$');
             addr = res.initPtInfoList[index].initPt.ysdwdz.split('$');
 
+            dataItem.tptData = {}
             dataItem.tptData.compNameDetail = res.initPtInfoList[index].initPt.wfjsdwmc
             dataItem.tptData.licenceNoDetail = res.initPtInfoList[index].initPt.fwjsdwwxfwjyxkzh
             dataItem.tptData.addrDetail = res.initPtInfoList[index].initPt.wfjsdz
@@ -951,8 +953,10 @@ export default {
       if (!checkFlag) {
         return
       }
-			
-			let submitFail = false
+      let submitFail = false
+      console.log(this.tptDataList)
+
+      submitData.initPtInfoList = []
 			for (let num in this.tptDataList) {
 				if (this.tptDataList[num].tptData.compNameDetail === "" || this.tptDataList[num].tptData.licenceNoDetail === "") {
 					this.$notify.error({
@@ -996,7 +1000,6 @@ export default {
 					});
 					return;
 				}
-				submitData.initPtInfoList = []
 
         let initPtData = {}
         initPtData.wfjsdwmc = this.tptDataList[num].tptData.compNameDetail
