@@ -913,6 +913,7 @@ export default {
           "LAST_NUM": ""
         }]
       }
+      this.tptDataList = []
 			this.tptDataList.push(emptyItem)
 		}
     })
