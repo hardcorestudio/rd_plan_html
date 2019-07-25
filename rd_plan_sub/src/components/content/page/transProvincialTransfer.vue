@@ -1187,7 +1187,7 @@ export default {
       param.xkzh = this.tptDataList[index].licenceNo
       if (param.dwmc !== "" || param.xkzh !== "") {
         fetchPt({
-          url: '/transProvincial/getXkz',
+          url: '/syncUpload/getXkz',
           method: 'POST',
           data: 'version=2&jsonParam=' + JSON.stringify(param)
         }).then(res => {

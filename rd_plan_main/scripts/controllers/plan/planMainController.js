@@ -209,7 +209,7 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
                     }
                 }
             }
-            var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId+"&showflag="+showflag+"&epName="+localStorageService.get('epName') ;
+            var sub_url = data.sub_url+"?IWBSESSION="+localStorageService.get('IWBSESSION')+"&WJWT="+localStorageService.get('WJWT')+"&DEVICE_UUID="+$rootScope.uuid+"&CURRENT_URL="+$location.url()+"&USER_ID="+localStorageService.get('userId')+"&TP_ID="+$stateParams.tpId+"&EP_ID="+$stateParams.epId+"&showflag="+showflag+"&epName="+$scope.epName ;
             // window.open(sub_url, '_blank')
             newWin.location.href = sub_url;
         },function(data,header,config,status){
@@ -236,14 +236,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         // })
 
 
-        var p = {};
-        p.EP_ID = $stateParams.epId;
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initPt', p, function(data,header,config,status){
-            console.log(JSON.stringify(data))
+        // var p = {};
+        // p.EP_ID = $stateParams.epId;
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initPt', p, function(data,header,config,status){
+        //     console.log(JSON.stringify(data))
            
-        },function(data,header,config,status){
-        });
+        // },function(data,header,config,status){
+        // });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initProductInfo', p, function(data,header,config,status){
@@ -275,14 +275,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        // var p = {};
-        // p.TP_ID = $stateParams.tpId
-        // Init.iwbhttp('/plan/initHandleSelf', p, function(data,header,config,status){
-        //     console.log(data)
-        //     console.log("sssssssssssss")
-        //    console.log(JSON.stringify(data))
-        // },function(data,header,config,status){
-        // });
+        var p = {};
+        p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/initHandleSelf', p, function(data,header,config,status){
+            console.log(data)
+            console.log("sssssssssssss")
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){
