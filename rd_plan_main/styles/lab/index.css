@@ -1,0 +1,18 @@
+td.details-control {
+    background: url('../../images/lab/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../../images/lab/details_close.png') no-repeat center center;
+}
+
+.format_title {
+    font-size:16px;
+    color:#6f6f6f;
+    margin-bottom:6px;
+}
+
+.format_content {
+    font-size:13px;
+    color:#777;
+}

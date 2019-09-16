@@ -800,6 +800,255 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
+        .state('dashboard.labWarn', {
+            url: '/labWarn',
+            templateUrl: 'views/dashboard/lab/labWarn.html',
+            controller: 'LabWarnCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/lab/labWarnController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labNotifications', {
+            url: '/labNotifications',
+            templateUrl: 'views/dashboard/lab/labNotifications.html',
+            controller: 'LabNotificationsCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/lab/LabNotificationsModalController.js',
+                            'scripts/controllers/lab/LabNotificationsController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp1TransferIndex', {
+            url: '/labEp1TransferIndex',
+            templateUrl: 'views/dashboard/lab/labEp1TransferIndex.html',
+            controller: 'LabEp1TransferIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/lab/LabEp1TransferIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp1TransferIndex.labEp1Transfer', {
+            url: '/labEp1Transfer',
+            templateUrl: 'views/dashboard/lab/labEp1Transfer.html',
+            controller: 'LabEp1TransferCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/lab/LabEp1TransferController.js',
+                            'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp2TransferIndex', {
+            url: '/labEp2TransferIndex',
+            templateUrl: 'views/dashboard/lab/labEp2TransferIndex.html',
+            controller: 'LabEp2TransferIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/lab/LabEp2TransferIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp2TransferIndex.labEp2Transfer', {
+            url: '/labEp2Transfer',
+            templateUrl: 'views/dashboard/lab/labEp2Transfer.html',
+            controller: 'LabEp2TransferCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/lab/LabEp2TransferController.js',
+                            'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp3TransferIndex', {
+            url: '/labEp3TransferIndex',
+            templateUrl: 'views/dashboard/lab/labEp3TransferIndex.html',
+            controller: 'LabEp3TransferIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/lab/LabEp3TransferIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp3TransferIndex.labEp3Transfer', {
+            url: '/labEp3Transfer',
+            templateUrl: 'views/dashboard/lab/labEp3Transfer.html',
+            controller: 'LabEp3TransferCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/lab/LabEp3TransferController.js',
+                            'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp1ListIndex', {
+            url: '/labEp1ListIndex',
+            templateUrl: 'views/dashboard/lab/labEp1ListIndex.html',
+            controller: 'LabEp1ListIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/lab/LabEp1ListIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp1ListIndex.labEp1List', {
+            url: '/labEp1List',
+            templateUrl: 'views/dashboard/lab/labEp1List.html',
+            controller: 'LabEp1ListCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/lab/LabEp1ListController.js',
+                            'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp2ListIndex', {
+            url: '/labEp2ListIndex',
+            templateUrl: 'views/dashboard/lab/labEp2ListIndex.html',
+            controller: 'LabEp2ListIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/lab/LabEp2ListIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp2ListIndex.labEp2List', {
+            url: '/labEp2List',
+            templateUrl: 'views/dashboard/lab/labEp2List.html',
+            controller: 'LabEp2ListCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/lab/LabEp2ListController.js',
+                            'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp3ListIndex', {
+            url: '/labEp3ListIndex',
+            templateUrl: 'views/dashboard/lab/labEp3ListIndex.html',
+            controller: 'LabEp3ListIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/lab/LabEp3ListIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.labEp3ListIndex.labEp3List', {
+            url: '/labEp3List',
+            templateUrl: 'views/dashboard/lab/labEp3List.html',
+            controller: 'LabEp3ListCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/lab/LabEp3ListController.js',
+                            'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
         .state('dashboard.monitorForAdminIndex', {
             url: '/monitorForAdminIndex',
             templateUrl: 'views/dashboard/monitorAdmin/monitorForAdminIndex.html',
@@ -1031,7 +1280,9 @@ iwoboApp.run(['$state', '$rootScope', 'localStorageService', '$modal', '$log', '
     // $rootScope.baseUrl = 'http://lovewobo.com';
     $rootScope.baseUrl = 'http://localhost:9002/api';
     // $rootScope.baseUrl = 'http://192.168.1.120:9002/api';
-    //$rootScope.baseUrl = 'http://60.30.64.249:7080/rd_2nd';
+    // $rootScope.baseUrl = 'http://60.30.64.249:7080/rd_2nd';
+    // $rootScope.baseUrl = 'http://60.30.64.249:8080/api';
+    // $rootScope.websocketUrlController = 'ws://60.30.64.249:8080/mywebsocket';
     $rootScope.websocketUrlController = 'ws://localhost:9002/mywebsocket';
     $rootScope.baseUrlPath = '';
     $rootScope.uuid = '';
