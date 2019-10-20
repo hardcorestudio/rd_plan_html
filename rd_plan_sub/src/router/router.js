@@ -11,6 +11,8 @@ import produceSituation from '../components/content/page/produceSituation.vue'
 import entrustDisposalMeasures from '../components/content/page/entrustDisposalMeasures.vue'
 import registrationForm from '../components/content/page/registrationForm.vue'
 import transProvincialTransfer from '../components/content/page/transProvincialTransfer.vue'
+import transProvincialTransferSync from '../components/content/page/transProvincialTransferSync.vue'
+import transProvincialTransferSyncDetail from '../components/content/page/transProvincialTransferSyncDetail.vue'
 
 
 import pageIncompatible from '../components/content/PageIncompatible.vue'
@@ -75,6 +77,13 @@ const routes = [
 	{
 		path: '/transProvincialTransfer',
 		component: transProvincialTransfer,
+	},
+	{
+		path: '/transProvincialTransferSync',
+		component: transProvincialTransferSync,
+	},{
+		path: '/transProvincialTransferSyncDetail',
+		component: transProvincialTransferSyncDetail,
 	},
 	
 	// {

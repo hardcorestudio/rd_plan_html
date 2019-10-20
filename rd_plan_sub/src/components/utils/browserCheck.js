@@ -47,3 +47,13 @@ function subStringByBefore(str) {
   var resultStr = str.substr(0, strIndex);
 	return resultStr;
 };
+export function getWholeQueryString(){
+  var result = subStringBySignAfter(window.location.href, "?")
+  return result;
+}
+function subStringBySignAfter(str, sign) {
+	var strIndex = str.indexOf(sign) + 1;
+  var resultStr = str.substr(strIndex, str.length);
+  resultStr = resultStr.replace(/%2F/g,'/')
+	return resultStr;
+};
