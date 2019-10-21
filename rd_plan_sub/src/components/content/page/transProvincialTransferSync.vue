@@ -8,10 +8,18 @@
     <div id="transProvincialTransferSyncBg">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-input
+          <!-- <el-input
             v-model="searchValue"
             placeholder="请输入单位名称"
-          ></el-input>
+          ></el-input> -->
+          <el-select v-model="searchValue" filterable placeholder="请输入单位名称">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-col>
         <!-- <el-col :span="10">
             <el-input
@@ -185,6 +193,7 @@ export default {
     };
     return {
       searchValue: '',
+      companyList: [],
       repaetClickTime: 2,
       repeatClickFlag: false,
       nowSearchIndex: '',
@@ -333,7 +342,6 @@ export default {
         localStorage.setItem("sVal", "")
         vm.searchValue = ""
       }
-      vm.getDataBySearching(vm)
 
       vm.repeatClickFlag = false
       vm.queryJson = getQueryString()
@@ -341,12 +349,25 @@ export default {
 
       vm.EP_ID = vm.queryJson.EP_ID
       vm.TP_ID = vm.queryJson.TP_ID
+
+      vm.getDataBySearching(vm)
+
+      vm.getCompanyList()
     })
   },
   mounted () {
     
   },
   methods: {
+    getCompanyList() {
+      fetch({
+        url: '/plan/initPt',
+        method: 'POST',
+        data: 'params=' + JSON.stringify(this.queryJson)
+      }).then(res => {
+
+      })
+    },
     nameRepeatCheck (arr, key) {
       for (let i = 0; i < arr.length; i++) {
         let name1 = arr[i][key]
