@@ -75,22 +75,24 @@
                 <el-form-item
                   label="产生单位联系人"
                 >
-                  <!-- <el-input
+                  <el-input
+                    v-if="allowFormStatus === 'to'"
                     v-model="tptItem.transferData.name"
                     placeholder="必填"
-                  ></el-input> -->
-                  <el-row>{{ tptItem.transferData.name }}</el-row>
+                  ></el-input>
+                  <el-row v-else-if="allowFormStatus === 'from'">{{ tptItem.transferData.name }}</el-row>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item
                   label="产生单位联系电话"
                 >
-                  <!-- <el-input
+                  <el-input
+                    v-if="allowFormStatus === 'to'"
                     v-model="tptItem.transferData.phone"
                     placeholder="手机号或区号-座机号码"
-                  ></el-input> -->
-                  <el-row>{{ tptItem.transferData.phone }}</el-row>
+                  ></el-input>
+                  <el-row v-else-if="allowFormStatus === 'from'">{{ tptItem.transferData.phone }}</el-row>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -124,6 +126,72 @@
             :nameList="nameList"
           ></assFormTptItem>
         </div>
+      </div>
+      <div v-if="allowFormStatus === 'to'" style="float: left;width: 100%;margin-top: 20px;">
+        <el-form
+          class="tptElForm"
+          ref="allowToForm"
+          :model="allowToFormInfo"
+          label-width="90px"
+        >
+          <el-row :gutter="20">
+            <el-col :span="12">
+              <el-form-item label="审批日期">
+                <el-date-picker
+                  v-model="allowToFormInfo.date"
+                  type="datetime"
+                  placeholder="请选择回复日期">
+                </el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="审批结果">
+                <el-select v-model="allowToFormInfo.result" placeholder="请选择">
+                  <el-option
+                    v-for="item in resultEnum"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </div>
+      <div v-else-if="allowFormStatus === 'from'" style="float: left;width: 100%;margin-top: 20px;">
+        <el-form
+          class="tptElForm"
+          ref="allowToForm"
+          :model="allowToFormInfo"
+          label-width="90px"
+        >
+          <el-row :gutter="20">
+            <el-col :span="12">
+              <el-form-item label="回复日期">
+                <!-- <el-row>{{allowToFormInfo.date}}</el-row> -->
+                <el-date-picker
+                  v-model="allowToFormInfo.date"
+                  type="datetime"
+                  placeholder="请选择回复日期">
+                </el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="商请结果">
+                <!-- <el-row>{{allowToFormInfo.result}}</el-row> -->
+                <el-select v-model="allowToFormInfo.result" placeholder="请选择">
+                  <el-option
+                    v-for="item in resultEnum"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
       </div>
       <div class="footerSign"></div>
     </div>
@@ -161,6 +229,18 @@ export default {
       }
     };
     return {
+      allowFormStatus: "",
+      resultEnum: [{
+        value: "同意",
+        label: "同意"
+      },{
+        value: "拒绝",
+        label: "拒绝"
+      }],
+      allowToFormInfo: {
+        date: "",
+        result: ""
+      },
       repaetClickTime: 2,
       repeatClickFlag: false,
       nowSearchIndex: '',
@@ -309,13 +389,13 @@ export default {
     this.EP_ID = this.queryJson.EP_ID
     this.TP_ID = this.queryJson.TP_ID
 
-    let dataList = this.$route.query.data
-    let listIndex = this.$route.query.dataIndex
+    let dataList = JSON.parse(localStorage.getItem("tptsWholeData")) 
+    let listIndex = this.queryJson.dataIndex
     this.tptDataList = []
     this.tptDataList.push(dataList[listIndex])
 
-    this.userRole = this.$route.query.userRole
-
+    this.userRole = this.queryJson.userRole
+    this.allowFormStatus = dataList[listIndex].allowFormStatus
   },
   methods: {
     doSubmit () {

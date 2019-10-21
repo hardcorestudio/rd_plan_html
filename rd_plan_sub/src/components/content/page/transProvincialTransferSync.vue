@@ -1014,13 +1014,11 @@ export default {
       }
     },
     toSyncDetail(wholeData, index){
+      localStorage.setItem("tptsWholeData", JSON.stringify(wholeData))
       this.$router.push({
-        path: '/transProvincialTransferSyncDetail?' + getWholeQueryString(),
+        path: '/transProvincialTransferSyncDetail?userRole=' + this.userRole + '&dataIndex=' + index + '&' + getWholeQueryString(),
         query: {
-          searchValue: this.searchValue,
-          data: wholeData,
-          dataIndex: index,
-          userRole: this.userRole
+          searchValue: this.searchValue
         }
       })
     }
