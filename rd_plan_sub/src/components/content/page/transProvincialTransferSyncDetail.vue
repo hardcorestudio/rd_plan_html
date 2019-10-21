@@ -2,6 +2,7 @@
   <div id='transProvincialTransferSyncDetail'>
     <my-aside
       :userRole="userRole"
+      needSave="1" 
       class="my-aside"
       :titleInfo="myTitleInfo"
       @doSubmit="doSubmit"
@@ -76,11 +77,11 @@
                   label="产生单位联系人"
                 >
                   <el-input
-                    v-if="allowFormStatus === 'to'"
+                    v-if="allowFormStatus === 'OUT_ADD'"
                     v-model="tptItem.transferData.name"
                     placeholder="必填"
                   ></el-input>
-                  <el-row v-else-if="allowFormStatus === 'from'">{{ tptItem.transferData.name }}</el-row>
+                  <el-row v-else>{{ tptItem.transferData.name }}</el-row>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
@@ -88,11 +89,11 @@
                   label="产生单位联系电话"
                 >
                   <el-input
-                    v-if="allowFormStatus === 'to'"
+                    v-if="allowFormStatus === 'OUT_ADD'"
                     v-model="tptItem.transferData.phone"
                     placeholder="手机号或区号-座机号码"
                   ></el-input>
-                  <el-row v-else-if="allowFormStatus === 'from'">{{ tptItem.transferData.phone }}</el-row>
+                  <el-row v-else>{{ tptItem.transferData.phone }}</el-row>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -127,7 +128,7 @@
           ></assFormTptItem>
         </div>
       </div>
-      <div v-if="allowFormStatus === 'to'" style="float: left;width: 100%;margin-top: 20px;">
+      <div v-if="allowFormStatus === 'OUT'" style="float: left;width: 100%;margin-top: 20px;">
         <el-form
           class="tptElForm"
           ref="allowToForm"
@@ -140,7 +141,8 @@
                 <el-date-picker
                   v-model="allowToFormInfo.date"
                   type="datetime"
-                  placeholder="请选择回复日期">
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  placeholder="请选择审批日期">
                 </el-date-picker>
               </el-form-item>
             </el-col>
@@ -159,7 +161,7 @@
           </el-row>
         </el-form>
       </div>
-      <div v-else-if="allowFormStatus === 'from'" style="float: left;width: 100%;margin-top: 20px;">
+      <div v-else-if="allowFormStatus === 'IN'" style="float: left;width: 100%;margin-top: 20px;">
         <el-form
           class="tptElForm"
           ref="allowToForm"
@@ -173,6 +175,7 @@
                 <el-date-picker
                   v-model="allowToFormInfo.date"
                   type="datetime"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                   placeholder="请选择回复日期">
                 </el-date-picker>
               </el-form-item>
@@ -188,6 +191,28 @@
                     :value="item.value">
                   </el-option>
                 </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </div>
+      <div v-else-if="allowFormStatus === 'OUT_ADD'" style="float: left;width: 100%;margin-top: 20px;">
+        <el-form
+          class="tptElForm"
+          ref="allowToForm"
+          :model="allowToFormInfo"
+          label-width="90px"
+        >
+          <el-row :gutter="20">
+            <el-col :span="12">
+              <el-form-item label="商请日期">
+                <!-- <el-row>{{allowToFormInfo.date}}</el-row> -->
+                <el-date-picker
+                  v-model="allowToFormInfo.date"
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  type="datetime"
+                  placeholder="请选择回复日期">
+                </el-date-picker>
               </el-form-item>
             </el-col>
           </el-row>
@@ -229,6 +254,7 @@ export default {
       }
     };
     return {
+      syncUrl: "http://gfxt.mepscc.cn/edpgf_ws_test/servicesx/KSTranService?wsdl",
       allowFormStatus: "",
       resultEnum: [{
         value: "同意",
@@ -395,175 +421,89 @@ export default {
     this.tptDataList.push(dataList[listIndex])
 
     this.userRole = this.queryJson.userRole
-    this.allowFormStatus = dataList[listIndex].allowFormStatus
+    this.allowFormStatus = this.queryJson.SYNC_TYPE
   },
   methods: {
     doSubmit () {
-      // if (!this.repeatClickFlag) {
-      //   this.repeatClickFlag = true
-      //   setTimeout(() => {
-      //     this.repeatClickFlag = false
-      //   }, this.repaetClickTime * 1000);
-      // } else {
-      //   this.$notify.error({
-      //     title: '警告',
-      //     message: this.repaetClickTime + "秒内不得重复提交"
-      //   });
-      //   return;
-			// }
+      if (!this.repeatClickFlag) {
+        this.repeatClickFlag = true
+        setTimeout(() => {
+          this.repeatClickFlag = false
+        }, this.repaetClickTime * 1000);
+      } else {
+        this.$notify.error({
+          title: '警告',
+          message: this.repaetClickTime + "秒内不得重复提交"
+        });
+        return;
+			}
 			
-			// let submitData = {}
-      // submitData.EP_ID = this.EP_ID
-			// submitData.TP_ID = this.TP_ID
-			
-			// let checkFlag = false
-			// for (let i in this.tptDataList) {
-      //   let formStr = 'form' + i
-			// 	this.$refs[formStr][0].validate((valid) => {
-			// 		if (valid) {
-			// 			checkFlag = true
-			// 		} else {
-			// 			checkFlag = false
-			// 		}
-			// 	});
-			// }
-      // if (!checkFlag) {
-      //   return
-      // }
-      // let submitFail = false
-      // console.log(this.tptDataList)
-
-      // submitData.initPtInfoList = []
-			// for (let num in this.tptDataList) {
-			// 	if (this.tptDataList[num].tptData.compNameDetail === "" || this.tptDataList[num].tptData.licenceNoDetail === "") {
-			// 		this.$notify.error({
-			// 			title: '警告',
-			// 			message: "请填写单位名称或许可证编号，并确保存在"
-			// 		});
-			// 		return;
-			// 	}
-			// 	for (let i in this.tptDataList[num].title1fromList) {
-			// 		let item = this.tptDataList[num].title1fromList[i].itemList
-			// 		for (let j in item) {
-			// 			if (item[j].text === "") {
-			// 				this.$notify.error({
-			// 					title: '警告',
-			// 					message: "请填全[跨省运输单位信息]所有内容"
-			// 				});
-			// 				return
-			// 			}
-			// 			if (this.checkDorSign(item[j].text)) {
-			// 				this.$notify.error({
-			// 					title: '警告',
-			// 					message: "[跨省运输单位信息]数据中不可输入'$'符号"
-			// 				});
-			// 				return
-			// 			}
-			// 		}
-			// 	}
-			// 	for (let i in this.tptDataList[num].formList) {
-			// 		if (this.tptDataList[num].formList[i].D_NAME === "" || this.tptDataList[num].formList[i].UNIT_NUM === "" || this.tptDataList[num].formList[i].SAMLL_CATEGORY_ID === "" || this.tptDataList[num].formList[i].BIG_CATEGORY_ID === "" || this.tptDataList[num].formList[i].LAST_NUM === "") {
-			// 			this.$notify.error({
-			// 				title: '警告',
-			// 				message: "请填全[危险废物情况]所有内容"
-			// 			});
-			// 			return;
-			// 		}
-			// 	}
-			// 	if (this.nameRepeatCheck(this.tptDataList[num].formList, 'D_NAME')) {
-			// 		this.$notify.error({
-			// 			title: '错误',
-			// 			message: "废物名称不能重复，请修改后重新提交"
-			// 		});
-			// 		return;
-			// 	}
-
-      //   let initPtData = {}
-      //   initPtData.wfjsdwmc = this.tptDataList[num].tptData.compNameDetail
-      //   initPtData.fwjsdwwxfwjyxkzh = this.tptDataList[num].tptData.licenceNoDetail
-      //   initPtData.wfjsdz = this.tptDataList[num].tptData.addrDetail
-      //   initPtData.yrsxzqhdm = this.tptDataList[num].tptData.cardDetail
-      //   initPtData.wfjsdwlxr = this.tptDataList[num].tptData.contactDetail
-      //   initPtData.wfjsdwlxrsj = this.tptDataList[num].tptData.contactPhoneDetail
-
-      //   initPtData.LINKMAN = this.tptDataList[num].transferData.name
-      //   initPtData.LINKTEL = this.tptDataList[num].transferData.phone
-
-      //   initPtData.ysdwmc = ""
-      //   initPtData.ysdwdz = ""
-      //   initPtData.ysdwlxr = ""
-      //   initPtData.ysdwlxrsj = ""
-      //   initPtData.ysdwdlyszh = ""
-
-			// 	let repeatCheck = []
-			// 	for (let i in this.tptDataList[num].title1fromList) {
-          
-        
-			// 		let itemData = {}
-			// 		itemData.ysdwmc = this.tptDataList[num].title1fromList[i].itemList[0].text
-			// 		itemData.ysdwdz = this.tptDataList[num].title1fromList[i].itemList[4].text
-			// 		itemData.ysdwlxr = this.tptDataList[num].title1fromList[i].itemList[2].text
-			// 		itemData.ysdwlxrsj = this.tptDataList[num].title1fromList[i].itemList[3].text
-			// 		itemData.ysdwdlyszh = this.tptDataList[num].title1fromList[i].itemList[1].text
-			// 		repeatCheck.push(itemData)
-			// 		if (i == 0) {
-			// 			initPtData.ysdwmc = this.tptDataList[num].title1fromList[i].itemList[0].text
-			// 			initPtData.ysdwdz = this.tptDataList[num].title1fromList[i].itemList[4].text
-			// 			initPtData.ysdwlxr = this.tptDataList[num].title1fromList[i].itemList[2].text
-			// 			initPtData.ysdwlxrsj = this.tptDataList[num].title1fromList[i].itemList[3].text
-			// 			initPtData.ysdwdlyszh = this.tptDataList[num].title1fromList[i].itemList[1].text
-			// 		} else {
-			// 			initPtData.ysdwmc += "$" + this.tptDataList[num].title1fromList[i].itemList[0].text
-			// 			initPtData.ysdwdz += "$" + this.tptDataList[num].title1fromList[i].itemList[4].text
-			// 			initPtData.ysdwlxr += "$" + this.tptDataList[num].title1fromList[i].itemList[2].text
-			// 			initPtData.ysdwlxrsj += "$" + this.tptDataList[num].title1fromList[i].itemList[3].text
-			// 			initPtData.ysdwdlyszh += "$" + this.tptDataList[num].title1fromList[i].itemList[1].text
-			// 		}
-			// 	}
-
-			// 	if (this.nameRepeatCheck(repeatCheck, 'ysdwmc') || this.nameRepeatCheck(repeatCheck, 'ysdwdlyszh')) {
-			// 		this.$notify.error({
-			// 			title: '错误',
-			// 			message: "单位名称或许可证号不能重复，请修改后重新提交"
-			// 		});
-			// 		return;
-			// 	}
-			// 	initPtData.PT_LIST = []
-			// 	for (let i in this.tptDataList[num].formList) {
-			// 		initPtData.PT_LIST.push(this.tptDataList[num].formList[i])
-			// 	}
-			// 	submitData.initPtInfoList.push(initPtData)
-				
-			// }
-      // for (let key in this.queryJson) {
-			// 	submitData[key] = this.queryJson[key]
-			// }
-			// const loading = this.$loading({
-			// 	lock: true,
-			// 	text: 'Loading',
-			// 	spinner: 'el-icon-loading',
-			// 	background: 'rgba(0, 0, 0, 0.3)'
-			// });
+			let submitData = {}
+      submitData.EP_ID = this.EP_ID
+      submitData.TP_ID = this.TP_ID
+      submitData.method = "saveKsldSq"
+      submitData.url = this.syncUrl
       
-      // fetch({
-      //   url: '/plan/savePt',
-      //   method: 'POST',
-      //   data: 'params=' + JSON.stringify(submitData)
-      // }).then(res => {
-      //   if (res.resFlag == '0') {
-      //     this.$notify({
-      //       title: '成功',
-      //       message: '保存成功',
-      //       type: 'success'
-      //     });
-      //   } else {
-      //     this.$notify.error({
-      //       title: '失败',
-      //       message: res.resMsg
-      //     });
-      //   }
-      //   loading.close();
-      // })
+      let jsonParam = {}
+      jsonParam.ycsxzqhdm = this.tptDataList[this.queryJson.dataIndex].tptData.ycsxzqhdm
+      jsonParam.wfycdwmc = this.tptDataList[this.queryJson.dataIndex].tptData.wfycdwmc
+      jsonParam.wfycdwdz = this.tptDataList[this.queryJson.dataIndex].tptData.wfycdwdz
+
+      jsonParam.ksrq = this.tptDataList[this.queryJson.dataIndex].tptData.ksrq
+      jsonParam.jsrq = this.tptDataList[this.queryJson.dataIndex].tptData.jsrq
+      jsonParam.wfycdwlxr = this.tptDataList[this.queryJson.dataIndex].transferData.name
+      jsonParam.fwycdwlxrsj = this.tptDataList[this.queryJson.dataIndex].transferData.phone
+      
+      jsonParam.ysdwsz = []
+      for (let i in this.tptDataList[this.queryJson.dataIndex].title1fromList) {
+        let itemData = {}
+        itemData.ysdwmc = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[0].text
+        itemData.ysdwdz = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[4].text
+        itemData.ysdwlxr = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[2].text
+        itemData.ysdwlxrsj = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[3].text
+        itemData.ysdwdlyszh = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[1].text
+        jsonParam.ysdwsz.push(itemData)
+      }
+      
+      jsonParam.wfjsdwmc = this.tptDataList[this.queryJson.dataIndex].tptData.compNameDetail
+      jsonParam.jsdwxkzbh = this.tptDataList[this.queryJson.dataIndex].tptData.licenceNoDetail
+      jsonParam.wfjsdz = this.tptDataList[this.queryJson.dataIndex].tptData.addrDetail
+      jsonParam.yrsxzqhdm = this.tptDataList[this.queryJson.dataIndex].tptData.cardDetail
+      jsonParam.wfjsdwlxr = this.tptDataList[this.queryJson.dataIndex].tptData.contactDetail
+      jsonParam.wfjsdwlxrsj = this.tptDataList[this.queryJson.dataIndex].tptData.contactPhoneDetail
+
+      jsonParam.fwsz = []
+      for (let i in this.tptDataList[this.queryJson.dataIndex].formList) {
+        let formItem = {}
+        formItem.fwmc = this.tptDataList[this.queryJson.dataIndex].formList[i].wxfwmc
+        formItem.fwlb = this.tptDataList[this.queryJson.dataIndex].formList[i].BIG_CATEGORY_ID
+        formItem.fwdm = this.tptDataList[this.queryJson.dataIndex].formList[i].wxfwdm
+        formItem.zysl = this.tptDataList[this.queryJson.dataIndex].formList[i].zysl
+        formItem.jldw = this.tptDataList[this.queryJson.dataIndex].formList[i].jldw
+        jsonParam.fwsz.push(formItem)
+      }
+      jsonParam.sqrq = this.allowToFormInfo.date
+      submitData.jsonParam = jsonParam
+
+      fetchPt({
+        url: '/syncUpload/indexForCors',
+        method: 'POST',
+        data: 'params=' + JSON.stringify(submitData)
+      }).then(res => {
+        if (res.length > 5) {
+          this.$notify({
+            title: '成功',
+            message: res,
+            type: 'success'
+          });
+        } else {
+          this.$notify.error({
+            title: '失败',
+            message: res
+          });
+        }
+        loading.close();
+      })
 
       localStorage.setItem("sVal", this.$route.query.searchValue)
       this.$router.back(-1)

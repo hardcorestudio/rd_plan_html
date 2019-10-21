@@ -12,12 +12,14 @@
             v-model="searchValue"
             placeholder="请输入单位名称"
           ></el-input> -->
-          <el-select v-model="searchValue" filterable placeholder="请输入单位名称">
+          <el-select v-model="searchValue" filterable placeholder="请输入单位名称" style="width: 100%;">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+              v-for="item in companyList"
+              :key="item.TP_ID"
+              :label="item.EP_NAME"
+              :value="item.TP_ID">
+              <span style="float: left">{{ item.EP_NAME }}</span>
+              <span style="float: right; color: #8492a6; font-size: 13px">{{ item.PLAN_YEAR }}</span>
             </el-option>
           </el-select>
         </el-col>
@@ -230,7 +232,12 @@ export default {
           addrDetail: "",
           cardDetail: "",
           contactDetail: "",
-          contactPhoneDetail: ""
+          contactPhoneDetail: "",
+          ycsxzqhdm:"",
+          wfycdwmc:"",
+          wfycdwdz:"",
+          ksrq:"",
+          jsrq:"",
         },
         formStatus: 'card',
         transferData: {
@@ -360,12 +367,12 @@ export default {
   },
   methods: {
     getCompanyList() {
-      fetch({
-        url: '/plan/initPt',
+      fetchPt({
+        url: '/syncUpload/queryPlanByEpName',
         method: 'POST',
         data: 'params=' + JSON.stringify(this.queryJson)
       }).then(res => {
-
+        this.companyList = res.planList
       })
     },
     nameRepeatCheck (arr, key) {
@@ -388,189 +395,191 @@ export default {
     },
     getDataBySearching(vm) {
       if (vm.searchValue !== '') {
-        // fetch({
-        // 	url: '/plan/initPt',
-        // 	method: 'POST',
-        // 	data: 'params=' + JSON.stringify(vm.queryJson)
-        // }).then(res => {
-        let res = {
-          "WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiU3FJK2M5U0Z2VWhKYlB0SmppYktlND0=",
-          "operatorId": "",
-          "empId": "",
-          "userType": "CSEP",
-          "newGuideFlag": "",
-          "belongQ": "",
-          "belongS": "",
-          "nickName": "天津市昱隆泰再生资源环保处理有限公司",
-          "orgCode": "",
-          "userId": "EP201410280946090018",
-          "userName": "",
-          "sepaName": "西青区",
-          "status": "",
-          "ifLogin": "0",
-          "ROLEID": "CSEP",
-          "epName": "天津市昱隆泰再生资源环保处理有限公司",
-          "epId": "EP201410280946090018",
-          "initPtInfoList": [{
-            "initPtList": [{
-              "SAMLL_CATEGORY_ID": "100-200-300",
-              "CAPACITY": null,
-              "SHAPE": null,
-              "wxfwmc": "bbb",
-              "jldw": "吨",
-              "UNIT_NUM": "100",
-              "BIG_CATEGORY_COMMENT": null,
-              "UNIT_NUM_YC": null,
-              "SAMLL_CATEGORY_NAME": "bbb",
-              "SAMLL_CATEGORY_COMMENT": null,
-              "ID": "1",
-              "BIG_CATEGORY_NAME": "aaa",
-              "UNIT_NUM_WC": null,
-              "UNIT": "吨",
-              "CONTAINER": null,
-              "TP_ID": "TP201810091008460015",
-              "BIG_CATEGORY_ID": "HW01",
-              "METERIAL": null,
-              "D_FROM": null,
-              "CONTAINER_NUM_YC": null,
-              "D_NAME": "bbb",
-              "wxfwdm": "100-200-300",
-              "CONTAINER_NUM": null,
-              "CONTAINER_NUM_WC": null,
-              "zysl": "100",
-              "LAST_NUM": "12"
-            }, {
-              "SAMLL_CATEGORY_ID": "100-200-300",
-              "CAPACITY": null,
-              "SHAPE": null,
-              "wxfwmc": "bbb",
-              "jldw": "吨",
-              "UNIT_NUM": "100",
-              "BIG_CATEGORY_COMMENT": null,
-              "UNIT_NUM_YC": null,
-              "SAMLL_CATEGORY_NAME": "bbb",
-              "SAMLL_CATEGORY_COMMENT": null,
-              "ID": "2",
-              "BIG_CATEGORY_NAME": "aaa",
-              "UNIT_NUM_WC": null,
-              "UNIT": "吨",
-              "CONTAINER": null,
-              "TP_ID": "TP201810091008460015",
-              "BIG_CATEGORY_ID": "HW01",
-              "METERIAL": null,
-              "D_FROM": null,
-              "CONTAINER_NUM_YC": null,
-              "D_NAME": "bbb",
-              "wxfwdm": "100-200-300",
-              "CONTAINER_NUM": null,
-              "CONTAINER_NUM_WC": null,
-              "zysl": "100",
-              "LAST_NUM": "111"
-            }],
-            "initPt": {
-              "ysdwlxrsj": "手机号1$手机号2",
-              "EN_NAME_YS": "名称1$名称2",
-              "EN_NAME_CZ": "处置单位名称",
-              "BTO_ID_CS": "XQQ",
-              "IF_ADDITIONAL": "0",
-              "BTO_ID_CZ": null,
-              "wfjsdz": "处置地址",
-              "ysdwdlyszh": "道路许可证号1$道路许可证号2",
-              "CHECK_DATE": null,
-              "wfjsdwlxrsj": "处置联系方式",
-              "fwycdwlxrsj": "23991989",
-              "wfycdwmc": "天津市昱隆泰再生资源环保处理有限公司",
-              "STATUS": "0",
-              "ysdwlxr": "联系人1$联系人2",
-              "ysdwdz": "地址1$地址2",
-              "jhqrr": null,
-              "LINKTEL": null,
-              "CHECK_RESULT": null,
-              "IF_TP_ADDITIONAL": "0",
-              "EN_ID_YS": null,
-              "wfycdwbm": "EP201410280946090018",
-              "jhqrrq": null,
-              "EN_NAME_CS": "天津市昱隆泰再生资源环保处理有限公司",
-              "EN_ID_CZ": null,
-              "LINKPHONE": "bb",
-              "wfycdwdz": "天津市西青区天津西青高端金属制品工业区19号",
-              "wfjsdwlxr": "处置联系人",
-              "ysdwmc": "名称1$名称2",
-              "jhqryj": null,
-              "wfjsdwmc": "处置单位名称",
-              "ACTIONDATE": 1544384454420,
-              "ycsxzqhdm": "120111",
-              "TP_ID": "TP201810091008460015",
-              "jhqrjg": null,
-              "jsrq": 1546185600000,
-              "ksrq": 1514736000000,
-              "MAIN_ID": null,
-              "CHECK_ADVICE": null,
-              "fwjsdwwxfwjyxkzh": "处置许可证号",
-              "yrsxzqhdm": "处置行政区划",
-              "wfycdwlxr": "王富庆",
-              "sysdate": 1544384454430,
-              "LINKMAN": "aa",
-              "jhqrsxzqh": "120000",
-              "BEGINTIME": 1514736000000,
-              "ENDTIME": 1546185600000,
-              "EN_ID_CS": "EP201410280946090018",
-              "bcsfcg": null
-            }
-          }],
-          "belongSepa": "XQQ",
-          "userPortrait": "",
-          "IWBSESSION": "BROWSER-20181210055815",
-          "initOverviewList": [{
-            "BIG_CATEGORY_NAME": "医疗废物",
-            "UNIT": "个",
-            "W_NAME": "发f",
-            "SOURCE_PROCESS": "21",
-            "SAMLL_CATEGORY_ID": "831-001-01",
-            "TP_ID": "TP201810091008460015",
-            "YEAR_NUM": "11",
-            "BIG_CATEGORY_ID": "HW01",
-            "W_SHAPE": "大",
-            "LAST_NUM": "22",
-            "SAMLL_CATEGORY_NAME": "感染性废物",
-            "ID": "1",
-            "D_NAME": "测试",
-            "CHARACTER": "T,I"
-          }, {
-            "BIG_CATEGORY_NAME": "医药废物",
-            "UNIT": "吨",
-            "W_NAME": "发大水",
-            "SOURCE_PROCESS": "发达",
-            "SAMLL_CATEGORY_ID": "271-002-02",
-            "TP_ID": "TP201810091008460015",
-            "YEAR_NUM": "11",
-            "BIG_CATEGORY_ID": "HW02",
-            "W_SHAPE": "12",
-            "LAST_NUM": "22",
-            "SAMLL_CATEGORY_NAME": "化学合成原料药生产产生的废母液及反应基废物",
-            "ID": "2",
-            "D_NAME": "发撒",
-            "CHARACTER": "T,I"
-          }, {
-            "BIG_CATEGORY_NAME": "废有机溶剂与含有机溶剂废物",
-            "UNIT": "吨",
-            "W_NAME": "测试33有害物质",
-            "SOURCE_PROCESS": "测试33来源",
-            "SAMLL_CATEGORY_ID": "900-406-06",
-            "TP_ID": "TP201810091008460015",
-            "YEAR_NUM": "100",
-            "BIG_CATEGORY_ID": "HW06",
-            "W_SHAPE": "测试",
-            "LAST_NUM": "50",
-            "SAMLL_CATEGORY_NAME": "900-402-06和900-404-06中所列废物再生处理产生的废活性炭及其他过滤吸附介质",
-            "ID": "3",
-            "D_NAME": "测试33",
-            "CHARACTER": "C"
-          }],
-          "realName": "",
-          "contextPath": "",
-          "orgSeq": ""
-        }
+        let pama = vm.queryJson
+        pama.TP_ID = vm.searchValue
+        fetch({
+        	url: '/plan/initPt',
+        	method: 'POST',
+        	data: 'params=' + JSON.stringify(pama)
+        }).then(res => {
+        // let res = {
+        //   "WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiU3FJK2M5U0Z2VWhKYlB0SmppYktlND0=",
+        //   "operatorId": "",
+        //   "empId": "",
+        //   "userType": "CSEP",
+        //   "newGuideFlag": "",
+        //   "belongQ": "",
+        //   "belongS": "",
+        //   "nickName": "天津市昱隆泰再生资源环保处理有限公司",
+        //   "orgCode": "",
+        //   "userId": "EP201410280946090018",
+        //   "userName": "",
+        //   "sepaName": "西青区",
+        //   "status": "",
+        //   "ifLogin": "0",
+        //   "ROLEID": "CSEP",
+        //   "epName": "天津市昱隆泰再生资源环保处理有限公司",
+        //   "epId": "EP201410280946090018",
+        //   "initPtInfoList": [{
+        //     "initPtList": [{
+        //       "SAMLL_CATEGORY_ID": "100-200-300",
+        //       "CAPACITY": null,
+        //       "SHAPE": null,
+        //       "wxfwmc": "bbb",
+        //       "jldw": "吨",
+        //       "UNIT_NUM": "100",
+        //       "BIG_CATEGORY_COMMENT": null,
+        //       "UNIT_NUM_YC": null,
+        //       "SAMLL_CATEGORY_NAME": "bbb",
+        //       "SAMLL_CATEGORY_COMMENT": null,
+        //       "ID": "1",
+        //       "BIG_CATEGORY_NAME": "aaa",
+        //       "UNIT_NUM_WC": null,
+        //       "UNIT": "吨",
+        //       "CONTAINER": null,
+        //       "TP_ID": "TP201810091008460015",
+        //       "BIG_CATEGORY_ID": "HW01",
+        //       "METERIAL": null,
+        //       "D_FROM": null,
+        //       "CONTAINER_NUM_YC": null,
+        //       "D_NAME": "bbb",
+        //       "wxfwdm": "100-200-300",
+        //       "CONTAINER_NUM": null,
+        //       "CONTAINER_NUM_WC": null,
+        //       "zysl": "100",
+        //       "LAST_NUM": "12"
+        //     }, {
+        //       "SAMLL_CATEGORY_ID": "100-200-300",
+        //       "CAPACITY": null,
+        //       "SHAPE": null,
+        //       "wxfwmc": "bbb",
+        //       "jldw": "吨",
+        //       "UNIT_NUM": "100",
+        //       "BIG_CATEGORY_COMMENT": null,
+        //       "UNIT_NUM_YC": null,
+        //       "SAMLL_CATEGORY_NAME": "bbb",
+        //       "SAMLL_CATEGORY_COMMENT": null,
+        //       "ID": "2",
+        //       "BIG_CATEGORY_NAME": "aaa",
+        //       "UNIT_NUM_WC": null,
+        //       "UNIT": "吨",
+        //       "CONTAINER": null,
+        //       "TP_ID": "TP201810091008460015",
+        //       "BIG_CATEGORY_ID": "HW01",
+        //       "METERIAL": null,
+        //       "D_FROM": null,
+        //       "CONTAINER_NUM_YC": null,
+        //       "D_NAME": "bbb",
+        //       "wxfwdm": "100-200-300",
+        //       "CONTAINER_NUM": null,
+        //       "CONTAINER_NUM_WC": null,
+        //       "zysl": "100",
+        //       "LAST_NUM": "111"
+        //     }],
+        //     "initPt": {
+        //       "ysdwlxrsj": "手机号1$手机号2",
+        //       "EN_NAME_YS": "名称1$名称2",
+        //       "EN_NAME_CZ": "处置单位名称",
+        //       "BTO_ID_CS": "XQQ",
+        //       "IF_ADDITIONAL": "0",
+        //       "BTO_ID_CZ": null,
+        //       "wfjsdz": "处置地址",
+        //       "ysdwdlyszh": "道路许可证号1$道路许可证号2",
+        //       "CHECK_DATE": null,
+        //       "wfjsdwlxrsj": "处置联系方式",
+        //       "fwycdwlxrsj": "23991989",
+        //       "wfycdwmc": "天津市昱隆泰再生资源环保处理有限公司",
+        //       "STATUS": "0",
+        //       "ysdwlxr": "联系人1$联系人2",
+        //       "ysdwdz": "地址1$地址2",
+        //       "jhqrr": null,
+        //       "LINKTEL": null,
+        //       "CHECK_RESULT": null,
+        //       "IF_TP_ADDITIONAL": "0",
+        //       "EN_ID_YS": null,
+        //       "wfycdwbm": "EP201410280946090018",
+        //       "jhqrrq": null,
+        //       "EN_NAME_CS": "天津市昱隆泰再生资源环保处理有限公司",
+        //       "EN_ID_CZ": null,
+        //       "LINKPHONE": "bb",
+        //       "wfycdwdz": "天津市西青区天津西青高端金属制品工业区19号",
+        //       "wfjsdwlxr": "处置联系人",
+        //       "ysdwmc": "名称1$名称2",
+        //       "jhqryj": null,
+        //       "wfjsdwmc": "处置单位名称",
+        //       "ACTIONDATE": 1544384454420,
+        //       "ycsxzqhdm": "120111",
+        //       "TP_ID": "TP201810091008460015",
+        //       "jhqrjg": null,
+        //       "jsrq": 1546185600000,
+        //       "ksrq": 1514736000000,
+        //       "MAIN_ID": null,
+        //       "CHECK_ADVICE": null,
+        //       "fwjsdwwxfwjyxkzh": "处置许可证号",
+        //       "yrsxzqhdm": "处置行政区划",
+        //       "wfycdwlxr": "王富庆",
+        //       "sysdate": 1544384454430,
+        //       "LINKMAN": "aa",
+        //       "jhqrsxzqh": "120000",
+        //       "BEGINTIME": 1514736000000,
+        //       "ENDTIME": 1546185600000,
+        //       "EN_ID_CS": "EP201410280946090018",
+        //       "bcsfcg": null
+        //     }
+        //   }],
+        //   "belongSepa": "XQQ",
+        //   "userPortrait": "",
+        //   "IWBSESSION": "BROWSER-20181210055815",
+        //   "initOverviewList": [{
+        //     "BIG_CATEGORY_NAME": "医疗废物",
+        //     "UNIT": "个",
+        //     "W_NAME": "发f",
+        //     "SOURCE_PROCESS": "21",
+        //     "SAMLL_CATEGORY_ID": "831-001-01",
+        //     "TP_ID": "TP201810091008460015",
+        //     "YEAR_NUM": "11",
+        //     "BIG_CATEGORY_ID": "HW01",
+        //     "W_SHAPE": "大",
+        //     "LAST_NUM": "22",
+        //     "SAMLL_CATEGORY_NAME": "感染性废物",
+        //     "ID": "1",
+        //     "D_NAME": "测试",
+        //     "CHARACTER": "T,I"
+        //   }, {
+        //     "BIG_CATEGORY_NAME": "医药废物",
+        //     "UNIT": "吨",
+        //     "W_NAME": "发大水",
+        //     "SOURCE_PROCESS": "发达",
+        //     "SAMLL_CATEGORY_ID": "271-002-02",
+        //     "TP_ID": "TP201810091008460015",
+        //     "YEAR_NUM": "11",
+        //     "BIG_CATEGORY_ID": "HW02",
+        //     "W_SHAPE": "12",
+        //     "LAST_NUM": "22",
+        //     "SAMLL_CATEGORY_NAME": "化学合成原料药生产产生的废母液及反应基废物",
+        //     "ID": "2",
+        //     "D_NAME": "发撒",
+        //     "CHARACTER": "T,I"
+        //   }, {
+        //     "BIG_CATEGORY_NAME": "废有机溶剂与含有机溶剂废物",
+        //     "UNIT": "吨",
+        //     "W_NAME": "测试33有害物质",
+        //     "SOURCE_PROCESS": "测试33来源",
+        //     "SAMLL_CATEGORY_ID": "900-406-06",
+        //     "TP_ID": "TP201810091008460015",
+        //     "YEAR_NUM": "100",
+        //     "BIG_CATEGORY_ID": "HW06",
+        //     "W_SHAPE": "测试",
+        //     "LAST_NUM": "50",
+        //     "SAMLL_CATEGORY_NAME": "900-402-06和900-404-06中所列废物再生处理产生的废活性炭及其他过滤吸附介质",
+        //     "ID": "3",
+        //     "D_NAME": "测试33",
+        //     "CHARACTER": "C"
+        //   }],
+        //   "realName": "",
+        //   "contextPath": "",
+        //   "orgSeq": ""
+        // }
         vm.userRole = res.userType
         vm.ifsave = res.ifsave
         vm.nameList = res.initOverviewList
@@ -620,6 +629,11 @@ export default {
                 vm.tptDataList[index].tptData.cardDetail = res.initPtInfoList[index].initPt.yrsxzqhdm
                 vm.tptDataList[index].tptData.contactDetail = res.initPtInfoList[index].initPt.wfjsdwlxr
                 vm.tptDataList[index].tptData.contactPhoneDetail = res.initPtInfoList[index].initPt.wfjsdwlxrsj
+                vm.tptDataList[index].tptData.ycsxzqhdm = res.initPtInfoList[index].initPt.ycsxzqhdm
+                vm.tptDataList[index].tptData.wfycdwmc = res.initPtInfoList[index].initPt.wfycdwmc
+                vm.tptDataList[index].tptData.wfycdwdz = res.initPtInfoList[index].initPt.wfycdwdz
+                vm.tptDataList[index].tptData.ksrq = res.initPtInfoList[index].initPt.ksrq
+                vm.tptDataList[index].tptData.jsrq = res.initPtInfoList[index].initPt.jsrq
 
               }
               let ptArray = []
@@ -743,6 +757,11 @@ export default {
                 dataItem.tptData.cardDetail = res.initPtInfoList[index].initPt.yrsxzqhdm
                 dataItem.tptData.contactDetail = res.initPtInfoList[index].initPt.wfjsdwlxr
                 dataItem.tptData.contactPhoneDetail = res.initPtInfoList[index].initPt.wfjsdwlxrsj
+                dataItem.tptData.ycsxzqhdm = res.initPtInfoList[index].initPt.ycsxzqhdm
+                dataItem.tptData.wfycdwmc = res.initPtInfoList[index].initPt.wfycdwmc
+                dataItem.tptData.wfycdwdz = res.initPtInfoList[index].initPt.wfycdwdz
+                dataItem.tptData.ksrq = res.initPtInfoList[index].initPt.ksrq
+                dataItem.tptData.jsrq = res.initPtInfoList[index].initPt.jsrq
 
               }
               let ptArray = []
@@ -836,7 +855,12 @@ export default {
               addrDetail: "",
               cardDetail: "",
               contactDetail: "",
-              contactPhoneDetail: ""
+              contactPhoneDetail: "",
+              ycsxzqhdm: "",
+              wfycdwmc: "",
+              wfycdwdz: "",
+              ksrq: "",
+              jsrq: ""
             },
             formStatus: 'card',
             transferData: {
@@ -921,9 +945,10 @@ export default {
           vm.tptDataList = []
           vm.tptDataList.push(emptyItem)
         }
-        // })
+      })
       } else {
         this.tptDataList = [{
+          
           dialogTableVisible: false,
           searchGridData: [],
           licenceNo: "",
@@ -934,7 +959,12 @@ export default {
             addrDetail: "",
             cardDetail: "",
             contactDetail: "",
-            contactPhoneDetail: ""
+            contactPhoneDetail: "",
+            ycsxzqhdm:"",
+            wfycdwmc:"",
+            wfycdwdz:"",
+            ksrq:"",
+            jsrq:"",
           },
           formStatus: 'card',
           transferData: {

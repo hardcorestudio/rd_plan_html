@@ -17,6 +17,8 @@
 		<div v-else-if="userRole === 'admin' && showflag == 'true'" class="leftAside_btnArea">
 			<!-- <el-button v-if="titleInfo.title" class="saveBtn" plain @click="doSubmit('agree')">同意</el-button>
 			<el-button type="info" plain @click="doSubmit('unagree')">不同意</el-button> -->
+			
+			<el-button v-if="needSave === '1'" class="saveBtn" plain @click="doSubmit('save')">保存</el-button>
 			<el-button type="info" plain @click="doClose">关闭</el-button>
 		</div>
 		<div v-else-if="userRole === 'download'" class="leftAside_btnArea">
@@ -34,6 +36,7 @@
 		props: {
 			titleInfo: Object,
 			userRole: String,
+			needSave: String
 		},
     data() {
       return {
