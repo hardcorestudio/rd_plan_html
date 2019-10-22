@@ -354,7 +354,7 @@ export default {
 
       vm.repeatClickFlag = false
       vm.queryJson = getQueryString()
-      vm.myTitleInfo.epName = vm.queryJson.epName
+      // vm.myTitleInfo.epName = vm.queryJson.epName
 
       vm.EP_ID = vm.queryJson.EP_ID
       vm.TP_ID = vm.queryJson.TP_ID
@@ -1168,9 +1168,15 @@ export default {
   border-radius: 5px;
 }
 .toSyncDetailClass{
-  float: right;
-  color: #13ce66;
-  font-size: 18px;
-  cursor: pointer;
+    float: right;
+    color: #13ce66;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #13ce66;
+    padding: 0 10px;
+    border-radius: 5px;
+    height: 34px;
+    margin: 5px 0;
+    line-height: 34px;
 }
 </style>

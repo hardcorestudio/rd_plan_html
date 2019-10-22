@@ -5,7 +5,7 @@
 			<div v-if="titleInfo.title" class="leftAside_subtitle">{{titleInfo.title}}</div>
 		</div>
 		<div class="leftAside_contentArea">
-			<div class="leftAside_textItemEpName">单位名称：{{titleInfo.epName}}</div>
+			<div v-if="titleInfo.epName && titleInfo.epName !== ''" class="leftAside_textItemEpName">单位名称：{{titleInfo.epName}}</div>
 			<div v-if="titleInfo.textInfoList">
 				<div class="leftAside_textItem" v-for="item in titleInfo.textInfoList" :key="item">{{item}}</div>
 			</div>

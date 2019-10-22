@@ -199,19 +199,20 @@
       <div v-else-if="allowFormStatus === 'OUT_ADD'" style="float: left;width: 100%;margin-top: 20px;">
         <el-form
           class="tptElForm"
-          ref="allowToForm"
+          ref="allowToFormOutAdd"
           :model="allowToFormInfo"
           label-width="90px"
+          :rules="allowRules"
         >
           <el-row :gutter="20">
             <el-col :span="12">
-              <el-form-item label="商请日期">
+              <el-form-item label="商请日期" prop="date">
                 <!-- <el-row>{{allowToFormInfo.date}}</el-row> -->
                 <el-date-picker
                   v-model="allowToFormInfo.date"
                   value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetime"
-                  placeholder="请选择回复日期">
+                  placeholder="请选择商请日期">
                 </el-date-picker>
               </el-form-item>
             </el-col>
@@ -392,8 +393,13 @@ export default {
 				phone: [
 					{ required: true, trigger: 'blur', validator: validatePhone },
 				]
-			},
+      },
 			nameList: [],
+      allowRules: {
+        date: [
+          { type: 'date', required: true, message: '请选择商请日期', trigger: 'change' }
+				]
+      }
     }
   },
   components: {
@@ -411,7 +417,7 @@ export default {
     
     this.repeatClickFlag = false
     this.queryJson = getQueryString()
-    this.myTitleInfo.epName = this.queryJson.epName
+    // this.myTitleInfo.epName = this.queryJson.epName
     this.EP_ID = this.queryJson.EP_ID
     this.TP_ID = this.queryJson.TP_ID
 
@@ -436,6 +442,18 @@ export default {
           message: this.repaetClickTime + "秒内不得重复提交"
         });
         return;
+      }
+      let _this = this
+			let checkFlag = false
+			_this.$refs['allowToFormOutAdd'].validate((valid) => {
+				if (valid) {
+					checkFlag = true
+				} else {
+					checkFlag = false
+				}
+			});
+			if (!checkFlag) {
+				return
 			}
 			
       let submitData = {}
@@ -506,7 +524,7 @@ export default {
       })
 
       localStorage.setItem("sVal", this.$route.query.searchValue)
-      this.$router.back(-1)
+      // this.$router.back(-1)
     },
     doResetUnitInfo (i) {
       this.tptDataList[i].title1fromList = [{
