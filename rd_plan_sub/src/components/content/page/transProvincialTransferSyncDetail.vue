@@ -438,9 +438,9 @@ export default {
         return;
 			}
 			
-			let submitData = {}
-      submitData.EP_ID = this.EP_ID
-      submitData.TP_ID = this.TP_ID
+      let submitData = {}
+      submitData.EP_ID = this.tptDataList[this.queryJson.dataIndex].tptData.EN_ID_CS
+      submitData.TP_ID = this.tptDataList[this.queryJson.dataIndex].tptData.TP_ID
       submitData.method = "saveKsldSq"
       submitData.url = this.syncUrl
       
@@ -476,14 +476,14 @@ export default {
       for (let i in this.tptDataList[this.queryJson.dataIndex].formList) {
         let formItem = {}
         formItem.fwmc = this.tptDataList[this.queryJson.dataIndex].formList[i].wxfwmc
-        formItem.fwlb = this.tptDataList[this.queryJson.dataIndex].formList[i].BIG_CATEGORY_ID
+        formItem.fwlb = this.tptDataList[this.queryJson.dataIndex].formList[i].BIG_CATEGORY_ID.substring(2)
         formItem.fwdm = this.tptDataList[this.queryJson.dataIndex].formList[i].wxfwdm
         formItem.zysl = this.tptDataList[this.queryJson.dataIndex].formList[i].zysl
         formItem.jldw = this.tptDataList[this.queryJson.dataIndex].formList[i].jldw
         jsonParam.fwsz.push(formItem)
       }
       jsonParam.sqrq = this.allowToFormInfo.date
-      submitData.jsonParam = jsonParam
+      submitData.jsonParam = JSON.stringify(jsonParam)
 
       fetchPt({
         url: '/syncUpload/indexForCors',

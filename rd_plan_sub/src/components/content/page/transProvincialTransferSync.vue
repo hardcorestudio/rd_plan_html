@@ -238,6 +238,8 @@ export default {
           wfycdwdz:"",
           ksrq:"",
           jsrq:"",
+          EN_ID_CS:"",
+          TP_ID:"",
         },
         formStatus: 'card',
         transferData: {
@@ -634,6 +636,8 @@ export default {
                 vm.tptDataList[index].tptData.wfycdwdz = res.initPtInfoList[index].initPt.wfycdwdz
                 vm.tptDataList[index].tptData.ksrq = res.initPtInfoList[index].initPt.ksrq
                 vm.tptDataList[index].tptData.jsrq = res.initPtInfoList[index].initPt.jsrq
+                vm.tptDataList[index].tptData.EN_ID_CS = res.initPtInfoList[index].initPt.EN_ID_CS
+                vm.tptDataList[index].tptData.TP_ID = res.initPtInfoList[index].initPt.TP_ID
 
               }
               let ptArray = []
@@ -762,7 +766,8 @@ export default {
                 dataItem.tptData.wfycdwdz = res.initPtInfoList[index].initPt.wfycdwdz
                 dataItem.tptData.ksrq = res.initPtInfoList[index].initPt.ksrq
                 dataItem.tptData.jsrq = res.initPtInfoList[index].initPt.jsrq
-
+                dataItem.tptData.EN_ID_CS = res.initPtInfoList[index].initPt.EN_ID_CS
+                dataItem.tptData.TP_ID = res.initPtInfoList[index].initPt.TP_ID
               }
               let ptArray = []
               for (let i = 0; i < name.length; i++) {
@@ -860,7 +865,9 @@ export default {
               wfycdwmc: "",
               wfycdwdz: "",
               ksrq: "",
-              jsrq: ""
+              jsrq: "",
+              EN_ID_CS: "",
+              TP_ID: "",
             },
             formStatus: 'card',
             transferData: {
@@ -965,6 +972,8 @@ export default {
             wfycdwdz:"",
             ksrq:"",
             jsrq:"",
+            EN_ID_CS: "",
+            TP_ID: "",
           },
           formStatus: 'card',
           transferData: {
