@@ -208,10 +208,11 @@
             <el-col :span="12">
               <el-form-item label="商请日期" prop="date">
                 <!-- <el-row>{{allowToFormInfo.date}}</el-row> -->
+                <!-- value-format="yyyy-MM-dd HH:mm:ss" -->
                 <el-date-picker
                   v-model="allowToFormInfo.date"
-                  value-format="yyyy-MM-dd HH:mm:ss"
                   type="datetime"
+                  format="yyyy-MM-dd HH:mm:ss"
                   placeholder="请选择商请日期">
                 </el-date-picker>
               </el-form-item>
@@ -430,6 +431,25 @@ export default {
     this.allowFormStatus = this.queryJson.SYNC_TYPE
   },
   methods: {
+    dateFormat(fmt, date) {
+        let ret;
+        let opt = {
+            "Y+": date.getFullYear().toString(),        // 年
+            "m+": (date.getMonth() + 1).toString(),     // 月
+            "d+": date.getDate().toString(),            // 日
+            "H+": date.getHours().toString(),           // 时
+            "M+": date.getMinutes().toString(),         // 分
+            "S+": date.getSeconds().toString()          // 秒
+            // 有其他格式化字符需求可以继续添加，必须转化成字符串
+        };
+        for (let k in opt) {
+            ret = new RegExp("(" + k + ")").exec(fmt);
+            if (ret) {
+                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            };
+        };
+        return fmt;
+    },
     doSubmit () {
       if (!this.repeatClickFlag) {
         this.repeatClickFlag = true
@@ -500,7 +520,7 @@ export default {
         formItem.jldw = this.tptDataList[this.queryJson.dataIndex].formList[i].jldw
         jsonParam.fwsz.push(formItem)
       }
-      jsonParam.sqrq = this.allowToFormInfo.date
+      jsonParam.sqrq = this.dateFormat("YYYY-mm-dd HH:MM:SS",this.allowToFormInfo.date)
       submitData.jsonParam = JSON.stringify(jsonParam)
 
       fetchPt({
