@@ -523,6 +523,13 @@ export default {
       jsonParam.sqrq = this.dateFormat("YYYY-mm-dd HH:MM:SS",this.allowToFormInfo.date)
       submitData.jsonParam = JSON.stringify(jsonParam)
 
+      const loading = this.$loading({
+				lock: true,
+				text: 'Loading',
+				spinner: 'el-icon-loading',
+				background: 'rgba(0, 0, 0, 0.3)'
+			});
+
       fetchPt({
         url: '/syncUpload/indexForCors',
         method: 'POST',
