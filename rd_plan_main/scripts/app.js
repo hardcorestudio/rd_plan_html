@@ -800,6 +800,82 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
+        .state('dashboard.plansyncIndex', {
+            url: '/plansyncIndex',
+            templateUrl: 'views/dashboard/plansync/plansyncIndex.html',
+            controller: 'PlansyncIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/plansync/plansyncIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.plansyncIndex.plansyncList', {
+            url: '/plansyncList',
+            controller: 'PlansyncListCtrl',
+            templateUrl: 'views/dashboard/plansync/plansyncList.html',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/directives/dateTools/WdatePicker.js',
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/plansync/approvalModalController.js',
+                            'scripts/controllers/plansync/plansyncListController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.plansyncInIndex', {
+            url: '/plansyncInIndex',
+            templateUrl: 'views/dashboard/plansync/plansyncInIndex.html',
+            controller: 'PlansyncInIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'scripts/controllers/plansync/plansyncInIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.plansyncInIndex.plansyncInList', {
+            url: '/plansyncInList',
+            controller: 'PlansyncInListCtrl',
+            templateUrl: 'views/dashboard/plansync/plansyncInList.html',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/directives/dateTools/WdatePicker.js',
+                            'scripts/controllers/modal/promptModalController.js',
+                            'scripts/controllers/plansync/replyModalController.js',
+                            'scripts/controllers/plansync/plansyncInListController.js'
+                        ]
+                    })
+                }
+            }
+        })
         .state('dashboard.labWarn', {
             url: '/labWarn',
             templateUrl: 'views/dashboard/lab/labWarn.html',
@@ -1279,11 +1355,15 @@ iwoboApp.run(['$state', '$rootScope', 'localStorageService', '$modal', '$log', '
     console.log("===========iwobo app running====================================");
     // $rootScope.baseUrl = 'http://lovewobo.com';
     $rootScope.baseUrl = 'http://localhost:9002/api';
-    // $rootScope.baseUrl = 'http://192.168.1.120:9002/api';
-    // $rootScope.baseUrl = 'http://60.30.64.249:7080/rd_2nd';
-    // $rootScope.baseUrl = 'http://60.30.64.249:8080/api';
-    // $rootScope.websocketUrlController = 'ws://60.30.64.249:8080/mywebsocket';
+    $rootScope.baseSyncUrl = 'http://localhost:9091/syncUpload';
+    $rootScope.subSyncUrl = 'http://localhost:9002/rdplan/rd_plan_sub/index.html#/transProvincialTransferSync';
+    $rootScope.syncUrl = 'http://gfxt.mepscc.cn/edpgf_ws_test/servicesx/KSTranService?wsdl';
     $rootScope.websocketUrlController = 'ws://localhost:9002/mywebsocket';
+    // $rootScope.baseUrl = 'http://60.30.64.249:8080/api';
+    // $rootScope.baseSyncUrl = 'http://60.30.64.249:7080/rd_2nd/syncUpload';
+    // $rootScope.subSyncUrl = 'http://60.30.64.249:8080/rdplan/rd_plan_sub/index.html#/transProvincialTransferSync';
+    // $rootScope.websocketUrlController = 'ws://60.30.64.249:8080/mywebsocket'; 
+    // $rootScope.syncUrl = 'http://gfxt.mepscc.cn/edpgf_ws/servicesx/KSTranService?wsdl';
     $rootScope.baseUrlPath = '';
     $rootScope.uuid = '';
     $rootScope.platform = "";

@@ -110,6 +110,22 @@ angular.module('sbAdminApp').factory('Init', ['$http','$rootScope','localStorage
                 }
                 error(data,header,config,status);
             });
+        },
+        synchttp : function(url,data,success,error){
+            // console.log("params="+JSON.stringify(data));
+            $http({
+                url:$rootScope.baseSyncUrl+url,
+                data: "params="+JSON.stringify(data),  
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' },
+                method: 'POST'
+                //method:'GET'
+            }).success(function(data,header,config,status){
+                // console.log(data);
+                success(data,header,config,status);
+            }).error(function(data,header,config,status){
+                console.log('========error==============');
+                error(data,header,config,status);
+            });
         }
     };
     return initRes;
