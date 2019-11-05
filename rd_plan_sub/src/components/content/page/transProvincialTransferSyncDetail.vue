@@ -256,7 +256,8 @@ export default {
       }
     };
     return {
-      syncUrl: "http://gfxt.mepscc.cn/edpgf_ws_test/servicesx/KSTranService?wsdl",
+      // syncUrl: "http://gfxt.mepscc.cn/edpgf_ws_test/servicesx/KSTranService?wsdl",
+      syncUrl: "http://gfxt.mepscc.cn/edpgf_ws/servicesx/KSTranService?wsdl",
       allowFormStatus: "",
       resultEnum: [{
         value: "同意",

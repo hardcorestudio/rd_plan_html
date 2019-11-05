@@ -33,6 +33,12 @@ angular.module('sbAdminApp').controller('PlansyncInListCtrl', ['$scope','$rootSc
     p.url = $rootScope.syncUrl
     var returnData = {};
     Init.synchttp('/indexForCors',p, function(data,header,config,status){
+        // for(var i=0,j=data.length-1 ; i < j ; i++,j--){
+        //     var tmp = data[i]
+        //     data[i] = data[j]
+        //     data[j] = tmp
+        // }
+        data = data.slice().reverse()
         if(data.length > 0){
             table = $('#epTable').DataTable({
                 "data": data,
@@ -50,6 +56,18 @@ angular.module('sbAdminApp').controller('PlansyncInListCtrl', ['$scope','$rootSc
                         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                             $(nTd).html("<div class='btn-group-vertical'><button type='button' class='btn btn-primary btn-sm dropdown-toggle' data-toggle='dropdown' id='a_check'>回复</button></div>");
                         }
+                    },
+                    {
+                        "data": "hfrq"
+                    },
+                    {
+                        "data": "sqjg"
+                    },
+                    {
+                        "data": "sprq",
+                    },
+                    {
+                        "data": "spjg"
                     },
                     {
                         "data": "zysqclid"
@@ -78,18 +96,7 @@ angular.module('sbAdminApp').controller('PlansyncInListCtrl', ['$scope','$rootSc
                     {
                         "data": "wfjsdwmc"
                     },
-                    {
-                        "data": "hfrq"
-                    },
-                    {
-                        "data": "sqjg"
-                    },
-                    {
-                        "data": "sprq",
-                    },
-                    {
-                        "data": "spjg"
-                    },
+                    
                 ],
                 "ordering":  false,
                 "language": {

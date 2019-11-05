@@ -33,6 +33,7 @@ angular.module('sbAdminApp').controller('PlansyncListCtrl', ['$scope','$rootScop
     p.url = $rootScope.syncUrl
     var returnData = {};
     Init.synchttp('/indexForCors',p, function(data,header,config,status){
+        data = data.slice().reverse()
         if(data.length > 0){
             table = $('#epTable').DataTable({
                 "data": data,
@@ -50,6 +51,18 @@ angular.module('sbAdminApp').controller('PlansyncListCtrl', ['$scope','$rootScop
                         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                             $(nTd).html("<div class='btn-group-vertical'><button type='button' class='btn btn-primary btn-sm dropdown-toggle' data-toggle='dropdown' id='a_check'>审批</button></div>");
                         }
+                    },
+                    {
+                        "data": "hfrq"
+                    },
+                    {
+                        "data": "sqjg"
+                    },
+                    {
+                        "data": "sprq",
+                    },
+                    {
+                        "data": "spjg"
                     },
                     {
                         "data": "zysqclid"
@@ -78,18 +91,7 @@ angular.module('sbAdminApp').controller('PlansyncListCtrl', ['$scope','$rootScop
                     {
                         "data": "wfjsdwmc"
                     },
-                    {
-                        "data": "hfrq"
-                    },
-                    {
-                        "data": "sqjg"
-                    },
-                    {
-                        "data": "sprq",
-                    },
-                    {
-                        "data": "spjg"
-                    },
+                    
                 ],
                 "ordering":  false,
                 "language": {
