@@ -424,6 +424,7 @@ export default {
     this.TP_ID = this.queryJson.TP_ID
 
     let dataList = JSON.parse(localStorage.getItem("tptsWholeData")) 
+    this.nameList = JSON.parse(localStorage.getItem("nameList"))
     let listIndex = this.queryJson.dataIndex
     this.tptDataList = []
     this.tptDataList.push(dataList[listIndex])
