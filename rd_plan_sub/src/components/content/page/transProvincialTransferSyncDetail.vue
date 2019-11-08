@@ -478,47 +478,47 @@ export default {
 			}
 			
       let submitData = {}
-      submitData.EP_ID = this.tptDataList[this.queryJson.dataIndex].tptData.EN_ID_CS
-      submitData.TP_ID = this.tptDataList[this.queryJson.dataIndex].tptData.TP_ID
+      submitData.EP_ID = this.tptDataList[0].tptData.EN_ID_CS
+      submitData.TP_ID = this.tptDataList[0].tptData.TP_ID
       submitData.method = "saveKsldSq"
       submitData.url = this.syncUrl
       
       let jsonParam = {}
-      jsonParam.ycsxzqhdm = this.tptDataList[this.queryJson.dataIndex].tptData.ycsxzqhdm
-      jsonParam.wfycdwmc = this.tptDataList[this.queryJson.dataIndex].tptData.wfycdwmc
-      jsonParam.wfycdwdz = this.tptDataList[this.queryJson.dataIndex].tptData.wfycdwdz
+      jsonParam.ycsxzqhdm = this.tptDataList[0].tptData.ycsxzqhdm
+      jsonParam.wfycdwmc = this.tptDataList[0].tptData.wfycdwmc
+      jsonParam.wfycdwdz = this.tptDataList[0].tptData.wfycdwdz
 
-      jsonParam.ksrq = this.tptDataList[this.queryJson.dataIndex].tptData.ksrq
-      jsonParam.jsrq = this.tptDataList[this.queryJson.dataIndex].tptData.jsrq
-      jsonParam.wfycdwlxr = this.tptDataList[this.queryJson.dataIndex].transferData.name
-      jsonParam.fwycdwlxrsj = this.tptDataList[this.queryJson.dataIndex].transferData.phone
+      jsonParam.ksrq = this.tptDataList[0].tptData.ksrq
+      jsonParam.jsrq = this.tptDataList[0].tptData.jsrq
+      jsonParam.wfycdwlxr = this.tptDataList[0].transferData.name
+      jsonParam.fwycdwlxrsj = this.tptDataList[0].transferData.phone
       
       jsonParam.ysdwsz = []
-      for (let i in this.tptDataList[this.queryJson.dataIndex].title1fromList) {
+      for (let i in this.tptDataList[0].title1fromList) {
         let itemData = {}
-        itemData.ysdwmc = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[0].text
-        itemData.ysdwdz = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[4].text
-        itemData.ysdwlxr = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[2].text
-        itemData.ysdwlxrsj = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[3].text
-        itemData.ysdwdlyszh = this.tptDataList[this.queryJson.dataIndex].title1fromList[i].itemList[1].text
+        itemData.ysdwmc = this.tptDataList[0].title1fromList[i].itemList[0].text
+        itemData.ysdwdz = this.tptDataList[0].title1fromList[i].itemList[4].text
+        itemData.ysdwlxr = this.tptDataList[0].title1fromList[i].itemList[2].text
+        itemData.ysdwlxrsj = this.tptDataList[0].title1fromList[i].itemList[3].text
+        itemData.ysdwdlyszh = this.tptDataList[0].title1fromList[i].itemList[1].text
         jsonParam.ysdwsz.push(itemData)
       }
       
-      jsonParam.wfjsdwmc = this.tptDataList[this.queryJson.dataIndex].tptData.compNameDetail
-      jsonParam.jsdwxkzbh = this.tptDataList[this.queryJson.dataIndex].tptData.licenceNoDetail
-      jsonParam.wfjsdz = this.tptDataList[this.queryJson.dataIndex].tptData.addrDetail
-      jsonParam.yrsxzqhdm = this.tptDataList[this.queryJson.dataIndex].tptData.cardDetail
-      jsonParam.wfjsdwlxr = this.tptDataList[this.queryJson.dataIndex].tptData.contactDetail
-      jsonParam.wfjsdwlxrsj = this.tptDataList[this.queryJson.dataIndex].tptData.contactPhoneDetail
+      jsonParam.wfjsdwmc = this.tptDataList[0].tptData.compNameDetail
+      jsonParam.jsdwxkzbh = this.tptDataList[0].tptData.licenceNoDetail
+      jsonParam.wfjsdz = this.tptDataList[0].tptData.addrDetail
+      jsonParam.yrsxzqhdm = this.tptDataList[0].tptData.cardDetail
+      jsonParam.wfjsdwlxr = this.tptDataList[0].tptData.contactDetail
+      jsonParam.wfjsdwlxrsj = this.tptDataList[0].tptData.contactPhoneDetail
 
       jsonParam.fwsz = []
-      for (let i in this.tptDataList[this.queryJson.dataIndex].formList) {
+      for (let i in this.tptDataList[0].formList) {
         let formItem = {}
-        formItem.fwmc = this.tptDataList[this.queryJson.dataIndex].formList[i].wxfwmc
-        formItem.fwlb = this.tptDataList[this.queryJson.dataIndex].formList[i].BIG_CATEGORY_ID.substring(2)
-        formItem.fwdm = this.tptDataList[this.queryJson.dataIndex].formList[i].wxfwdm
-        formItem.zysl = this.tptDataList[this.queryJson.dataIndex].formList[i].zysl
-        formItem.jldw = this.tptDataList[this.queryJson.dataIndex].formList[i].jldw
+        formItem.fwmc = this.tptDataList[0].formList[i].wxfwmc
+        formItem.fwlb = this.tptDataList[0].formList[i].BIG_CATEGORY_ID.substring(2)
+        formItem.fwdm = this.tptDataList[0].formList[i].wxfwdm
+        formItem.zysl = this.tptDataList[0].formList[i].zysl
+        formItem.jldw = this.tptDataList[0].formList[i].jldw
         jsonParam.fwsz.push(formItem)
       }
       jsonParam.sqrq = this.dateFormat("YYYY-mm-dd HH:MM:SS",this.allowToFormInfo.date)
