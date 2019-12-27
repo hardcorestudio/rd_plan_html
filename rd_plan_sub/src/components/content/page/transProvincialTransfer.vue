@@ -7,14 +7,27 @@
       @doSubmit="doSubmit"
     ></my-aside>
     <div id="transProvincialTransferBg">
+      <div v-if="userRole === 'CSEP'" class="productCompSwitchBg">
+				<div class="productCompSwitch_title">是否有危险废物跨省转移</div>
+				<el-switch
+					class="productCompSwitch_switch" 
+					v-model="ifsave" 
+					@change="ifsaveCheck" 
+					active-color="#13ce66"
+					active-text="是"
+					inactive-text="否"
+					active-value="1"
+					inactive-value="0">
+				</el-switch>
+			</div>
 			<div v-for="(tptItem,tptIndex) in tptDataList" :key="tptIndex">
         <div class="tptFormTitle">危险废物跨省转移(表{{tptIndex + 1}})
-          <div class="tptFormTitle_delText" @click="delFromByIndex(tptIndex)">删除</div>
-          <div v-if="tptIndex == tptDataList.length - 1" class="tptFormTitle_newText" @click="addFromByIndex">新增</div>
+          <div v-if="ifsaveUserRole=== 'CSEP'" class="tptFormTitle_delText" @click="delFromByIndex(tptIndex)">删除</div>
+          <div v-if="tptIndex == tptDataList.length - 1 && ifsaveUserRole=== 'CSEP'" class="tptFormTitle_newText" @click="addFromByIndex">新增</div>
         </div>
         <div class="tptFormBg">
           <assTitle
-            :userRole="userRole"
+            :userRole="ifsaveUserRole"
             :titleInfo="title1"
           ></assTitle>
           <el-form
@@ -42,6 +55,7 @@
               </el-col>
               <el-col :span="4">
                 <el-button
+                  v-if="ifsaveUserRole=== 'CSEP'"
                   type="success"
                   plain
                   @click="doSearch(tptIndex)"
@@ -89,7 +103,7 @@
             </el-row>
           </el-form>
           <assTptTitle
-            :userRole="userRole"
+            :userRole="ifsaveUserRole"
             :titleInfo="title2"
           ></assTptTitle>
           <el-form
@@ -106,9 +120,11 @@
                   prop="name"
                 >
                   <el-input
+                    v-if="ifsaveUserRole=== 'CSEP'"
                     v-model="tptItem.transferData.name"
                     placeholder="必填"
                   ></el-input>
+                  <el-row v-else>{{tptItem.transferData.name}}</el-row>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
@@ -117,15 +133,17 @@
                   prop="phone"
                 >
                   <el-input
+                    v-if="ifsaveUserRole=== 'CSEP'"
                     v-model="tptItem.transferData.phone"
                     placeholder="手机号或区号-座机号码"
                   ></el-input>
+                  <el-row v-else>{{tptItem.transferData.phone}}</el-row>
                 </el-form-item>
               </el-col>
             </el-row>
           </el-form>
           <assTptTitle
-            :userRole="userRole"
+            :userRole="ifsaveUserRole"
             titleSize="small"
             :formStatus="tptItem.formStatus === 'card' ? '0' : '1'"
             :titleInfo="title3"
@@ -137,7 +155,7 @@
           <assForm
             v-if="tptItem.formStatus === 'card'"
             :formList="tptItem.title1fromList"
-            :type="userRole === 'CSEP' ? '' : 'label'"
+            :type="ifsaveUserRole === 'CSEP' ? '' : 'label'"
           ></assForm>
           <assTable
             v-else-if="tptItem.formStatus === 'table'"
@@ -145,7 +163,7 @@
             :tableTitleList="tptItem.formDataListTitle"
           ></assTable>
           <assTptTitle
-            :userRole="userRole"
+            :userRole="ifsaveUserRole"
             titleSize="small"
             :titleInfo="title4"
             titleType="reset"
@@ -154,7 +172,7 @@
           ></assTptTitle>
           <assFormTptItem
             v-if="tptItem.formStatus === 'card'"
-            :type="userRole !== 'CSEP' ? 'label' : ''"
+            :type="ifsaveUserRole !== 'CSEP' ? 'label' : ''"
             v-for="(item,index) in tptItem.formList"
             :key="index"
             :formItem="item"
@@ -405,7 +423,8 @@ export default {
     //   "ifLogin": "0",
     //   "ROLEID": "CSEP",
     //   "epName": "天津市昱隆泰再生资源环保处理有限公司",
-		// 	"epId": "EP201410280946090018",
+    //   "epId": "EP201410280946090018",
+    //   "ifsave": "0",
 		// 	"initPtInfoList": [{
 		// 		"initPtList": [{
 		// 			"SAMLL_CATEGORY_ID": "100-200-300",
@@ -568,6 +587,8 @@ export default {
     // }
     this.userRole = res.userType
     this.ifsave = res.ifsave
+    this.ifsaveUserRole = this.ifsave === '1' ?  this.userRole : 'ifsave'
+
     this.EP_ID = this.queryJson.EP_ID
     this.TP_ID = this.queryJson.TP_ID
 		this.nameList = res.initOverviewList
@@ -938,126 +959,129 @@ export default {
 			let submitData = {}
       submitData.EP_ID = this.EP_ID
 			submitData.TP_ID = this.TP_ID
-			
-			let checkFlag = false
-			for (let i in this.tptDataList) {
-        let formStr = 'form' + i
-				this.$refs[formStr][0].validate((valid) => {
-					if (valid) {
-						checkFlag = true
-					} else {
-						checkFlag = false
-					}
-				});
-			}
-      if (!checkFlag) {
-        return
-      }
-      let submitFail = false
-      console.log(this.tptDataList)
-
-      submitData.initPtInfoList = []
-			for (let num in this.tptDataList) {
-				if (this.tptDataList[num].tptData.compNameDetail === "" || this.tptDataList[num].tptData.licenceNoDetail === "") {
-					this.$notify.error({
-						title: '警告',
-						message: "请填写单位名称或许可证编号，并确保存在"
-					});
-					return;
-				}
-				for (let i in this.tptDataList[num].title1fromList) {
-					let item = this.tptDataList[num].title1fromList[i].itemList
-					for (let j in item) {
-						if (item[j].text === "") {
-							this.$notify.error({
-								title: '警告',
-								message: "请填全[跨省运输单位信息]所有内容"
-							});
-							return
-						}
-						if (this.checkDorSign(item[j].text)) {
-							this.$notify.error({
-								title: '警告',
-								message: "[跨省运输单位信息]数据中不可输入'$'符号"
-							});
-							return
-						}
-					}
-				}
-				for (let i in this.tptDataList[num].formList) {
-					if (this.tptDataList[num].formList[i].D_NAME === "" || this.tptDataList[num].formList[i].UNIT_NUM === "" || this.tptDataList[num].formList[i].SAMLL_CATEGORY_ID === "" || this.tptDataList[num].formList[i].BIG_CATEGORY_ID === "" || this.tptDataList[num].formList[i].LAST_NUM === "") {
-						this.$notify.error({
-							title: '警告',
-							message: "请填全[危险废物情况]所有内容"
-						});
-						return;
-					}
-				}
-				if (this.nameRepeatCheck(this.tptDataList[num].formList, 'D_NAME')) {
-					this.$notify.error({
-						title: '错误',
-						message: "废物名称不能重复，请修改后重新提交"
-					});
-					return;
-				}
-
-        let initPtData = {}
-        initPtData.wfjsdwmc = this.tptDataList[num].tptData.compNameDetail
-        initPtData.fwjsdwwxfwjyxkzh = this.tptDataList[num].tptData.licenceNoDetail
-        initPtData.wfjsdz = this.tptDataList[num].tptData.addrDetail
-        initPtData.yrsxzqhdm = this.tptDataList[num].tptData.cardDetail
-        initPtData.wfjsdwlxr = this.tptDataList[num].tptData.contactDetail
-        initPtData.wfjsdwlxrsj = this.tptDataList[num].tptData.contactPhoneDetail
-
-        initPtData.LINKMAN = this.tptDataList[num].transferData.name
-        initPtData.LINKTEL = this.tptDataList[num].transferData.phone
-
-        initPtData.ysdwmc = ""
-        initPtData.ysdwdz = ""
-        initPtData.ysdwlxr = ""
-        initPtData.ysdwlxrsj = ""
-        initPtData.ysdwdlyszh = ""
-
-				let repeatCheck = []
-				for (let i in this.tptDataList[num].title1fromList) {
+      
+      if(this.ifsave === '1'){
+        let checkFlag = false
+        for (let i in this.tptDataList) {
+          let formStr = 'form' + i
+          this.$refs[formStr][0].validate((valid) => {
+            if (valid) {
+              checkFlag = true
+            } else {
+              checkFlag = false
+            }
+          });
+        }
+        if (!checkFlag) {
+          return
+        }
+        let submitFail = false
+  
+        submitData.initPtInfoList = []
+        for (let num in this.tptDataList) {
+          if (this.tptDataList[num].tptData.compNameDetail === "" || this.tptDataList[num].tptData.licenceNoDetail === "") {
+            this.$notify.error({
+              title: '警告',
+              message: "请填写单位名称或许可证编号，并确保存在"
+            });
+            return;
+          }
+          for (let i in this.tptDataList[num].title1fromList) {
+            let item = this.tptDataList[num].title1fromList[i].itemList
+            for (let j in item) {
+              if (item[j].text === "") {
+                this.$notify.error({
+                  title: '警告',
+                  message: "请填全[跨省运输单位信息]所有内容"
+                });
+                return
+              }
+              if (this.checkDorSign(item[j].text)) {
+                this.$notify.error({
+                  title: '警告',
+                  message: "[跨省运输单位信息]数据中不可输入'$'符号"
+                });
+                return
+              }
+            }
+          }
+          for (let i in this.tptDataList[num].formList) {
+            if (this.tptDataList[num].formList[i].D_NAME === "" || this.tptDataList[num].formList[i].UNIT_NUM === "" || this.tptDataList[num].formList[i].SAMLL_CATEGORY_ID === "" || this.tptDataList[num].formList[i].BIG_CATEGORY_ID === "" || this.tptDataList[num].formList[i].LAST_NUM === "") {
+              this.$notify.error({
+                title: '警告',
+                message: "请填全[危险废物情况]所有内容"
+              });
+              return;
+            }
+          }
+          if (this.nameRepeatCheck(this.tptDataList[num].formList, 'D_NAME')) {
+            this.$notify.error({
+              title: '错误',
+              message: "废物名称不能重复，请修改后重新提交"
+            });
+            return;
+          }
+  
+          let initPtData = {}
+          initPtData.wfjsdwmc = this.tptDataList[num].tptData.compNameDetail
+          initPtData.fwjsdwwxfwjyxkzh = this.tptDataList[num].tptData.licenceNoDetail
+          initPtData.wfjsdz = this.tptDataList[num].tptData.addrDetail
+          initPtData.yrsxzqhdm = this.tptDataList[num].tptData.cardDetail
+          initPtData.wfjsdwlxr = this.tptDataList[num].tptData.contactDetail
+          initPtData.wfjsdwlxrsj = this.tptDataList[num].tptData.contactPhoneDetail
+  
+          initPtData.LINKMAN = this.tptDataList[num].transferData.name
+          initPtData.LINKTEL = this.tptDataList[num].transferData.phone
+  
+          initPtData.ysdwmc = ""
+          initPtData.ysdwdz = ""
+          initPtData.ysdwlxr = ""
+          initPtData.ysdwlxrsj = ""
+          initPtData.ysdwdlyszh = ""
+  
+          let repeatCheck = []
+          for (let i in this.tptDataList[num].title1fromList) {
+            
           
-        
-					let itemData = {}
-					itemData.ysdwmc = this.tptDataList[num].title1fromList[i].itemList[0].text
-					itemData.ysdwdz = this.tptDataList[num].title1fromList[i].itemList[4].text
-					itemData.ysdwlxr = this.tptDataList[num].title1fromList[i].itemList[2].text
-					itemData.ysdwlxrsj = this.tptDataList[num].title1fromList[i].itemList[3].text
-					itemData.ysdwdlyszh = this.tptDataList[num].title1fromList[i].itemList[1].text
-					repeatCheck.push(itemData)
-					if (i == 0) {
-						initPtData.ysdwmc = this.tptDataList[num].title1fromList[i].itemList[0].text
-						initPtData.ysdwdz = this.tptDataList[num].title1fromList[i].itemList[4].text
-						initPtData.ysdwlxr = this.tptDataList[num].title1fromList[i].itemList[2].text
-						initPtData.ysdwlxrsj = this.tptDataList[num].title1fromList[i].itemList[3].text
-						initPtData.ysdwdlyszh = this.tptDataList[num].title1fromList[i].itemList[1].text
-					} else {
-						initPtData.ysdwmc += "$" + this.tptDataList[num].title1fromList[i].itemList[0].text
-						initPtData.ysdwdz += "$" + this.tptDataList[num].title1fromList[i].itemList[4].text
-						initPtData.ysdwlxr += "$" + this.tptDataList[num].title1fromList[i].itemList[2].text
-						initPtData.ysdwlxrsj += "$" + this.tptDataList[num].title1fromList[i].itemList[3].text
-						initPtData.ysdwdlyszh += "$" + this.tptDataList[num].title1fromList[i].itemList[1].text
-					}
-				}
+            let itemData = {}
+            itemData.ysdwmc = this.tptDataList[num].title1fromList[i].itemList[0].text
+            itemData.ysdwdz = this.tptDataList[num].title1fromList[i].itemList[4].text
+            itemData.ysdwlxr = this.tptDataList[num].title1fromList[i].itemList[2].text
+            itemData.ysdwlxrsj = this.tptDataList[num].title1fromList[i].itemList[3].text
+            itemData.ysdwdlyszh = this.tptDataList[num].title1fromList[i].itemList[1].text
+            repeatCheck.push(itemData)
+            if (i == 0) {
+              initPtData.ysdwmc = this.tptDataList[num].title1fromList[i].itemList[0].text
+              initPtData.ysdwdz = this.tptDataList[num].title1fromList[i].itemList[4].text
+              initPtData.ysdwlxr = this.tptDataList[num].title1fromList[i].itemList[2].text
+              initPtData.ysdwlxrsj = this.tptDataList[num].title1fromList[i].itemList[3].text
+              initPtData.ysdwdlyszh = this.tptDataList[num].title1fromList[i].itemList[1].text
+            } else {
+              initPtData.ysdwmc += "$" + this.tptDataList[num].title1fromList[i].itemList[0].text
+              initPtData.ysdwdz += "$" + this.tptDataList[num].title1fromList[i].itemList[4].text
+              initPtData.ysdwlxr += "$" + this.tptDataList[num].title1fromList[i].itemList[2].text
+              initPtData.ysdwlxrsj += "$" + this.tptDataList[num].title1fromList[i].itemList[3].text
+              initPtData.ysdwdlyszh += "$" + this.tptDataList[num].title1fromList[i].itemList[1].text
+            }
+          }
+  
+          if (this.nameRepeatCheck(repeatCheck, 'ysdwmc') || this.nameRepeatCheck(repeatCheck, 'ysdwdlyszh')) {
+            this.$notify.error({
+              title: '错误',
+              message: "单位名称或许可证号不能重复，请修改后重新提交"
+            });
+            return;
+          }
+          initPtData.PT_LIST = []
+          for (let i in this.tptDataList[num].formList) {
+            initPtData.PT_LIST.push(this.tptDataList[num].formList[i])
+          }
+          submitData.initPtInfoList.push(initPtData)
+          
+        }
+      }
 
-				if (this.nameRepeatCheck(repeatCheck, 'ysdwmc') || this.nameRepeatCheck(repeatCheck, 'ysdwdlyszh')) {
-					this.$notify.error({
-						title: '错误',
-						message: "单位名称或许可证号不能重复，请修改后重新提交"
-					});
-					return;
-				}
-				initPtData.PT_LIST = []
-				for (let i in this.tptDataList[num].formList) {
-					initPtData.PT_LIST.push(this.tptDataList[num].formList[i])
-				}
-				submitData.initPtInfoList.push(initPtData)
-				
-			}
+      submitData.ifsave = this.ifsave
       for (let key in this.queryJson) {
 				submitData[key] = this.queryJson[key]
 			}
@@ -1450,7 +1474,122 @@ export default {
         }]
       }
       this.tptDataList.push(item)
-    }
+    },
+    ifsaveCheck(val) {
+			if (val === '1') {
+				this.ifsaveUserRole = this.userRole
+			}else {
+				this.$confirm('切换后数据将会被清空，是否确定?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					//清理数据
+					this.tptDataList = [{
+            dialogTableVisible: false,
+            searchGridData: [],
+            licenceNo: "",
+            compName: "",
+            tptData: {
+              compNameDetail: "",
+              licenceNoDetail: "",
+              addrDetail: "",
+              cardDetail: "",
+              contactDetail: "",
+              contactPhoneDetail: ""
+            },
+            formStatus: 'card',
+            transferData: {
+              name: "",
+              phone: ""
+            },
+            title1fromList: [{
+              index: 1,
+              itemList: [{
+                type: "input",
+                text: "",
+                title: "单位名称",
+                limit: "100"
+              }, {
+                type: "input",
+                text: "",
+                title: "道路危险货物运输许可证",
+                limit: "100"
+              }, {
+                type: "input",
+                text: "",
+                title: "联系人",
+                limit: "100"
+              }, {
+                type: "input",
+                text: "",
+                title: "联系方式",
+                limit: "100"
+              }, {
+                type: "input",
+                text: "",
+                title: "单位地址",
+                limit: "100"
+              }]
+            }],
+            formDataListTitle: [{
+              title: '单位名称',
+              key: 'EN_NAME_YS'
+            }, {
+              title: '道路危险货物运输许可证',
+              key: 'ysdwdlyszh'
+            }, {
+              title: '联系人',
+              key: 'ysdwlxr'
+            }, {
+              title: '联系方式',
+              key: 'ysdwlxrsj'
+            }, {
+              title: '单位地址',
+              key: 'ysdwdz'
+            }],
+            formDataListTitle1: [{
+              title: '废物名称',
+              key: 'D_NAME'
+            }, {
+              title: '废物类别',
+              key: 'BIG_CATEGORY_ID'
+            }, {
+              title: '废物代码',
+              key: 'SAMLL_CATEGORY_ID'
+            }, {
+              title: '预计产量',
+              key: 'UNIT_NUM'
+            }, {
+              title: '上年实际产量',
+              key: 'LAST_NUM'
+            }],
+            formDataList: [],
+            formDataList1: [],
+            formList: [{
+              "UNIT": "",
+              "SAMLL_CATEGORY_ID": "",
+              "SAMLL_CATEGORY_NAME": "",
+              "ID": "",
+              "D_NAME": "",
+              "UNIT_NUM": "",
+              "BIG_CATEGORY_ID": "",
+              "BIG_CATEGORY_NAME": "",
+              "LAST_NUM": ""
+            }]
+          }],
+					
+
+					this.ifsaveUserRole = "ifsave"
+				}).catch(() => {
+					if(val === '1'){
+						this.ifsave = "0"
+					}else{
+						this.ifsave = "1"
+					}    
+				});
+			}
+		},
   }
 }
 </script>
@@ -1507,6 +1646,7 @@ export default {
   font-size: 22px;
 }
 .tptElForm {
+  width: 100%;
   float: left;
 }
 .tptFormTitle_delText{
