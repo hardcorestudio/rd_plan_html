@@ -3,7 +3,7 @@
 		<my-aside :userRole="userRole" class="my-aside" :titleInfo="myTitleInfo" @doSubmit="doSubmit"></my-aside>
 		<div id="produceSituationPlan">
 			<assTitle :userRole="userRole" :titleInfo="title1" titleType="reset" :formStatus="formStatus === 'card' ? '0' : '1'" @doReset="doReset" :numTitle="numTitle" @formStatusChange="formStatusChange"></assTitle>
-			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'" :cateList="cateList" :levelOneData="levelOneData" :levelTwoData="levelTwoData"></assForm>
+			<assForm v-if="formStatus === 'card'" :formList="title1fromList" :type="userRole === 'CSEP' ? '' : 'label'" :cateListThree="cateListThree" :cateList="cateList" :levelOneData="levelOneData" :levelTwoData="levelTwoData"></assForm>
 			<assTable v-else-if="formStatus === 'table'" :tableList="formDataList" :tableTitleList="formDataListTitle"></assTable>
 			<div class="footerSign"></div>
 		</div>
@@ -92,6 +92,11 @@ export default {
 					text: "",
 					title: "来源及产生工序",
 					limit: "250"
+				}, {
+					type: "selectDIYSecond",
+					text: "",
+					title: "是否有常温常压下易燃易爆及排出有毒气体的危险废物",
+					isSingle: "1"
 				}]
 			}],
 			formStatus: 'card',
@@ -125,9 +130,19 @@ export default {
 			}, {
 				title: '来源及产生工序',
 				key: 'SOURCE_PROCESS'
+			}, {
+				title: '是否有常温常压下易燃易爆及排出有毒气体的危险废物',
+				key: 'IETG'
 			}],
 			formDataList: [],
-			cateList: []
+			cateList: [],
+			cateListThree: [{
+				value: "0",
+				label: "否"
+			},{
+				value: "1",
+				label: "是"
+			}]
 		}
 	},
 	components: {
@@ -4304,6 +4319,11 @@ export default {
 						text: res.initOverviewList[i].SOURCE_PROCESS,
 						title: "来源及产生工序",
 						limit: "250"
+					}, {
+						type: "selectDIYSecond",
+						text: res.initOverviewList[i].IETG,
+						title: "是否有常温常压下易燃易爆及排出有毒气体的危险废物",
+						isSingle: "1"
 					}]
 				}
 				this.title1fromList.push(item)
@@ -4357,6 +4377,11 @@ export default {
 					text: "",
 					title: "来源及产生工序",
 					limit: "250"
+				}, {
+					type: "selectDIYSecond",
+					text: "",
+					title: "是否有常温常压下易燃易爆及排出有毒气体的危险废物",
+					isSingle: "1"
 				}]
 			}]
 		}
@@ -4443,6 +4468,8 @@ export default {
 				item.YEAR_NUM = this.title1fromList[i].itemList[6].text
 				item.LAST_NUM = this.title1fromList[i].itemList[7].text
 				item.SOURCE_PROCESS = this.title1fromList[i].itemList[8].text
+				item.IETG = this.title1fromList[i].itemList[9].text
+				
 				// item.BIG_CATEGORY_NAME
 				// item.SAMLL_CATEGORY_NAME
 				submitData.LIST.push(item)
@@ -4543,6 +4570,11 @@ export default {
 					text: "",
 					title: "来源及产生工序",
 					limit: "250"
+				}, {
+					type: "selectDIYSecond",
+					text: "",
+					title: "是否有常温常压下易燃易爆及排出有毒气体的危险废物",
+					isSingle: "1"
 				}]
 			}]
 		},

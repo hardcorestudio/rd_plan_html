@@ -20,9 +20,27 @@
 											:value="uItem.value">
 										</el-option>
 									</el-select>
-									<el-select v-else placeholder="请选择" v-model="fItem.text" @change="selectUnitChange(fItem,item.index)" class="assFromItem_unitBgSelect">
+									<el-select v-else placeholder="请选择" v-model="fItem.text" @change="selectUnitChange(fItem,item.index,'first')" class="assFromItem_unitBgSelect">
 										<el-option
 											v-for="uItem in cateList"
+											:key="uItem.value"
+											:label="uItem.label"
+											:value="uItem.value">
+										</el-option>
+									</el-select>
+								</div>
+								<div v-else-if="fItem.type === 'selectDIYSecond'" class="assFromItem_unitBg">
+									<el-select v-if="fItem.num && fItem.num === '1'" placeholder="请选择" v-model="fItem.text" class="assFromItem_unitBgSelect">
+										<el-option
+											v-for="uItem in cateList4"
+											:key="uItem.value"
+											:label="uItem.label"
+											:value="uItem.value">
+										</el-option>
+									</el-select>
+									<el-select v-else placeholder="请选择" v-model="fItem.text" @change="selectUnitChange(fItem,item.index,'second')" class="assFromItem_unitBgSelect">
+										<el-option
+											v-for="uItem in cateListThree"
 											:key="uItem.value"
 											:label="uItem.label"
 											:value="uItem.value">
@@ -152,7 +170,9 @@
 			levelOneData: Array,
 			levelTwoData: Object,
 			cateList: Array,
-			cateList2: Array
+			cateList2: Array,
+			cateListThree: Array,
+			cateList4: Array,
 		},
     data() {
       return {
@@ -288,19 +308,25 @@
 					}
 				}
 			},
-			selectUnitChange(item,index){
+			selectUnitChange(item,index,sign){
+				let cList = []
+				if(sign === 'second') {
+					cList = this.cateListThree
+				}else {
+					cList = this.cateList
+				}
 				if(item.unit && item.unit === '1'){
-					for(let i in this.cateList){
-						if(this.cateList[i].value === item.text){
+					for(let i in cList){
+						if(cList[i].value === item.text){
 							for(let m in this.formList){
 								if(this.formList[m].index === index){
 									for(let j in this.formList[m].itemList){
 										let formItem = this.formList[m].itemList[j]
 										// if(formItem.type === "selectThree" || formItem.type === "select"){
-										// 	formItem.text = this.cateList[i].UNIT
+										// 	formItem.text = cList[i].UNIT
 										// }
 										if(formItem.type === "inputWithUnitSelect"){
-											formItem.unit = this.cateList[i].UNIT
+											formItem.unit = cList[i].UNIT
 										}
 									}
 									break
