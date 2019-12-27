@@ -27,9 +27,33 @@
 						</el-form-item>
 					</el-col>
 				</el-row>
-				<el-form-item label="行业类别/代码">
-					<el-row>{{baseInfoData.category}}</el-row>
-				</el-form-item>
+				<el-row>
+					<el-form-item label="统一社会信用代码" prop="socialCreditCode">
+						<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.socialCreditCode" placeholder="必填"></el-input>
+						<el-row v-else>{{baseInfoData.socialCreditCode}}</el-row>
+					</el-form-item>
+				</el-row>
+				<el-row>
+					<el-col v-if="userRole=== 'CSEP'" :span="1" style="width: 35px;height: 40px;line-height: 40px;">
+						<el-checkbox v-model="baseInfoData.pdpChecked" true-label="1" false-label="0"></el-checkbox>
+					</el-col>
+					<el-col :span="userRole=== 'CSEP' ? '23' : '24'">
+						<el-form-item label="排污许可证" class="pollutantDischargePermitItem">
+							<el-input v-if="userRole=== 'CSEP'" v-model="baseInfoData.pollutantDischargePermit" placeholder="必填" :disabled="baseInfoData.pdpChecked==='0'"></el-input>
+							<el-row v-else>{{baseInfoData.pollutantDischargePermit}}</el-row>
+						</el-form-item>
+					</el-col>
+				</el-row>
+				<el-row :gutter="20">
+					<el-col :span="20">
+						<el-form-item label="行业类别/代码">
+							<el-row>{{baseInfoData.category}}</el-row>
+						</el-form-item>
+					</el-col>
+					<el-col v-if="userRole=== 'CSEP'" :span="4" style="text-align: right;">
+						<el-button @click="categoryEditModalOpen">选择</el-button>
+					</el-col>
+				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="总投资" prop="totalInvestment">
@@ -137,6 +161,30 @@
 			<assTitle :userRole="userRole" :titleInfo="manageDes" titleType="textarea"></assTitle>
 			<div class="footerSign"></div>
 		</div>
+		<!-- modal -->
+		<!-- <el-cascader :props="categoryProps"></el-cascader> -->
+		<el-dialog
+			title="行业类别/代码"
+			v-if="categoryModalFlag"
+			:visible.sync="categoryModalFlag"
+			width="60%">
+			<div style="width: 100%;height: 300px;">
+				<!-- <div v-if="categoryValues.first_id" style="padding:10px 0; float: left;">{{categoryValues.first_id}} - {{categoryValues.first_name}} ></div>
+				<div v-if="categoryValues.second_id" style="padding:10px 0; float: left;"> {{categoryValues.second_id}} - {{categoryValues.second_name}} ></div>
+				<div v-if="categoryValues.third_id" style="padding:10px 0; float: left;"> {{categoryValues.third_id}} - {{categoryValues.third_name}} ></div> -->
+				<el-cascader
+					style="width:100%"
+					v-model="categoryChooseList"
+					:options="modalDataOptions"
+					@active-item-change="categoryItemChange"
+					:props="categoryProps"
+				></el-cascader>
+			</div>
+			<span slot="footer" class="dialog-footer">
+					<el-button @click="categoryModalFlag = false">取 消</el-button>
+					<el-button type="primary" @click="categorySubmit">确 定</el-button>
+				</span>
+		</el-dialog>
 	</div>
 </template>
 <script>
@@ -206,6 +254,7 @@ export default {
 			}
 		};
 		return {
+			categoryModalFlag: false,
 			repaetClickTime: 2,
 			repeatClickFlag: false,
 			myTitleInfo: {
@@ -256,7 +305,10 @@ export default {
 				trashChargeMan: "", // input
 				TOTAL_INVESTMENT_UNIT: "万元",
 				TOTAL_OUTPUTVALUE_UNIT: "万元",
-				FLOOR_AREA_UNIT: "平方米"
+				FLOOR_AREA_UNIT: "平方米",
+				socialCreditCode: "",
+				pollutantDischargePermit: "",
+				pdpChecked: '0'
 			},
 			rules: {
 				totalInvestment: [
@@ -298,7 +350,13 @@ export default {
 				],
 				trashChargeMan: [
 					{ required: true, message: '请输入废物管理负责人', trigger: 'blur' }
-				]
+				],
+				socialCreditCode: [
+					{ required: true, message: '请输入统一社会信用代码', trigger: 'blur' }
+				],
+				pollutantDischargePermit: [
+					{ required: true, message: '请输入排污许可证', trigger: 'blur' }
+				],
 			},
 			managerList: [{
 				index: 1,
@@ -332,6 +390,15 @@ export default {
 				placeholder: "必填",
 				text: ""
 			},
+			modalData: {},
+			modalDataOptions: [],
+			categoryProps: {
+				label: "dict_value",
+				value: 'dict_id',
+				children: 'children'
+			},
+			categoryValues: {},
+			categoryChooseList: []
 		}
 	},
 	components: {
@@ -474,7 +541,14 @@ export default {
 				this.baseInfoData.factoryAddr = res.initRes.sbAdress
 				this.baseInfoData.legalPerson = res.initRes.LINKMAN
 				this.baseInfoData.postNo = res.initRes.POSTAL_CODE
-				this.baseInfoData.category = res.initRes.dictname
+				this.baseInfoData.category = ''
+				if (res.initRes.industry_type_id && res.initRes.industry_type_id !== '') {
+					this.baseInfoData.category = res.initRes.industry_type_id + ' - ' + res.initRes.industry_type_name + 
+																			 res.initRes.industry_big_id + ' - ' + res.initRes.industry_big_name + 
+																			 res.initRes.industry_mid_id + ' - ' + res.initRes.industry_mid_name + 
+																			 res.initRes.industry_sm_id + ' - ' + res.initRes.industry_sm_name
+				}
+				
 			}
 			if(res.initEpExtend){
 				this.baseInfoData.totalInvestment = parseInt(res.initEpExtend.TOTAL_INVESTMENT)
@@ -560,6 +634,21 @@ export default {
 				});
 				return
 			}
+			if (this.baseInfoData.pdpChecked === "1" && this.baseInfoData.pollutantDischargePermit === '') {
+				_this.$notify.error({
+					title: '警告',
+					message: "请填写排污许可证"
+				});
+				return
+			}
+			if(this.baseInfoData.category === '') {
+				_this.$notify.error({
+					title: '警告',
+					message: "请选择行业类别/代码"
+				});
+				return
+			}
+
 			const loading = _this.$loading({
 				lock: true,
 				text: 'Loading',
@@ -583,6 +672,17 @@ export default {
 			submitData.DEPARTMENT_HEAD = _this.baseInfoData.departmentChargeMan
 			submitData.MANAGER = _this.baseInfoData.trashChargeMan
 			submitData.MANAGEMENT_ORG = _this.manageDes.text
+			//new 20191227
+			submitData.REGISTERCODE = _this.baseInfoData.socialCreditCode
+			submitData.PDP = _this.baseInfoData.pdpChecked === '0' ? '' : _this.baseInfoData.pollutantDischargePermit
+			submitData.industry_type_id = _this.categoryValues.first_id
+			submitData.industry_type_name = _this.categoryValues.first_name
+			submitData.industry_big_id = _this.categoryValues.second_id
+			submitData.industry_big_name = _this.categoryValues.second_name
+			submitData.industry_mid_id = _this.categoryValues.third_id
+			submitData.industry_mid_name = _this.categoryValues.third_name
+			submitData.industry_sm_id = _this.categoryValues.fourth_id
+			submitData.industry_sm_name = _this.categoryValues.fourth_name
 
 			submitData.TOTAL_INVESTMENT_UNIT = _this.baseInfoData.TOTAL_INVESTMENT_UNIT
 			submitData.TOTAL_OUTPUTVALUE_UNIT = _this.baseInfoData.TOTAL_OUTPUTVALUE_UNIT
@@ -627,6 +727,357 @@ export default {
 				loading.close();
 			})
 		},
+		categoryEditModalOpen() {
+
+			//wudi add url
+			fetch({
+				url: '',
+				method: 'GET',
+				data: 'params='
+			}).then(res => {
+				this.modalData = res
+				// this.modalData = {
+				// 	"industryBig": [
+				// 		{
+				// 			"id_main": 12,
+				// 			"id": 93,
+				// 			"status": "1",
+				// 			"dict_value": "社会保障",
+				// 			"dict_id": "S93",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 12,
+				// 			"id": 94,
+				// 			"status": "1",
+				// 			"dict_value": "群众团体、社会团体和其他成员组织",
+				// 			"dict_id": "S94",
+				// 			"children": []
+				// 		}
+				// 	],
+				// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiVzA0TTEzL1llQnJZN0pDSzJWcDR2Zz0=",
+				// 	"operatorId": "",
+				// 	"industrySm": [
+				// 		{
+				// 			"id_main": 14,
+				// 			"id": 1094,
+				// 			"status": "1",
+				// 			"dict_value": "村民自治组织",
+				// 			"dict_id": "S9320",
+				// 		},
+				// 		{
+				// 			"id_main": 14,
+				// 			"id": 1095,
+				// 			"status": "1",
+				// 			"dict_value": "国际组织",
+				// 			"dict_id": "T9400",
+				// 		}
+				// 	],
+				// 	"empId": "",
+				// 	"userType": "CSEP",
+				// 	"newGuideFlag": "",
+				// 	"belongQ": "",
+				// 	"belongS": "",
+				// 	"nickName": "天津市昱隆泰再生资源环保处理有限公司",
+				// 	"orgCode": "",
+				// 	"userId": "EP201410280946090018",
+				// 	"userName": "",
+				// 	"sepaName": "西青区",
+				// 	"industryMid": [
+				// 		{
+				// 			"id_main": 13,
+				// 			"id": 431,
+				// 			"status": "1",
+				// 			"dict_value": "村民自治组织",
+				// 			"dict_id": "S932",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 13,
+				// 			"id": 432,
+				// 			"status": "1",
+				// 			"dict_value": "国际组织",
+				// 			"dict_id": "T940",
+				// 			"children": []
+				// 		}
+				// 	],
+				// 	"status": "",
+				// 	"ifLogin": "0",
+				// 	"ROLEID": "CSEP",
+				// 	"epName": "天津市昱隆泰再生资源环保处理有限公司",
+				// 	"epId": "EP201410280946090018",
+				// 	"industryType": [
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 1,
+				// 			"status": "1",
+				// 			"dict_value": "农、林、牧、渔业",
+				// 			"dict_id": "A",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 2,
+				// 			"status": "1",
+				// 			"dict_value": "采矿业",
+				// 			"dict_id": "B",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 3,
+				// 			"status": "1",
+				// 			"dict_value": "制造业",
+				// 			"dict_id": "C",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 4,
+				// 			"status": "1",
+				// 			"dict_value": "电力、热力、燃气及水生产和供应业",
+				// 			"dict_id": "D",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 5,
+				// 			"status": "1",
+				// 			"dict_value": "建筑业",
+				// 			"dict_id": "E",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 6,
+				// 			"status": "1",
+				// 			"dict_value": "批发和零售业",
+				// 			"dict_id": "F",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 7,
+				// 			"status": "1",
+				// 			"dict_value": "交通运输、仓储和邮政业",
+				// 			"dict_id": "G",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 8,
+				// 			"status": "1",
+				// 			"dict_value": "住宿和餐饮业",
+				// 			"dict_id": "H",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 9,
+				// 			"status": "1",
+				// 			"dict_value": "信息传输、软件和信息技术服务业",
+				// 			"dict_id": "I",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 10,
+				// 			"status": "1",
+				// 			"dict_value": "金融业",
+				// 			"dict_id": "J",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 11,
+				// 			"status": "1",
+				// 			"dict_value": "房地产业",
+				// 			"dict_id": "K",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 12,
+				// 			"status": "1",
+				// 			"dict_value": "租赁和商务服务业",
+				// 			"dict_id": "L",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 13,
+				// 			"status": "1",
+				// 			"dict_value": "科学研究和技术服务业",
+				// 			"dict_id": "M",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 14,
+				// 			"status": "1",
+				// 			"dict_value": "水利、环境和公共设施管理业",
+				// 			"dict_id": "N",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 15,
+				// 			"status": "1",
+				// 			"dict_value": "居民服务、修理和其他服务业",
+				// 			"dict_id": "O",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 16,
+				// 			"status": "1",
+				// 			"dict_value": "教育",
+				// 			"dict_id": "P",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 17,
+				// 			"status": "1",
+				// 			"dict_value": "卫生和社会工作",
+				// 			"dict_id": "Q",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 18,
+				// 			"status": "1",
+				// 			"dict_value": "文化、体育和娱乐业",
+				// 			"dict_id": "R",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 19,
+				// 			"status": "1",
+				// 			"dict_value": "公共管理、社会保障和社会组织",
+				// 			"dict_id": "S",
+				// 			"children": []
+				// 		},
+				// 		{
+				// 			"id_main": 11,
+				// 			"id": 20,
+				// 			"status": "1",
+				// 			"dict_value": "国际组织",
+				// 			"dict_id": "T",
+				// 			"children": []
+				// 		}
+				// 	],
+				// 	"belongSepa": "XQQ",
+				// 	"userPortrait": "",
+				// 	"IWBSESSION": "BROWSER-20200125020857",
+				// 	"realName": "",
+				// 	"contextPath": "",
+				// 	"orgSeq": ""
+				// }
+				this.modalDataOptions = this.modalData.industryType
+				this.categoryChooseList = []
+				this.categoryModalFlag = true
+			})
+		},
+		categoryItemChange(val) {
+			if(val.length === 1) {
+				for (let i in this.modalDataOptions) {
+					if(this.modalDataOptions[i].dict_id === val[0]) {
+						
+						this.modalDataOptions[i].children = []
+						this.modalDataOptions[i].children = this.modalData.industryBig.filter((item) => {
+							return item.dict_id.substring(0,1) === val[0];
+						})
+						break
+					}
+				}
+			}else if (val.length === 2) {
+				for (let i in this.modalDataOptions) {
+					if(this.modalDataOptions[i].dict_id === val[0]) {
+
+						for(let m in this.modalDataOptions[i].children) {
+							if(this.modalDataOptions[i].children[m].dict_id === val[1]) {
+
+								this.modalDataOptions[i].children[m].children = []
+								this.modalDataOptions[i].children[m].children = this.modalData.industryMid.filter((item) => {
+									return item.dict_id.substring(0,3) === val[1];
+								})
+								
+								break
+							}
+						}
+						break
+					}
+				}
+			}else if (val.length === 3) {
+				for (let i in this.modalDataOptions) {
+					if(this.modalDataOptions[i].dict_id === val[0]) {
+
+						for(let m in this.modalDataOptions[i].children) {
+							if(this.modalDataOptions[i].children[m].dict_id === val[1]) {
+
+								for(let n in this.modalDataOptions[i].children[m].children) {
+									if(this.modalDataOptions[i].children[m].children[n].dict_id === val[2]) {
+
+										this.modalDataOptions[i].children[m].children[n].children = []
+										this.modalDataOptions[i].children[m].children[n].children = this.modalData.industrySm.filter((item) => {
+											return item.dict_id.substring(0,4) === val[2];
+										})
+										break
+									}
+								}
+								break
+							}
+						}
+						break
+					}
+				}
+			}
+		},
+		categorySubmit() {
+			if (this.categoryChooseList.length === 4) {
+				for (let i in this.modalData.industryType) {
+					if (this.modalData.industryType[i].dict_id === this.categoryChooseList[0]) {
+						this.categoryValues.first_id = this.modalData.industryType[i].dict_id
+						this.categoryValues.first_name = this.modalData.industryType[i].dict_value
+						break
+					}
+				}
+				for (let i in this.modalData.industryBig) {
+					if (this.modalData.industryBig[i].dict_id === this.categoryChooseList[1]) {
+						this.categoryValues.second_id = this.modalData.industryBig[i].dict_id
+						this.categoryValues.second_name = this.modalData.industryBig[i].dict_value
+						break
+					}
+				}
+				for (let i in this.modalData.industryMid) {
+					if (this.modalData.industryMid[i].dict_id === this.categoryChooseList[2]) {
+						this.categoryValues.third_id = this.modalData.industryMid[i].dict_id
+						this.categoryValues.third_name = this.modalData.industryMid[i].dict_value
+						break
+					}
+				}
+				for (let i in this.modalData.industrySm) {
+					if (this.modalData.industrySm[i].dict_id === this.categoryChooseList[3]) {
+						this.categoryValues.fourth_id = this.modalData.industrySm[i].dict_id
+						this.categoryValues.fourth_name = this.modalData.industrySm[i].dict_value
+						break
+					}
+				}
+				this.baseInfoData.category = this.categoryValues.first_id + " - " + this.categoryValues.first_name + ' / ' + 
+																		 this.categoryValues.second_id + " - " + this.categoryValues.second_name + ' / ' + 
+																		 this.categoryValues.third_id + " - " + this.categoryValues.third_name + ' / ' + 
+																		 this.categoryValues.fourth_id + " - " + this.categoryValues.fourth_name;
+
+				this.categoryModalFlag = false
+			} else {
+				this.$notify.error({
+					title: '警告',
+					message: "请选择行业类别/代码"
+				});
+			}
+		}
 	}
 }
 </script>
@@ -655,12 +1106,18 @@ export default {
 #baseInfoArea .el-form-item__label {
   text-align: left;
   font-size: 16px;
-  width: 140px !important;
+  width: 155px !important;
 }
 #baseInfoArea .el-form-item__content {
   font-size: 16px;
   color: #666;
-  margin-left: 140px !important;
+  margin-left: 155px !important;
+}
+#baseInfoArea .pollutantDischargePermitItem .el-form-item__label {
+	width: 120px !important;
+}
+#baseInfoArea .pollutantDischargePermitItem .el-form-item__content {
+	margin-left: 120px !important;
 }
 /* #baseInfoArea .el-form-item {
   margin-bottom: 10px;
