@@ -359,7 +359,7 @@ export default {
 		// 		"BIG_NAME": "废催化剂"
 		// 	}],
 		// 	"smallCategoryType": ["In", "T", "I", "R", "C", "T,I", "T/I", "R,T", "T/C/I/R", "T,R", "T/C", "T,C", "C,T", "R/C", "T/In", "T/C/I/R/In"],
-		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiV0FnbVFiNks5UUJFd1dQTU0vNjZIVT0=",
+		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiVm5qVnVsRmlyVlo2S09QVGlpQktIYz0=",
 		// 	"operatorId": "",
 		// 	"empId": "",
 		// 	"userType": "CSEP",
@@ -4258,9 +4258,108 @@ export default {
 		// 	"epId": "EP201410280946090018",
 		// 	"belongSepa": "XQQ",
 		// 	"userPortrait": "",
-		// 	"IWBSESSION": "BROWSER-20181019084346",
-		// 	"initOverviewList": [],
-		// 	"sumOverviewList": [],
+		// 	"IWBSESSION": "BROWSER-20200106065447",
+		// 	"initOverviewList": [{
+		// 		"BIG_CATEGORY_NAME": "废有机溶剂与含有机溶剂废物",
+		// 		"UNIT": "吨",
+		// 		"W_NAME": "废油等",
+		// 		"SOURCE_PROCESS": "废水处理站",
+		// 		"SAMLL_CATEGORY_ID": "900-410-06",
+		// 		"TP_ID": "TP202001230422330029",
+		// 		"YEAR_NUM": "0.5",
+		// 		"BIG_CATEGORY_ID": "HW06",
+		// 		"W_SHAPE": "半固态",
+		// 		"LAST_NUM": "0",
+		// 		"SAMLL_CATEGORY_NAME": "900-402-06和900-404-06中所列废物再生处理产生的废水处理浮渣和污泥（不包括废水生化处理污泥）",
+		// 		"ID": "1",
+		// 		"IETG": 0,
+		// 		"D_NAME": "污水处理站污泥",
+		// 		"CHARACTER": "T"
+		// 	}, {
+		// 		"BIG_CATEGORY_NAME": "其他废物",
+		// 		"UNIT": "吨",
+		// 		"W_NAME": "油漆等",
+		// 		"SOURCE_PROCESS": "废水处理站及粉碎工艺",
+		// 		"SAMLL_CATEGORY_ID": "900-039-49",
+		// 		"TP_ID": "TP202001230422330029",
+		// 		"YEAR_NUM": "0.2",
+		// 		"BIG_CATEGORY_ID": "HW49",
+		// 		"W_SHAPE": "固态",
+		// 		"LAST_NUM": "0",
+		// 		"SAMLL_CATEGORY_NAME": "化工行业生产产生的废活性炭",
+		// 		"ID": "2",
+		// 		"IETG": 1,
+		// 		"D_NAME": "废活性炭",
+		// 		"CHARACTER": "T"
+		// 	}, {
+		// 		"BIG_CATEGORY_NAME": "油/水、烃/水混合物或乳化液",
+		// 		"UNIT": "吨",
+		// 		"W_NAME": "废油",
+		// 		"SOURCE_PROCESS": "清洗工艺",
+		// 		"SAMLL_CATEGORY_ID": "900-007-09",
+		// 		"TP_ID": "TP202001230422330029",
+		// 		"YEAR_NUM": "0.3",
+		// 		"BIG_CATEGORY_ID": "HW09",
+		// 		"W_SHAPE": "液态",
+		// 		"LAST_NUM": "0",
+		// 		"SAMLL_CATEGORY_NAME": "其他工艺产生的油/水烃/水混合物或乳化液",
+		// 		"ID": "3",
+		// 		"IETG": 0,
+		// 		"D_NAME": "含油废水",
+		// 		"CHARACTER": "T"
+		// 	}, {
+		// 		"BIG_CATEGORY_NAME": "废有机溶剂与含有机溶剂废物",
+		// 		"UNIT": "吨",
+		// 		"W_NAME": "乙二醇、苯甲酰氯",
+		// 		"SOURCE_PROCESS": "清洗工艺",
+		// 		"SAMLL_CATEGORY_ID": "900-404-06",
+		// 		"TP_ID": "TP202001230422330029",
+		// 		"YEAR_NUM": "25",
+		// 		"BIG_CATEGORY_ID": "HW06",
+		// 		"W_SHAPE": "液态",
+		// 		"LAST_NUM": "19.12",
+		// 		"SAMLL_CATEGORY_NAME": "工业生产中作为清洗剂或萃取剂使用后废弃的其他列入《危险化学品目录》的有机溶剂",
+		// 		"ID": "4",
+		// 		"IETG": null,
+		// 		"D_NAME": "废有机溶剂",
+		// 		"CHARACTER": "T"
+		// 	}, {
+		// 		"BIG_CATEGORY_NAME": "废矿物油与含矿物油废物",
+		// 		"UNIT": "吨",
+		// 		"W_NAME": "废油",
+		// 		"SOURCE_PROCESS": "残液回收",
+		// 		"SAMLL_CATEGORY_ID": "900-249-08",
+		// 		"TP_ID": "TP202001230422330029",
+		// 		"YEAR_NUM": "3",
+		// 		"BIG_CATEGORY_ID": "HW08",
+		// 		"W_SHAPE": "液态",
+		// 		"LAST_NUM": "2",
+		// 		"SAMLL_CATEGORY_NAME": "其他生产销售使用产生的废矿物油及含矿物油废物",
+		// 		"ID": "5",
+		// 		"IETG": null,
+		// 		"D_NAME": "废油",
+		// 		"CHARACTER": "T,I"
+		// 	}, {
+		// 		"BIG_CATEGORY_NAME": "废碱",
+		// 		"UNIT": "吨",
+		// 		"W_NAME": "废碱",
+		// 		"SOURCE_PROCESS": "清洗工艺",
+		// 		"SAMLL_CATEGORY_ID": "900-352-35",
+		// 		"TP_ID": "TP202001230422330029",
+		// 		"YEAR_NUM": "25",
+		// 		"BIG_CATEGORY_ID": "HW35",
+		// 		"W_SHAPE": "液态",
+		// 		"LAST_NUM": "0",
+		// 		"SAMLL_CATEGORY_NAME": "使用碱进行清洗产生的废碱液",
+		// 		"ID": "6",
+		// 		"IETG": null,
+		// 		"D_NAME": "洗桶废水",
+		// 		"CHARACTER": "C"
+		// 	}],
+		// 	"sumOverviewList": [{
+		// 		"last_num_sum": "21.12吨",
+		// 		"year_num_sum": "54.00吨"
+		// 	}],
 		// 	"realName": "",
 		// 	"contextPath": "",
 		// 	"orgSeq": ""
@@ -4321,7 +4420,7 @@ export default {
 						limit: "250"
 					}, {
 						type: "selectDIYSecond",
-						text: res.initOverviewList[i].IETG,
+						text: res.initOverviewList[i].IETG == null ? "" : res.initOverviewList[i].IETG + "",
 						title: "是否有常温常压下易燃易爆及排出有毒气体的危险废物",
 						isSingle: "1"
 					}]
@@ -4468,7 +4567,7 @@ export default {
 				item.YEAR_NUM = this.title1fromList[i].itemList[6].text
 				item.LAST_NUM = this.title1fromList[i].itemList[7].text
 				item.SOURCE_PROCESS = this.title1fromList[i].itemList[8].text
-				item.IETG = this.title1fromList[i].itemList[9].text
+				item.IETG = this.title1fromList[i].itemList[9].text !== null ? this.title1fromList[i].itemList[9].text : ''
 				
 				// item.BIG_CATEGORY_NAME
 				// item.SAMLL_CATEGORY_NAME
