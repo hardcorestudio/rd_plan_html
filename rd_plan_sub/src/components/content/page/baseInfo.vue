@@ -572,6 +572,14 @@ export default {
 																			 res.initEpExtend.industry_big_id + ' - ' + res.initEpExtend.industry_big_name + 
 																			 res.initEpExtend.industry_mid_id + ' - ' + res.initEpExtend.industry_mid_name + 
 																			 res.initEpExtend.industry_sm_id + ' - ' + res.initEpExtend.industry_sm_name
+					this.categoryValues.first_id = res.initEpExtend.industry_type_id
+					this.categoryValues.first_name = res.initEpExtend.industry_type_name
+					this.categoryValues.second_id = res.initEpExtend.industry_big_id
+					this.categoryValues.second_name = res.initEpExtend.industry_big_name
+					this.categoryValues.third_id = res.initEpExtend.industry_mid_id
+					this.categoryValues.third_name = res.initEpExtend.industry_mid_name
+					this.categoryValues.fourth_id = res.initEpExtend.industry_sm_id
+					this.categoryValues.fourth_name = res.initEpExtend.industry_sm_name
 				}
 				this.baseInfoData.socialCreditCode = res.initEpExtend.REGISTERCODE
 				this.baseInfoData.pollutantDischargePermit = res.initEpExtend.PDP
