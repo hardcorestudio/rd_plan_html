@@ -132,15 +132,15 @@ export default {
 				key: 'SOURCE_PROCESS'
 			}, {
 				title: '是否有常温常压下易燃易爆及排出有毒气体的危险废物',
-				key: 'IETG'
+				key: 'IETG_TEXT'
 			}],
 			formDataList: [],
 			cateList: [],
 			cateListThree: [{
-				value: "0",
+				value: "否",
 				label: "否"
 			},{
-				value: "1",
+				value: "是",
 				label: "是"
 			}]
 		}
@@ -4365,68 +4365,75 @@ export default {
 		// 	"orgSeq": ""
 		// }
 		this.userRole = res.userType
-
-		this.formDataList = res.initOverviewList
-		if (res.initOverviewList.length > 0) {
+		
+		let fDList = res.initOverviewList
+		this.formDataList = []
+		if (fDList.length > 0) {
 			this.title1fromList = []
-			for (let i in res.initOverviewList) {
+			for (let i in fDList) {
 				let item = {
 					index: i + 1,
 					itemList: [{
 						type: "input",
-						text: res.initOverviewList[i].D_NAME,
+						text: fDList[i].D_NAME,
 						title: "废物名称",
 						isSingle: "1",
 						limit: "100"
 					}, {
 						type: "selectLevel",
-						text1: res.initOverviewList[i].BIG_CATEGORY_ID,
+						text1: fDList[i].BIG_CATEGORY_ID,
 						title1: "类别选择",
-						text2: res.initOverviewList[i].SAMLL_CATEGORY_ID,
+						text2: fDList[i].SAMLL_CATEGORY_ID,
 						title2: "废物代码",
 						isSingle: "1"
 					}, {
 						type: "input",
-						text: res.initOverviewList[i].W_NAME,
+						text: fDList[i].W_NAME,
 						title: "有害物质名称",
 						limit: "100"
 					}, {
 						type: "input",
-						text: res.initOverviewList[i].W_SHAPE,
+						text: fDList[i].W_SHAPE,
 						title: "物理性状",
 						limit: "25"
 					}, {
 						type: "selectDIY",
-						text: res.initOverviewList[i].CHARACTER,
+						text: fDList[i].CHARACTER,
 						title: "危险特性"
 					}, {
 						type: "select",
-						text: res.initOverviewList[i].UNIT,
+						text: fDList[i].UNIT,
 						title: "单位"
 					}, {
 						type: "inputWithUnitSelect",
-						text: res.initOverviewList[i].YEAR_NUM,
+						text: fDList[i].YEAR_NUM,
 						title: "本年计划产生量",
-						unit: res.initOverviewList[i].UNIT
+						unit: fDList[i].UNIT
 					}, {
 						type: "inputWithUnitSelect",
-						text: res.initOverviewList[i].LAST_NUM,
+						text: fDList[i].LAST_NUM,
 						title: "上年实际产生量",
-						unit: res.initOverviewList[i].UNIT
+						unit: fDList[i].UNIT
 					}, {
 						type: "input",
-						text: res.initOverviewList[i].SOURCE_PROCESS,
+						text: fDList[i].SOURCE_PROCESS,
 						title: "来源及产生工序",
 						limit: "250"
 					}, {
 						type: "selectDIYSecond",
-						text: res.initOverviewList[i].IETG == null ? "" : res.initOverviewList[i].IETG + "",
+						text: fDList[i].IETG == null ? "" : fDList[i].IETG == '0' ? "否" : "是",
 						title: "是否有常温常压下易燃易爆及排出有毒气体的危险废物",
 						isSingle: "1"
 					}]
 				}
 				this.title1fromList.push(item)
+
+				let dItem = {}
+				dItem = fDList[i]
+				dItem.IETG_TEXT = fDList[i].IETG == null ? "" : fDList[i].IETG == '0' ? "否" : "是"
+				this.formDataList.push(dItem)
 			}
+
 		} else {
 			this.title1fromList = [{
 				index: 1,
@@ -4567,8 +4574,7 @@ export default {
 				item.YEAR_NUM = this.title1fromList[i].itemList[6].text
 				item.LAST_NUM = this.title1fromList[i].itemList[7].text
 				item.SOURCE_PROCESS = this.title1fromList[i].itemList[8].text
-				item.IETG = this.title1fromList[i].itemList[9].text !== null ? this.title1fromList[i].itemList[9].text : ''
-				
+				item.IETG = this.title1fromList[i].itemList[9].text != null && this.title1fromList[i].itemList[9].text !== '' ? (this.title1fromList[i].itemList[9].text == "否" ? "0" : '1') : ""
 				// item.BIG_CATEGORY_NAME
 				// item.SAMLL_CATEGORY_NAME
 				submitData.LIST.push(item)
