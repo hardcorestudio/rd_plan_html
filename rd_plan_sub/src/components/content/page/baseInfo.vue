@@ -423,8 +423,8 @@ export default {
 
 		this.myTitleInfo.epName = this.queryJson.epName
 		// let res = {
-		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiV2Z4Z0RySVp5WUw3ZlUyVEZZRGc2Yz0=",
-		// 	"sepaName": "津南区",
+		// 	"WJWT": "czlEcjhPMjRXelI5LzQrVE5JS1hiU0xmajBIT1VoM0RsWjhTV1QwVW9EVT0=",
+		// 	"sepaName": "西青区",
 		// 	"operatorId": "",
 		// 	"status": "",
 		// 	"ROLEID": "CSEP",
@@ -432,95 +432,102 @@ export default {
 		// 	"initRes": {
 		// 		"ISSUIETIME": null,
 		// 		"ISSUIEVALID": null,
-		// 		"FAX_NUM": "28569822",
-		// 		"epAdress": "天津市津南区双桥河镇东",
-		// 		"sbAdress": "天津市津南区双桥河镇东",
-		// 		"EP_NAME": "天津合佳威立雅环境服务有限公司",
+		// 		"FAX_NUM": "23991989",
+		// 		"epAdress": "天津市西青区天津西青高端金属制品工业区19号",
+		// 		"sbAdress": "天津市西青区高端金属制品工业区19号",
+		// 		"EP_NAME": "天津市昱隆泰再生资源环保处理有限公司",
 		// 		"STATUS": "2",
 		// 		"IF_HANDLE": "1",
-		// 		"LATITUDE": "117.35",
+		// 		"LATITUDE": "38.53",
 		// 		"IF_PRODUCE": "1",
 		// 		"STEP": "1",
-		// 		"planYear": "2018年",
-		// 		"TEL": "28569833",
-		// 		"OrgId": 3229,
-		// 		"REGISTERCODE": "120000400075101",
-		// 		"R_PERSON": "马宏民",
-		// 		"LINKMAN": "周小华",
-		// 		"EMAIL": "mahongmin1987@126.com",
-		// 		"EP_ADRESS_J": "双桥河镇东",
-		// 		"PROCESSINSTID": 5529,
-		// 		"YSFZDATE": 1403452800000,
-		// 		"epName": "天津合佳威立雅环境服务有限公司",
+		// 		"planYear": "2020年",
+		// 		"TEL": "23991989",
+		// 		"OrgId": 3235,
+		// 		"REGISTERCODE": "120111000088275",
+		// 		"R_PERSON": "左松虎",
+		// 		"EMAIL": "1340242675@qq.com",
+		// 		"EP_ADRESS_J": "天津西青高端金属制品工业区19号",
+		// 		"PROCESSINSTID": 5464,
+		// 		"YSFZDATE": null,
+		// 		"epName": "天津市昱隆泰再生资源环保处理有限公司",
 		// 		"EP_ADRESS_S": "022",
-		// 		"EP_ADRESS_Q": "JNQ",
-		// 		"EP_ID": "EP201410280910450012",
-		// 		"SB_ADRESS_J": "北闸口镇二八公路69号",
-		// 		"sysdate": 1448208000000,
-		// 		"BELONG_SEPA": "JNQ",
+		// 		"EP_ADRESS_Q": "XQQ",
+		// 		"EP_ID": "EP201410280946090018",
+		// 		"SB_ADRESS_J": "高端金属制品工业区19号",
+		// 		"sysdate": 1452614400000,
+		// 		"LINKMAN": "王富庆",
+		// 		"BELONG_SEPA": "XQQ",
 		// 		"CARD_NUM": 0,
 		// 		"COMMENT": null,
 		// 		"INDUSTRY_CODE": "mid_772",
 		// 		"dictname": "环境治理业",
 		// 		"SB_ADRESS_S": "022",
-		// 		"SB_ADRESS_Q": "JNQ",
-		// 		"POSTAL_CODE": "300350",
-		// 		"LONGITUDE": "38.96",
-		// 		"R_DATE": 1448208000000,
-		// 		"IF_TRANSPORT": "1"
+		// 		"SB_ADRESS_Q": "XQQ",
+		// 		"POSTAL_CODE": "300383",
+		// 		"LONGITUDE": "117.16",
+		// 		"R_DATE": 1452614400000,
+		// 		"IF_TRANSPORT": "0"
 		// 	},
 		// 	"empId": "",
-		// 	"epName": "天津合佳威立雅环境服务有限公司",
+		// 	"epName": "天津市昱隆泰再生资源环保处理有限公司",
 		// 	"initEpExtend": {
-		// 		"LINK_NUM": "jj",
-		// 		"TOTAL_INVESTMENT": "11",
+		// 		"LINK_NUM": "18902080007",
+		// 		"TOTAL_INVESTMENT": "95",
 		// 		"SYS_ACCIDENT": 1,
-		// 		"SYS_OPERATION": 0,
-		// 		"TOTAL_OUTPUTVALUE_UNIT": "dd",
+		// 		"SYS_OPERATION": 1,
+		// 		"TOTAL_OUTPUTVALUE_UNIT": "万元",
+		// 		"industry_mid_id": "谷物磨制",
 		// 		"STATUS": "00",
-		// 		"TOTAL_OUTPUTVALUE": "12",
-		// 		"MANAGEMENT_ORG": "rr",
-		// 		"MAIL": "mm",
-		// 		"WEBSITE": "nn",
-		// 		"EMPLOYEES_NUM": 10,
-		// 		"MANAGER": "qq",
-		// 		"SYS_MANAGER": 0,
-		// 		"DEPARTMENT": "oo",
+		// 		"MANAGEMENT_ORG": null,
+		// 		"TOTAL_OUTPUTVALUE": "1455",
+		// 		"MAIL": "1340242675@qq.com",
+		// 		"WEBSITE": "",
+		// 		"industry_sm_id": "C1310",
+		// 		"EMPLOYEES_NUM": 30,
+		// 		"industry_type_id": "C",
+		// 		"industry_sm_name": "谷物磨制",
+		// 		"MANAGER": "杨富财",
+		// 		"REGISTERCODE": "123",
+		// 		"SYS_MANAGER": 1,
+		// 		"DEPARTMENT": "安环部",
 		// 		"SYS_LEDGER": 1,
-		// 		"FLOOR_AREA": "13",
-		// 		"FAX_TEL": "ll",
+		// 		"FLOOR_AREA": "6667",
+		// 		"FAX_TEL": "",
 		// 		"SYS_RESPONSIBILITY": 1,
-		// 		"FLOOR_AREA_UNIT": "ff",
-		// 		"EP_ID": "EP201410280910450012",
-		// 		"PRINCIPAL": "hh",
-		// 		"SYS_TRAINING": 0,
-		// 		"DEPARTMENT_HEAD": "pp",
-		// 		"TOTAL_INVESTMENT_UNIT": "bb",
+		// 		"PDP": "abc",
+		// 		"FLOOR_AREA_UNIT": "平方米",
+		// 		"TP_ID": "TP202001230422330029",
+		// 		"EP_ID": "EP201410280946090018",
+		// 		"PRINCIPAL": "王富庆",
+		// 		"SYS_TRAINING": 1,
+		// 		"DEPARTMENT_HEAD": "杨富财",
+		// 		"industry_big_name": "农副食品加工业",
+		// 		"TOTAL_INVESTMENT_UNIT": "万元",
 		// 		"sons": [{
-		// 			"TECHNICAL_DIRECTER": "111",
-		// 			"EDU_LEVEL": "aaa",
+		// 			"TECHNICAL_DIRECTER": "杭亮",
+		// 			"EDU_LEVEL": "高中",
 		// 			"ID": "1",
-		// 			"EP_ID": "EP201410280910450012"
-		// 		}, {
-		// 			"TECHNICAL_DIRECTER": "222",
-		// 			"EDU_LEVEL": "bbb",
-		// 			"ID": "2",
-		// 			"EP_ID": "EP201410280910450012"
+		// 			"TP_ID": "TP202001230422330029",
+		// 			"EP_ID": "EP201410280946090018"
 		// 		}],
-		// 		"sysdate": 1536966393780,
-		// 		"LINKMAN": "ii"
+		// 		"sysdate": 1578259949393,
+		// 		"LINKMAN": "王富庆",
+		// 		"industry_type_name": "制造业",
+		// 		"industry_mid_name": "谷物磨制",
+		// 		"industry_big_id": "C13"
 		// 	},
-		// 	"epId": "EP201410280910450012",
+		// 	"epId": "EP201410280946090018",
 		// 	"userType": "CSEP",
 		// 	"newGuideFlag": "",
-		// 	"belongSepa": "JNQ",
+		// 	"belongSepa": "XQQ",
 		// 	"belongQ": "",
 		// 	"userPortrait": "",
 		// 	"belongS": "",
-		// 	"nickName": "天津合佳威立雅环境服务有限公司",
-		// 	"IWBSESSION": "BROWSER-20180915064502",
+		// 	"nickName": "天津市昱隆泰再生资源环保处理有限公司",
+		// 	"IWBSESSION": "BROWSER-20191229043010",
 		// 	"orgCode": "",
-		// 	"userId": "EP201410280910450012",
+		// 	"userId": "EP201410280946090018",
 		// 	"userName": "",
 		// 	"realName": "",
 		// 	"contextPath": "",
@@ -541,13 +548,7 @@ export default {
 				this.baseInfoData.factoryAddr = res.initRes.sbAdress
 				this.baseInfoData.legalPerson = res.initRes.LINKMAN
 				this.baseInfoData.postNo = res.initRes.POSTAL_CODE
-				this.baseInfoData.category = ''
-				if (res.initRes.industry_type_id && res.initRes.industry_type_id !== '') {
-					this.baseInfoData.category = res.initRes.industry_type_id + ' - ' + res.initRes.industry_type_name + 
-																			 res.initRes.industry_big_id + ' - ' + res.initRes.industry_big_name + 
-																			 res.initRes.industry_mid_id + ' - ' + res.initRes.industry_mid_name + 
-																			 res.initRes.industry_sm_id + ' - ' + res.initRes.industry_sm_name
-				}
+				
 				
 			}
 			if(res.initEpExtend){
@@ -564,6 +565,16 @@ export default {
 				this.baseInfoData.department = res.initEpExtend.DEPARTMENT
 				this.baseInfoData.departmentChargeMan = res.initEpExtend.DEPARTMENT_HEAD
 				this.baseInfoData.trashChargeMan = res.initEpExtend.MANAGER
+
+				this.baseInfoData.category = ''
+				if (res.initEpExtend.industry_type_id && res.initEpExtend.industry_type_id !== '') {
+					this.baseInfoData.category = res.initEpExtend.industry_type_id + ' - ' + res.initEpExtend.industry_type_name + 
+																			 res.initEpExtend.industry_big_id + ' - ' + res.initEpExtend.industry_big_name + 
+																			 res.initEpExtend.industry_mid_id + ' - ' + res.initEpExtend.industry_mid_name + 
+																			 res.initEpExtend.industry_sm_id + ' - ' + res.initEpExtend.industry_sm_name
+				}
+				this.baseInfoData.socialCreditCode = res.initEpExtend.REGISTERCODE
+				this.baseInfoData.pollutantDischargePermit = res.initEpExtend.PDP
 
 				if (res.initEpExtend.sons && res.initEpExtend.sons.length > 0) {
 					this.managerList = []
@@ -582,6 +593,7 @@ export default {
 				this.switchList[2].text1 = res.initEpExtend.SYS_TRAINING ? res.initEpExtend.SYS_TRAINING + "" : "0"
 				this.switchList[2].text2 = res.initEpExtend.SYS_ACCIDENT ? res.initEpExtend.SYS_ACCIDENT + "" : "0"
 				this.manageDes.text = res.initEpExtend.MANAGEMENT_ORG
+
 			}
 		})
 	},
