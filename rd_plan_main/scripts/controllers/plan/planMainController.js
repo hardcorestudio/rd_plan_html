@@ -217,6 +217,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
     }
 
     $scope.test1 = function(pathname){
+        var p = {};
+        // p.TP_ID = $stateParams.tpId
+        Init.iwbhttp('/plan/getIndustryType', p, function(data,header,config,status){
+            console.log(data)
+           console.log(JSON.stringify(data))
+        },function(data,header,config,status){
+        });
+
         // var p = {};
         // var p1 = {};
         // p1.dwmc = "";
@@ -275,14 +283,14 @@ angular.module('sbAdminApp').controller('PlanMainCtrl', ['$rootScope','$scope','
         //    console.log(JSON.stringify(data))
         // },function(data,header,config,status){
         // });
-        var p = {};
-        p.TP_ID = $stateParams.tpId
-        Init.iwbhttp('/plan/initHandleSelf', p, function(data,header,config,status){
-            console.log(data)
-            console.log("sssssssssssss")
-           console.log(JSON.stringify(data))
-        },function(data,header,config,status){
-        });
+        // var p = {};
+        // p.TP_ID = $stateParams.tpId
+        // Init.iwbhttp('/plan/initHandleSelf', p, function(data,header,config,status){
+        //     console.log(data)
+        //     console.log("sssssssssssss")
+        //    console.log(JSON.stringify(data))
+        // },function(data,header,config,status){
+        // });
         // var p = {};
         // p.TP_ID = $stateParams.tpId
         // Init.iwbhttp('/plan/initHandle', p, function(data,header,config,status){

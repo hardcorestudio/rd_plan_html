@@ -34,6 +34,9 @@ angular.module('sbAdminApp').controller('UnfinishedTaskListCtrl', ['$scope', 'In
                 "data": "EP_NAME"
             },
             {
+                "data": "APPLY_YEAR"
+            },
+            {
                 "visible": false,
                 "data": "BIZ_ID"
             },

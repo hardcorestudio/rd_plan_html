@@ -18,7 +18,7 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
     $scope.sepaFlag = false;
     //状态默认全选
     $scope.statusContent = "状态：全部";
-
+    $scope.thisyear = '';
     //table当前数据（页面数据页数等）
     $scope.pageData = "";
 
@@ -65,9 +65,9 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
             }
             $scope.param.searchContent = CheckParam.checkSql($scope.searchContent);
             Init.iwbhttp('/plan/planList', $scope.param, function(data,header,config,status){
-                console.log(data)
                 var returnData = {};
                 if(data.resFlag == 0){
+                    $scope.thisyear = data.thisyear
                     returnData.recordsTotal = data.totalRow;//返回数据全部记录
                     returnData.recordsFiltered = data.totalRow;//后台不实现过滤功能，每次查询均视作全部结果
                     returnData.data = data.epList;//返回的数据列表
@@ -122,12 +122,13 @@ angular.module('sbAdminApp').controller('PlanListCtrl', ['$scope','$state','Init
         var tpId = data.TP_ID;
         var epId = data.EP_ID;
         var epName = data.EP_NAME;
+        var year = data.applyYear
         $state.go("dashboard.planIndex.planMain",
         {
             "tpId":tpId,
             "epId":epId,
             "epName":epName,
-            "btnFlag":true,
+            "btnFlag":$scope.thisyear == year ? true : false,
             "from":"dashboard.planIndex.planList"
         });
     });
