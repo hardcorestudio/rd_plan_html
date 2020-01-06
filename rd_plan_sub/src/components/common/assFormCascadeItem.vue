@@ -79,7 +79,7 @@
 				<el-col class="assFromItem_col" span="24">	
 					<el-row class="assFromItem_itemRow">
 						<div class="assFromItem_title">本年度计划委托利用处置量</div>
-						<div v-if="type === 'label'" class="assFromItem_right">{{formItem.YEAR_NUM}}</div>
+						<div v-if="type === 'label'" class="assFromItem_right">{{formItem.YEAR_NUM}}{{formItem.UNIT}}</div>
 						<div v-else class="assFromItem_right">
 							<el-input v-model="formItem.YEAR_NUM" placeholder="必填(限10位)" type="number" maxlength="10" @input="numChange" oninput="if(value.length > 10)value=value.slice(0,10)">
 								<template slot="append">{{formItem.UNIT}}</template>
@@ -90,12 +90,13 @@
 				<el-col class="assFromItem_col" span="24">	
 					<el-row class="assFromItem_itemRow">
 						<div class="assFromItem_title">上年度实际委托利用处置量</div>
-						<div v-if="type === 'label'" class="assFromItem_right">{{formItem.LAST_NUM}}</div>
+						<div class="assFromItem_right">{{formItem.LAST_NUM}}{{formItem.UNIT}}</div>
+						<!-- <div v-if="type === 'label'" class="assFromItem_right">{{formItem.LAST_NUM}}{{formItem.UNIT}}</div>
 						<div v-else class="assFromItem_right">
 							<el-input v-model="formItem.LAST_NUM" placeholder="必填(限10位)" type="number" maxlength="10" @input="numChange" oninput="if(value.length > 10)value=value.slice(0,10)">
 								<template slot="append">{{formItem.UNIT}}</template>
 							</el-input>
-						</div>
+						</div> -->
 					</el-row>
 				</el-col>
 			</el-row>
