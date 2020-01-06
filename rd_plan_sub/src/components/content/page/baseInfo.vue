@@ -740,12 +740,16 @@ export default {
 			})
 		},
 		categoryEditModalOpen() {
-
+			let _this = this
+			let submitData = {}
+			for (let key in _this.queryJson) {
+				submitData[key] = _this.queryJson[key]
+			}
 			//wudi add url
 			fetch({
-				url: '',
-				method: 'GET',
-				data: 'params='
+				url: '/plan/getIndustryType',
+				method: 'POST',
+				data: 'params='+ JSON.stringify(submitData)
 			}).then(res => {
 				this.modalData = res
 				// this.modalData = {
