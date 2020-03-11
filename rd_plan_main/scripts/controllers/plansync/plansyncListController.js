@@ -26,9 +26,9 @@ angular.module('sbAdminApp').controller('PlansyncListCtrl', ['$scope','$rootScop
     //table数据
     var table = "";
     var p = {}
-    p.jsonParam = {
+    p.jsonParam = JSON.stringify({
         sxzqhdm:"120000"
-    }
+    })
     p.method = "getYcKsldSq"
     p.url = $rootScope.syncUrl
     var returnData = {};
@@ -529,9 +529,9 @@ angular.module('sbAdminApp').controller('PlansyncListCtrl', ['$scope','$rootScop
         var modalInstance = Modal.modal(url, ctrlName, resolve, function (result) {
             if(angular.equals("succeed",result)){
                 var p = {}
-                p.jsonParam = {
+                p.jsonParam = JSON.stringify({
                     sxzqhdm:"120000"
-                }
+                })
                 p.method = "getYcKsldSq"
                 p.url = $rootScope.syncUrl
                 Init.synchttp('/indexForCors',p, function(data,header,config,status){
