@@ -485,7 +485,7 @@ export default {
       submitData.url = this.syncUrl
       
       let jsonParam = {}
-      jsonParam.ycsxzqhdm = this.tptDataList[0].tptData.ycsxzqhdm
+      jsonParam.ycsxzqhdm = this.tptDataList[0].tptData.ycsxzqhdm == "" || this.tptDataList[0].tptData.ycsxzqhdm == null ? '120116' : this.tptDataList[0].tptData.ycsxzqhdm
       jsonParam.wfycdwmc = this.tptDataList[0].tptData.wfycdwmc
       jsonParam.wfycdwdz = this.tptDataList[0].tptData.wfycdwdz
 
