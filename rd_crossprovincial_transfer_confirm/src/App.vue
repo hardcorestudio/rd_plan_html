@@ -27,6 +27,7 @@ export default {
         "background-color": "#f5f7f9",
         "box-sizing": "border-box",
         "padding": "40px 5%",
+        "overflow-y":"auto",
       }
     }
   }

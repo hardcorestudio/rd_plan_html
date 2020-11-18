@@ -1333,6 +1333,46 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
                 }
             }
         })
+        .state('dashboard.enterpriseFileIndex', {
+            url: '/enterpriseFileIndex',
+            templateUrl: 'views/dashboard/enterpriseFile/enterpriseFileIndex.html',
+            controller: 'EnterpriseFileIndexCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/enterpriseFile/enterpriseFileIndexController.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.enterpriseFileIndex.enterpriseFileList', {
+            url: '/enterpriseFileList',
+            templateUrl: 'views/dashboard/enterpriseFile/enterpriseFileList.html',
+            controller: 'EnterpriseFileListCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'sbAdminApp',
+                        files: [
+                            'styles/lab/index.css',
+                            'lib/dataTables/dataTables.bootstrap.min.css',
+                            'lib/dataTables/dataTables.bootstrap.min.js',
+                            'lib/dataTables/jquery.dataTables.min.css',
+                            'lib/dataTables/jquery.dataTables.min.js',
+                            'scripts/controllers/enterpriseFile/enterpriseFileListController.js',
+                            'scripts/controllers/modal/promptModalController.js'
+                        ]
+                    })
+                }
+            }
+        })
     /* $httpProvider.interceptors.push(['$rootScope','$injector','$q',function($rootScope,$injector,$q){
      return {
      'request':function(config){
@@ -1354,16 +1394,16 @@ iwoboApp.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', '$ocLa
 iwoboApp.run(['$state', '$rootScope', 'localStorageService', '$modal', '$log', 'Init', function ($state, $rootScope, localStorageService, $modal, $log, Init) {
     console.log("===========iwobo app running====================================");
     // $rootScope.baseUrl = 'http://lovewobo.com';
-    $rootScope.baseUrl = 'http://localhost:9002/api';
-    $rootScope.baseSyncUrl = 'http://localhost:9091/syncUpload';
-    $rootScope.subSyncUrl = 'http://localhost:9002/rdplan/rd_plan_sub/index.html#/transProvincialTransferSync';
-    $rootScope.syncUrl = 'http://gfxt.mepscc.cn/edpgf_ws_test/servicesx/KSTranService?wsdl';
-    $rootScope.websocketUrlController = 'ws://localhost:9002/mywebsocket';
-    // $rootScope.baseUrl = 'http://60.30.64.249:8080/api';
-    // $rootScope.baseSyncUrl = 'http://60.30.64.249:7080/rd_2nd/syncUpload';
-    // $rootScope.subSyncUrl = 'http://60.30.64.249:8080/rdplan/rd_plan_sub/index.html#/transProvincialTransferSync';
-    // $rootScope.websocketUrlController = 'ws://60.30.64.249:8080/mywebsocket'; 
-    // $rootScope.syncUrl = 'http://gfxt.mepscc.cn/edpgf_ws/servicesx/KSTranService?wsdl';
+    // $rootScope.baseUrl = 'http://localhost:9002/api';
+    // $rootScope.baseSyncUrl = 'http://localhost:9091/syncUpload';
+    // $rootScope.subSyncUrl = 'http://localhost:9002/rdplan/rd_plan_sub/index.html#/transProvincialTransferSync';
+    // $rootScope.syncUrl = 'http://gfxt.mepscc.cn/edpgf_ws_test/servicesx/KSTranService?wsdl';
+    // $rootScope.websocketUrlController = 'ws://localhost:9002/mywebsocket';
+    $rootScope.baseUrl = 'http://60.30.64.249:8080/api';
+    $rootScope.baseSyncUrl = 'http://60.30.64.249:7080/rd_2nd/syncUpload';
+    $rootScope.subSyncUrl = 'http://60.30.64.249:8080/rdplan/rd_plan_sub/index.html#/transProvincialTransferSync';
+    $rootScope.websocketUrlController = 'ws://60.30.64.249:8080/mywebsocket'; 
+    $rootScope.syncUrl = 'http://gfxt.mepscc.cn/edpgf_ws/servicesx/KSTranService?wsdl';
     $rootScope.baseUrlPath = '';
     $rootScope.uuid = '';
     $rootScope.platform = "";
